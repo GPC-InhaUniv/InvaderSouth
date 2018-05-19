@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,6 +8,9 @@ public class BoomObjectPool : MonoBehaviour {
     public GameObject Boom;
     public int BoomCount = 30;
     List<GameObject> Booms;
+
+
+    public Boundary boundary;
     public float spaqwnWait;
     public float startWait;
     public float waveWait;
@@ -17,6 +21,15 @@ public class BoomObjectPool : MonoBehaviour {
     // Use this for initialization
     void Start()
     {
+        Screen.SetResolution(700, 1080, true);
+        //boundary.xMax = 700;
+        //boundary.zMax = (1080/3)*2;
+        boundary.xMax = 7;
+        boundary.zMax = 20;
+        Debug.Log(boundary.xMax);
+        Debug.Log(boundary.zMax);
+
+
 
         //object pool 생성
         Booms = new List<GameObject>();
@@ -24,18 +37,34 @@ public class BoomObjectPool : MonoBehaviour {
         {
             GameObject obj = Instantiate(Boom);
             obj.SetActive(false);
+            //obj.transform.position = new Vector3()
             Booms.Add(obj);
         }
         //Object Pool 생성 끝
-        // StartCoroutine(SpawnWaves());
+        //StartCoroutine(Boomming());
+        Boomming();
     }
 
-    //IEnumerator SpawnWaves()
+    private void Boomming()
+    {
+        foreach(GameObject boom in Booms)
+        {
+            Debug.Log(boundary.xMax);
+            Debug.Log(boundary.zMax);
+            spawnPosition = new Vector3(boundary.xMax, 0f, boundary.zMax);
+            spawnRotation = Quaternion.identity;
+            boom.transform.position = spawnPosition;
+            boom.transform.rotation = spawnRotation;
+            boom.SetActive(true);
+        }
+    }
+
+    //IEnumerator Boomming()
     //{
     //    yield return new WaitForSeconds(startWait);
-    //    foreach(GameObject boom in Booms)
+    //    foreach (GameObject boom in Booms)
     //    {
-    //        spawnPosition = new Vector3()
+    //        spawnPosition = new Vector3();
     //    }
     //    while (true)
     //    {
