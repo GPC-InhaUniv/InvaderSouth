@@ -19,7 +19,7 @@ public class PlayerController : MonoBehaviour
     public Transform missileShotSpot2;
     Rigidbody rigidbodyShip;
     AudioSource fireSound;
-
+    
     public float fireRate;
     private float nextFire;
     //public float missileFireRate;
