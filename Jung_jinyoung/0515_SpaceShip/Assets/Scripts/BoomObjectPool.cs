@@ -71,12 +71,12 @@ public class BoomObjectPool : MonoBehaviour {
         yield return new WaitForSeconds(startWait);
         boomActive = false;
 
-        Debug.Log("Bombing");
+        //Debug.Log("Bombing");
 
         for (int i = 0; i < boundary.zMax; i++)
         {
             spawnPosition = new Vector3(Random.Range(-spawnValue.x, spawnValue.x), 0f, i);
-            Debug.Log(spawnPosition);
+            //Debug.Log(spawnPosition);
             spawnRotation = Quaternion.identity;
             Bombs[i].transform.position = spawnPosition;
             Bombs[i].transform.rotation = spawnRotation;
@@ -84,6 +84,6 @@ public class BoomObjectPool : MonoBehaviour {
             yield return new WaitForSeconds(spaqwnWait);
         }
         
-        Debug.Log("Bombing over");
+        //Debug.Log("Bombing over");
     }
 }
