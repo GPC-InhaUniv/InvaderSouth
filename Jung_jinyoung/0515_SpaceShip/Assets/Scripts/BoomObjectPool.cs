@@ -38,22 +38,31 @@ public class BoomObjectPool : MonoBehaviour {
         }
         //Object Pool 생성 끝
         Debug.Log("objpool");
-        
+        //Random.state = 3;
+
+
     }
     
-    private void Update()
+    //private void Update()
+    //{
+    //    if (Input.GetKeyDown(KeyCode.Space))
+    //    {
+    //        Instantiate(bomber);
+    //        Debug.Log("spacebar");
+    //        boomActive = true;
+    //    }
+    //    if (boomActive)
+    //    {
+    //        Debug.Log("if in");
+    //        StartCoroutine(Bombing());
+    //    }
+    //}
+
+    public void StartBombing()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            Instantiate(bomber);
-            Debug.Log("spacebar");
-            boomActive = true;
-        }
-        if (boomActive)
-        {
-            Debug.Log("if in");
-            StartCoroutine(Bombing());
-        }
+        boomActive = true;
+        Instantiate(bomber);
+        StartCoroutine(Bombing());
     }
 
     IEnumerator Bombing()
