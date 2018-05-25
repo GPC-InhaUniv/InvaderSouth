@@ -22,6 +22,7 @@ public class BoomObjectPool : MonoBehaviour {
     // Use this for initialization
     void Awake()
     {
+        
         boundary.xMax = 7;
         boundary.xMin = -7;
         boundary.zMax = 20;
