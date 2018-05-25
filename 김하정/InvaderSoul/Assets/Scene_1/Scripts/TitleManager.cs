@@ -24,6 +24,11 @@ public class TitleManager : MonoBehaviour {
     private GameObject LoginPanel;
     private Text CreateAccountAlert;
     private Text LoginAlert;
+    private GameObject QuitAlertPanel;
+
+     
+    
+
 
     string playerID="";
     string secreatNum="";
@@ -49,7 +54,11 @@ public class TitleManager : MonoBehaviour {
         CreateAccountAlert = GameObject.Find("CreateAccountAlert").GetComponent<Text>();
         CreateAccountAlert.gameObject.SetActive(false);
         CreateAccountPanel.SetActive(false);
- 
+
+        QuitAlertPanel = GameObject.Find("QuitAlertPanel");
+        QuitAlertPanel.gameObject.SetActive(false);
+
+
     }
    
     /// <summary>
@@ -201,6 +210,15 @@ public class TitleManager : MonoBehaviour {
 
     public void GameQuit()
     {
+        QuitAlertPanel.gameObject.SetActive(true);
+        
+    }
+    public void QuitBtn()
+    {
         Application.Quit();
+    }
+    public void NotQuitBtn()
+    {
+        QuitAlertPanel.gameObject.SetActive(false);
     }
 }
