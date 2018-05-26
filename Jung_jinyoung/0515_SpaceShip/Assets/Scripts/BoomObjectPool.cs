@@ -1,84 +1,90 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class BoomObjectPool : MonoBehaviour {
 
-    public GameObject Boom;
-    public int BoomCount = 30;
-    List<GameObject> Booms;
-
+    public GameObject Bomb;
+    public int BombCount;
+    List<GameObject> Bombs;
+    public bool boomActive;
+    public GameObject bomber;
 
     public Boundary boundary;
     public float spaqwnWait;
+    public float endWait;
     public float startWait;
-    public float waveWait;
     public Vector3 spawnValue;
     Vector3 spawnPosition;
     Quaternion spawnRotation;
+    
 
     // Use this for initialization
-    void Start()
+    void Awake()
     {
-        Screen.SetResolution(700, 1080, true);
-        //boundary.xMax = 700;
-        //boundary.zMax = (1080/3)*2;
+        
         boundary.xMax = 7;
+        boundary.xMin = -7;
         boundary.zMax = 20;
-        Debug.Log(boundary.xMax);
-        Debug.Log(boundary.zMax);
-
-
+        boundary.zMin = 0;
 
         //object pool 생성
-        Booms = new List<GameObject>();
-        for (int i = 0; i < BoomCount; i++)
+        Bombs = new List<GameObject>();
+        for (int i = 0; i < BombCount; i++)
         {
-            GameObject obj = Instantiate(Boom);
+            GameObject obj = Instantiate(Bomb);
             obj.SetActive(false);
             //obj.transform.position = new Vector3()
-            Booms.Add(obj);
+            Bombs.Add(obj);
         }
         //Object Pool 생성 끝
-        //StartCoroutine(Boomming());
-        Boomming();
-    }
+        Debug.Log("objpool");
+        //Random.state = 3;
 
-    private void Boomming()
-    {
-        foreach(GameObject boom in Booms)
-        {
-            Debug.Log(boundary.xMax);
-            Debug.Log(boundary.zMax);
-            spawnPosition = new Vector3(boundary.xMax, 0f, boundary.zMax);
-            spawnRotation = Quaternion.identity;
-            boom.transform.position = spawnPosition;
-            boom.transform.rotation = spawnRotation;
-            boom.SetActive(true);
-        }
-    }
 
-    //IEnumerator Boomming()
+    }
+    
+    //private void Update()
     //{
-    //    yield return new WaitForSeconds(startWait);
-    //    foreach (GameObject boom in Booms)
+    //    if (Input.GetKeyDown(KeyCode.Space))
     //    {
-    //        spawnPosition = new Vector3();
+    //        Instantiate(bomber);
+    //        Debug.Log("spacebar");
+    //        boomActive = true;
     //    }
-    //    while (true)
+    //    if (boomActive)
     //    {
-    //        for (int i = 0; i < Booms.Count; i++)
-    //        {
-    //            spawnPosition = new Vector3(Random.Range(-spawnValue.x, spawnValue.x), spawnValue.y, spawnValue.z);
-    //            spawnRotation = Quaternion.identity;
-
-    //            Booms[i].SetActive(true);
-    //            Booms[i].transform.position = spawnPosition;
-    //            Booms[i].transform.rotation = spawnRotation;
-    //            yield return new WaitForSeconds(spaqwnWait);
-    //        }
-    //        yield return new WaitForSeconds(waveWait);
+    //        Debug.Log("if in");
+    //        StartCoroutine(Bombing());
     //    }
     //}
+
+    public void StartBombing()
+    {
+        boomActive = true;
+        Instantiate(bomber);
+        StartCoroutine(Bombing());
+    }
+
+    IEnumerator Bombing()
+    {
+        
+        yield return new WaitForSeconds(startWait);
+        boomActive = false;
+
+        //Debug.Log("Bombing");
+
+        for (int i = 0; i < boundary.zMax; i++)
+        {
+            spawnPosition = new Vector3(Random.Range(-spawnValue.x, spawnValue.x), 0f, i);
+            //Debug.Log(spawnPosition);
+            spawnRotation = Quaternion.identity;
+            Bombs[i].transform.position = spawnPosition;
+            Bombs[i].transform.rotation = spawnRotation;
+            Bombs[i].SetActive(true);
+            yield return new WaitForSeconds(spaqwnWait);
+        }
+        
+        //Debug.Log("Bombing over");
+    }
 }

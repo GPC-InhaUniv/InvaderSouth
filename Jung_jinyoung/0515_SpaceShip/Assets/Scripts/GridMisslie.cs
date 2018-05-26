@@ -39,10 +39,10 @@ public class GridMisslie : MonoBehaviour {
         else
         {
             SetTarget();
-            Debug.Log("settarget "+rb);
+            //Debug.Log("settarget "+rb);
             rb.transform.Translate(new Vector3(0, 0, 1) * speed * Time.deltaTime);
         }
-        Debug.Log(target);
+        //Debug.Log(target);
         
     }
     void RuningForEnemy(Transform target)

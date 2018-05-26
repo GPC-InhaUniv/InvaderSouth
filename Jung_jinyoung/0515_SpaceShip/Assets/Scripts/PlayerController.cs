@@ -19,7 +19,7 @@ public class PlayerController : MonoBehaviour
     public Transform missileShotSpot2;
     Rigidbody rigidbodyShip;
     AudioSource fireSound;
-
+    public BoomObjectPool bombCall;
     public float fireRate;
     private float nextFire;
     //public float missileFireRate;
@@ -29,6 +29,7 @@ public class PlayerController : MonoBehaviour
     {
         rigidbodyShip = gameObject.GetComponent<Rigidbody>();
         fireSound = gameObject.GetComponent<AudioSource>();
+        bombCall = GameObject.Find("GameObjectPool").GetComponent<BoomObjectPool>();
         //missileShotSpot = shotSpot;
     }
 
@@ -57,6 +58,10 @@ public class PlayerController : MonoBehaviour
             Instantiate(missiles, missileShotSpot2.position, shotSpot.rotation);
             fireSound.Play();
         }
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            bombCall.StartBombing();
+        }
 
     }
 
@@ -66,6 +71,7 @@ public class PlayerController : MonoBehaviour
         
         float moveHorizontal = Input.GetAxis("Horizontal");
         float moveVertical = Input.GetAxis("Vertical");
+        //Debug.Log(Input.GetAxis("Vertical"));
 
         Vector3 movement = new Vector3(moveHorizontal, 0.0f, moveVertical);
         rigidbodyShip.velocity = movement * speed;

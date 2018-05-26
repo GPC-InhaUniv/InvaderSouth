@@ -18,6 +18,6 @@ public class DestroyByContect : MonoBehaviour {
         }
         Instantiate(explosion, transform.position, transform.rotation);
         Destroy(gameObject);
-        Destroy(other.gameObject);
+        if(other.tag != "Bomb") Destroy(other.gameObject);
     }
 }
