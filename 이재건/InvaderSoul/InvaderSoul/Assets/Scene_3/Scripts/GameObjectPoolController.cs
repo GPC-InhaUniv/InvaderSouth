@@ -13,7 +13,7 @@ public class GameObjectPoolController :MonoBehaviour
             gameObject.GetComponent<BulletPool>().enabled = true;
             gameObject.GetComponent<BackGroundPool>().enabled = true;
             DontDestroyOnLoad(gameObject);
-        }
+        } 
     }
 
 }
