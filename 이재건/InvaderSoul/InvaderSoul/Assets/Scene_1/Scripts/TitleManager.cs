@@ -9,7 +9,7 @@ public class TitleManager : MonoBehaviour
     [Header("LoginPanel")]
     public InputField IDInputField;
     public InputField PassInputField;
-
+    
     [Header("CreateAccountPanel")]
     public InputField New_IDInputField;
     public InputField New_PassInputField;
@@ -88,7 +88,7 @@ public class TitleManager : MonoBehaviour
         }
         else if (New_IDInputField.text != "" && New_PassInputField.text != "" && Confirm_New_PassInputField.text != "")
         {
-
+            
             Debug.Log("새로 만드는 계정의 ID는?" + New_IDInputField.text);
             Debug.Log("새로 만드는 계정의 비밀번호는?" + New_PassInputField.text);
             Debug.Log("새로만드는 계정의 비밀번호 확인" + Confirm_New_PassInputField.text);
@@ -108,6 +108,7 @@ public class TitleManager : MonoBehaviour
                 PlayerPrefs.SetString(playerID, playerID);
                 PlayerPrefs.SetString(playerID + "secretNum", secreatNum);
                 PlayerPrefs.Save();
+                GameController.Instance.PlayerName = playerID;
                 LoadingSceneController.LoadScene("LobbyUI");
             }
         }
