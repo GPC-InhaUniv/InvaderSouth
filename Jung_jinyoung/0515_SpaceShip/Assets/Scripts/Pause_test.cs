@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class Pause_test : MonoBehaviour {
     public GameObject PauseUI;
-    private bool paused = false;
+    public bool paused = false;
 
 	// Use this for initialization
 	void Start () {
