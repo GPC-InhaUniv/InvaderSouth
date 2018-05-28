@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,6 +8,7 @@ public class Boundary
 {
     public float xMin, xMax, zMin, zMax;
 }
+
 public class PlayerController : MonoBehaviour
 {
     public float speed;
@@ -22,53 +24,56 @@ public class PlayerController : MonoBehaviour
     public BoomObjectPool bombCall;
     public float fireRate;
     private float nextFire;
-    //public float missileFireRate;
     private float missileNextFire;
 
-    private void Start()
+    private void Awake()
     {
         rigidbodyShip = gameObject.GetComponent<Rigidbody>();
         fireSound = gameObject.GetComponent<AudioSource>();
         bombCall = GameObject.Find("GameObjectPool").GetComponent<BoomObjectPool>();
-        //missileShotSpot = shotSpot;
     }
-
     private void Update()
+    {
+        InputManger_test();
+    }
+    void FixedUpdate()
+    {
+        MovingShip();
+    }
+    
+    
+
+    private void InputManger_test()
     {
         if (Input.GetButton("Fire1") && Time.time > nextFire)
         {
-            nextFire = Time.time + fireRate;
-            Instantiate(weapons, shotSpot.position, shotSpot.rotation);
-            fireSound.Play();
+            GunsFire();
         }
         if (Input.GetButton("Fire1") && Time.time > missileNextFire)
         {
-            //var pos = transform.position;
-            //pos.x += 1;
-            //transform.position = pos;
-            
-            //var tmp = missileShotSpot.position;
-            //tmp.x = 2;
-            //missileShotSpot.position = tmp; //Obviously don't x1 if you really want 1 :)
-            //Transform missileTF = shotSpot;
-            //missileTF.position.x = shotSpot.position.x;
-            //shotSpot.position.x = shotSpot.position.x - 7;
-            missileNextFire = Time.time + fireRate * 5;
-            Instantiate(missiles, missileShotSpot.position, shotSpot.rotation);
-            Instantiate(missiles, missileShotSpot2.position, shotSpot.rotation);
-            fireSound.Play();
+            MissilesFire();
         }
         if (Input.GetKeyDown(KeyCode.Space))
         {
             bombCall.StartBombing();
         }
-
+    }
+    private void MissilesFire()
+    {
+        missileNextFire = Time.time + fireRate * 5;
+        Instantiate(missiles, missileShotSpot.position, shotSpot.rotation);
+        Instantiate(missiles, missileShotSpot2.position, shotSpot.rotation);
+        fireSound.Play();
     }
 
-
-    void FixedUpdate()
+    private void GunsFire()
     {
-        
+        nextFire = Time.time + fireRate;
+        Instantiate(weapons, shotSpot.position, shotSpot.rotation);
+        fireSound.Play();
+    }
+    private void MovingShip()
+    {
         float moveHorizontal = Input.GetAxis("Horizontal");
         float moveVertical = Input.GetAxis("Vertical");
         //Debug.Log(Input.GetAxis("Vertical"));
@@ -82,7 +87,6 @@ public class PlayerController : MonoBehaviour
             0.0f,
             Mathf.Clamp(rigidbodyShip.position.z, boundary.zMin, boundary.zMax)
         );
-
         rigidbodyShip.rotation = Quaternion.Euler(0.0f, 0.0f, rigidbodyShip.velocity.x * -tilt);
     }
 }
