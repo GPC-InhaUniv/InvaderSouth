@@ -52,10 +52,6 @@ public class LoginManager : MonoBehaviour {
         }
     }
 
-    public void ChangeMenu(int i)
-    {
-        GameFunctions.ChangeMenu(menus.ToArray(), i);
-    }
- 
+
   
 }

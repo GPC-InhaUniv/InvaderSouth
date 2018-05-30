@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PlayFab.ClientModels;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,6 +9,7 @@ using UnityEngine.UI;
 public class LoadingSceneController : MonoBehaviour
 {
     public static string NextScene;
+    public AccountInfo Info;
 
     [SerializeField]
     Image progressBar;
@@ -27,10 +29,18 @@ public class LoadingSceneController : MonoBehaviour
     {
         
         Screen.SetResolution(700, 1080, true);
+        Info = GameObject.Find("AccountInfo").GetComponent<AccountInfo>();
+
         if (isMainSceneLoading)
             controllerInfomationImage.SetActive(true);
+
+        GameManager.Instance.Awake();
         StartCoroutine(LoadScene());
+
+
     }
+
+
 
     public static void LoadScene(string sceneName)
     {

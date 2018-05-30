@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 
-public class TitleManager : MonoBehaviour
+public class TitleController : MonoBehaviour
 {
     [Header("LoginPanel")]
     public InputField IDInputField;
@@ -33,10 +33,10 @@ public class TitleManager : MonoBehaviour
     /// </summary>
     public void LoginBtn()
     {
-        StartCoroutine(LginCo());
+         LoingAccount();
     }
 
-    IEnumerator LginCo()
+    void LoingAccount()
     {
         if (IDInputField.text != "" && PassInputField.text != "")
         {
@@ -49,7 +49,7 @@ public class TitleManager : MonoBehaviour
 
             if (!LoginManager.isError)
             {
-               
+
                 Debug.Log("로그인 성공");
             }
             else
@@ -60,7 +60,6 @@ public class TitleManager : MonoBehaviour
             }
 
         }
-        yield return null;
     }
 
     public void OpenCreateAccountBtn()
@@ -70,10 +69,10 @@ public class TitleManager : MonoBehaviour
 
     public void CreateAccountBtn()
     {
-        StartCoroutine(CreateCo());
+        CreateAccount();
     }
 
-    IEnumerator CreateCo()
+    void CreateAccount()
     {
         playerID = New_IDInputField.text;
         secreatNum = New_PassInputField.text;
@@ -82,8 +81,6 @@ public class TitleManager : MonoBehaviour
 
         if (!LoginManager.isError)
         {
-            CreateAccountAlert.text = "계정 생성 성공! 로그인 해주세요!";
-            CreateAccountAlert.gameObject.SetActive(true);
             Debug.Log("계정 생성 성공");
         }
         else
@@ -91,8 +88,7 @@ public class TitleManager : MonoBehaviour
             Debug.Log("계정 생성 실패");
         }
 
-
-        yield return null;
+ 
     }
 
     public void ShowLoginAlertPanel()

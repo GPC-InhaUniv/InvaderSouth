@@ -4,6 +4,7 @@ using UnityEngine;
 using PlayFab;
 using PlayFab.ClientModels;
 using UnityEngine.SceneManagement;
+using System;
 
 public class AccountInfo : MonoBehaviour
 {
@@ -46,7 +47,7 @@ public class AccountInfo : MonoBehaviour
             
         };
 
-        PlayFabClientAPI.RegisterPlayFabUser(request, OnRegister, GameFunctions.OnAPIError);
+        PlayFabClientAPI.RegisterPlayFabUser(request, OnRegister, GameErrorManager.OnAPIError);
         
     }
 
@@ -68,15 +69,13 @@ public class AccountInfo : MonoBehaviour
             
         };
 
-        PlayFabClientAPI.LoginWithPlayFab(request, OnLogin, GameFunctions.OnAPIError);
- 
+        PlayFabClientAPI.LoginWithPlayFab(request, OnLogin, GameErrorManager.OnAPIError);
     }
 
     static void OnLogin(LoginResult result)
     {
         Debug.Log("Login with: " + result.PlayFabId);
         GetAccountInfo(result.PlayFabId);
-        GameController.Instance.PlayerName = result.PlayFabId;
         LoadingSceneController.LoadScene("LobbyUI");
 
     }
@@ -103,7 +102,7 @@ public class AccountInfo : MonoBehaviour
             InfoRequestParameters=paramInfo
         };
 
-        PlayFabClientAPI.GetPlayerCombinedInfo(request,OnGotAccountInfo , GameFunctions.OnAPIError);
+        PlayFabClientAPI.GetPlayerCombinedInfo(request,OnGotAccountInfo , GameErrorManager.OnAPIError);
     }
 
     static void OnGotAccountInfo(GetPlayerCombinedInfoResult result)
@@ -116,15 +115,19 @@ public class AccountInfo : MonoBehaviour
     void SetUpAccount()
     {
         Dictionary<string, string> data = new Dictionary<string, string>();
-        data.Add("PlayerMoney", "100");
-        data.Add("PlayerStage", "0");
+
+        data.Add("PlayerMoney", "1000");
+        data.Add("PlayerDiamondCount", "0");
+        data.Add("CompleteStageNumber","0");
+        data.Add("CleardStageScore", "0");
+        data.Add("PlayerPlaneCount", "0");
 
         UpdateUserDataRequest request = new UpdateUserDataRequest()
         {
             Data=data,
             
         };
-        PlayFabClientAPI.UpdateUserData(request,UpdateDataInfo,GameFunctions.OnAPIError);
+        PlayFabClientAPI.UpdateUserData(request,UpdateDataInfo, GameErrorManager.OnAPIError);
 
     }
 

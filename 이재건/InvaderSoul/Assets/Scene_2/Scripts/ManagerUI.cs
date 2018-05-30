@@ -6,30 +6,18 @@ using UnityEngine.UI;
 public class ManagerUI : MonoBehaviour
 {
     private GameObject lobbyGUI;
-    private GameController allGameManager;
+    private GameManager gameManager;
     public Button Stage2Button;
     public Button Stage3Button;
 
     private void Start()
     {
         lobbyGUI = GameObject.Find("LobbyGUI");
-        allGameManager = GameObject.Find("GameController").GetComponent<GameController>();
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         Stage2Button = GameObject.Find("LobbyGUI").transform.Find("Stage").transform.Find("Canvas").transform.Find("Stage2Button").GetComponent<Button>();
         Stage3Button = GameObject.Find("LobbyGUI").transform.Find("Stage").transform.Find("Canvas").transform.Find("Stage3Button").GetComponent<Button>();
     }
 
-    private void Update()
-    {
-        if(allGameManager.Count == 2)
-        {
-            Stage2Button.interactable = true;
-        }
-
-        if (allGameManager.Count == 3)
-        {
-            Stage3Button.interactable = true;
-        }
-    }
 
     public void OnLobbyStart()
     {
@@ -47,42 +35,17 @@ public class ManagerUI : MonoBehaviour
 
     public void ShopStart()
     {
-      //  Debug.Log("메인 게임 입장!");
-        if(allGameManager.CarryingAmount < allGameManager.TotalAmount)
-        {
-            Debug.Log("소지금액 부족");
-        }
-
-        else
-        {
-            allGameManager.CarryingAmount -= allGameManager.TotalAmount;
-            PlayerPrefs.SetInt(allGameManager.PlayerName + "CarryingAmount", allGameManager.CarryingAmount);
-            Debug.Log("소지금액 : " + allGameManager.CarryingAmount);
-            LoadingSceneController.LoadScene("Main");
-        }
+         LoadingSceneController.LoadScene("Main");
     }
 
     public void OnItem1Toggle()
     {
-        allGameManager.LifeUpAndDown(lobbyGUI.transform.Find("Shop").transform.Find("Canvas").transform.Find("Item1").GetComponent<Toggle>().isOn);
-        lobbyGUI.transform.Find("Shop").transform.Find("Canvas").transform.Find("StartButton").transform.Find("Text").GetComponent<Text>().text = "Start\n" + "" + allGameManager.TotalAmount.ToString();
-
-        //if (lobbyGUI.transform.Find("Shop").transform.Find("Canvas").transform.Find("Item1").GetComponent<Toggle>().isOn == true)
-        //{
-        //    Debug.Log("Item1 구매 체크");
-        //}
-
-        //else
-        //{
-        //    Debug.Log("Item1 구매 해제");
-        //}
+      
     }
     
     public void OnItem2Toggle()
     {
-        allGameManager.DamageUpAndDown(lobbyGUI.transform.Find("Shop").transform.Find("Canvas").transform.Find("Item2").GetComponent<Toggle>().isOn);
-        lobbyGUI.transform.Find("Shop").transform.Find("Canvas").transform.Find("StartButton").transform.Find("Text").GetComponent<Text>().text = "Start\n" + "" + allGameManager.TotalAmount.ToString();
-
+ 
         //if (lobbyGUI.transform.Find("Shop").transform.Find("Canvas").transform.Find("Item2").GetComponent<Toggle>().isOn == true)
         //{
         //    Debug.Log("Item2 구매 체크");
@@ -145,8 +108,5 @@ public class ManagerUI : MonoBehaviour
      //   Debug.Log("Stage3 입장");
     }
 
-    public void OnStageClearButtonClick()
-    {
-        allGameManager.GameClear();
-    }
+
 }

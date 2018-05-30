@@ -9,10 +9,10 @@ public class GameObjectPoolController :MonoBehaviour
     {
         if(LoadingSceneController.isMainSceneLoading)
         {
-            Debug.Log("GameObjectPool 작동");
-            gameObject.GetComponent<BulletPool>().enabled = true;
-            gameObject.GetComponent<BackGroundPool>().enabled = true;
+            GetComponent<BulletPool>().enabled = true;
+            GetComponent<BackGroundPool>().enabled = true;
             DontDestroyOnLoad(gameObject);
+            Debug.Log("GameObjectPool 작동");
         } 
     }
 
