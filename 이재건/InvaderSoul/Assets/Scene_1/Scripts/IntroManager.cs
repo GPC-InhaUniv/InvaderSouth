@@ -1,0 +1,36 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.UI;
+
+public class IntroManager : MonoBehaviour
+{
+    public Image IntroPanelImage;
+    public GameObject LoginManager;
+
+    private bool IsLoadedIntro;
+    private void Start()
+    {
+        IsLoadedIntro = false;
+    }
+    // Update is called once per frame
+    void Update()
+    {
+
+        if (IntroPanelImage.color.a >= 0.99 && !IsLoadedIntro)
+        {
+            Debug.Log("인트로 로딩 완료");
+            IsLoadedIntro = true;
+            StartCoroutine(ChangePanelIntroToLogin());
+        }
+
+    }
+
+    IEnumerator ChangePanelIntroToLogin()
+    {
+        yield return new WaitForSeconds(2.0f);
+        gameObject.SetActive(false);
+        LoginManager.SetActive(true);
+
+    }
+}

@@ -6,11 +6,6 @@ using UnityEngine.UI;
 
 public class LoginManager : MonoBehaviour {
 
-    public static bool isError = false;
-
-    [SerializeField]
-    private List<GameObject> menus = new List<GameObject>();
-
     [SerializeField]
     private InputField loginUserName;
 
@@ -29,12 +24,12 @@ public class LoginManager : MonoBehaviour {
     [SerializeField]
     private InputField registerConfirmPassword;
 
-
+    
 
     public void Login()
     {
         AccountInfo.Login(loginUserName.text, loginPassword.text);
-       
+
     }
 
     public void Register()
@@ -42,12 +37,10 @@ public class LoginManager : MonoBehaviour {
         if (registerConfirmPassword.text == registerPassword.text)
         {
             AccountInfo.Register(registerUsername.text, registerEmail.text, registerPassword.text);
-            isError = false;
-
         }
         else
         {
-            isError = true;
+  
             Debug.LogError("Passwords do not match!");
         }
     }

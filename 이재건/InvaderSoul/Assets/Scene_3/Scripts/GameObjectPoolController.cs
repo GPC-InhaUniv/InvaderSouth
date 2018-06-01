@@ -2,18 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameObjectPoolController :MonoBehaviour
+public class GameObjectPoolController : MonoBehaviour
 {
 
-    private void OnLevelWasLoaded(int level)
+    public void MakeObjectPools()
     {
-        if(LoadingSceneController.isMainSceneLoading)
-        {
-            GetComponent<BulletPool>().enabled = true;
-            GetComponent<BackGroundPool>().enabled = true;
-            DontDestroyOnLoad(gameObject);
-            Debug.Log("GameObjectPool 작동");
-        } 
+        GetComponent<BulletPool>().enabled = true;
+        GetComponent<BackGroundPool>().enabled = true;
+        DontDestroyOnLoad(gameObject);
+        Debug.Log("GameObjectPool 작동");
+
     }
+
 
 }

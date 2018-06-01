@@ -9,7 +9,7 @@ using System;
 public class AccountInfo : MonoBehaviour
 {
     private static AccountInfo instance;
- 
+
 
     [SerializeField]
     private GetPlayerCombinedInfoResultPayload info;
@@ -32,7 +32,7 @@ public class AccountInfo : MonoBehaviour
         if (instance != this)
             instance = this;
 
- 
+
         DontDestroyOnLoad(gameObject);
     }
 
@@ -44,11 +44,12 @@ public class AccountInfo : MonoBehaviour
             Email = email,
             Username = username,
             Password = password,
-            
+
         };
 
         PlayFabClientAPI.RegisterPlayFabUser(request, OnRegister, GameErrorManager.OnAPIError);
-        
+
+
     }
 
     static void OnRegister(RegisterPlayFabUserResult result)
@@ -66,7 +67,7 @@ public class AccountInfo : MonoBehaviour
             TitleId = PlayFabSettings.TitleId,
             Username = username,
             Password = password,
-            
+
         };
 
         PlayFabClientAPI.LoginWithPlayFab(request, OnLogin, GameErrorManager.OnAPIError);
@@ -80,29 +81,28 @@ public class AccountInfo : MonoBehaviour
 
     }
 
-
     public static void GetAccountInfo(string playfabId)
     {
         GetPlayerCombinedInfoRequestParams paramInfo = new GetPlayerCombinedInfoRequestParams()
         {
-            GetTitleData=true,
-            GetUserInventory=true,
-            GetUserAccountInfo=true,
-            GetUserVirtualCurrency=true,
-            GetPlayerProfile=true,
-            GetPlayerStatistics=true,
-            GetUserData=true,
-            GetUserReadOnlyData=true,
-            
+            GetTitleData = true,
+            GetUserInventory = true,
+            GetUserAccountInfo = true,
+            GetUserVirtualCurrency = true,
+            GetPlayerProfile = true,
+            GetPlayerStatistics = true,
+            GetUserData = true,
+            GetUserReadOnlyData = true,
+
         };
 
         GetPlayerCombinedInfoRequest request = new GetPlayerCombinedInfoRequest()
         {
-            PlayFabId=playfabId,
-            InfoRequestParameters=paramInfo
+            PlayFabId = playfabId,
+            InfoRequestParameters = paramInfo
         };
 
-        PlayFabClientAPI.GetPlayerCombinedInfo(request,OnGotAccountInfo , GameErrorManager.OnAPIError);
+        PlayFabClientAPI.GetPlayerCombinedInfo(request, OnGotAccountInfo, GameErrorManager.OnAPIError);
     }
 
     static void OnGotAccountInfo(GetPlayerCombinedInfoResult result)
@@ -118,27 +118,24 @@ public class AccountInfo : MonoBehaviour
 
         data.Add("PlayerMoney", "1000");
         data.Add("PlayerDiamondCount", "0");
-        data.Add("CompleteStageNumber","0");
+        data.Add("CompleteStageNumber", "0");
         data.Add("CleardStageScore", "0");
         data.Add("PlayerPlaneCount", "0");
 
         UpdateUserDataRequest request = new UpdateUserDataRequest()
         {
-            Data=data,
-            
+            Data = data,
+
         };
-        PlayFabClientAPI.UpdateUserData(request,UpdateDataInfo, GameErrorManager.OnAPIError);
+        PlayFabClientAPI.UpdateUserData(request, UpdateDataInfo, GameErrorManager.OnAPIError);
 
     }
 
-  
+
     void UpdateDataInfo(UpdateUserDataResult result)
     {
         Debug.Log("UpdateDataInfo");
-
-        //List<StatisticUpdate> stats = new List<StatisticUpdate>();
-        //StatisticUpdate trophies = new StatisticUpdate();
-        
+        TitleManager.IsSuccesCreateId = true;
     }
 
 

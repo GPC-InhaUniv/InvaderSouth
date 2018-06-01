@@ -19,22 +19,29 @@ public class LoadingSceneController : MonoBehaviour
     Text pressAnyKeyText;
     [SerializeField]
     GameObject controllerInfomationImage;
+    [SerializeField]
+    GameObjectPoolController gameObjectPoolController;
 
     int percentage = 0;
     public static bool isMainSceneLoading = false;
 
- 
+    public delegate void LoadInGameScene();
+
+    public LoadInGameScene loadInGameSceneDelegater;
+
  
     private void Awake()
     {
         
         Screen.SetResolution(700, 1080, true);
+        loadInGameSceneDelegater = new LoadInGameScene(gameObjectPoolController.MakeObjectPools);
         Info = GameObject.Find("AccountInfo").GetComponent<AccountInfo>();
 
         if (isMainSceneLoading)
             controllerInfomationImage.SetActive(true);
 
         GameManager.Instance.Awake();
+        //loadInGameSceneDelegater = new LoadInGameScene(GameObjectPoolController.MakeObjectPools); 
         StartCoroutine(LoadScene());
 
 
@@ -81,10 +88,14 @@ public class LoadingSceneController : MonoBehaviour
                     if (NextScene.Equals("Main"))
                     {
                         pressAnyKeyText.text = "Press Any Key To Start Game!";
+                       
                         pressAnyKeyText.gameObject.SetActive(true);
                         progressBar.gameObject.SetActive(false);
-                        if(Input.anyKeyDown)
-                        asyncOperation.allowSceneActivation = true;
+                        if (Input.anyKeyDown)
+                        {
+                            loadInGameSceneDelegater();
+                            asyncOperation.allowSceneActivation = true;
+                        }
                     }
                     else
                         asyncOperation.allowSceneActivation = true;

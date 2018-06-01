@@ -1,0 +1,89 @@
+Initialize engine version: 5.6.5f1 (2cac56bf7bb6)
+GfxDevice: creating device client; threaded=1
+Direct3D:
+    Version:  Direct3D 11.0 [level 11.0]
+    Renderer: NVIDIA GeForce GT 640M (ID=0xfd8)
+    Vendor:   NVIDIA
+    VRAM:     2289 MB
+    Driver:   22.21.13.8205
+Begin MonoManager ReloadAssembly
+Platform assembly: C:\Users\hrd32105\Desktop\InvaderSoul\test_Data\Managed\UnityEngine.dll (this message is harmless)
+Loading C:\Users\hrd32105\Desktop\InvaderSoul\test_Data\Managed\UnityEngine.dll into Unity Child Domain
+Platform assembly: C:\Users\hrd32105\Desktop\InvaderSoul\test_Data\Managed\Assembly-CSharp.dll (this message is harmless)
+Loading C:\Users\hrd32105\Desktop\InvaderSoul\test_Data\Managed\Assembly-CSharp.dll into Unity Child Domain
+Platform assembly: C:\Users\hrd32105\Desktop\InvaderSoul\test_Data\Managed\UnityEngine.UI.dll (this message is harmless)
+Loading C:\Users\hrd32105\Desktop\InvaderSoul\test_Data\Managed\UnityEngine.UI.dll into Unity Child Domain
+Platform assembly: C:\Users\hrd32105\Desktop\InvaderSoul\test_Data\Managed\UnityEngine.Networking.dll (this message is harmless)
+Loading C:\Users\hrd32105\Desktop\InvaderSoul\test_Data\Managed\UnityEngine.Networking.dll into Unity Child Domain
+- Completed reload, in  0.023 seconds
+Platform assembly: C:\Users\hrd32105\Desktop\InvaderSoul\test_Data\Managed\System.Core.dll (this message is harmless)
+Platform assembly: C:\Users\hrd32105\Desktop\InvaderSoul\test_Data\Managed\System.dll (this message is harmless)
+desktop: 1920x1080 59Hz; virtual: 1920x1080 at 0,0
+<RI> Initializing input.
+XInput1_3.dll not found. Trying XInput9_1_0.dll instead...
+<RI> Input initialized.
+<RI> Initialized touch support.
+UnloadTime: 1.957240 ms
+Setting up 2 worker threads for Enlighten.
+  Thread -> id: 3964 -> priority: 1 
+  Thread -> id: 1714 -> priority: 1 
+인트로 로딩 완료
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+PlayFab.PlayFabError
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+System.String
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+로그인 에러!
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Login with: C991554161B6E498
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Unloading 5 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 2.003995 ms
+
+Unloading 14 unused Assets to reduce memory usage. Loaded Objects now: 427.
+Total: 0.393044 ms (FindLiveObjects: 0.032310 ms CreateObjectMapping: 0.020526 ms MarkObjects: 0.283950 ms  DeleteObjects: 0.055877 ms)
+
+Unloading 3 Unused Serialized files (Serialized files now loaded: 0)
+Update Account Infomation!
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+UnloadTime: 0.516203 ms
+
+Unloading 33 unused Assets to reduce memory usage. Loaded Objects now: 649.
+Total: 1.014922 ms (FindLiveObjects: 0.040292 ms CreateObjectMapping: 0.049415 ms MarkObjects: 0.712726 ms  DeleteObjects: 0.210966 ms)
+
+playermoney920
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+UpdateDataInfo
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Unloading 3 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 0.678135 ms
+
+Unloading 25 unused Assets to reduce memory usage. Loaded Objects now: 430.
+Total: 0.474390 ms (FindLiveObjects: 0.033450 ms CreateObjectMapping: 0.022807 ms MarkObjects: 0.340588 ms  DeleteObjects: 0.076024 ms)
+
+Unloading 6 Unused Serialized files (Serialized files now loaded: 0)
+GameObjectPool 작동
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+UnloadTime: 0.574362 ms
+
+Unloading 4 unused Assets to reduce memory usage. Loaded Objects now: 1129.
+Total: 0.601350 ms (FindLiveObjects: 0.069942 ms CreateObjectMapping: 0.031930 ms MarkObjects: 0.483893 ms  DeleteObjects: 0.015204 ms)
+

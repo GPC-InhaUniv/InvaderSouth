@@ -23,29 +23,29 @@ public class ManagerUI : MonoBehaviour
     {
         lobbyGUI.transform.Find("Lobby").gameObject.SetActive(false);
         lobbyGUI.transform.Find("Stage").gameObject.SetActive(true);
-      //  Debug.Log("스테이지 UI로 이동!");
+        //  Debug.Log("스테이지 UI로 이동!");
     }
 
     public void OnStageClick()
     {
         lobbyGUI.transform.Find("Stage").gameObject.SetActive(false);
         lobbyGUI.transform.Find("Shop").gameObject.SetActive(true);
-      //  Debug.Log("상점 UI로 이동!");
+        //  Debug.Log("상점 UI로 이동!");
     }
 
     public void ShopStart()
     {
-         LoadingSceneController.LoadScene("Main");
+        LoadingSceneController.LoadScene("Main");
     }
 
     public void OnItem1Toggle()
     {
-      
+
     }
-    
+
     public void OnItem2Toggle()
     {
- 
+
         //if (lobbyGUI.transform.Find("Shop").transform.Find("Canvas").transform.Find("Item2").GetComponent<Toggle>().isOn == true)
         //{
         //    Debug.Log("Item2 구매 체크");
@@ -74,38 +74,38 @@ public class ManagerUI : MonoBehaviour
     {
         lobbyGUI.transform.Find("Lobby").transform.Find("Canvas").transform.Find("character1Button").gameObject.SetActive(false);
         lobbyGUI.transform.Find("Lobby").transform.Find("Canvas").transform.Find("character2Button").gameObject.SetActive(true);
-       // Debug.Log("오른쪽 화살표 클릭!");
+        // Debug.Log("오른쪽 화살표 클릭!");
     }
 
     public void LeftArrowClick()
     {
         lobbyGUI.transform.Find("Lobby").transform.Find("Canvas").transform.Find("character1Button").gameObject.SetActive(true);
         lobbyGUI.transform.Find("Lobby").transform.Find("Canvas").transform.Find("character2Button").gameObject.SetActive(false);
-      //  Debug.Log("왼쪽 화살표 클릭!");
+        //  Debug.Log("왼쪽 화살표 클릭!");
     }
 
     public void OnShopBackButtonClick()
     {
         lobbyGUI.transform.Find("Stage").gameObject.SetActive(true);
         lobbyGUI.transform.Find("Shop").gameObject.SetActive(false);
-    //    Debug.Log("상점에서 스테이지 UI로 되돌아가기!");
+        //    Debug.Log("상점에서 스테이지 UI로 되돌아가기!");
     }
 
     public void OnStageBackButtonClick()
     {
         lobbyGUI.transform.Find("Stage").gameObject.SetActive(false);
         lobbyGUI.transform.Find("Lobby").gameObject.SetActive(true);
-      //  Debug.Log("스테이지에서 로비 UI로 되돌아가기!");
+        //  Debug.Log("스테이지에서 로비 UI로 되돌아가기!");
     }
 
     public void OnStageTwoButtonClick()
     {
-       // Debug.Log("Stage2 입장");
+        // Debug.Log("Stage2 입장");
     }
 
     public void OnStageThreeOnButtonClick()
     {
-     //   Debug.Log("Stage3 입장");
+        //   Debug.Log("Stage3 입장");
     }
 
 

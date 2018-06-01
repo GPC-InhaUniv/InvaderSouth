@@ -24,7 +24,6 @@ public class DataManager : MonoBehaviour
     }
     public void Start()
     {
-
         Instance.SetGameManagerData();
     }
 
@@ -37,7 +36,7 @@ public class DataManager : MonoBehaviour
         userData.Value = money.ToString();
         Dictionary<string, string> data = new Dictionary<string, string>();
         data.Add("PlayerMoney", userData.Value);
-        
+
 
         UpdateUserDataRequest request = new UpdateUserDataRequest()
         {
@@ -53,9 +52,9 @@ public class DataManager : MonoBehaviour
     public void SetGameManagerData()
     {
         UserDataRecord userData = new UserDataRecord();
-        GameManager.Instance.playerName = Info.Info.AccountInfo.Username;
+        GameManager.Instance.SetPlayerName(Info.Info.AccountInfo.Username);
         Info.Info.UserData.TryGetValue("PlayerMoney", out userData);
-        Debug.Log("playermoney"+ userData.Value);
+        Debug.Log("playermoney" + userData.Value);
         GameManager.Instance.SetPlayerMoney(userData.Value);
 
         Info.Info.UserData.TryGetValue("PlayerDiamondCount", out userData);
@@ -73,5 +72,5 @@ public class DataManager : MonoBehaviour
     }
 
     // Update is called once per frame
- 
+
 }

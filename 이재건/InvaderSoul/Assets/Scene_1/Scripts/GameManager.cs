@@ -2,8 +2,8 @@
 
 public class GameManager : Singleton<GameManager>
 {
-    public string playerName;
-    public string playerMoneyCount;
+    private string playerName;
+    private string playerMoneyCount;
     private int playerDiamondCount;
 
     public int LastCompletedStageNumber;

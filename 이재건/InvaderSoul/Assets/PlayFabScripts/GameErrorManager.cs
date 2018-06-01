@@ -9,7 +9,8 @@ public static class GameErrorManager
     {
         Debug.LogError(error.GetType());
         Debug.LogError(error.ErrorMessage.GetType());
-
+        TitleManager.IsLoginError = true;
+        TitleManager.IsCreateIDError = true;
     }
 
 }
