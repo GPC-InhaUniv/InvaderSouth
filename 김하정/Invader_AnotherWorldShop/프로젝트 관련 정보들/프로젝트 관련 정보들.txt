@@ -1,0 +1,71 @@
+Äİ¹éÀº ÇÑ¸í
+ÀÌº¥Æ®´Â ¿©·Á¸í
+
+
+1¼øÀ§ : ·Îºñ (Ä³¸¯ÅÍ ¼±ÅÃÃ¢), ½ºÅ×ÀÌÁö ¼±ÅÃÃ¢
+2¼øÀ§ : µ¥ÄÚ·¹ÀÌÅÍ ÆĞÅÏÀ¸·Î Àû ¿òÁ÷ÀÓ ±¸Çö, º¸½º ¿òÁ÷ÀÓ ±¸Çö
+
+
+
+½Ì±ÛÅæ ÃÖÁ¾ »À´ë
+public class GameManager : Singleton<GameManager>
+{
+    private string playerName;
+<<<<<<< HEAD:ì´ì¬ê±´/InvaderSoul/Assets/Scene_1/Scripts/GameManager.cs
+    private string playerMoneyCount;
+=======
+    private int playerMoneyCount;
+>>>>>>> c82b3384faec7914d4cd3e4ef8a24ae99cd8ab8f:ê¹€í•˜ì •/Invader_AnotherWorldShop/í”„ë¡œì íŠ¸ ê´€ë ¨ ì •ë³´ë“¤/í”„ë¡œì íŠ¸ ê´€ë ¨ ì •ë³´ë“¤.txt
+    private int playerDiamondCount;
+
+    public int LastCompletedStageNumber;
+    public int[] CleardStageScore;
+    public bool[] IsPlayerHavePlane;
+
+    private int maxStageCount = 3;
+    private int PlaneCount = 2;
+
+    private void Start()
+    {
+        playerName = "";
+        playerMoneyCount = 0;
+        playerDiamondCount = 0;
+        LastCompletedStageNumber = 0;
+        CleardStageScore = new int[maxStageCount];
+        for (int i = 0; i < maxStageCount; i++)
+            CleardStageScore[i] = 0;
+
+        for (int i = 0; i < PlaneCount; i++)
+            IsPlayerHavePlane[i] = false;
+    }
+
+    public void SetPlayerName(string name)
+    {
+        playerName = name;
+    }
+
+    public string GetPlayerName()
+    {
+        return playerName;
+    }
+
+    public void SetPlayerMoney(int money)
+    {
+        playerMoneyCount = money;
+    }
+
+    public int GetPlayerMoney()
+    {
+        return playerMoneyCount;
+    }
+
+    public void SetPlayerDiamond(int diamond)
+    {
+        playerDiamondCount = diamond;
+    }
+
+    public int GetPlayerDiamond()
+    {
+        return playerDiamondCount;
+    }
+}
