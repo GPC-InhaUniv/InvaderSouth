@@ -46,6 +46,7 @@ public class Pause_test : MonoBehaviour {
     public void toogleInput(bool IsAlive)
     {
         //PlayerController playerController = new PlayerController();
+        //GameObject.Find("Player").GetComponent<PlayerController>().
         GameObject.Find("Player").GetComponent<PlayerController>().enabled = IsAlive;
         //playerController.enabled = IsAlive;
     }

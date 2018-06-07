@@ -15,7 +15,7 @@ public class GridMisslie : MonoBehaviour {
         rb = GetComponent<Rigidbody>();
     }
     //Update is called once per frame
-    void Update () {
+    void FixedUpdate () {
         //if(!ifTarget)
         //{
         //    rb.transform.Translate(new Vector3(0, 0, 1) * speed * Time.deltaTime);
@@ -34,7 +34,7 @@ public class GridMisslie : MonoBehaviour {
         
         if (target!=null)
         {
-            RuningForEnemy(target);
+            RuningToEnemy(target);
         }
         else
         {
@@ -45,7 +45,7 @@ public class GridMisslie : MonoBehaviour {
         //Debug.Log(target);
         
     }
-    void RuningForEnemy(Transform target)
+    void RuningToEnemy(Transform target)
     {
         Vector3 direction = target.position - rb.position;
         Quaternion q = Quaternion.LookRotation(direction);
