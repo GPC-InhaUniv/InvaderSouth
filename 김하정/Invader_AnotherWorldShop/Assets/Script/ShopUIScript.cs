@@ -16,10 +16,10 @@ public class ShopUIScript : MonoBehaviour
     private List<Text> ItemPriceText;
     
     //싱글톤으로 연결 부탁드립니다. 값은 테스트를 위해 임시로 넣어놨어요!
-    public  int playerMoneyCount = 3000;
-    //private int playerMoneyCountText =  GameManager.GetPlayerMoney();
-    public int playerDiamondCount = 50;
-    //private int playerDiamondCount =  GameManager.GetPlayerDiamond();
+    private  int playerMoneyCount = GameManager.GetPlayerMoney();
+    
+    private int playerDiamondCount = GameManager.GetPlayerDiamond();
+    
 
     private int ShowTotalItemPrice;
     private Text ShowTotalItemPriceText;
@@ -27,8 +27,8 @@ public class ShopUIScript : MonoBehaviour
     
     [Header("<Gold>")]
     private Text GoldAlert;
-    //플레이어가 소지할 수 있는 골드의 최대치 : 싱글톤에서 지정해줘야 하지 않을까용?
-    public int MaxGold = 9999999 ;
+    
+    private int MaxGold = 9999999 ;
     [SerializeField]
     private List<Text> GoldPriceText;
     [SerializeField]
@@ -38,7 +38,7 @@ public class ShopUIScript : MonoBehaviour
     private Text CanBuyGoldAndDiamondText;
     private Text CantBuyGoldAndDiamondText;
    
-    public int DiamondPriceForGold; //골드당 다이아몬드 가격
+    public int DiamondPriceForGold; //골드당 다이아몬드 가격 나중에 배열로 바꿔서 각기 정해줄 예정
 
     private int SaveGoldItemPrice= 0;
     private int SaveDiamondItemPrice = 0;
@@ -46,8 +46,8 @@ public class ShopUIScript : MonoBehaviour
 
    
     [Header("<Diamond>")]
-    //플레이어가 소지할 수 있는 최대 다이아몬드의 개수//싱글톤에서 해줘야하지 않을까?
-    public int MaxDiamond = 999999;
+   
+    private int MaxDiamond = 999999;
     [SerializeField]
     private List<Text> DiamondPriceText;
     [SerializeField]
@@ -58,12 +58,6 @@ public class ShopUIScript : MonoBehaviour
 
     private GameObject DiamondButtonPanel;
     private Text CurrentPlayerDiamondText;
-
-
-    //public int DiamondPriceForGold;
-
-    //private int SaveGoldItemPrice = 0;
-    //public Image ThankAlert;
 
 
     void Start()
