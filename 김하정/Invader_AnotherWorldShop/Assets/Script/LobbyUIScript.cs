@@ -94,4 +94,7 @@ public class LobbyUIScript : MonoBehaviour
         if (lastCompletedStageNumber == 3)
             stageThreeSelectionButton.interactable = true;
     }
+
+    
+
 }
