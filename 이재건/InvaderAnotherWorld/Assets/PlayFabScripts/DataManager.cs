@@ -15,11 +15,16 @@ public class DataManager : MonoBehaviour
 
     private void Awake()
     {
-        if (Instance != this)
-            Instance = this;
-
         Info = GameObject.Find("AccountInfo").GetComponent<AccountInfo>();
-        DontDestroyOnLoad(gameObject);
+        if (Instance == null)
+        {
+            if (Instance != this)
+                Instance = this;
+
+          
+            DontDestroyOnLoad(gameObject);
+        }
+       
 
     }
     public void Start()

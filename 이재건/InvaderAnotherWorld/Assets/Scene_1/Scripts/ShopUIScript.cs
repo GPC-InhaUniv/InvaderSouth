@@ -7,7 +7,13 @@ using System;
 
 public class ShopUIScript : MonoBehaviour 
 {
-    public GameObject ShopPanel;
+    [SerializeField]
+    private GameObject ShopPanel;
+    [SerializeField]
+    private GameObject WarningPanel;
+    [SerializeField]
+    private Text WarningText;
+
     public List<Toggle> ShopToggleList;
     public List<Text> ItemPriceText;
     
@@ -73,12 +79,23 @@ public class ShopUIScript : MonoBehaviour
         ShopPanel.SetActive(false);
     }
 
+    
+
     public void OnClickStartBtn()
     {
         totalItemPrice = Convert.ToInt32(ShowTotalItemPrice.text);
-        int calculateMoneyBeforeStart = Convert.ToInt32(GameManager.Instance.GetPlayerMoney()) + totalItemPrice;
+        if (totalItemPrice < 0)
+            totalItemPrice = totalItemPrice * -1;
+        Debug.Log(totalItemPrice);
+        int calculateMoneyBeforeStart = Convert.ToInt32(GameManager.Instance.GetPlayerMoney()) - totalItemPrice;
         if (calculateMoneyBeforeStart < 0)
+        {
             Debug.Log("소지 금액 부족");
+            WarningText.text = "소지금액 " + calculateMoneyBeforeStart.ToString() + " 원이 부족합니다.";
+            WarningPanel.SetActive(true);
+
+
+        }
         else
         {
             DataManager.Instance.BuyItem(totalItemPrice);

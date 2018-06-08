@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : Singleton<GameManager>
 {
@@ -31,6 +32,21 @@ public class GameManager : Singleton<GameManager>
 
     }
 
+    public void ResetPlayerInfo()
+    {
+        playerName = "";
+        playerMoneyCount = "";
+        playerDiamondCount = "0";
+        LastCompletedStageNumber = "0";
+        CleardStageScore = new int[maxStageCount];
+        for (int i = 0; i < maxStageCount; i++)
+            CleardStageScore[i] = 0;
+
+        IsPlayerHavePlane = new bool[maxPlaneCount];
+        for (int i = 0; i < maxPlaneCount; i++)
+            IsPlayerHavePlane[i] = false;
+       
+    }
 
     public void SetPlayerName(string name)
     {

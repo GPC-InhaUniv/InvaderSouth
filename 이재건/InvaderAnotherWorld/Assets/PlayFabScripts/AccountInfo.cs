@@ -29,11 +29,14 @@ public class AccountInfo : MonoBehaviour
 
     private void Awake()
     {
-        if (instance != this)
-            instance = this;
+        if (instance == null)
+        {
+            if (instance != this)
+                instance = this;
 
 
-        DontDestroyOnLoad(gameObject);
+            DontDestroyOnLoad(gameObject);
+        }
     }
 
     public static void Register(string username, string email, string password)

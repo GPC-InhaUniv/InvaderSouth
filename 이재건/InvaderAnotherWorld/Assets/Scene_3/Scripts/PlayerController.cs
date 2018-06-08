@@ -7,6 +7,7 @@ public class Boundary
 {
     public float xMin = -6, xMax = 6, zMin = -4, zMax = 8;
 }
+
 public class PlayerController : MonoBehaviour
 {
     public Rigidbody rb;
@@ -47,6 +48,13 @@ public class PlayerController : MonoBehaviour
         );
 
         rb.rotation = Quaternion.Euler(0.0f, 0.0f, rb.velocity.x * -tilit);
+    }
+
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "Enemy")
+            Debug.Log("레이저맞음");
     }
 
 

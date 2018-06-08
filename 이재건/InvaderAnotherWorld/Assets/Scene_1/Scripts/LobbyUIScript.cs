@@ -2,16 +2,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class LobbyUIScript : MonoBehaviour
 {
-    // UI 위치가 어딘지 몰라서 Diamond UI는 아직 안넣었습니다.
-    private int playerDiamondCount;
-    // lastCompletedStageNumber = GameManager.lastCompletedStageNumber;
-    private int lastCompletedStageNumber = 3;
+    private int lastCompletedStageNumber = 0;
     // planeCount = GameManager.planeCount;
-    private int planeCount = 1;
 
     private GameObject characterSelectionUIPanel;
     private GameObject stageSelectionUIPanel;
@@ -20,7 +17,9 @@ public class LobbyUIScript : MonoBehaviour
     private GameObject firstCharacter;
     private GameObject secondCharacter;
     private GameObject shopPanel;
- 
+    private GameObject backToLoginScenePanel;
+
+    
 
     private Button stageOneSelectionButton;
     private Button stageTwoSelectionButton;
@@ -42,13 +41,11 @@ public class LobbyUIScript : MonoBehaviour
         stageThreeSelectionButton = stageSelectionUIPanel.transform.Find("StageThreeSelectionButton").GetComponent<Button>();
         playerMoneyCountText = characterSelectionUIPanel.transform.Find("PlayerNameAndMoneyImage").transform.Find("PlayerMoneyCountText").GetComponent<Text>();
         playerNameText = characterSelectionUIPanel.transform.Find("PlayerNameAndMoneyImage").transform.Find("PlayerNameText").GetComponent<Text>();
+        backToLoginScenePanel = characterSelectionUIPanel.transform.Find("BackToLoginScenePanel").gameObject;
 
         lastCompletedStageNumber = Convert.ToInt32(GameManager.Instance.GetPlayerLastCompletedStageNumber());
 
-        // playerMoneyCountText.text = GameManager.GetPlayerMoney();
-        // playerNameText.text = GameManager.GetPlayerName();
-        // lastCompletedStageNumber = GameManager.LastCompletedStageNumber;
-        // playerDiamondCount = GameManager.GetPlayerDiamond();
+
     }
 
     private void Update()
@@ -100,6 +97,18 @@ public class LobbyUIScript : MonoBehaviour
 
     }
 
+    public void OnClickBackToLoginSceneButton()
+    {
+        backToLoginScenePanel.SetActive(true);
+    }
+
+    public void OnClickBackLoginYesBtn()
+    {
+        GameManager.Instance.ResetPlayerInfo();
+        SceneManager.LoadScene(0);
+    }
+
+
     private void CheckTheDifficulty()
     {
         if (lastCompletedStageNumber >= 2)
@@ -107,4 +116,6 @@ public class LobbyUIScript : MonoBehaviour
         if (lastCompletedStageNumber == 3)
             stageThreeSelectionButton.interactable = true;
     }
+
+    
 }

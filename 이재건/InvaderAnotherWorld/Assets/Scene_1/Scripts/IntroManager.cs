@@ -11,6 +11,7 @@ public class IntroManager : MonoBehaviour
     private bool IsLoadedIntro;
     private void Start()
     {
+        Screen.SetResolution(700, 1080, true);
         IsLoadedIntro = false;
     }
     // Update is called once per frame
@@ -28,7 +29,7 @@ public class IntroManager : MonoBehaviour
 
     IEnumerator ChangePanelIntroToLogin()
     {
-        yield return new WaitForSeconds(2.0f);
+        yield return new WaitForSeconds(1.5f);
         gameObject.SetActive(false);
         LoginManager.SetActive(true);
 

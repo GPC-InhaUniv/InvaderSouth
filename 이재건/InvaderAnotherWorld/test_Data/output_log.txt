@@ -2,50 +2,51 @@ Initialize engine version: 5.6.5f1 (2cac56bf7bb6)
 GfxDevice: creating device client; threaded=1
 Direct3D:
     Version:  Direct3D 11.0 [level 11.0]
-    Renderer: NVIDIA GeForce GTX 765M (ID=0x11e2)
+    Renderer: NVIDIA GeForce GT 640M (ID=0xfd8)
     Vendor:   NVIDIA
-    VRAM:     1991 MB
-    Driver:   21.21.13.7270
+    VRAM:     2289 MB
+    Driver:   22.21.13.8205
 Begin MonoManager ReloadAssembly
-Platform assembly: C:\Users\Gaeguri\Documents\InvaderAnotherWorld\test_Data\Managed\UnityEngine.dll (this message is harmless)
-Loading C:\Users\Gaeguri\Documents\InvaderAnotherWorld\test_Data\Managed\UnityEngine.dll into Unity Child Domain
-Platform assembly: C:\Users\Gaeguri\Documents\InvaderAnotherWorld\test_Data\Managed\Assembly-CSharp.dll (this message is harmless)
-Loading C:\Users\Gaeguri\Documents\InvaderAnotherWorld\test_Data\Managed\Assembly-CSharp.dll into Unity Child Domain
-Platform assembly: C:\Users\Gaeguri\Documents\InvaderAnotherWorld\test_Data\Managed\UnityEngine.UI.dll (this message is harmless)
-Loading C:\Users\Gaeguri\Documents\InvaderAnotherWorld\test_Data\Managed\UnityEngine.UI.dll into Unity Child Domain
-Platform assembly: C:\Users\Gaeguri\Documents\InvaderAnotherWorld\test_Data\Managed\UnityEngine.Networking.dll (this message is harmless)
-Loading C:\Users\Gaeguri\Documents\InvaderAnotherWorld\test_Data\Managed\UnityEngine.Networking.dll into Unity Child Domain
-- Completed reload, in  0.053 seconds
-Platform assembly: C:\Users\Gaeguri\Documents\InvaderAnotherWorld\test_Data\Managed\System.Core.dll (this message is harmless)
-Platform assembly: C:\Users\Gaeguri\Documents\InvaderAnotherWorld\test_Data\Managed\System.dll (this message is harmless)
+Platform assembly: C:\Users\hrd32105\Desktop\InvaderAnotherWorld\test_Data\Managed\UnityEngine.dll (this message is harmless)
+Loading C:\Users\hrd32105\Desktop\InvaderAnotherWorld\test_Data\Managed\UnityEngine.dll into Unity Child Domain
+Platform assembly: C:\Users\hrd32105\Desktop\InvaderAnotherWorld\test_Data\Managed\Assembly-CSharp.dll (this message is harmless)
+Loading C:\Users\hrd32105\Desktop\InvaderAnotherWorld\test_Data\Managed\Assembly-CSharp.dll into Unity Child Domain
+Platform assembly: C:\Users\hrd32105\Desktop\InvaderAnotherWorld\test_Data\Managed\UnityEngine.UI.dll (this message is harmless)
+Loading C:\Users\hrd32105\Desktop\InvaderAnotherWorld\test_Data\Managed\UnityEngine.UI.dll into Unity Child Domain
+Platform assembly: C:\Users\hrd32105\Desktop\InvaderAnotherWorld\test_Data\Managed\UnityEngine.Networking.dll (this message is harmless)
+Loading C:\Users\hrd32105\Desktop\InvaderAnotherWorld\test_Data\Managed\UnityEngine.Networking.dll into Unity Child Domain
+- Completed reload, in  0.180 seconds
+Platform assembly: C:\Users\hrd32105\Desktop\InvaderAnotherWorld\test_Data\Managed\System.Core.dll (this message is harmless)
+Platform assembly: C:\Users\hrd32105\Desktop\InvaderAnotherWorld\test_Data\Managed\System.dll (this message is harmless)
 desktop: 1920x1080 59Hz; virtual: 1920x1080 at 0,0
 <RI> Initializing input.
+XInput1_3.dll not found. Trying XInput9_1_0.dll instead...
 <RI> Input initialized.
 <RI> Initialized touch support.
-UnloadTime: 1.284982 ms
+UnloadTime: 1.135800 ms
+Setting up 2 worker threads for Enlighten.
+  Thread -> id: 480c -> priority: 1 
+  Thread -> id: 363c -> priority: 1 
 인트로 로딩 완료
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-Setting up 2 worker threads for Enlighten.
-  Thread -> id: 249c -> priority: 1 
-  Thread -> id: 2e34 -> priority: 1 
 Login with: BE7748D093642826
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
 Unloading 5 Unused Serialized files (Serialized files now loaded: 0)
-UnloadTime: 4.072533 ms
+UnloadTime: 3.045146 ms
 
 Unloading 14 unused Assets to reduce memory usage. Loaded Objects now: 429.
-Total: 0.498392 ms (FindLiveObjects: 0.045569 ms CreateObjectMapping: 0.038590 ms MarkObjects: 0.353472 ms  DeleteObjects: 0.059938 ms)
+Total: 0.367576 ms (FindLiveObjects: 0.039152 ms CreateObjectMapping: 0.035731 ms MarkObjects: 0.234914 ms  DeleteObjects: 0.056637 ms)
 
 Unloading 5 Unused Serialized files (Serialized files now loaded: 0)
 Update Account Infomation!
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-UnloadTime: 0.504961 ms
+UnloadTime: 0.511642 ms
 Item1 (UnityEngine.UI.Toggle)는 토글 꺼져있음-OFF
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
@@ -62,37 +63,13 @@ Item3 (UnityEngine.UI.Toggle)는 토글 꺼져있음-OFF
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-playermoney1000
+playermoney200
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
 
-Unloading 32 unused Assets to reduce memory usage. Loaded Objects now: 781.
-Total: 1.193433 ms (FindLiveObjects: 0.066096 ms CreateObjectMapping: 0.057064 ms MarkObjects: 0.952447 ms  DeleteObjects: 0.117413 ms)
-
-Right Arrow Button Click!
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Right Arrow Button Click!
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Left Arrow Button Click!
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Start Button Click!
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Backward Movement Button Click!
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Right Arrow Button Click!
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+Unloading 32 unused Assets to reduce memory usage. Loaded Objects now: 813.
+Total: 0.824861 ms (FindLiveObjects: 0.043333 ms CreateObjectMapping: 0.030409 ms MarkObjects: 0.651146 ms  DeleteObjects: 0.099591 ms)
 
 Start Button Click!
  
@@ -106,83 +83,27 @@ Go to the store
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-Item1 (UnityEngine.UI.Toggle)는 토글 꺼져있음-OFF
+0
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-Item2 (UnityEngine.UI.Toggle)는 토글 켜져있음-ON
+Unloading 3 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 0.978430 ms
+
+Unloading 28 unused Assets to reduce memory usage. Loaded Objects now: 435.
+Total: 0.498718 ms (FindLiveObjects: 0.043713 ms CreateObjectMapping: 0.033070 ms MarkObjects: 0.297634 ms  DeleteObjects: 0.123539 ms)
+
+Unloading 6 Unused Serialized files (Serialized files now loaded: 0)
+UpdateDataInfo
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-Item3 (UnityEngine.UI.Toggle)는 토글 꺼져있음-OFF
+GameObjectPool 작동
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-200
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+UnloadTime: 0.566379 ms
 
-Item1 (UnityEngine.UI.Toggle)는 토글 켜져있음-ON
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Item2 (UnityEngine.UI.Toggle)는 토글 켜져있음-ON
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Item3 (UnityEngine.UI.Toggle)는 토글 꺼져있음-OFF
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-300
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Item1 (UnityEngine.UI.Toggle)는 토글 켜져있음-ON
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Item2 (UnityEngine.UI.Toggle)는 토글 켜져있음-ON
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Item3 (UnityEngine.UI.Toggle)는 토글 켜져있음-ON
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-600
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Backward Movement Button Click!
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Start Button Click!
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Stage Button Click
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Go to the store
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Item1 (UnityEngine.UI.Toggle)는 토글 켜져있음-ON
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Item2 (UnityEngine.UI.Toggle)는 토글 꺼져있음-OFF
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Item3 (UnityEngine.UI.Toggle)는 토글 켜져있음-ON
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-400
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+Unloading 4 unused Assets to reduce memory usage. Loaded Objects now: 1132.
+Total: 0.599070 ms (FindLiveObjects: 0.056257 ms CreateObjectMapping: 0.039912 ms MarkObjects: 0.482753 ms  DeleteObjects: 0.019386 ms)
 

@@ -3,7 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-
+public class s
+{
+    IEnumerator Ddd()
+    {
+        yield return new WaitForSeconds(5.0f);
+    }
+}
 public class TitleManager : MonoBehaviour
 {
     [Header("LoginPanel")]

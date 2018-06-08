@@ -28,7 +28,7 @@ public class BulletPool : MonoBehaviour
 
     }
 
-    public void Fire(Transform p)
+    public void Fire(Transform t)
     {
         if (bullets.Count>BulletCount)
             return;
@@ -38,7 +38,7 @@ public class BulletPool : MonoBehaviour
           
                 tempBullet = bullets.Dequeue();
                 tempBullet.SetActive(true);
-             tempBullet.transform.position = p.position;
+             tempBullet.transform.position = t.position;
                 nextFire = Time.time;
           
         }

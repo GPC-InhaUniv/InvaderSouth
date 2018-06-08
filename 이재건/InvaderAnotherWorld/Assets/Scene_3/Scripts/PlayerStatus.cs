@@ -29,8 +29,7 @@ public class PlayerStatus : MonoBehaviour {
     public void GetScoreSkill()
     {
         Score += 10;
-        SkillAmount += 10;
-        uIController.ReFresh();
+        SkillAmount += 0.3f;
     }
 
 	// Update is called once per frame

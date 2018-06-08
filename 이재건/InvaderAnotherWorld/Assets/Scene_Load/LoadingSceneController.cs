@@ -37,7 +37,9 @@ public class LoadingSceneController : MonoBehaviour
         if (isMainSceneLoading)
             controllerInfomationImage.SetActive(true);
 
+        if(GameManager.Instance==null)
         GameManager.Instance.Awake();
+
         StartCoroutine(LoadScene());
 
 
