@@ -33,8 +33,12 @@ public class BossFirstSkillGoRightBulletController : MonoBehaviour
             float x = radius * Mathf.Sin(runningTime);
             Instantiate(smallBullet, new Vector3(x + transform.position.x, 3.6f, transform.position.z), Quaternion.Euler(0, -runningTime, 0));
             smallBulletCount++;
-            if (smallBulletCount >= 360)
+            if (smallBulletCount >= 60)
+            {
                 IsFinishMakeCircle = true;
+                this.gameObject.SetActive(false);
+                yield return null;
+            }
             yield return new WaitForSeconds(0.1f);
         }
         yield return null;

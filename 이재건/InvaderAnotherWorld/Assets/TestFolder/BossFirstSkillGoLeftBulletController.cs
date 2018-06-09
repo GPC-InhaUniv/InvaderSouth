@@ -29,12 +29,16 @@ public class BossFirstSkillGoLeftBulletController : MonoBehaviour {
         {
             runningTime +=Time.deltaTime+10.0f;
             float x =radius * Mathf.Sin(runningTime);
-            Debug.Log(x+"   ");
             Instantiate(smallBullet, new Vector3(x+transform.position.x, 3.6f,transform.position.z ), Quaternion.Euler(0,runningTime,0));
             smallBulletCount++;
-            if (smallBulletCount >= 360)
+            if (smallBulletCount >= 60)
+            {
                 IsFinishMakeCircle = true;
-            yield return new WaitForSeconds(0.1f);
+                this.gameObject.SetActive(false);
+                yield return null;
+            }
+            else
+                yield return new WaitForSeconds(0.1f);
         }
         yield return null;
 

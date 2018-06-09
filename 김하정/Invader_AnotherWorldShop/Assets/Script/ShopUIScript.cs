@@ -14,11 +14,11 @@ public class ShopUIScript : MonoBehaviour
     private List<Toggle> ShopToggleList;
     [SerializeField]
     private List<Text> ItemPriceText;
-    
+
     //싱글톤으로 연결 부탁드립니다. 값은 테스트를 위해 임시로 넣어놨어요!
-    private  int playerMoneyCount = GameManager.GetPlayerMoney();
-    
-    private int playerDiamondCount = GameManager.GetPlayerDiamond();
+    private int playerMoneyCount = 0;
+
+    private int playerDiamondCount = 0;
     
 
     private int ShowTotalItemPrice;
