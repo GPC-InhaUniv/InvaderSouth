@@ -7,8 +7,9 @@ public enum BossState
     alive,
     dead,
 }
-public class BossController : MonoBehaviour {
-    
+public class BossController : MonoBehaviour
+{
+
     [SerializeField]
     private PlayerController player;
     [SerializeField]
@@ -23,63 +24,80 @@ public class BossController : MonoBehaviour {
     [SerializeField]
     private Transform shotposition;
 
-    private float firstFireTime = 5.0f;
-    private float firstFiredelayTime = 5.0f;
-    private float secondFiredelayTime = 4.0f;
+    private float firstFireTime = 10.0f;
+    private float secondFireTime = 15.0f;
+    private float firstFiredelayTime = 10.0f;
+    private float secondFiredelayTime = 15.0f;
     private bool isUseSkill;
     private BossState bossstate;
+
     
 
-
-	void Start () {
+    void Start()
+    {
         player = GameObject.Find("Player").GetComponent<PlayerController>();
         isUseSkill = false;
         bossstate = BossState.alive;
 
-        StartCoroutine(NormalAttack());
-	}
+        StartCoroutine(BossNormalAttack());
+    }
 
-    IEnumerator NormalAttack()
+    IEnumerator BossNormalAttack()
     {
-        while (bossstate.Equals(BossState.alive))
+        while (BossState.alive.Equals(bossstate))
         {
-            if (Time.time > firstFiredelayTime&&!isUseSkill)
+            if (isUseSkill)
             {
-                isUseSkill = true;
-                UseFirstSkill();
-                yield return new WaitForSeconds(10.0f);
-                firstFiredelayTime = Time.time + firstFireTime;
-            }
-            else if(Time.time>secondFiredelayTime&&!isUseSkill)
-            {
-                isUseSkill = true;
-                UseSecondSkill();
-                yield return new WaitForSeconds(5.0f);
-                secondFiredelayTime = Time.time + secondFiredelayTime;
+                yield return new WaitForSeconds(2.5f);
+                isUseSkill = false;
+
             }
             else
             {
-                isUseSkill = false;
                 Instantiate(bullet, new Vector3(shotposition.transform.position.x, 3.6f, shotposition.transform.position.z), bullet.transform.rotation);
-
                 yield return new WaitForSeconds(1.0f);
             }
+
+
+
         }
 
     }
-    void  UseFirstSkill()
+    private void Update()
     {
-        Instantiate(firstSkillLeftBullet, new Vector3(shotposition.transform.position.x-1f, 3.6f, shotposition.transform.position.z), firstSkillLeftBullet.transform.rotation);
+        if (bossstate.Equals(BossState.alive))
+        {
 
-        Instantiate(firstSkillRightBullet, new Vector3(shotposition.transform.position.x+1f, 3.6f, shotposition.transform.position.z), firstSkillRightBullet.transform.rotation);
+            if (Time.time > firstFiredelayTime && !isUseSkill)
+            {
+                isUseSkill = true;
+                UseFirstSkill();
+                firstFiredelayTime = Time.time + firstFireTime;
+            }
+            else if (Time.time > secondFiredelayTime && !isUseSkill)
+            {
+                isUseSkill = true;
+                UseSecondSkill();
+                secondFiredelayTime = Time.time + secondFireTime;
+            }
+
+
+        }
+    }
+
+    void UseFirstSkill()
+    {
+        Instantiate(firstSkillLeftBullet, new Vector3(shotposition.transform.position.x - 1f, 3.6f, shotposition.transform.position.z), firstSkillLeftBullet.transform.rotation);
+
+        Instantiate(firstSkillRightBullet, new Vector3(shotposition.transform.position.x + 1f, 3.6f, shotposition.transform.position.z), firstSkillRightBullet.transform.rotation);
 
     }
 
     void UseSecondSkill()
     {
         Instantiate(SecondSkillBullet, new Vector3(shotposition.transform.position.x - 1f, 3.6f, shotposition.transform.position.z), Quaternion.Euler(0, 0, 0));
-     
+
     }
 
-    
+
 }
