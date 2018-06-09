@@ -33,8 +33,9 @@ public class PlayerController_jin : MonoBehaviour
         rigidbodyShip = gameObject.GetComponent<Rigidbody>();
         fireSound = gameObject.GetComponent<AudioSource>();
         BombSkill = GameObject.Find("GameObjectPool").GetComponent<BombObjectPool>();
-        animation = GetComponent<Animator>();
-        animation.enabled = false;
+        animation = gameObject.GetComponentInChildren<Animator>();
+        //animation = GetComponent<Animator>();
+        //animation.enabled = false;
     }
     private void Update()
     {
@@ -61,7 +62,12 @@ public class PlayerController_jin : MonoBehaviour
         {
             BombSkill.StartBombing();
             //animation.enabled = true;
-            //animation.SetBool("SkillActive", true);
+            animation.SetBool("SkillActive", true);
+            Debug.Log("test");
+            //yield return new WaitForSeconds(30f);
+            Debug.Log("test2");
+            animation.SetBool("SkillActive", false);
+
             //animation.Play(0);
         }
     }
