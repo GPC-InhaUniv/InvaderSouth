@@ -16,10 +16,10 @@ public class ShopUIScript : MonoBehaviour
 
     public List<Toggle> ShopToggleList;
     public List<Text> ItemPriceText;
-    
-    //private int playerMoneyCountText =  GameManager.GetPlayerMoney();
+
+    //private int playerMoneyCount = int.Parse(GameManager.Instance.GetPlayerMoney());
     private int playerDiamondCount = 50;
-    //private int playerDiamondCount =  GameManager.GetPlayerDiamond();
+    //private int playerDiamondCount = int.Parse(GameManager.Instance.GetPlayerDiamond());
     public Text ShowTotalItemPrice;
     public Text CurrentPlayerCash;
 
