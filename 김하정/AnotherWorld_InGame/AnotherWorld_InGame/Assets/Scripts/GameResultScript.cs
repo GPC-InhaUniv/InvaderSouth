@@ -14,49 +14,74 @@ public class GameResultScript : MonoBehaviour {
     private GameObject gameEndResultPanel;
     private int playerGold = 100;   //이번 게임에서 플레이어가 획득한 골드. //임시 값으로 넣어 놨음
     private int tempGold = 0;
-    private bool coroutineFlag=true;
+    //private bool coroutineFlag=true;
     private  Button nextButton;
-    private int playerMoney;
-    private int changeScoreBuffer;
+    
+    [SerializeField]
+    private int controlChangeScore;
 
 
     void Start ()
     {
         getPlayerScoreText = GameObject.Find("GetPlayerScoreText").GetComponent<Text>();
         getPlayerGoldText = GameObject.Find("GetPlayerGoldText").GetComponent<Text>();
-        playerstate = GameObject.Find("PlayerShip").GetComponent<PlayerController>();
+        //playerstate = GameObject.Find("PlayerShip").GetComponent<PlayerController>();
         gameEndResultPanel = GameObject.Find("GameEndResultPanel");
        
         nextButton = GameObject.Find("NextButton").GetComponent<Button>();
         nextButton.gameObject.SetActive(false);
         gameEndResultPanel.gameObject.SetActive(false);
 
-        changeScoreBuffer = playerScore - 15;
-
-
-
     }
 
-    private void Update()
+    /*delegate*/
+    private void Awake()
     {
-        if (playerstate.isGameOver&& coroutineFlag)
-        {
-            gameEndResultPanel.gameObject.SetActive(true);
-            StartCoroutine("ChangeScoreCoroutine");
-            StartCoroutine("ChangeGoldCoroutine");
-            coroutineFlag = false;
-        }
-
-        else if (playerstate.isGameClear && coroutineFlag)
-        {
-            gameEndResultPanel.gameObject.SetActive(true);//게임 클리어 화면 트루로 바꿔주기
-            nextButton.gameObject.SetActive(true);
-            StartCoroutine("ChangeScoreCoroutine");
-            StartCoroutine("ChangeGoldCoroutine");
-            coroutineFlag = false;
-        }
-
+        PlayerController player = FindObjectOfType<PlayerController>();
+        player.GameOverResult += GameOverResultMethod;
+        player.GameClearResult += GameClearResultMethod;
     }
+
+    void GameOverResultMethod()
+    {
+        gameEndResultPanel.gameObject.SetActive(true);
+        StartCoroutine("ChangeScoreCoroutine");
+        StartCoroutine("ChangeGoldCoroutine");
+         
+    }
+
+    void GameClearResultMethod()
+    {
+        gameEndResultPanel.gameObject.SetActive(true);//게임 클리어 화면 트루로 바꿔주기
+        nextButton.gameObject.SetActive(true);
+        StartCoroutine("ChangeScoreCoroutine");
+        StartCoroutine("ChangeGoldCoroutine");
+        
+    }
+
+
+
+
+    //private void Update()
+    //{
+    //    if (playerstate.isGameOver&& coroutineFlag)
+    //    {
+    //        gameEndResultPanel.gameObject.SetActive(true);
+    //        StartCoroutine("ChangeScoreCoroutine");
+    //        StartCoroutine("ChangeGoldCoroutine");
+    //        coroutineFlag = false;
+    //    }
+
+    //    else if (playerstate.isGameClear && coroutineFlag)
+    //    {
+    //gameEndResultPanel.gameObject.SetActive(true);//게임 클리어 화면 트루로 바꿔주기
+    //        nextButton.gameObject.SetActive(true);
+    //        StartCoroutine("ChangeScoreCoroutine");
+    //StartCoroutine("ChangeGoldCoroutine");
+    //coroutineFlag = false;
+    //    }
+
+    //}
 
 
     IEnumerator ChangeScoreCoroutine()
@@ -67,11 +92,11 @@ public class GameResultScript : MonoBehaviour {
         {
             tempScore += 1;
             getPlayerScoreText.text = string.Format("{0:D3}", tempScore);
-            if (tempScore < changeScoreBuffer) 
+            if (tempScore < playerScore - controlChangeScore) 
             {
                 yield return new WaitForSeconds(0.01f);
             }
-            else if ( changeScoreBuffer < tempScore  ) 
+            else if (playerScore - controlChangeScore < tempScore  ) 
             { yield return new WaitForSeconds(0.1f); }
              
         }
@@ -89,7 +114,12 @@ public class GameResultScript : MonoBehaviour {
             tempGold += 1;
             getPlayerGoldText.text = string.Format("{0:D3}", tempGold);
 
-            yield return new WaitForSeconds(0.01f);
+            if (tempScore < playerGold - controlChangeScore)
+            {
+                yield return new WaitForSeconds(0.01f);
+            }
+            else if (playerGold - controlChangeScore < tempScore)
+            { yield return new WaitForSeconds(0.1f); }
         }
         yield return null;
     }
@@ -100,6 +130,15 @@ public class GameResultScript : MonoBehaviour {
         playerScore = 0;
         SceneManager.LoadScene("  ");   //씬 이름 넣어줄것.
           //아이템은 게임 매니저에 구현되면 넣을 예정.   
+
+
+        /*
+         * 
+        *골드랑 점수 초기화
+        *점수도 싱글톤에서 가져오기
+        *델리게이트는 옵저버
+        * 
+        */
     }
 
 

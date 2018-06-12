@@ -4,7 +4,15 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    
+    /*delegate*/
+    public delegate void GameResult();
+    public GameResult GameOverResult;
+    public GameResult GameClearResult;
+
+
+
+
+
     public GameObject Bolt;
     public GameObject BoltSpawn;
     private float fireTime = 0.25f;
@@ -41,12 +49,14 @@ public class PlayerController : MonoBehaviour
             SetState(new DeadState());
             playerState.behavior();
             isGameOver = true;
+            GameOverResult();
         }
         if (Input.GetKeyDown(KeyCode.G))
         {
             //SetState(new DeadState());
             //playerState.behavior();
             isGameClear = true;
+            GameClearResult();
         }
 
     }
