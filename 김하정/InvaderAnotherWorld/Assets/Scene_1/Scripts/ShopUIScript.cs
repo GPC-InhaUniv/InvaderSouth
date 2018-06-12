@@ -64,7 +64,6 @@ public class ShopUIScript : MonoBehaviour
     void Start()
     {
 
-        /*오브젝트 불러오기*/
         shopPanel = GameObject.Find("ShopPanel");
         showTotalItemPriceText = GameObject.Find("ShowTotalItemPriceText").GetComponent<Text>();
 
@@ -95,6 +94,7 @@ public class ShopUIScript : MonoBehaviour
         canBuyGoldAndDiamondText.gameObject.SetActive(false);
         buyAlert.gameObject.SetActive(false);
         buyGoldPanel.gameObject.SetActive(false);
+        shopPanel.SetActive(false);
 
         currentPlayerCashText.text = playerMoneyCount.ToString() + "G";
         currentPlayerDiamondText.text = playerDiamondCount.ToString() + " D";
@@ -163,6 +163,7 @@ public class ShopUIScript : MonoBehaviour
         buyDiamondPanel.SetActive(false);
         buyAlert.gameObject.SetActive(false);
         startButtonWarningPanel.SetActive(false);
+        ResetToggleOff();
     }
 
     public void BuyItem()
