@@ -13,7 +13,7 @@ public class PlayerController : MonoBehaviour
     private EnemyController enemyController;
 
     public BombObjectPool BombSkill;
-
+    Animator animator;
 
     private bool isGameOver;
     public bool IsGameOver
@@ -21,17 +21,25 @@ public class PlayerController : MonoBehaviour
         get { return isGameOver; }
         private set { }
     }
-
+    
     private void Awake()
     {
         playerState = new LivingState();
         enemyController = GameObject.Find("EnemyShip1").GetComponent<EnemyController>();
         BombSkill = GameObject.Find("GameObjectPool").GetComponent<BombObjectPool>();
+        animator = gameObject.GetComponentInChildren<Animator>();
+        Debug.Log(playerState);
+    }
+    private void Update()
+    {
+        playerState.Behavior();
+        Debug.Log(playerState);
     }
 
     private void FixedUpdate()
     {
-        playerState.Behavior();
+        //Debug.Log(playerState);
+        
 
         if (Input.GetKey(KeyCode.Z))
         {
@@ -41,6 +49,7 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
         {
             BombSkill.StartBombing();
+            animator.Play("SkillAnim");
             SetState(new MujuckState());
             Debug.Log("필살기 사용!");
             Invoke("SetMeshCollider", 3f);
@@ -86,7 +95,9 @@ public class PlayerController : MonoBehaviour
 
     private void SetMeshCollider()
     {
-        this.GetComponent<MeshCollider>().convex = true;
+        this.GetComponentInChildren<MeshCollider>().convex = true;
+        
+        //this.GetComponent<MeshCollider>().convex = true;
         SetState(new LivingState());
     }
 }

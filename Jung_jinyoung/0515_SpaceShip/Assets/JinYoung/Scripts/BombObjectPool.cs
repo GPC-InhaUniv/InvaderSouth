@@ -50,13 +50,22 @@ public class BombObjectPool : MonoBehaviour {
     {
         if (!BombActive)
         {
-            StartCoroutine(BombingCoroutine()); 
+            StartCoroutine(BombingCoroutine());
         }
     }
-
+    //void OnWillRenderObject()
+    //{
+    //    Debug.Log("OnWillRenderObject");
+    //    if (tag == "Enemy")
+    //    {
+    //        gameObject.SetActive(false);
+    //        Debug.Log("OnWillRenderObject23232");
+    //    }
+    //}
 
     IEnumerator BombingCoroutine()
     {
+        //Vector3 viewPos = Camera.WorldToViewportPoint();
         BombActive = true;
         if (BombActive)
         {

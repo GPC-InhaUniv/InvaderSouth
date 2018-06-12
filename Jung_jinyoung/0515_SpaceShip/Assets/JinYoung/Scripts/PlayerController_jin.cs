@@ -26,20 +26,28 @@ public class PlayerController_jin : MonoBehaviour
     private float nextFire;
     private float missileNextFire;
 
-    Animator animation;
+    Animator animator;
 
     private void Awake()
     {
         rigidbodyShip = gameObject.GetComponent<Rigidbody>();
         fireSound = gameObject.GetComponent<AudioSource>();
         BombSkill = GameObject.Find("GameObjectPool").GetComponent<BombObjectPool>();
-        animation = gameObject.GetComponentInChildren<Animator>();
+        animator = gameObject.GetComponentInChildren<Animator>();
         //animation = GetComponent<Animator>();
         //animation.enabled = false;
     }
     private void Update()
     {
         InputManger_test();
+        // animation.SetBool("SkillActive", false);
+        if (animator.GetBool("SkillActive"))
+        {
+            Debug.Log("if test");
+            //animator.GetCurrentAnimatorStateInfo(int 0).normalizedTime;
+            
+        }
+
     }
     void FixedUpdate()
     {
@@ -61,15 +69,11 @@ public class PlayerController_jin : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
         {
             BombSkill.StartBombing();
-            //animation.enabled = true;
-            animation.SetBool("SkillActive", true);
-            Debug.Log("test");
-            //yield return new WaitForSeconds(30f);
-            Debug.Log("test2");
-            animation.SetBool("SkillActive", false);
-
-            //animation.Play(0);
+            animator.Play("SkillAnim");
+            //animator.SetBool("SkillActive", true);
+            
         }
+        
     }
     private void MissilesFire()
     {
@@ -102,4 +106,5 @@ public class PlayerController_jin : MonoBehaviour
         );
         rigidbodyShip.rotation = Quaternion.Euler(0.0f, 0.0f, rigidbodyShip.velocity.x * -tilt);
     }
+
 }

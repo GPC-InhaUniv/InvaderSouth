@@ -9,7 +9,8 @@ public class MujuckState : State
 
     public MujuckState()
     {
-        playerCollider = GameObject.Find("PlayerShip").GetComponent<MeshCollider>();
+        playerCollider = GameObject.Find("PlayerShipObject").GetComponentInChildren<MeshCollider>();
+        //playerCollider = GameObject.Find("PlayerShipObject").GetComponent<MeshCollider>();
         isBehavior = true;
     }
 
