@@ -7,8 +7,8 @@ using UnityEngine;
 public class LivingState : State
 {
     private GameObject playerObject;
-    //public float speed = 0.2f;
-    public float speed = 10f;
+    private float speed = 0.2f;
+    //private float speed = 10f;
     public float tilt = 3f;
     private bool isInput;
     private bool isGameClear;
@@ -32,28 +32,28 @@ public class LivingState : State
 
     public void Behavior()
     {
-        //if (isInput == true)
-        //{
-        //    if (Input.GetKey(KeyCode.RightArrow) == true)
-        //    {
-        //        playerObject.transform.Translate(new Vector3(1, 0, 0) * speed);
-        //    }
+        if (isInput == true)
+        {
+            if (Input.GetKey(KeyCode.RightArrow) == true)
+            {
+                playerObject.transform.Translate(new Vector3(1, 0, 0) * speed);
+            }
 
-        //    else if (Input.GetKey(KeyCode.LeftArrow) == true)
-        //    {
-        //        playerObject.transform.Translate(new Vector3(1, 0, 0) * -speed);
-        //    }
+            else if (Input.GetKey(KeyCode.LeftArrow) == true)
+            {
+                playerObject.transform.Translate(new Vector3(1, 0, 0) * -speed);
+            }
 
-        //    if (Input.GetKey(KeyCode.UpArrow) == true)
-        //    {
-        //        playerObject.transform.Translate(new Vector3(0, 0, 1) * speed);
-        //    }
+            if (Input.GetKey(KeyCode.UpArrow) == true)
+            {
+                playerObject.transform.Translate(new Vector3(0, 0, 1) * speed);
+            }
 
-        //    else if (Input.GetKey(KeyCode.DownArrow) == true)
-        //    {
-        //        playerObject.transform.Translate(new Vector3(0, 0, 1) * -speed);
-        //    }
-        //}
+            else if (Input.GetKey(KeyCode.DownArrow) == true)
+            {
+                playerObject.transform.Translate(new Vector3(0, 0, 1) * -speed);
+            }
+        }
 
 
         //보스 몬스터가 죽었을 경우에 Gaem Clear를 보여주는 if문 작성!
@@ -67,8 +67,8 @@ public class LivingState : State
         //        isGameClear = false;
         //    }
         //}
-
-        MovingShip();
+        //if (isInput == true)
+        //    MovingShip();
     }
     void MovingShip()
     {

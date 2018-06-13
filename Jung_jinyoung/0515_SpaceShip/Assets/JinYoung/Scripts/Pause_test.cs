@@ -47,7 +47,7 @@ public class Pause_test : MonoBehaviour {
     {
         //PlayerController playerController = new PlayerController();
         //GameObject.Find("Player").GetComponent<PlayerController>().
-        GameObject.Find("Player").GetComponent<PlayerController_jin>().enabled = IsAlive;
+        GameObject.Find("PlayerObject").GetComponent<PlayerController_jin>().enabled = IsAlive;
         //playerController.enabled = IsAlive;
     }
 }

@@ -52,7 +52,7 @@ public class PlayerController : MonoBehaviour
             animator.Play("SkillAnim");
             SetState(new MujuckState());
             Debug.Log("필살기 사용!");
-            Invoke("SetMeshCollider", 3f);
+            Invoke("SetMeshCollider", 1f);
         }
 
         if(isGameOver != true)
