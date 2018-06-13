@@ -1,0 +1,67 @@
+콜백은 한명
+이벤트는 여려명
+
+
+1순위 : 로비 (캐릭터 선택창), 스테이지 선택창
+2순위 : 데코레이터 패턴으로 적 움직임 구현, 보스 움직임 구현
+
+
+
+싱글톤 최종 뼈대
+public class GameManager : Singleton<GameManager>
+{
+    private string playerName;
+    private int playerMoneyCount;
+    private int playerDiamondCount;
+
+    public int LastCompletedStageNumber;
+    public int[] CleardStageScore;
+    public bool[] IsPlayerHavePlane;
+
+    private int maxStageCount = 3;
+    private int PlaneCount = 2;
+
+    private void Start()
+    {
+        playerName = "";
+        playerMoneyCount = 0;
+        playerDiamondCount = 0;
+        LastCompletedStageNumber = 0;
+        CleardStageScore = new int[maxStageCount];
+        for (int i = 0; i < maxStageCount; i++)
+            CleardStageScore[i] = 0;
+
+        for (int i = 0; i < PlaneCount; i++)
+            IsPlayerHavePlane[i] = false;
+    }
+
+    public void SetPlayerName(string name)
+    {
+        playerName = name;
+    }
+
+    public string GetPlayerName()
+    {
+        return playerName;
+    }
+
+    public void SetPlayerMoney(int money)
+    {
+        playerMoneyCount = money;
+    }
+
+    public int GetPlayerMoney()
+    {
+        return playerMoneyCount;
+    }
+
+    public void SetPlayerDiamond(int diamond)
+    {
+        playerDiamondCount = diamond;
+    }
+
+    public int GetPlayerDiamond()
+    {
+        return playerDiamondCount;
+    }
+}
