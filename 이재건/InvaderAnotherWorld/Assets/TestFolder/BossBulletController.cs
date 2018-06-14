@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class BossBulletController : MonoBehaviour {
+
     [SerializeField]
     private Rigidbody rb;
     [SerializeField]
@@ -11,13 +12,24 @@ public class BossBulletController : MonoBehaviour {
     private Transform target;
     [SerializeField]
     private float rotateSpeed = 5.0f;
-
+    public float autoActiveFalseTime;
+    public float aliveMissleTime;
     // Use this for initialization
+
     void Start () {
 
         rb = GetComponent<Rigidbody>();
-        SetTarget();
+        autoActiveFalseTime = 2.0f;
+        aliveMissleTime = 0.0f;
 
+    }
+
+    public void Initialize()
+    {
+        autoActiveFalseTime = 2.0f;
+        aliveMissleTime = 0.0f;
+        gameObject.transform.rotation = Quaternion.identity;
+        gameObject.transform.position = new Vector3(0, 0, 0);
     }
 
     private void FixedUpdate()
@@ -29,10 +41,17 @@ public class BossBulletController : MonoBehaviour {
         else
         {
             SetTarget();
-            //Debug.Log("settarget "+rb);
             rb.transform.Translate(new Vector3(0, 0, -1) * speed * Time.deltaTime);
         }
 
+        if (aliveMissleTime > autoActiveFalseTime)
+        {
+            Initialize();
+            BossBulletPool.BossNormalbullets.Enqueue(this.gameObject);
+            gameObject.SetActive(false);
+        }
+        else
+            aliveMissleTime += Time.deltaTime;
     }
 
     void RuningForEnemy(Transform target)
@@ -46,10 +65,11 @@ public class BossBulletController : MonoBehaviour {
     }
     public void SetTarget()
     {
+
         if (GameObject.FindGameObjectWithTag("Player") != null)
         {
             GameObject player = GameObject.FindGameObjectWithTag("Player");
-
+     
             float distance = Mathf.Infinity;   
            
                 Vector3 diff = player.transform.position - rb.position;

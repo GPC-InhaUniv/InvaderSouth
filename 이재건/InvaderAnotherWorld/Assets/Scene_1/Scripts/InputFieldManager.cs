@@ -10,6 +10,9 @@ public class InputFieldManager : MonoBehaviour
     [SerializeField]
     private InputField PassWordInputField;
     [SerializeField]
+    private InputField SecondPassWordInputField;
+
+    [SerializeField]
     private InputField EmailInputField;
 
     [SerializeField]
@@ -24,6 +27,7 @@ public class InputFieldManager : MonoBehaviour
     public void OnChangePassWordValue()
     {
         text = PassWordInputField.text;
+ 
         if (!Regex.IsMatch(text, @"(?=.*\d).{6,12}"))
         {
             ErrorText.text = "비밀번호는 6~12자리 미만으로 해주세요";
@@ -33,6 +37,18 @@ public class InputFieldManager : MonoBehaviour
             ErrorText.text = "";
         }
 
+    }
+    public void OnCheckSecondPassword()
+    {
+        text = SecondPassWordInputField.text;
+        if(!PassWordInputField.text.Equals(SecondPassWordInputField.text))
+        {
+            ErrorText.text = "비밀번호가 일치하지 않습니다!";
+        }   
+        else
+        {
+            ErrorText.text = "";
+        }
     }
     public void OnChangeEmailValue()
     {

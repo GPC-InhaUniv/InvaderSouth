@@ -13,6 +13,10 @@ public class GameManager : Singleton<GameManager>
 
     private const int maxStageCount = 3;
     private const int maxPlaneCount = 2;
+    private const int maxItemCount = 3;
+
+    public int currentStage = 0;
+    private bool[] buyItemList;
 
 
 
@@ -29,6 +33,10 @@ public class GameManager : Singleton<GameManager>
         IsPlayerHavePlane = new bool[maxPlaneCount];
         for (int i = 0; i < maxPlaneCount; i++)
             IsPlayerHavePlane[i] = false;
+
+        buyItemList = new bool[maxItemCount];
+        for (int i = 0; i < maxItemCount; i++)
+            buyItemList[i] = false;
 
     }
 

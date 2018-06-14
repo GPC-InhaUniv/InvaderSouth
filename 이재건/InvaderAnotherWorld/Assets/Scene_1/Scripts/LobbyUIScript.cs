@@ -111,9 +111,9 @@ public class LobbyUIScript : MonoBehaviour
 
     private void CheckTheDifficulty()
     {
-        if (lastCompletedStageNumber >= 2)
+        if (lastCompletedStageNumber >= 1)
             stageTwoSelectionButton.interactable = true;
-        if (lastCompletedStageNumber == 3)
+        if (lastCompletedStageNumber == 2)
             stageThreeSelectionButton.interactable = true;
     }
 

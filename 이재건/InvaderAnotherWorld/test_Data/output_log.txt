@@ -2,51 +2,50 @@ Initialize engine version: 5.6.5f1 (2cac56bf7bb6)
 GfxDevice: creating device client; threaded=1
 Direct3D:
     Version:  Direct3D 11.0 [level 11.0]
-    Renderer: NVIDIA GeForce GT 640M (ID=0xfd8)
+    Renderer: NVIDIA GeForce GTX 765M (ID=0x11e2)
     Vendor:   NVIDIA
-    VRAM:     2289 MB
-    Driver:   22.21.13.8205
+    VRAM:     1991 MB
+    Driver:   21.21.13.7270
 Begin MonoManager ReloadAssembly
-Platform assembly: C:\Users\hrd32105\Desktop\InvaderAnotherWorld\test_Data\Managed\UnityEngine.dll (this message is harmless)
-Loading C:\Users\hrd32105\Desktop\InvaderAnotherWorld\test_Data\Managed\UnityEngine.dll into Unity Child Domain
-Platform assembly: C:\Users\hrd32105\Desktop\InvaderAnotherWorld\test_Data\Managed\Assembly-CSharp.dll (this message is harmless)
-Loading C:\Users\hrd32105\Desktop\InvaderAnotherWorld\test_Data\Managed\Assembly-CSharp.dll into Unity Child Domain
-Platform assembly: C:\Users\hrd32105\Desktop\InvaderAnotherWorld\test_Data\Managed\UnityEngine.UI.dll (this message is harmless)
-Loading C:\Users\hrd32105\Desktop\InvaderAnotherWorld\test_Data\Managed\UnityEngine.UI.dll into Unity Child Domain
-Platform assembly: C:\Users\hrd32105\Desktop\InvaderAnotherWorld\test_Data\Managed\UnityEngine.Networking.dll (this message is harmless)
-Loading C:\Users\hrd32105\Desktop\InvaderAnotherWorld\test_Data\Managed\UnityEngine.Networking.dll into Unity Child Domain
-- Completed reload, in  0.180 seconds
-Platform assembly: C:\Users\hrd32105\Desktop\InvaderAnotherWorld\test_Data\Managed\System.Core.dll (this message is harmless)
-Platform assembly: C:\Users\hrd32105\Desktop\InvaderAnotherWorld\test_Data\Managed\System.dll (this message is harmless)
+Platform assembly: C:\Users\Gaeguri\Desktop\InvaderAnotherWorld\test_Data\Managed\UnityEngine.dll (this message is harmless)
+Loading C:\Users\Gaeguri\Desktop\InvaderAnotherWorld\test_Data\Managed\UnityEngine.dll into Unity Child Domain
+Platform assembly: C:\Users\Gaeguri\Desktop\InvaderAnotherWorld\test_Data\Managed\Assembly-CSharp.dll (this message is harmless)
+Loading C:\Users\Gaeguri\Desktop\InvaderAnotherWorld\test_Data\Managed\Assembly-CSharp.dll into Unity Child Domain
+Platform assembly: C:\Users\Gaeguri\Desktop\InvaderAnotherWorld\test_Data\Managed\UnityEngine.UI.dll (this message is harmless)
+Loading C:\Users\Gaeguri\Desktop\InvaderAnotherWorld\test_Data\Managed\UnityEngine.UI.dll into Unity Child Domain
+Platform assembly: C:\Users\Gaeguri\Desktop\InvaderAnotherWorld\test_Data\Managed\UnityEngine.Networking.dll (this message is harmless)
+Loading C:\Users\Gaeguri\Desktop\InvaderAnotherWorld\test_Data\Managed\UnityEngine.Networking.dll into Unity Child Domain
+- Completed reload, in  0.060 seconds
+Platform assembly: C:\Users\Gaeguri\Desktop\InvaderAnotherWorld\test_Data\Managed\System.Core.dll (this message is harmless)
+Platform assembly: C:\Users\Gaeguri\Desktop\InvaderAnotherWorld\test_Data\Managed\System.dll (this message is harmless)
 desktop: 1920x1080 59Hz; virtual: 1920x1080 at 0,0
 <RI> Initializing input.
-XInput1_3.dll not found. Trying XInput9_1_0.dll instead...
 <RI> Input initialized.
 <RI> Initialized touch support.
-UnloadTime: 1.135800 ms
+UnloadTime: 3.723987 ms
 Setting up 2 worker threads for Enlighten.
-  Thread -> id: 480c -> priority: 1 
-  Thread -> id: 363c -> priority: 1 
+  Thread -> id: 1270 -> priority: 1 
+  Thread -> id: 1f48 -> priority: 1 
 인트로 로딩 완료
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-Login with: BE7748D093642826
+Login with: 165EF6F8D76BE3DB
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
 Unloading 5 Unused Serialized files (Serialized files now loaded: 0)
-UnloadTime: 3.045146 ms
+UnloadTime: 9.422250 ms
 
-Unloading 14 unused Assets to reduce memory usage. Loaded Objects now: 429.
-Total: 0.367576 ms (FindLiveObjects: 0.039152 ms CreateObjectMapping: 0.035731 ms MarkObjects: 0.234914 ms  DeleteObjects: 0.056637 ms)
+Unloading 14 unused Assets to reduce memory usage. Loaded Objects now: 506.
+Total: 1.071913 ms (FindLiveObjects: 0.097707 ms CreateObjectMapping: 0.067738 ms MarkObjects: 0.714746 ms  DeleteObjects: 0.190078 ms)
 
 Unloading 5 Unused Serialized files (Serialized files now loaded: 0)
 Update Account Infomation!
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-UnloadTime: 0.511642 ms
+UnloadTime: 1.225044 ms
 Item1 (UnityEngine.UI.Toggle)는 토글 꺼져있음-OFF
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
@@ -63,13 +62,249 @@ Item3 (UnityEngine.UI.Toggle)는 토글 꺼져있음-OFF
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-playermoney200
+playermoney900
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
 
-Unloading 32 unused Assets to reduce memory usage. Loaded Objects now: 813.
-Total: 0.824861 ms (FindLiveObjects: 0.043333 ms CreateObjectMapping: 0.030409 ms MarkObjects: 0.651146 ms  DeleteObjects: 0.099591 ms)
+Unloading 89 unused Assets to reduce memory usage. Loaded Objects now: 1252.
+Total: 4.682592 ms (FindLiveObjects: 0.254533 ms CreateObjectMapping: 0.200752 ms MarkObjects: 3.892307 ms  DeleteObjects: 0.332946 ms)
+
+Right Arrow Button Click!
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Left Arrow Button Click!
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Right Arrow Button Click!
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Unloading 2 Unused Serialized files (Serialized files now loaded: 0)
+FormatException: Input string was not in the correct format
+  at System.Int32.Parse (System.String s) [0x00000] in <filename unknown>:0 
+  at ShopUIScript.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+UnloadTime: 3.136507 ms
+
+Unloading 27 unused Assets to reduce memory usage. Loaded Objects now: 658.
+Total: 2.130690 ms (FindLiveObjects: 0.113308 ms CreateObjectMapping: 0.087444 ms MarkObjects: 1.437702 ms  DeleteObjects: 0.491003 ms)
+
+Login with: 165EF6F8D76BE3DB
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Unloading 3 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 2.168870 ms
+
+Unloading 12 unused Assets to reduce memory usage. Loaded Objects now: 510.
+Total: 1.185632 ms (FindLiveObjects: 0.080875 ms CreateObjectMapping: 0.064043 ms MarkObjects: 0.881013 ms  DeleteObjects: 0.158057 ms)
+
+Unloading 5 Unused Serialized files (Serialized files now loaded: 0)
+Update Account Infomation!
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+UnloadTime: 1.223812 ms
+Item1 (UnityEngine.UI.Toggle)는 토글 꺼져있음-OFF
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Item2 (UnityEngine.UI.Toggle)는 토글 꺼져있음-OFF
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Item3 (UnityEngine.UI.Toggle)는 토글 꺼져있음-OFF
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+0
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+playermoney900
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+
+Unloading 89 unused Assets to reduce memory usage. Loaded Objects now: 1255.
+Total: 5.090256 ms (FindLiveObjects: 0.264796 ms CreateObjectMapping: 0.246733 ms MarkObjects: 4.166136 ms  DeleteObjects: 0.411358 ms)
+
+FormatException: Input string was not in the correct format
+  at System.Int32.Parse (System.String s) [0x00000] in <filename unknown>:0 
+  at ShopUIScript.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+Unloading 2 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 5.720432 ms
+
+Unloading 27 unused Assets to reduce memory usage. Loaded Objects now: 658.
+Total: 2.259188 ms (FindLiveObjects: 0.107971 ms CreateObjectMapping: 0.094423 ms MarkObjects: 1.506262 ms  DeleteObjects: 0.548067 ms)
+
+Registered with: F2CCD59231DC0486
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+계정 생성 완료!
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+UpdateDataInfo
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Login with: F2CCD59231DC0486
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Unloading 3 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 2.462405 ms
+
+Unloading 12 unused Assets to reduce memory usage. Loaded Objects now: 510.
+Total: 2.241946 ms (FindLiveObjects: 0.137940 ms CreateObjectMapping: 0.123571 ms MarkObjects: 1.742321 ms  DeleteObjects: 0.236059 ms)
+
+Unloading 5 Unused Serialized files (Serialized files now loaded: 0)
+Update Account Infomation!
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+UnloadTime: 1.261992 ms
+Item1 (UnityEngine.UI.Toggle)는 토글 꺼져있음-OFF
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Item2 (UnityEngine.UI.Toggle)는 토글 꺼져있음-OFF
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Item3 (UnityEngine.UI.Toggle)는 토글 꺼져있음-OFF
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+0
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+playermoney1000
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+
+Unloading 89 unused Assets to reduce memory usage. Loaded Objects now: 1255.
+Total: 6.458168 ms (FindLiveObjects: 0.159288 ms CreateObjectMapping: 0.178994 ms MarkObjects: 5.699905 ms  DeleteObjects: 0.418748 ms)
+
+Right Arrow Button Click!
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+FormatException: Input string was not in the correct format
+  at System.Int32.Parse (System.String s) [0x00000] in <filename unknown>:0 
+  at ShopUIScript.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+Unloading 2 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 2.727201 ms
+
+Unloading 27 unused Assets to reduce memory usage. Loaded Objects now: 658.
+Total: 2.228809 ms (FindLiveObjects: 0.137530 ms CreateObjectMapping: 0.091960 ms MarkObjects: 1.517757 ms  DeleteObjects: 0.479918 ms)
+
+Login with: 165EF6F8D76BE3DB
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Unloading 3 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 2.230451 ms
+
+Unloading 12 unused Assets to reduce memory usage. Loaded Objects now: 510.
+Total: 1.463977 ms (FindLiveObjects: 0.121519 ms CreateObjectMapping: 0.081696 ms MarkObjects: 1.077661 ms  DeleteObjects: 0.181047 ms)
+
+Unloading 5 Unused Serialized files (Serialized files now loaded: 0)
+Update Account Infomation!
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+UnloadTime: 1.205338 ms
+Item1 (UnityEngine.UI.Toggle)는 토글 꺼져있음-OFF
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Item2 (UnityEngine.UI.Toggle)는 토글 꺼져있음-OFF
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Item3 (UnityEngine.UI.Toggle)는 토글 꺼져있음-OFF
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+0
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+playermoney900
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+
+Unloading 89 unused Assets to reduce memory usage. Loaded Objects now: 1255.
+Total: 5.692926 ms (FindLiveObjects: 0.237701 ms CreateObjectMapping: 0.243038 ms MarkObjects: 4.802880 ms  DeleteObjects: 0.407663 ms)
+
+FormatException: Input string was not in the correct format
+  at System.Int32.Parse (System.String s) [0x00000] in <filename unknown>:0 
+  at ShopUIScript.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+Unloading 2 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 4.554505 ms
+
+Unloading 27 unused Assets to reduce memory usage. Loaded Objects now: 658.
+Total: 2.373728 ms (FindLiveObjects: 0.136298 ms CreateObjectMapping: 0.133014 ms MarkObjects: 1.608897 ms  DeleteObjects: 0.494697 ms)
+
+Login with: F2CCD59231DC0486
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Unloading 3 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 1.783375 ms
+
+Unloading 12 unused Assets to reduce memory usage. Loaded Objects now: 510.
+Total: 1.663909 ms (FindLiveObjects: 0.140403 ms CreateObjectMapping: 0.096065 ms MarkObjects: 1.220117 ms  DeleteObjects: 0.204447 ms)
+
+Unloading 5 Unused Serialized files (Serialized files now loaded: 0)
+Update Account Infomation!
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+UnloadTime: 1.029628 ms
+Item1 (UnityEngine.UI.Toggle)는 토글 꺼져있음-OFF
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Item2 (UnityEngine.UI.Toggle)는 토글 꺼져있음-OFF
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Item3 (UnityEngine.UI.Toggle)는 토글 꺼져있음-OFF
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+0
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+playermoney1000
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+
+Unloading 89 unused Assets to reduce memory usage. Loaded Objects now: 1255.
+Total: 4.647697 ms (FindLiveObjects: 0.216353 ms CreateObjectMapping: 0.160930 ms MarkObjects: 3.932540 ms  DeleteObjects: 0.336230 ms)
 
 Start Button Click!
  
@@ -83,27 +318,47 @@ Go to the store
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-0
+UpdateDataInfo
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+UpdateDataInfo
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+UpdateDataInfo
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+UpdateDataInfo
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+UpdateDataInfo
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+UpdateDataInfo
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
 Unloading 3 Unused Serialized files (Serialized files now loaded: 0)
-UnloadTime: 0.978430 ms
+UnloadTime: 3.905034 ms
 
-Unloading 28 unused Assets to reduce memory usage. Loaded Objects now: 435.
-Total: 0.498718 ms (FindLiveObjects: 0.043713 ms CreateObjectMapping: 0.033070 ms MarkObjects: 0.297634 ms  DeleteObjects: 0.123539 ms)
+Unloading 29 unused Assets to reduce memory usage. Loaded Objects now: 510.
+Total: 1.948001 ms (FindLiveObjects: 0.137530 ms CreateObjectMapping: 0.104687 ms MarkObjects: 1.269793 ms  DeleteObjects: 0.433938 ms)
 
 Unloading 6 Unused Serialized files (Serialized files now loaded: 0)
 UpdateDataInfo
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-GameObjectPool 작동
+GameObjectPool 2 스테이지 작동
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-UnloadTime: 0.566379 ms
+UnloadTime: 2.246872 ms
 
-Unloading 4 unused Assets to reduce memory usage. Loaded Objects now: 1132.
-Total: 0.599070 ms (FindLiveObjects: 0.056257 ms CreateObjectMapping: 0.039912 ms MarkObjects: 0.482753 ms  DeleteObjects: 0.019386 ms)
+Unloading 4 unused Assets to reduce memory usage. Loaded Objects now: 2298.
+Total: 2.497711 ms (FindLiveObjects: 0.300103 ms CreateObjectMapping: 0.210195 ms MarkObjects: 1.944716 ms  DeleteObjects: 0.041464 ms)
 

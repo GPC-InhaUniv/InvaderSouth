@@ -55,6 +55,10 @@ public class PlayerController : MonoBehaviour
     {
         if (other.tag == "Enemy")
             Debug.Log("레이저맞음");
+        if(other.tag=="SparkBomb")
+        {
+            Debug.Log("상태이상 걸림");
+        }
     }
 
 

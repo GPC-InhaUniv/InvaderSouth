@@ -14,22 +14,23 @@ public class BackGroundPool : MonoBehaviour
     public Vector3 spawnValue;
     Vector3 spawnPosition;
     Quaternion spawnRotation;
+    public GameObject parent;
 
     // Use this for initialization
     void Start()
     {
-        if (backgroundObjects == null)
-        {
+        
             //object pool 생성
             backgroundObjects = new List<GameObject>();
             for (int i = 0; i < EnemyCount; i++)
             {
                 GameObject obj = Instantiate(BackGround);
+                obj.transform.parent = parent.transform;
                 obj.SetActive(false);
                 backgroundObjects.Add(obj);
-                DontDestroyOnLoad(obj);
+              //  DontDestroyOnLoad(obj);
             }
-        }
+        
 
     }
 

@@ -13,13 +13,13 @@ public class BossController : MonoBehaviour
     [SerializeField]
     private PlayerController player;
     [SerializeField]
-    private GameObject bullet;
-    [SerializeField]
-    private GameObject firstSkillLeftBullet;
-    [SerializeField]
     private GameObject firstSkillRightBullet;
     [SerializeField]
     private GameObject SecondSkillBullet;
+
+    private float firstMissleAngle;
+    private float secondMissleAngle;
+
 
     [SerializeField]
     private Transform shotposition;
@@ -28,17 +28,30 @@ public class BossController : MonoBehaviour
     private float secondFireTime = 15.0f;
     private float firstFiredelayTime = 10.0f;
     private float secondFiredelayTime = 15.0f;
+
+    //just for text
+    //private float firstFireTime = 1.0f;
+    //private float secondFireTime = 5.0f;
+    //private float firstFiredelayTime = 1.0f;
+    //private float secondFiredelayTime = 5.0f;
+
     private bool isUseSkill;
     private BossState bossstate;
 
-    
+    private BossBulletPool bossBulletPool;
+
 
     void Start()
     {
         player = GameObject.Find("Player").GetComponent<PlayerController>();
+        bossBulletPool = GameObject.Find("GameObjectPool").GetComponent<BossBulletPool>();
+
         isUseSkill = false;
         bossstate = BossState.alive;
-
+        firstMissleAngle = 30.0f;
+        secondMissleAngle = 45.0f;
+        firstFiredelayTime = Time.time + firstFireTime;
+         secondFiredelayTime = Time.time + secondFireTime;
         StartCoroutine(BossNormalAttack());
     }
 
@@ -46,6 +59,7 @@ public class BossController : MonoBehaviour
     {
         while (BossState.alive.Equals(bossstate))
         {
+
             if (isUseSkill)
             {
                 yield return new WaitForSeconds(2.5f);
@@ -54,8 +68,8 @@ public class BossController : MonoBehaviour
             }
             else
             {
-                Instantiate(bullet, new Vector3(shotposition.transform.position.x, 3.6f, shotposition.transform.position.z), bullet.transform.rotation);
-                yield return new WaitForSeconds(1.0f);
+                bossBulletPool.FireNormalBullet(shotposition.transform);
+                yield return new WaitForSeconds(0.8f);
             }
 
 
@@ -67,11 +81,12 @@ public class BossController : MonoBehaviour
     {
         if (bossstate.Equals(BossState.alive))
         {
-
+             
             if (Time.time > firstFiredelayTime && !isUseSkill)
             {
                 isUseSkill = true;
                 UseFirstSkill();
+               
                 firstFiredelayTime = Time.time + firstFireTime;
             }
             else if (Time.time > secondFiredelayTime && !isUseSkill)
@@ -87,15 +102,15 @@ public class BossController : MonoBehaviour
 
     void UseFirstSkill()
     {
-        Instantiate(firstSkillLeftBullet, new Vector3(shotposition.transform.position.x - 1f, 3.6f, shotposition.transform.position.z), firstSkillLeftBullet.transform.rotation);
-
-        Instantiate(firstSkillRightBullet, new Vector3(shotposition.transform.position.x + 1f, 3.6f, shotposition.transform.position.z), firstSkillRightBullet.transform.rotation);
-
+        bossBulletPool.FireSecondBullet(shotposition.transform, firstMissleAngle);
     }
 
     void UseSecondSkill()
     {
-        Instantiate(SecondSkillBullet, new Vector3(shotposition.transform.position.x - 1f, 3.6f, shotposition.transform.position.z), Quaternion.Euler(0, 0, 0));
+        bossBulletPool.FireThirdBullet(shotposition.transform, 0);
+        bossBulletPool.FireThirdBullet(shotposition.transform, -secondMissleAngle);
+        bossBulletPool.FireThirdBullet(shotposition.transform, secondMissleAngle);
+
 
     }
 

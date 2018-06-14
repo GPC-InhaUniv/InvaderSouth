@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SecondSkillBulletController : MonoBehaviour {
+public class SecondSkillBulletController : MonoBehaviour
+{
 
     private Rigidbody rigidbody;
     private float speed;
@@ -10,30 +11,60 @@ public class SecondSkillBulletController : MonoBehaviour {
     private GameObject warningPlane;
     [SerializeField]
     private GameObject lazerObject;
-
+    private float moveFowardTime = 0;
+    private float lazerRateTime = 0f;
+    private float warningTime = 0f;
     // Use this for initialization
-    void Start () {
+    void Start()
+    {
         rigidbody = GetComponent<Rigidbody>();
         speed = 1.0f;
-        StartCoroutine(StartSecondSkill());
-	}
-	IEnumerator StartSecondSkill()
-    {
-        yield return new WaitForSeconds(2.0f);
-        speed = 0.0f;
-        warningPlane.SetActive(true);
-        yield return new WaitForSeconds(2.0f);
-        warningPlane.SetActive(false);
-        lazerObject.SetActive(true);
-        yield return new WaitForSeconds(3.0f);
-        lazerObject.SetActive(false);
-        this.gameObject.SetActive(false);
-        yield return null;
-     
 
     }
-	// Update is called once per frame
-	void Update () {
-        rigidbody.transform.Translate(new Vector3(0, 0, -1) * speed * Time.deltaTime);
+
+    public void Initialize()
+    {
+        lazerRateTime = 0f;
+        warningTime = 0f;
+        moveFowardTime = 0;
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        if (2.5f > moveFowardTime)
+        {
+            moveFowardTime += Time.deltaTime;
+            rigidbody.transform.Translate(new Vector3(0, 0, -1) * speed * Time.deltaTime);
+        }
+        else if (!warningPlane.activeInHierarchy&&warningTime<1f)
+        {
+            warningPlane.SetActive(true);
+           
+        }
+        else if (warningPlane.activeInHierarchy&&!lazerObject.activeInHierarchy)
+        {
+            warningTime += Time.deltaTime;
+            if (warningTime > 2.0f)
+            {
+                warningPlane.SetActive(false);
+                lazerObject.SetActive(true);
+            }
+        }
+        else if (lazerObject.activeInHierarchy)
+        {
+            lazerRateTime += Time.deltaTime;
+            if (lazerRateTime > 3.0f)
+            {
+                Initialize();
+                gameObject.SetActive(false);
+                lazerObject.SetActive(false);
+                BossBulletPool.BossThirdMissiles.Enqueue(gameObject);
+                
+            }
+
+
+        }
+
     }
 }

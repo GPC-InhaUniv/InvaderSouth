@@ -27,18 +27,18 @@ public class LoadingSceneController : MonoBehaviour
 
     public LoadInGameScene loadInGameSceneDelegater;
 
- 
+
     private void Awake()
     {
-        
+
         Screen.SetResolution(700, 1080, true);
         Info = GameObject.Find("AccountInfo").GetComponent<AccountInfo>();
 
         if (isMainSceneLoading)
             controllerInfomationImage.SetActive(true);
 
-        if(GameManager.Instance==null)
-        GameManager.Instance.Awake();
+        if (GameManager.Instance == null)
+            GameManager.Instance.Awake();
 
         StartCoroutine(LoadScene());
 
@@ -77,24 +77,13 @@ public class LoadingSceneController : MonoBehaviour
                 progressBar.fillAmount += timer / 6f;  //프로그레스 바 채우기
                 percentage = Convert.ToInt32(progressBar.fillAmount * 100);
                 progressText.text = percentage.ToString() + "%";
-                //    Debug.Log(" progressBar.fillAmount =" + progressBar.fillAmount);
                 if (progressBar.fillAmount == 1.0f) //가득 찼다면
                 {
                     progressText.text = "100%";
-                    
+
                     yield return null;
                     if (NextScene.Equals("Main"))
-                    {
-                        pressAnyKeyText.text = "Press Any Key To Start Game!";
-                       
-                        pressAnyKeyText.gameObject.SetActive(true);
-                        progressBar.gameObject.SetActive(false);
-                        if (Input.anyKeyDown)
-                        {
-                            loadInGameSceneDelegater();
-                            asyncOperation.allowSceneActivation = true;
-                        }
-                    }
+                        LoadMainScene(asyncOperation);
                     else
                         asyncOperation.allowSceneActivation = true;
                 }
@@ -110,6 +99,21 @@ public class LoadingSceneController : MonoBehaviour
                 }
             }
         }
+    }
+
+    void LoadMainScene(AsyncOperation asyncOperation)
+    {
+
+        pressAnyKeyText.text = "Press Any Key To Start Game!";
+
+        pressAnyKeyText.gameObject.SetActive(true);
+        progressBar.gameObject.SetActive(false);
+        if (Input.anyKeyDown)
+        {
+            loadInGameSceneDelegater();
+            asyncOperation.allowSceneActivation = true;
+        }
+
     }
 
 }
