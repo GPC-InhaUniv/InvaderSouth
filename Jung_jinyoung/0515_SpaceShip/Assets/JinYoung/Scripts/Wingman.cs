@@ -19,15 +19,17 @@ public class Wingman : MonoBehaviour {
     private float missileNextFire;
     public GameObject missiles;
 
-    public GameObject target;
-    public GameObject body;
+    public GameObject Player;
+    public Rigidbody PetRigidbody;
 
     // Use this for initialization
     void Start () {
         //rigidbody = GetComponent<Rigidbody>();
         wingManPosition = transform.position;
-        target = GameObject.FindGameObjectWithTag("Player");
-        body = gameObject.GetComponentInChildren<GameObject>();
+        Player = GameObject.FindGameObjectWithTag("Player");
+        PetRigidbody = gameObject.GetComponentInChildren<Rigidbody>();
+        Debug.Log(PetRigidbody.ToString());
+
         //targetPosition = target.transform.position;
 
         //Vector3 screen_point = Camera.main.WorldToScreenPoint(transform.position);
@@ -36,29 +38,32 @@ public class Wingman : MonoBehaviour {
 
     void Update()
     {
-        if (target == null)
+        
+        if (Player == null)
         {
             Debug.Log("Destroy");
             Destroy(gameObject);
         }
         else 
         {
-            targetPosition = target.transform.position;
+            targetPosition = Player.transform.position;
             wingManPosition = targetPosition;
-            if (target.transform.position.x > 0)
+            if (Player.transform.position.x > 0)
             {
-                transform.Rotate(new Vector3(0,0,0),Space.Self);
+                transform.Rotate(new Vector3(0, 0, 0) * Time.deltaTime * speed);
+                //transform.Rotate(new Vector3(0,0,0),Space.Self);
             }
-            else if(target.transform.position.x < 0)
+            else
             {
-                transform.Rotate(new Vector3(0, 180, 0), Space.Self);
+                transform.Rotate(new Vector3(0, -180, 0)*Time.deltaTime*speed);
+                //transform.rotation = Vector3.right.y
             }
             //else
             //{
             //    wingManPosition = targetPosition;
             //    wingManPosition.z -= rangeX;
             //}
-            
+
         }
         
         //wingManPosition = targetPosition;
@@ -79,7 +84,8 @@ public class Wingman : MonoBehaviour {
 
     void MoveToPlayer()
     {
-        //transform.position = Vector3.Lerp(transform.position, wingManPosition, speed * Time.deltaTime);
+        transform.position = Vector3.Lerp(transform.position, wingManPosition, speed * Time.deltaTime);
+        transform.rotation = 
 
         //Debug.Log(wingManPosition);
         //Debug.Log(targetPosition);
