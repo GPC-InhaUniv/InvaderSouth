@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class LobbyUIScript : MonoBehaviour
+public class LobbyUIScript_test : MonoBehaviour
 {
     private int lastCompletedStageNumber = 0;
     // planeCount = GameManager.planeCount;
@@ -27,39 +27,10 @@ public class LobbyUIScript : MonoBehaviour
 
     private void Awake()
     {
-        shopPanel = GameObject.Find("LobbyUICanvas").transform.Find("ShopPanel").gameObject;
-        firstCharacter = characterSelectionUIPanel.transform.Find("FirstCharacter").gameObject;
-        secondCharacter = characterSelectionUIPanel.transform.Find("SecondCharacter").gameObject;
-        stageOneSelectionButton = stageSelectionUIPanel.transform.Find("StageOneSelectionButton").GetComponent<Button>();
-        stageTwoSelectionButton = stageSelectionUIPanel.transform.Find("StageTwoSelectionButton").GetComponent<Button>();
-        stageThreeSelectionButton = stageSelectionUIPanel.transform.Find("StageThreeSelectionButton").GetComponent<Button>();
-        playerMoneyCountText = characterSelectionUIPanel.transform.Find("PlayerNameAndMoneyImage").transform.Find("PlayerMoneyCountText").GetComponent<Text>();
-        playerNameText = characterSelectionUIPanel.transform.Find("PlayerNameAndMoneyImage").transform.Find("PlayerNameText").GetComponent<Text>();
-        backToLoginScenePanel = characterSelectionUIPanel.transform.Find("BackToLoginScenePanel").gameObject;
-        firstCharacterInfoImage = characterSelectionUIPanel.transform.Find("FirstCharacterInfoImage").gameObject;
-        secondCharacterInfoImage = characterSelectionUIPanel.transform.Find("SecondCharacterInfoImage").gameObject;
+        SetCharacterSelectionUIPanel();
+        SetStageSelectionUIPanel();
+        SetShopUIPanel();
         lastCompletedStageNumber = Convert.ToInt32(GameManager.Instance.LastCompletedStageNumber);
-    }
-
-    private void SetCharacterSelectionUIPanel()
-    {
-        characterSelectionUIPanel = GameObject.Find("LobbyUICanvas").transform.Find("CharacterSelectionUIPanel").gameObject;
-
-
-    }
-
-    private void SetStageSelectionUIPanel()
-    {
-        stageSelectionUIPanel = GameObject.Find("LobbyUICanvas").transform.Find("StageSelectionUIPanel").gameObject;
-
-
-    }
-
-    private void SetShopUIPanel()
-    {
-        shopPanel = GameObject.Find("LobbyUICanvas").transform.Find("ShopPanel").gameObject;
-
-
     }
 
     private void Update()
@@ -95,20 +66,18 @@ public class LobbyUIScript : MonoBehaviour
         Debug.Log("Left Arrow Button Click!");
     }
 
-    private void OnClickBackwardMovementButtonOfStageSelection()
+    public void OnClickBackwardMovementButtonOfStageSelection()
     {
         characterSelectionUIPanel.SetActive(true);
         stageSelectionUIPanel.SetActive(false);
         Debug.Log("Backward Movement Button Click!");
     }
 
-    private void OnClickStageButtonClick()
+    public void OnClickStageButtonClick()
     {
         Debug.Log("Stage Button Click");
         Debug.Log("Go to the store");
         shopPanel.SetActive(true);
-
-
     }
 
     public void OnClickBackToLoginSceneButton()
@@ -131,5 +100,27 @@ public class LobbyUIScript : MonoBehaviour
             stageThreeSelectionButton.interactable = true;
     }
 
-    
+    private void SetCharacterSelectionUIPanel()
+    {
+        characterSelectionUIPanel = GameObject.Find("LobbyUICanvas").transform.Find("CharacterSelectionUIPanel").gameObject;
+        firstCharacter = characterSelectionUIPanel.transform.Find("FirstCharacter").gameObject;
+        firstCharacter = characterSelectionUIPanel.transform.Find("FirstCharacter").gameObject;
+        secondCharacter = characterSelectionUIPanel.transform.Find("SecondCharacter").gameObject;
+        backToLoginScenePanel = characterSelectionUIPanel.transform.Find("BackToLoginScenePanel").gameObject;
+        playerNameText = characterSelectionUIPanel.transform.Find("PlayerNameAndMoneyImage").transform.Find("PlayerNameText").GetComponent<Text>();
+        playerMoneyCountText = characterSelectionUIPanel.transform.Find("PlayerNameAndMoneyImage").transform.Find("PlayerMoneyCountText").GetComponent<Text>();
+    }
+
+    private void SetStageSelectionUIPanel()
+    {
+        stageSelectionUIPanel = GameObject.Find("LobbyUICanvas").transform.Find("StageSelectionUIPanel").gameObject;
+        stageOneSelectionButton = stageSelectionUIPanel.transform.Find("StageOneSelectionButton").GetComponent<Button>();
+        stageTwoSelectionButton = stageSelectionUIPanel.transform.Find("StageTwoSelectionButton").GetComponent<Button>();
+        stageThreeSelectionButton = stageSelectionUIPanel.transform.Find("StageThreeSelectionButton").GetComponent<Button>();
+    }
+
+    private void SetShopUIPanel()
+    {
+        shopPanel = GameObject.Find("LobbyUICanvas").transform.Find("ShopPanel").gameObject;
+    }
 }
