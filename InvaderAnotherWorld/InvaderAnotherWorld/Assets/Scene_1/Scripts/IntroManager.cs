@@ -1,12 +1,13 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class IntroManager : MonoBehaviour
 {
-    public Image IntroPanelImage;
-    public GameObject LoginManager;
+    [SerializeField]
+    private Image IntroPanelImage;
+    [SerializeField]
+    private GameObject LoginManager;
 
     private bool IsLoadedIntro;
     private void Start()

@@ -8,6 +8,7 @@ using System;
 
 public class ShopUIScript : MonoBehaviour
 {
+
     [Header("<Shop>")]
     private GameObject shopPanel;
     [SerializeField]
@@ -15,9 +16,11 @@ public class ShopUIScript : MonoBehaviour
     [SerializeField]
     private List<Text> itemPriceText;
 
+    const int NONE = -1;
+
     //싱글톤으로 연결 부탁드립니다. 값은 테스트를 위해 임시로 넣어놨어요!
-    private int playerMoneyCount = -1;   //계산하기 쉽도록 만든 변수. 아래서 사용하는 동안 형변환을 하지 않기 위해.
-    private int playerDiamondCount = -1;
+    private int playerMoneyCount = NONE;   //계산하기 쉽도록 만든 변수. 아래서 사용하는 동안 형변환을 하지 않기 위해.
+    private int playerDiamondCount =NONE;
 
 
     private int totalItemPrice;
@@ -181,6 +184,7 @@ public class ShopUIScript : MonoBehaviour
         if (playerMoneyCount >= maxGold)
         {
             goldAlert.gameObject.SetActive(true);
+
         }
         else
         {
@@ -215,6 +219,7 @@ public class ShopUIScript : MonoBehaviour
         {
             DataManager.Instance.BuyMoney(saveGoldItemPrice);
             DataManager.Instance.UseDiaMond(DiamondPriceForGold);
+            UpdatePlayerInformation();
             thankAlert.gameObject.SetActive(true);
         }
         else if (playerDiamondCount <= DiamondPriceForGold)
@@ -283,6 +288,7 @@ public class ShopUIScript : MonoBehaviour
         DataManager.Instance.BuyDiaMond(saveDiamondItemPrice);
         diamondButtonPanel.gameObject.SetActive(false);
         thankAlert.gameObject.SetActive(true);
+        UpdatePlayerInformation();
     }
 
     // 다이아몬드 구매 버튼 메소드
@@ -330,13 +336,22 @@ public class ShopUIScript : MonoBehaviour
         }
     }
 
+
     private void Update()
     {
-        playerMoneyCount = int.Parse(GameManager.Instance.PlayerMoneyCount);
-        playerDiamondCount = int.Parse(GameManager.Instance.PlayerDiamondCount);
+        if (playerMoneyCount == NONE || playerMoneyCount == NONE)
+        {
+            UpdatePlayerInformation();
+        }
+
+    }
+
+    private void UpdatePlayerInformation()
+    {
+        playerMoneyCount = GameManager.Instance.PlayerMoneyCount;
+        playerDiamondCount = GameManager.Instance.PlayerDiamondCount;
         currentPlayerCashText.text = playerMoneyCount.ToString() + " G";
         currentPlayerDiamondText.text = playerDiamondCount.ToString() + "D";
-
     }
 
 }
