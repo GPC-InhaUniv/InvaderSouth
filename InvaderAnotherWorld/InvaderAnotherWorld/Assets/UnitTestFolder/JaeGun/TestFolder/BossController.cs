@@ -7,6 +7,7 @@ public enum BossState
     alive,
     dead,
 }
+
 public class BossController : MonoBehaviour
 {
 
@@ -28,13 +29,6 @@ public class BossController : MonoBehaviour
     private float secondFireTime = 15.0f;
     private float firstFiredelayTime = 10.0f;
     private float secondFiredelayTime = 15.0f;
-
-    //just for text
-    //private float firstFireTime = 1.0f;
-    //private float secondFireTime = 5.0f;
-    //private float firstFiredelayTime = 1.0f;
-    //private float secondFiredelayTime = 5.0f;
-
     private bool isUseSkill;
     private BossState bossstate;
 
@@ -51,7 +45,7 @@ public class BossController : MonoBehaviour
         firstMissleAngle = 30.0f;
         secondMissleAngle = 45.0f;
         firstFiredelayTime = Time.time + firstFireTime;
-         secondFiredelayTime = Time.time + secondFireTime;
+        secondFiredelayTime = Time.time + secondFireTime;
         StartCoroutine(BossNormalAttack());
     }
 
@@ -64,15 +58,12 @@ public class BossController : MonoBehaviour
             {
                 yield return new WaitForSeconds(2.5f);
                 isUseSkill = false;
-
             }
             else
             {
                 bossBulletPool.FireNormalBullet(shotposition.transform);
                 yield return new WaitForSeconds(0.8f);
             }
-
-
 
         }
 
@@ -81,28 +72,27 @@ public class BossController : MonoBehaviour
     {
         if (bossstate.Equals(BossState.alive))
         {
-             
-            if (Time.time > firstFiredelayTime && !isUseSkill)
-            {
-                isUseSkill = true;
-                UseFirstSkill();
-               
-                firstFiredelayTime = Time.time + firstFireTime;
-            }
-            else if (Time.time > secondFiredelayTime && !isUseSkill)
-            {
-                isUseSkill = true;
-                UseSecondSkill();
-                secondFiredelayTime = Time.time + secondFireTime;
-            }
-
-
+            UseSkill();
         }
     }
 
+    void UseSkill()
+    {
+        if (Time.time > firstFiredelayTime && !isUseSkill)
+        {
+            UseFirstSkill();
+        }
+        else if (Time.time > secondFiredelayTime && !isUseSkill)
+        {
+            UseSecondSkill();
+        }
+
+    }
     void UseFirstSkill()
     {
         bossBulletPool.FireSecondBullet(shotposition.transform, firstMissleAngle);
+        firstFiredelayTime = Time.time + firstFireTime;
+        isUseSkill = true;
     }
 
     void UseSecondSkill()
@@ -110,7 +100,8 @@ public class BossController : MonoBehaviour
         bossBulletPool.FireThirdBullet(shotposition.transform, 0);
         bossBulletPool.FireThirdBullet(shotposition.transform, -secondMissleAngle);
         bossBulletPool.FireThirdBullet(shotposition.transform, secondMissleAngle);
-
+        secondFiredelayTime = Time.time + secondFireTime;
+        isUseSkill = true;
 
     }
 

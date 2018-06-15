@@ -9,13 +9,13 @@ using System;
 public class DataManager : MonoBehaviour
 {
 
-    public AccountInfo Info;
+    private AccountInfo info;
 
     public static DataManager Instance;
 
     private void Awake()
     {
-        Info = GameObject.Find("AccountInfo").GetComponent<AccountInfo>();
+        info = GameObject.Find("AccountInfo").GetComponent<AccountInfo>();
         if (Instance == null)
         {
             if (Instance != this)
@@ -35,7 +35,7 @@ public class DataManager : MonoBehaviour
     public void UseMoney(int price)
     {
         UserDataRecord userData = new UserDataRecord();
-        Info.Info.UserData.TryGetValue("PlayerMoney", out userData);
+        info.Info.UserData.TryGetValue("PlayerMoney", out userData);
         int money = Convert.ToInt32(userData.Value);
         money -= price;
         userData.Value = money.ToString();
@@ -50,14 +50,14 @@ public class DataManager : MonoBehaviour
         };
         PlayFabClientAPI.UpdateUserData(request, UpdateDataInfo, GameErrorManager.OnAPIError);
 
-        GameManager.Instance.PlayerMoneyCount=userData.Value;
+        int.TryParse(userData.Value, out GameManager.Instance.PlayerMoneyCount);
 
     }
 
     public void UseDiaMond(int price)
     {
         UserDataRecord userData = new UserDataRecord();
-        Info.Info.UserData.TryGetValue("PlayerDiamondCount", out userData);
+        info.Info.UserData.TryGetValue("PlayerDiamondCount", out userData);
         int diamond = Convert.ToInt32(userData.Value);
         diamond -= price;
         userData.Value = diamond.ToString();
@@ -72,7 +72,7 @@ public class DataManager : MonoBehaviour
         };
         PlayFabClientAPI.UpdateUserData(request, UpdateDataInfo, GameErrorManager.OnAPIError);
 
-        GameManager.Instance.PlayerDiamondCount=userData.Value;
+        int.TryParse(userData.Value, out GameManager.Instance.PlayerDiamondCount);
     }
 
 
@@ -80,7 +80,7 @@ public class DataManager : MonoBehaviour
     public void BuyMoney(int price)
     {
         UserDataRecord userData = new UserDataRecord();
-        Info.Info.UserData.TryGetValue("PlayerMoney", out userData);
+        info.Info.UserData.TryGetValue("PlayerMoney", out userData);
         int money = Convert.ToInt32(userData.Value);
         money += price;
         userData.Value = money.ToString();
@@ -95,13 +95,13 @@ public class DataManager : MonoBehaviour
         };
         PlayFabClientAPI.UpdateUserData(request, UpdateDataInfo, GameErrorManager.OnAPIError);
 
-        GameManager.Instance.PlayerMoneyCount=userData.Value;
+        int.TryParse(userData.Value, out GameManager.Instance.PlayerMoneyCount);
     }
 
     public void BuyDiaMond(int price)
     {
         UserDataRecord userData = new UserDataRecord();
-        Info.Info.UserData.TryGetValue("PlayerDiamondCount", out userData);
+        info.Info.UserData.TryGetValue("PlayerDiamondCount", out userData);
         int diamond = Convert.ToInt32(userData.Value);
         diamond += price;
         userData.Value = diamond.ToString();
@@ -116,33 +116,28 @@ public class DataManager : MonoBehaviour
         };
         PlayFabClientAPI.UpdateUserData(request, UpdateDataInfo, GameErrorManager.OnAPIError);
 
-        GameManager.Instance.PlayerDiamondCount=userData.Value;
+        int.TryParse(userData.Value, out GameManager.Instance.PlayerDiamondCount);
     }
 
     public void SetGameManagerData()
     {
         UserDataRecord userData = new UserDataRecord();
-        GameManager.Instance.PlayerName=Info.Info.AccountInfo.Username;
-        Info.Info.UserData.TryGetValue("PlayerMoney", out userData);
+        GameManager.Instance.PlayerName=info.Info.AccountInfo.Username;
+        info.Info.UserData.TryGetValue("PlayerMoney", out userData);
         Debug.Log("playermoney" + userData.Value);
-        GameManager.Instance.PlayerMoneyCount=userData.Value;
+        int.TryParse(userData.Value, out GameManager.Instance.PlayerMoneyCount);
 
-        Info.Info.UserData.TryGetValue("PlayerDiamondCount", out userData);
-        GameManager.Instance.PlayerDiamondCount=userData.Value;
+        info.Info.UserData.TryGetValue("PlayerDiamondCount", out userData);
+        int.TryParse(userData.Value, out GameManager.Instance.PlayerDiamondCount);
 
-        Info.Info.UserData.TryGetValue("CompleteStageNumber", out userData);
-        GameManager.Instance.LastCompletedStageNumber=userData.Value;
+        info.Info.UserData.TryGetValue("CompleteStageNumber", out userData);
+        int.TryParse(userData.Value, out GameManager.Instance.LastCompletedStageNumber);
 
     }
-
-  
-
 
     void UpdateDataInfo(UpdateUserDataResult result)
     {
         Debug.Log("UpdateDataInfo");
     }
-
-    // Update is called once per frame
 
 }
