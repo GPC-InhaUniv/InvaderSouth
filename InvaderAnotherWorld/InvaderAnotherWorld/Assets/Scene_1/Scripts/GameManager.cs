@@ -4,9 +4,9 @@ using UnityEngine.SceneManagement;
 public class GameManager : Singleton<GameManager>
 {
     public string PlayerName;
-    public string PlayerMoneyCount;
-    public string PlayerDiamondCount;
-    public string LastCompletedStageNumber;
+    public int PlayerMoneyCount;
+    public int PlayerDiamondCount;
+    public int LastCompletedStageNumber;
     public int[] CleardStageScore;
     public bool[] IsPlayerHavePlane;
 
@@ -24,9 +24,9 @@ public class GameManager : Singleton<GameManager>
     private void Start()
     {
         PlayerName = "";
-        PlayerMoneyCount = "";
-        PlayerDiamondCount = "0";
-        LastCompletedStageNumber = "0";
+        PlayerMoneyCount = 0;
+        PlayerDiamondCount = 0;
+        LastCompletedStageNumber = 0;
         CleardStageScore = new int[maxStageCount];
         for (int i = 0; i < maxStageCount; i++)
             CleardStageScore[i] = 0;
@@ -44,9 +44,9 @@ public class GameManager : Singleton<GameManager>
     public void ResetPlayerInfo()
     {
         PlayerName = "";
-        PlayerMoneyCount = "";
-        PlayerDiamondCount = "0";
-        LastCompletedStageNumber = "0";
+        PlayerMoneyCount = 0;
+        PlayerDiamondCount = 0;
+        LastCompletedStageNumber = 0;
         CleardStageScore = new int[maxStageCount];
         for (int i = 0; i < maxStageCount; i++)
             CleardStageScore[i] = 0;

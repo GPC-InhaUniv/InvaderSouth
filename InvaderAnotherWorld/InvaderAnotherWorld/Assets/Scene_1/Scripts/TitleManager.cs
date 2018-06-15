@@ -1,23 +1,25 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 public class TitleManager : MonoBehaviour
 {
+
+    /*LoginObject가 ActiveInHierachy가 False 이므로 Start 부분에서 find를 하기 않고
+    하이라키 상에서 끌어다가 사용*/
+
     [Header("LoginPanel")]
     [SerializeField]
-    private InputField IDInputField;
+    private InputField idInputField;
     [SerializeField]
-    private InputField PassInputField;
+    private InputField passInputField;
 
     [Header("CreateAccountPanel")]
     [SerializeField]
-    public InputField New_IDInputField;
+    private InputField new_IDInputField;
     [SerializeField]
-    public InputField New_PassInputField;
+    private InputField new_PassInputField;
     [SerializeField]
-    public InputField Confirm_New_PassInputField;
+    private InputField confirm_New_PassInputField;
 
     [Header("PopUp")]
     [SerializeField]
@@ -41,12 +43,14 @@ public class TitleManager : MonoBehaviour
     [SerializeField]
     private GameObject IntroManager;
 
-    string playerID = "";
+    private string playerID = "";
 
+    /*AccountInfoMation에서 사용해야 하기 때문에 static으로 선언*/
     public static bool IsCreateIDError = false;
     public static bool IsLoginError = false;
     public static bool IsSuccesCreateId = false;
-    public static bool IsNotFirstStart=false;
+
+    private bool IsNotFirstStart=false;
 
     private void Start()
     {
@@ -102,11 +106,11 @@ public class TitleManager : MonoBehaviour
 
     void LoingAccount()
     {
-        if (IDInputField.text != "" && PassInputField.text != "")
+        if (idInputField.text != "" && passInputField.text != "")
         {
             //아이디 및 비밀번호를 임시 변수에 저장
-            playerID = IDInputField.text;
-           Debug.Log("ID는?" + IDInputField.text);
+            playerID = idInputField.text;
+          
         }
     }
 
@@ -122,13 +126,13 @@ public class TitleManager : MonoBehaviour
 
     void CreateAccount()
     {
-        playerID = New_IDInputField.text;
+        playerID = new_IDInputField.text;
 
     }
 
     public void ShowLoginAlertPanel()
     {
-        if (IDInputField.text == "" || PassInputField.text == "")
+        if (idInputField.text == "" || passInputField.text == "")
         {
             LoginAlertPanel.gameObject.SetActive(true);
         }
@@ -178,6 +182,7 @@ public class TitleManager : MonoBehaviour
     {
         CreateIDErrorPanel.gameObject.SetActive(false);
     }
+
     public void GameQuit()
     {
         Application.Quit();

@@ -8,7 +8,6 @@ using UnityEngine.UI;
 public class LobbyUIScript : MonoBehaviour
 {
     private int lastCompletedStageNumber = 0;
-    // planeCount = GameManager.planeCount;
 
     private GameObject characterSelectionUIPanel;
     private GameObject stageSelectionUIPanel;
@@ -32,7 +31,8 @@ public class LobbyUIScript : MonoBehaviour
         characterSelectionUIPanel = GameObject.Find("LobbyUICanvas").transform.Find("CharacterSelectionUIPanel").gameObject;
         stageSelectionUIPanel = GameObject.Find("LobbyUICanvas").transform.Find("StageSelectionUIPanel").gameObject;
         shopPanel = GameObject.Find("LobbyUICanvas").transform.Find("ShopPanel").gameObject;
-        loadimage();
+        firstCharacterInfoImage = characterSelectionUIPanel.transform.Find("FirstCharacterInfoImage").gameObject;
+        secondCharacterInfoImage = characterSelectionUIPanel.transform.Find("SecondCharacterInfoImage").gameObject;
         firstCharacter = characterSelectionUIPanel.transform.Find("FirstCharacter").gameObject;
         secondCharacter = characterSelectionUIPanel.transform.Find("SecondCharacter").gameObject;
         stageOneSelectionButton = stageSelectionUIPanel.transform.Find("StageOneSelectionButton").GetComponent<Button>();
@@ -46,15 +46,16 @@ public class LobbyUIScript : MonoBehaviour
 
 
     }
-    private void loadimage()
-    {
-        firstCharacterInfoImage = characterSelectionUIPanel.transform.Find("FirstCharacterInfoImage").gameObject;
-        secondCharacterInfoImage = characterSelectionUIPanel.transform.Find("SecondCharacterInfoImage").gameObject;
-    }
+
     private void Update()
     {
-        playerMoneyCountText.text = GameManager.Instance.PlayerMoneyCount;
-        playerNameText.text = GameManager.Instance.PlayerName;
+        /* 서버에서 정보가 늦게 들어올 것을 방지하여 데이터가 들어올 때 까지 update*/
+        if (playerNameText.text == ""
+            || playerMoneyCountText.text == "")
+        {
+            playerMoneyCountText.text = GameManager.Instance.PlayerMoneyCount.ToString();
+            playerNameText.text = GameManager.Instance.PlayerName;
+        }
     }
 
     public void OnClickStartButtonOfCharacterSelection()
