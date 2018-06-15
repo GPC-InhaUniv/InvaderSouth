@@ -314,7 +314,7 @@ public class ShopUIScript : MonoBehaviour
         if (totalItemPrice < 0)
             totalItemPrice = totalItemPrice * -1;
 
-        int calculateMoneyBeforeStart = Convert.ToInt32(GameManager.Instance.GetPlayerMoney()) - totalItemPrice;
+        int calculateMoneyBeforeStart = Convert.ToInt32(GameManager.Instance.PlayerMoneyCount) - totalItemPrice;
         if (calculateMoneyBeforeStart < 0)
         {
             Debug.Log("소지 금액 부족");
@@ -332,10 +332,10 @@ public class ShopUIScript : MonoBehaviour
 
     private void Update()
     {
-        playerMoneyCount = int.Parse(GameManager.Instance.GetPlayerMoney());
-        playerDiamondCount = int.Parse(GameManager.Instance.GetPlayerDiamond());
-        currentPlayerCashText.text = GameManager.Instance.GetPlayerMoney() + " G";
-        currentPlayerDiamondText.text = GameManager.Instance.GetPlayerDiamond() + "D";
+        playerMoneyCount = int.Parse(GameManager.Instance.PlayerMoneyCount);
+        playerDiamondCount = int.Parse(GameManager.Instance.PlayerDiamondCount);
+        currentPlayerCashText.text = playerMoneyCount.ToString() + " G";
+        currentPlayerDiamondText.text = playerDiamondCount.ToString() + "D";
 
     }
 

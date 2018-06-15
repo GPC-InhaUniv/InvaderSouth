@@ -50,7 +50,7 @@ public class DataManager : MonoBehaviour
         };
         PlayFabClientAPI.UpdateUserData(request, UpdateDataInfo, GameErrorManager.OnAPIError);
 
-        GameManager.Instance.SetPlayerMoney(userData.Value);
+        GameManager.Instance.PlayerMoneyCount=userData.Value;
 
     }
 
@@ -72,7 +72,7 @@ public class DataManager : MonoBehaviour
         };
         PlayFabClientAPI.UpdateUserData(request, UpdateDataInfo, GameErrorManager.OnAPIError);
 
-        GameManager.Instance.SetPlayerDiamond(userData.Value);
+        GameManager.Instance.PlayerDiamondCount=userData.Value;
     }
 
 
@@ -95,7 +95,7 @@ public class DataManager : MonoBehaviour
         };
         PlayFabClientAPI.UpdateUserData(request, UpdateDataInfo, GameErrorManager.OnAPIError);
 
-        GameManager.Instance.SetPlayerMoney(userData.Value);
+        GameManager.Instance.PlayerMoneyCount=userData.Value;
     }
 
     public void BuyDiaMond(int price)
@@ -116,22 +116,22 @@ public class DataManager : MonoBehaviour
         };
         PlayFabClientAPI.UpdateUserData(request, UpdateDataInfo, GameErrorManager.OnAPIError);
 
-        GameManager.Instance.SetPlayerDiamond(userData.Value);
+        GameManager.Instance.PlayerDiamondCount=userData.Value;
     }
 
     public void SetGameManagerData()
     {
         UserDataRecord userData = new UserDataRecord();
-        GameManager.Instance.SetPlayerName(Info.Info.AccountInfo.Username);
+        GameManager.Instance.PlayerName=Info.Info.AccountInfo.Username;
         Info.Info.UserData.TryGetValue("PlayerMoney", out userData);
         Debug.Log("playermoney" + userData.Value);
-        GameManager.Instance.SetPlayerMoney(userData.Value);
+        GameManager.Instance.PlayerMoneyCount=userData.Value;
 
         Info.Info.UserData.TryGetValue("PlayerDiamondCount", out userData);
-        GameManager.Instance.SetPlayerDiamond(userData.Value);
+        GameManager.Instance.PlayerDiamondCount=userData.Value;
 
         Info.Info.UserData.TryGetValue("CompleteStageNumber", out userData);
-        GameManager.Instance.SetPlayerLastCompletedStageNumber(userData.Value);
+        GameManager.Instance.LastCompletedStageNumber=userData.Value;
 
     }
 

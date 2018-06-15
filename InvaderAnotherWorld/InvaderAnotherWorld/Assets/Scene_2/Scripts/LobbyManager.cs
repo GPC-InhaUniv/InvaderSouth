@@ -17,8 +17,8 @@ public class LobbyManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        money.text = GameManager.Instance.GetPlayerMoney();
-        id.text = GameManager.Instance.GetPlayerName();
+        money.text = GameManager.Instance.PlayerMoneyCount;
+        id.text = GameManager.Instance.PlayerName;
 
     }
 }

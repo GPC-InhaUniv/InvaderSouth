@@ -3,11 +3,10 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : Singleton<GameManager>
 {
-    private string playerName;
-    private string playerMoneyCount;
-    private string playerDiamondCount;
-    private string LastCompletedStageNumber;
-
+    public string PlayerName;
+    public string PlayerMoneyCount;
+    public string PlayerDiamondCount;
+    public string LastCompletedStageNumber;
     public int[] CleardStageScore;
     public bool[] IsPlayerHavePlane;
 
@@ -22,9 +21,9 @@ public class GameManager : Singleton<GameManager>
 
     private void Start()
     {
-        playerName = "";
-        playerMoneyCount = "";
-        playerDiamondCount = "0";
+        PlayerName = "";
+        PlayerMoneyCount = "";
+        PlayerDiamondCount = "0";
         LastCompletedStageNumber = "0";
         CleardStageScore = new int[maxStageCount];
         for (int i = 0; i < maxStageCount; i++)
@@ -42,9 +41,9 @@ public class GameManager : Singleton<GameManager>
 
     public void ResetPlayerInfo()
     {
-        playerName = "";
-        playerMoneyCount = "";
-        playerDiamondCount = "0";
+        PlayerName = "";
+        PlayerMoneyCount = "";
+        PlayerDiamondCount = "0";
         LastCompletedStageNumber = "0";
         CleardStageScore = new int[maxStageCount];
         for (int i = 0; i < maxStageCount; i++)
@@ -55,48 +54,5 @@ public class GameManager : Singleton<GameManager>
             IsPlayerHavePlane[i] = false;
        
     }
-
-    public void SetPlayerName(string name)
-    {
-        playerName = name;
-    }
-
-    public string GetPlayerName()
-    {
-        return playerName;
-    }
-
-    public void SetPlayerMoney(string money)
-    {
-        playerMoneyCount = money;
-    }
-
-    public string GetPlayerMoney()
-    {
-        return playerMoneyCount;
-    }
-
-    public void SetPlayerDiamond(string diamond)
-    {
-        playerDiamondCount = diamond;
-    }
-
-    public string GetPlayerDiamond()
-    {
-        return playerDiamondCount;
-    }
-    public void SetPlayerLastCompletedStageNumber(string stage)
-    {
-        LastCompletedStageNumber = stage;
-    }
-
-    public string GetPlayerLastCompletedStageNumber()
-    {
-        return LastCompletedStageNumber;
-    }
-
-
-
-
 
 }

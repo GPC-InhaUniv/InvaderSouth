@@ -42,7 +42,7 @@ public class LobbyUIScript : MonoBehaviour
         playerNameText = characterSelectionUIPanel.transform.Find("PlayerNameAndMoneyImage").transform.Find("PlayerNameText").GetComponent<Text>();
         backToLoginScenePanel = characterSelectionUIPanel.transform.Find("BackToLoginScenePanel").gameObject;
 
-        lastCompletedStageNumber = Convert.ToInt32(GameManager.Instance.GetPlayerLastCompletedStageNumber());
+        lastCompletedStageNumber = Convert.ToInt32(GameManager.Instance.LastCompletedStageNumber);
 
 
     }
@@ -53,15 +53,15 @@ public class LobbyUIScript : MonoBehaviour
     }
     private void Update()
     {
-        playerMoneyCountText.text = GameManager.Instance.GetPlayerMoney();
-        playerNameText.text = GameManager.Instance.GetPlayerName();
+        playerMoneyCountText.text = GameManager.Instance.PlayerMoneyCount;
+        playerNameText.text = GameManager.Instance.PlayerName;
     }
 
     public void OnClickStartButtonOfCharacterSelection()
     {
         characterSelectionUIPanel.SetActive(false);
         stageSelectionUIPanel.SetActive(true);
-        lastCompletedStageNumber =Convert.ToInt32(GameManager.Instance.GetPlayerLastCompletedStageNumber());
+        lastCompletedStageNumber =Convert.ToInt32(GameManager.Instance.LastCompletedStageNumber);
         CheckTheDifficulty();
         Debug.Log("Start Button Click!");
     }
