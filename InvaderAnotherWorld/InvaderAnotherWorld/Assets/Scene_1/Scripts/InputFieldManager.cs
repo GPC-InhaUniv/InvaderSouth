@@ -50,6 +50,7 @@ public class InputFieldManager : MonoBehaviour
             ErrorText.text = "";
         }
     }
+
     public void OnChangeEmailValue()
     {
         text = EmailInputField.text;

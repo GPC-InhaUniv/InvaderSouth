@@ -10,12 +10,14 @@ public class GameManager : Singleton<GameManager>
     public int[] CleardStageScore;
     public bool[] IsPlayerHavePlane;
 
+  
+
+    public int currentStage = 0;
+    public bool[] buyItemList;
+
     private const int maxStageCount = 3;
     private const int maxPlaneCount = 2;
     private const int maxItemCount = 3;
-
-    public int currentStage = 0;
-    private bool[] buyItemList;
 
 
 
