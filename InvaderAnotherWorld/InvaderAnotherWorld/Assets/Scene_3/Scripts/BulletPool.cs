@@ -7,12 +7,13 @@ public class BulletPool : MonoBehaviour
     [SerializeField]
     private GameObject Bullet;
     private int BulletCount = 10;
-    public static Queue<GameObject> bullets;
     private float fireTime = 0.25f;
     private float nextFire = 0f;
     private  GameObject tempBullet;
     [SerializeField]
     private GameObject parent;
+
+    public static Queue<GameObject> bullets;
 
     private void Start()
     {

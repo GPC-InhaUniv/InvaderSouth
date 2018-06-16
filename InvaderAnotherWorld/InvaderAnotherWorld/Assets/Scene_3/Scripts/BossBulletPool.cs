@@ -20,19 +20,19 @@ public class BossBulletPool : MonoBehaviour
     private GameObject bossSecondRightMissile;
     private int secondRightMissileCount = 10;
     public static Queue<GameObject> BossSecondRightMissiles;
-    GameObject tempSecondRightMissile;
+    private GameObject tempSecondRightMissile;
 
     [SerializeField]
     private GameObject bossThirdMissile;
     private int thirdMissileCount = 3;
     public static Queue<GameObject> BossThirdMissiles;
-    GameObject tempThirdMissile;
+    private GameObject tempThirdMissile;
 
     [SerializeField]
     private GameObject bosssmallBullet;
     private int bosssmallBulletCount = 100;
     public static Queue<GameObject> BosssmallBullets;
-    GameObject tempbosssmallBullet;
+    private GameObject tempbosssmallBullet;
 
     [SerializeField]
     private GameObject parent;

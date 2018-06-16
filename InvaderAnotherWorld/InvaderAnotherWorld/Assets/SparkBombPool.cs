@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BackGroundPool : MonoBehaviour
-{
+public class SparkBombPool : MonoBehaviour {
+
     [SerializeField]
-    private GameObject BackGroundObject;
+    private GameObject sparkBombObject;
 
     private int enemyCount = 30;
     List<GameObject> backgroundObjects;
@@ -22,18 +22,18 @@ public class BackGroundPool : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        
-            //object pool 생성
-            backgroundObjects = new List<GameObject>();
-            for (int i = 0; i < enemyCount; i++)
-            {
-                GameObject obj = Instantiate(BackGroundObject);
-                obj.transform.parent = parent.transform;
-                obj.SetActive(false);
-                backgroundObjects.Add(obj);
-              //  DontDestroyOnLoad(obj);
-            }
-        
+
+        //object pool 생성
+        backgroundObjects = new List<GameObject>();
+        for (int i = 0; i < enemyCount; i++)
+        {
+            GameObject obj = Instantiate(sparkBombObject);
+            obj.transform.parent = parent.transform;
+            obj.SetActive(false);
+            backgroundObjects.Add(obj);
+            //  DontDestroyOnLoad(obj);
+        }
+
 
     }
 
@@ -60,6 +60,4 @@ public class BackGroundPool : MonoBehaviour
             yield return new WaitForSeconds(waveWait);
         }
     }
-
-
 }

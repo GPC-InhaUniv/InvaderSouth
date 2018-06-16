@@ -54,15 +54,11 @@ public class LobbyUIScript : MonoBehaviour
     private void SetStageSelectionUIPanel()
     {
         stageSelectionUIPanel = GameObject.Find("LobbyUICanvas").transform.Find("StageSelectionUIPanel").gameObject;
-
-
     }
     
     private void SetShopUIPanel()
     {
         shopPanel = GameObject.Find("LobbyUICanvas").transform.Find("ShopPanel").gameObject;
-
-
     }
     
     private void Update()

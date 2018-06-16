@@ -7,24 +7,24 @@ using System;
 public class UIController : MonoBehaviour {
 
     [SerializeField]
-    Image hpBar;
+    private Image hpBar;
     [SerializeField]
-    Image skillBar;
+    private Image skillBar;
     [SerializeField]
-    Text scoreText;
+    private Text scoreText;
     [SerializeField]
-    Text skillAmountText;
+    private Text skillAmountText;
 
 
-    public PlayerStatus playerstatus;
-    private float PreviousSkillAmount;
+    private PlayerStatus playerstatusComponent;
+    private float previousSkillAmount;
 
     // Use this for initialization
     void Start()
     {
-        playerstatus = GameObject.Find("Player").GetComponent<PlayerStatus>();
+        playerstatusComponent = GameObject.Find("Player").GetComponent<PlayerStatus>();
         skillBar.fillAmount = 0.0f;
-        PreviousSkillAmount = 0.0f;
+        previousSkillAmount = 0.0f;
 
         ReFresh();
 
@@ -33,16 +33,16 @@ public class UIController : MonoBehaviour {
  
     public void ChangeStat()
     {
-        playerstatus.Damaged(0.1f);
+        playerstatusComponent.Damaged(0.1f);
 
-        playerstatus.SkillAmount +=0.05f;
+        playerstatusComponent.SkillAmount +=0.05f;
     }
 
 
 
     public void ReFresh()
     {
-        hpBar.fillAmount = playerstatus.PlayerHp;
+        hpBar.fillAmount = playerstatusComponent.PlayerHp;
         if (hpBar.fillAmount <= 0.5f && hpBar.fillAmount >= 0.3f)
             hpBar.color = Color.yellow;
         else if (hpBar.fillAmount < 0.3f)
@@ -58,19 +58,21 @@ public class UIController : MonoBehaviour {
            
         }
 
-        if(PreviousSkillAmount<playerstatus.SkillAmount&&skillBar.fillAmount<1.0f)
+        if(previousSkillAmount< playerstatusComponent.SkillAmount 
+            &&skillBar.fillAmount<1.0f)
         {
             skillBar.fillAmount += 0.01f;
-            PreviousSkillAmount += 0.01f;
-            if(PreviousSkillAmount>=1.0f||skillBar.fillAmount>=1.0f)
+            previousSkillAmount += 0.01f;
+            if(previousSkillAmount>=1.0f ||
+                skillBar.fillAmount>=1.0f)
             {
-                PreviousSkillAmount = 1.0f;
+                previousSkillAmount = 1.0f;
                 skillBar.fillAmount = 1.0f;
             }
 
             skillAmountText.text = (Math.Truncate(skillBar.fillAmount * 100)).ToString()+"%";
         }
-        scoreText.text = playerstatus.Score.ToString();
+        scoreText.text = playerstatusComponent.Score.ToString();
 
 
     }

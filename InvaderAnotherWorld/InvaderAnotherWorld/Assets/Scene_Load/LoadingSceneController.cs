@@ -11,20 +11,21 @@ public class LoadingSceneController : MonoBehaviour
     private AccountInfo info;
 
     [SerializeField]
-    Image progressBar;
+    private Image progressBar;
     [SerializeField]
-    Text progressText;
+    private Text progressText;
     [SerializeField]
-    Text pressAnyKeyText;
+    private Text pressAnyKeyText;
     [SerializeField]
-    GameObject controllerInfomationImage;
+    private GameObject controllerInfomationImage;
 
-    int percentage = 0;
-    public static bool isMainSceneLoading = false;
+    private int percentage = 0;
+
+    public static bool IsMainSceneLoading = false;
 
     public delegate void LoadInGameScene();
 
-    public LoadInGameScene loadInGameSceneDelegater;
+    public LoadInGameScene LoadInGameSceneDelegater;
 
 
     private void Awake()
@@ -33,7 +34,7 @@ public class LoadingSceneController : MonoBehaviour
         Screen.SetResolution(700, 1080, true);
         info = GameObject.Find("AccountInfo").GetComponent<AccountInfo>();
 
-        if (isMainSceneLoading)
+        if (IsMainSceneLoading)
             controllerInfomationImage.SetActive(true);
 
         if (GameManager.Instance == null)
@@ -49,9 +50,9 @@ public class LoadingSceneController : MonoBehaviour
     public static void LoadScene(string sceneName)
     {
         if (sceneName == "Main")
-            isMainSceneLoading = true;
+            IsMainSceneLoading = true;
         else
-            isMainSceneLoading = false;
+            IsMainSceneLoading = false;
 
         NextScene = sceneName;
         SceneManager.LoadScene("LoadingScene");
@@ -109,7 +110,7 @@ public class LoadingSceneController : MonoBehaviour
         progressBar.gameObject.SetActive(false);
         if (Input.anyKeyDown)
         {
-            loadInGameSceneDelegater();
+            LoadInGameSceneDelegater();
             asyncOperation.allowSceneActivation = true;
         }
 

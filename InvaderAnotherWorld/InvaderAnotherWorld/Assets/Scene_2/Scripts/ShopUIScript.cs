@@ -272,6 +272,7 @@ public class ShopUIScript : MonoBehaviour
         }
     }
 
+
     //다이아 구매 시 , 상황별 알림창 띄우는 메소드//
     public void BuyDiamondAlertMethod()
     {

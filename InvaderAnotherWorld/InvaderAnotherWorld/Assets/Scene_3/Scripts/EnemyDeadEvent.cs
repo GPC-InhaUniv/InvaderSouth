@@ -4,18 +4,18 @@ using UnityEngine;
 
 public class EnemyDeadEvent : MonoBehaviour {
 
-    public PlayerStatus playerStatus;
+    private PlayerStatus playerstatusComponent;
 
 	// Use this for initialization
 	void Start () {
-        playerStatus = GameObject.Find("Player").GetComponent<PlayerStatus>();
+        playerstatusComponent = GameObject.Find("Player").GetComponent<PlayerStatus>();
 	}
 
     private void OnTriggerEnter(Collider other)
     {
         if(other.tag=="Bullet")
         {
-            playerStatus.GetScoreSkill();
+            playerstatusComponent.GetScoreSkill();
             Destroy(other.gameObject);
             Destroy(gameObject);
           

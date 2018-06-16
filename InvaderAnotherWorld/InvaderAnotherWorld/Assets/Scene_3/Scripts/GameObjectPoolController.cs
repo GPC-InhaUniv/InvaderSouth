@@ -14,13 +14,13 @@ public class GameObjectPoolController : MonoBehaviour
         {
             
             case 0:            
-                LoadingSceneController.loadInGameSceneDelegater = new LoadingSceneController.LoadInGameScene(MakeObjectPoolAtStage0);
+                LoadingSceneController.LoadInGameSceneDelegater = new LoadingSceneController.LoadInGameScene(MakeObjectPoolAtStage0);
                 break;
             case 1:      
-                LoadingSceneController.loadInGameSceneDelegater = new LoadingSceneController.LoadInGameScene(MakeObjectPoolAtStage1);
+                LoadingSceneController.LoadInGameSceneDelegater = new LoadingSceneController.LoadInGameScene(MakeObjectPoolAtStage1);
                 break;
             case 2:
-                LoadingSceneController.loadInGameSceneDelegater = new LoadingSceneController.LoadInGameScene(MakeObjectPoolAtStage2);
+                LoadingSceneController.LoadInGameSceneDelegater = new LoadingSceneController.LoadInGameScene(MakeObjectPoolAtStage2);
                 break;
             default:
                 break;
