@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Wingman : MonoBehaviour {
     public float moveStartDistance;
-    public float rangeX;
+    public float rangeZ;
 
     public float speed;
 
@@ -19,16 +19,18 @@ public class Wingman : MonoBehaviour {
     private float missileNextFire;
     public GameObject missiles;
 
-    public GameObject Player;
-    public Rigidbody PetRigidbody;
+    private GameObject Player;
+    private Transform PetObject;
+    private Quaternion rotateVelue;
+    private Quaternion petObjectRotateVelue;
 
     // Use this for initialization
     void Start () {
         //rigidbody = GetComponent<Rigidbody>();
         wingManPosition = transform.position;
         Player = GameObject.FindGameObjectWithTag("Player");
-        PetRigidbody = gameObject.GetComponentInChildren<Rigidbody>();
-        Debug.Log(PetRigidbody.ToString());
+        PetObject = transform.GetChild(0);
+        Debug.Log(PetObject.ToString());
 
         //targetPosition = target.transform.position;
 
@@ -48,14 +50,23 @@ public class Wingman : MonoBehaviour {
         {
             targetPosition = Player.transform.position;
             wingManPosition = targetPosition;
-            if (Player.transform.position.x > 0)
+            wingManPosition.z = targetPosition.z - rangeZ;
+            if (Player.transform.position.x > 1)
             {
-                transform.Rotate(new Vector3(0, 0, 0) * Time.deltaTime * speed);
+                //rotateVelue = new Vector3(0, 0, 0);
+                rotateVelue = Quaternion.Euler(new Vector3(0, 0, 0));
+                petObjectRotateVelue = Quaternion.Euler(new Vector3(0, 0, 0));
+                //rotateVelue = Player.transform.rotation;
+
+                //transform.Rotate(new Vector3(0, 0, 0) * Time.deltaTime * speed);
                 //transform.Rotate(new Vector3(0,0,0),Space.Self);
             }
-            else
+            else if (Player.transform.position.x < -1)
             {
-                transform.Rotate(new Vector3(0, -180, 0)*Time.deltaTime*speed);
+                rotateVelue = Quaternion.Euler(new Vector3(0, 180f, 0));
+                petObjectRotateVelue = Quaternion.Euler(new Vector3(0, 0, 0));
+                //rotateVelue = Player.transform.rotation;
+                //transform.Rotate(new Vector3(0, -180, 0)*Time.deltaTime*speed);
                 //transform.rotation = Vector3.right.y
             }
             //else
@@ -84,18 +95,22 @@ public class Wingman : MonoBehaviour {
 
     void MoveToPlayer()
     {
-        transform.position = Vector3.Lerp(transform.position, wingManPosition, speed * Time.deltaTime);
-        transform.rotation = 
+        transform.position = Vector3.Lerp(transform.position, wingManPosition, 2*speed * Time.deltaTime);
+        transform.rotation = Quaternion.Slerp(transform.rotation, rotateVelue, (speed * Time.deltaTime)/speed);
+        //PetObject.rotation = Quaternion.Slerp(PetObject.rotation, petObjectRotateVelue, speed * Time.deltaTime);
+        PetObject.rotation = petObjectRotateVelue;
+        Debug.Log(petObjectRotateVelue);
+        //transform.rotation = 
 
         //Debug.Log(wingManPosition);
         //Debug.Log(targetPosition);
         //Debug.Log("MoveToPlayer");
-        
+
     }
     private void MissilesFire()
     {
         missileNextFire = Time.time + fireRate * 5;
-        Instantiate(missiles, transform.position, transform.rotation);
+        Instantiate(missiles, PetObject.position, PetObject.rotation);
         //fireSound.Play();
     }
 }
