@@ -96,7 +96,7 @@ public class Wingman : MonoBehaviour {
     void MoveToPlayer()
     {
         transform.position = Vector3.Lerp(transform.position, wingManPosition, 2*speed * Time.deltaTime);
-        transform.rotation = Quaternion.Slerp(transform.rotation, rotateVelue, speed/2 * Time.deltaTime);
+        transform.rotation = Quaternion.Slerp(transform.rotation, rotateVelue, (speed * Time.deltaTime)/speed);
         //PetObject.rotation = Quaternion.Slerp(PetObject.rotation, petObjectRotateVelue, speed * Time.deltaTime);
         PetObject.rotation = petObjectRotateVelue;
         Debug.Log(petObjectRotateVelue);
