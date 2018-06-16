@@ -35,7 +35,7 @@ public class LobbyUIScript_test : MonoBehaviour
 
     private void Update()
     {
-        playerMoneyCountText.text = GameManager.Instance.PlayerMoneyCount;
+      //  playerMoneyCountText.text = GameManager.Instance.PlayerMoneyCount;
         playerNameText.text = GameManager.Instance.PlayerName;
     }
 
