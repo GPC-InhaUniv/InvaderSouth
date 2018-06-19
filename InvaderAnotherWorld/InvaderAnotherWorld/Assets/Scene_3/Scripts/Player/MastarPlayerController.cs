@@ -40,6 +40,7 @@ public class MastarPlayerController : MonoBehaviour
     //스킬 풀, 스킬애니메이션
     [SerializeField]
     private BombObjectPool BombSkill;
+    [SerializeField]
     Animator skillAnimator;
     
 
@@ -48,13 +49,20 @@ public class MastarPlayerController : MonoBehaviour
         mastarBoundary = new MastarBoundary(6, -6, 8, -4);
         playerState = new LivingState();
         bulletSpawn = this.transform.Find("BulletSpawn");
-        playerMeshCollider = this.GetComponent<MeshCollider>();
-        playerMeshRenderer = this.GetComponent<MeshRenderer>();
+        playerMeshCollider = this.GetComponentInChildren<MeshCollider>();
+        playerMeshRenderer = this.GetComponentInChildren<MeshRenderer>();
         rigidbody3D = this.gameObject.GetComponent<Rigidbody>();
-        bulletObjectPool = GameObject.Find("ObjectPool").GetComponent<BulletObjectPool>();
-        enemyObjectPool = GameObject.Find("ObjectPool").GetComponent<EnemyObjectPool>();
+        //bulletObjectPool = GameObject.Find("ObjectPool").GetComponent<BulletObjectPool>();
+        //enemyObjectPool = GameObject.Find("ObjectPool").GetComponent<EnemyObjectPool>();
 
+        //BombSkill = GameObject.Find("GameObjectPool").GetComponent<BombObjectPool>();
         skillAnimator = gameObject.GetComponentInChildren<Animator>();
+    }
+
+    private void Update()
+    {
+        //playerState.Behavior();
+        Debug.Log(playerState);
     }
 
     private void FixedUpdate()
@@ -68,13 +76,14 @@ public class MastarPlayerController : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
+            Debug.Log("필살기 사용!");
+
             skillAnimator.Play("SkillAnim");
             //BombSkill.StartBombing();
             
 
             SetState(new InvincibilityState());
-            Invoke("SetMeshCollider", 1f);
-            Debug.Log("필살기 사용!");
+            Invoke("SetMeshCollider", 1.2f);
         }
 
         if(isGameOver != true)
