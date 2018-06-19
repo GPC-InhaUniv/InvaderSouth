@@ -30,6 +30,7 @@ public class BulletObjectPool : MonoBehaviour
         {
             GameObject PlayerBulletObj = Instantiate(PlayerBulletPrefab) as GameObject;
             PlayerBulletObj.SetActive(false);
+            PlayerBulletObj.transform.parent = parent.transform;
             playerBullets.Enqueue(PlayerBulletObj);
         }
 
@@ -37,6 +38,7 @@ public class BulletObjectPool : MonoBehaviour
         {
             GameObject EnemyBulletObj = Instantiate(EnemyBulletPrefab) as GameObject;
             EnemyBulletObj.SetActive(false);
+            EnemyBulletObj.transform.parent = parent.transform;
             enemyBullets.Enqueue(EnemyBulletObj);
         }
     }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class BombObjectPool : MonoBehaviour
 {
     [SerializeField]
@@ -10,10 +11,10 @@ public class BombObjectPool : MonoBehaviour
     private GameObject Bomber;
     private int BombCount=30;
     private List<GameObject> Bombs;
-    public bool BombActive;
+    private bool BombActive;
 
 
-    private Boundary boundary;
+    private BombBoundary bombBoundary;
     private float spaqwnWait;
     private float endWait;
     private float startWait;
@@ -21,16 +22,30 @@ public class BombObjectPool : MonoBehaviour
     private Vector3 spawnPosition;
     private Quaternion spawnRotation;
 
+    public struct BombBoundary
+    {
+        public float boundaryXMax;
+        public float boundaryXMin;
+        public float boundaryZMax;
+        public float boundaryZMin;
+
+        public BombBoundary(float XMax, float XMin, float ZMax, float ZMin)
+        {
+            boundaryXMax = XMax;
+            boundaryXMin = XMin;
+            boundaryZMax = ZMax;
+            boundaryZMin = ZMin;
+        }
+    }
+
+
     [SerializeField]
     private GameObject parent;
     
     private void Start()
-    {   
-        boundary.xMax = 7;
-        boundary.xMin = -7;
-        boundary.zMax = 20;
-        boundary.zMin = 0;
-
+    {
+        bombBoundary = new BombBoundary(7, -7, 20, 0);
+  
         spaqwnWait = 0.05f;
         endWait = 2.0f;
         startWait = 0.8f;
@@ -71,12 +86,12 @@ public class BombObjectPool : MonoBehaviour
         if (BombActive)
         {
             //폭격기 오브젝트의 위치를 초기화 하고 동작시킨다
-            Bombs[0].transform.position = new Vector3(0f, 0f, boundary.zMin - 10f);
+            Bombs[0].transform.position = new Vector3(0f, 0f, bombBoundary.boundaryZMin - 10f);
             Bombs[0].SetActive(true); 
         }
 
         yield return new WaitForSeconds(startWait);
-        for (int i = 1; i < boundary.zMax; i++)
+        for (int i = 1; i < bombBoundary.boundaryZMax; i++)
         {
             spawnPosition = new Vector3(Random.Range(-spawnValue.x, spawnValue.x), 0f, i);
             //Debug.Log(spawnPosition);

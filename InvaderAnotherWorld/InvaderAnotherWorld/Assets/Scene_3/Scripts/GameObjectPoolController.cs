@@ -45,6 +45,7 @@ public class GameObjectPoolController : MonoBehaviour
     public void MakeObjectPoolAtStage1()
     {
         GetComponent<BackGroundPool>().enabled = true;
+        GetComponent<BulletObjectPool>().enabled = true;
         GetComponent<BossEnemyPool>().enabled = true;
         GetComponent<BombObjectPool>().enabled = true;
         DontDestroyOnLoad(gameObject);
@@ -55,6 +56,7 @@ public class GameObjectPoolController : MonoBehaviour
     public void MakeObjectPoolAtStage2()
     {
         GetComponent<BackGroundPool>().enabled = true;
+        GetComponent<BulletObjectPool>().enabled = true;
         GetComponent<BossEnemyPool>().enabled = true;
         GetComponent<BombObjectPool>().enabled = true;
         DontDestroyOnLoad(gameObject);
