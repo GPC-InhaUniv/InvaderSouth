@@ -16,6 +16,10 @@ public class ShopUIScript : MonoBehaviour
     private int diamondItemCount = 10;
 
     const int NONE = -1;
+<<<<<<< HEAD
+=======
+    //싱글톤으로 연결 부탁드립니다. 값은 테스트를 위해 임시로 넣어놨어요!
+>>>>>>> 366bb50f0c598793f2fae52aefd6ec8b0eff69bf
     private int playerMoneyCount = NONE;   //계산하기 쉽도록 만든 변수. 아래서 사용하는 동안 형변환을 하지 않기 위해.
     private int playerDiamondCount = NONE;
 

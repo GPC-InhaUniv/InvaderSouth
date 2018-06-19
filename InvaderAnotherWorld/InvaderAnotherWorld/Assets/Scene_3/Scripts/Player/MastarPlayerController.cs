@@ -48,14 +48,14 @@ public class MastarPlayerController : MonoBehaviour
     {
         mastarBoundary = new MastarBoundary(6, -6, 8, -4);
         playerState = new LivingState();
-        bulletSpawn = this.transform.Find("BulletSpawn");
+        bulletSpawn = GameObject.Find("BoltSpawn").GetComponentInChildren<Transform>();
         playerMeshCollider = this.GetComponentInChildren<MeshCollider>();
         playerMeshRenderer = this.GetComponentInChildren<MeshRenderer>();
         rigidbody3D = this.gameObject.GetComponent<Rigidbody>();
-        //bulletObjectPool = GameObject.Find("ObjectPool").GetComponent<BulletObjectPool>();
-        //enemyObjectPool = GameObject.Find("ObjectPool").GetComponent<EnemyObjectPool>();
+        bulletObjectPool = GameObject.Find("GameObjectPool").GetComponent<BulletObjectPool>();
+        enemyObjectPool = GameObject.Find("GameObjectPool").GetComponent<EnemyObjectPool>();
 
-        //BombSkill = GameObject.Find("GameObjectPool").GetComponent<BombObjectPool>();
+        BombSkill = GameObject.Find("GameObjectPool").GetComponent<BombObjectPool>();
         skillAnimator = gameObject.GetComponentInChildren<Animator>();
     }
 
@@ -79,7 +79,7 @@ public class MastarPlayerController : MonoBehaviour
             Debug.Log("필살기 사용!");
 
             skillAnimator.Play("SkillAnim");
-            //BombSkill.StartBombing();
+            BombSkill.StartBombing();
             
 
             SetState(new InvincibilityState());

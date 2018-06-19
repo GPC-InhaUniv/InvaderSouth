@@ -47,7 +47,7 @@ public class BossBulletController : MonoBehaviour {
         if (aliveMissleTime > autoActiveFalseTime)
         {
             Initialize();
-            BossEnemyPool.BossNormalbullets.Enqueue(this.gameObject);
+            BossEnemyPool. BossNormalbullets.Enqueue(this.gameObject);
             gameObject.SetActive(false);
         }
         else
