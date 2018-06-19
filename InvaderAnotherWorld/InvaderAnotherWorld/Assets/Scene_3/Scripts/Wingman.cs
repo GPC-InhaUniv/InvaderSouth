@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Wingman : MonoBehaviour {
-    public float moveStartDistance;
-    public float rangeZ;
+    private float moveStartDistance = 2f;
+    private float rangeZ = 1f;
 
-    public float speed;
+    private float speed = 10f;
 
     //Rigidbody rigidbody;
     Vector3 wingManPosition;
@@ -14,15 +14,18 @@ public class Wingman : MonoBehaviour {
 
     //float targetPointX;
     //bool facingRight = true;
-    public float fireRate;
+    public float fireRate = 3f;
     private float nextFire;
-    private float missileNextFire;
-    public GameObject missiles;
+    private float missileNextFire =0;
+    //public GameObject missiles;
+    //private MissileObjectPool missileObjectPool;
 
     private GameObject Player;
     private Transform PetObject;
     private Quaternion rotateVelue;
     private Quaternion petObjectRotateVelue;
+
+    PetObjectPool petObjectPool;
 
     // Use this for initialization
     void Start () {
@@ -30,6 +33,8 @@ public class Wingman : MonoBehaviour {
         wingManPosition = transform.position;
         Player = GameObject.FindGameObjectWithTag("Player");
         PetObject = transform.GetChild(0);
+
+        petObjectPool = GameObject.Find("GameObjectPool").GetComponent<PetObjectPool>();
         Debug.Log(PetObject.ToString());
 
         //targetPosition = target.transform.position;
@@ -76,7 +81,9 @@ public class Wingman : MonoBehaviour {
             //}
 
         }
-        
+
+
+
         //wingManPosition = targetPosition;
         //transform.position = targetPosition;
 
@@ -109,8 +116,7 @@ public class Wingman : MonoBehaviour {
     }
     private void MissilesFire()
     {
-        missileNextFire = Time.time + fireRate * 5;
-        Instantiate(missiles, PetObject.position, PetObject.rotation);
-        //fireSound.Play();
+        missileNextFire = Time.time + fireRate;
+        petObjectPool.SetPetMissileOfPositionAndActive(PetObject.transform);
     }
 }
