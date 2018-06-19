@@ -2,14 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public struct JinBoundary
+public struct ParkBoundary
 {
     public float boundaryXMax;
     public float boundaryXMin;
     public float boundaryZMax;
     public float boundaryZMin;
 
-    public JinBoundary(float XMax, float XMin, float ZMax, float ZMin)
+    public ParkBoundary(float XMax, float XMin, float ZMax, float ZMin)
     {
         boundaryXMax = XMax;
         boundaryXMin = XMin;
@@ -18,9 +18,9 @@ public struct JinBoundary
     }
 }
 
-public class PlayerControllerState_Jin : MonoBehaviour
+public class ParkPlayerController : MonoBehaviour
 {
-    private JinBoundary jinBoundary;
+    private ParkBoundary parkBoundary;
     private MeshCollider playerMeshCollider;
     private MeshRenderer playerMeshRenderer;
     private Transform bulletSpawn;
@@ -38,14 +38,14 @@ public class PlayerControllerState_Jin : MonoBehaviour
 
     private void Awake()
     {
-        jinBoundary = new JinBoundary(6, -6, 1, -9);
+        parkBoundary = new ParkBoundary(6, -6, 1, -9);
         playerState = new LivingState();
         bulletSpawn = this.transform.Find("BulletSpawn");
         playerMeshCollider = this.GetComponent<MeshCollider>();
         playerMeshRenderer = this.GetComponent<MeshRenderer>();
         rigidbody3D = this.gameObject.GetComponent<Rigidbody>();
-        bulletObjectPool = GameObject.FindGameObjectWithTag("ObjectPoolManager").GetComponent<BulletObjectPool>();
-        enemyObjectPool = GameObject.FindGameObjectWithTag("ObjectPoolManager").GetComponent<EnemyObjectPool>();
+        bulletObjectPool = GameObject.Find("ObjectPool").GetComponent<BulletObjectPool>();
+        enemyObjectPool = GameObject.Find("ObjectPool").GetComponent<EnemyObjectPool>();
     }
 
     private void FixedUpdate()
@@ -79,9 +79,9 @@ public class PlayerControllerState_Jin : MonoBehaviour
         // 플레이어가 화면 밖으로 나가는 것을 방지.
         rigidbody3D.position = new Vector3
         (
-            Mathf.Clamp(rigidbody3D.position.x, jinBoundary.boundaryXMin, jinBoundary.boundaryXMax),
+            Mathf.Clamp(rigidbody3D.position.x, parkBoundary.boundaryXMin, parkBoundary.boundaryXMax),
             0.0f,
-            Mathf.Clamp(rigidbody3D.position.z, jinBoundary.boundaryZMin, jinBoundary.boundaryZMax)
+            Mathf.Clamp(rigidbody3D.position.z, parkBoundary.boundaryZMin, parkBoundary.boundaryZMax)
         );
     }
 

@@ -4,17 +4,22 @@ using UnityEngine;
 
 public class BulletObjectPool : MonoBehaviour
 {
-    public GameObject PlayerBulletPrefab;
+    [SerializeField]
+    private GameObject PlayerBulletPrefab;
     private Queue<GameObject> playerBullets;
     private GameObject playerBullet;
     private const int playerBulletCount = 10;
     private const float fireTime = 0.25f;
     private float nextFire = 0f;
 
-    public GameObject EnemyBulletPrefab;
+    [SerializeField]
+    private GameObject EnemyBulletPrefab;
     private Queue<GameObject> enemyBullets;
     private GameObject enemyBullet;
     private const int enemyBulletCount = 50;
+
+    [SerializeField]
+    private GameObject parent;
 
     private void Start()
     {
@@ -36,7 +41,7 @@ public class BulletObjectPool : MonoBehaviour
         }
     }
 
-    public void SetPlayerBulletOfPositionAndActive(Transform p)
+    public void SetPlayerBulletOfPositionAndActive(Transform transform)
     {
         if (playerBullets.Count > playerBulletCount)
             return;
@@ -44,18 +49,18 @@ public class BulletObjectPool : MonoBehaviour
         {
             playerBullet = playerBullets.Dequeue();
             playerBullet.SetActive(true);
-            playerBullet.transform.position = p.position;
+            playerBullet.transform.position = transform.position;
             nextFire = Time.time;
         }
     }
 
-    public IEnumerator SetEnemyBulletOfPositionAndActive(Transform p)
+    public IEnumerator SetEnemyBulletOfPositionAndActive(Transform transform)
     {
         while (true)
         {
             enemyBullet = enemyBullets.Dequeue();
             enemyBullet.SetActive(true);
-            enemyBullet.transform.position = p.position;
+            enemyBullet.transform.position = transform.position;
             yield return new WaitForSeconds(1);
         }
     }

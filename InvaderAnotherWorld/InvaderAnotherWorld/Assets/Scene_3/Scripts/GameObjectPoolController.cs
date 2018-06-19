@@ -33,7 +33,6 @@ public class GameObjectPoolController : MonoBehaviour
 
     public void MakeObjectPoolAtStage0()
     {
-        GetComponent<BulletPool>().enabled = true;
         GetComponent<BackGroundPool>().enabled = true;
         GetComponent<BulletObjectPool>().enabled = true;
         GetComponent<EnemyObjectPool>().enabled = true;
