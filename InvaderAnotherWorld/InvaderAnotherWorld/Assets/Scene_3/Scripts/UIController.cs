@@ -15,6 +15,7 @@ public class UIController : MonoBehaviour {
     [SerializeField]
     private Text skillAmountText;
 
+    
 
     private PlayerStatus playerstatusComponent;
     private float previousSkillAmount;
