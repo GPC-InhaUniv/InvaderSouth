@@ -41,11 +41,8 @@ public class GameObjectPoolController : MonoBehaviour
         GetComponent<BulletObjectPool>().enabled = true;
         GetComponent<EnemyObjectPool>().enabled = true;
         GetComponent<BombObjectPool>().enabled = true;
-<<<<<<< HEAD
-   
-=======
         GetComponent<PetObjectPool>().enabled = true;
->>>>>>> 2ccefa246b3d4fd90471a45287cecfb9ca067c53
+
         DontDestroyOnLoad(gameObject);
         Debug.Log("GameObjectPool 0스테이지 작동");
 
