@@ -56,7 +56,7 @@ public class GridMisslie : MonoBehaviour {
     }
     public void SetTarget()
     {
-        if (GameObject.FindGameObjectWithTag("Enemy") != null)
+        if (GameObject.FindGameObjectWithTag("EnemyPlane") != null)
         {
             GameObject[] enemys = GameObject.FindGameObjectsWithTag("Enemy");
             float distance = Mathf.Infinity;
@@ -73,5 +73,13 @@ public class GridMisslie : MonoBehaviour {
                 }
             }
         }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.tag=="EnemyPlane")
+            PetObjectPool.petMissiles.Enqueue(gameObject);
+        if(other.tag == "Boundary")
+            PetObjectPool.petMissiles.Enqueue(gameObject);
     }
 }

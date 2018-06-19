@@ -48,7 +48,7 @@ public class MastarPlayerController : MonoBehaviour
     {
         mastarBoundary = new MastarBoundary(6, -6, 8, -4);
         playerState = new LivingState();
-        bulletSpawn = this.transform.Find("BulletSpawn");
+        bulletSpawn = GameObject.Find("BoltSpawn").GetComponentInChildren<Transform>();
         playerMeshCollider = this.GetComponentInChildren<MeshCollider>();
         playerMeshRenderer = this.GetComponentInChildren<MeshRenderer>();
         rigidbody3D = this.gameObject.GetComponent<Rigidbody>();

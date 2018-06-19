@@ -8,7 +8,7 @@ public class PetObjectPool : MonoBehaviour {
     private GameObject petObjectPrefab;
     [SerializeField]
     private GameObject petMissilePrefab;
-    private Queue<GameObject> petMissiles;
+    public static Queue<GameObject> petMissiles;
     private GameObject petMissile;
     private const int petMissileCount = 10;
     //private const float fireTime = 0.25f;
@@ -55,7 +55,7 @@ public class PetObjectPool : MonoBehaviour {
         //}
     }
 
-    public void PetMissilesEnqueue(GameObject other)
+    public static void PetMissilesEnqueue(GameObject other)
     {
         petMissiles.Enqueue(other.gameObject);
     }
