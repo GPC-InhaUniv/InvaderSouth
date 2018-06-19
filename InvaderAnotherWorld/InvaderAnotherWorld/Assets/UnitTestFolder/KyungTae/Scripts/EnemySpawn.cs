@@ -8,6 +8,7 @@ public class EnemySpawn : MonoBehaviour
 
     private void Awake()
     {
+       // enemyObjectPool = GameObject.FindGameObjectWithTag("ObjectPoolManager").GetComponent<EnemyObjectPool>();
         enemyObjectPool = GameObject.Find("ObjectPool").GetComponent<EnemyObjectPool>();
     }
 

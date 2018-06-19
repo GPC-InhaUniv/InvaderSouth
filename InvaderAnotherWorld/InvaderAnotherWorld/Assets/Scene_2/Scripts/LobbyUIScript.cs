@@ -106,14 +106,30 @@ public class LobbyUIScript : MonoBehaviour
         Debug.Log("Backward Movement Button Click!");
     }
 
-    private void OnClickStageButtonClick()
+    public void OnClickStageOneButtonClick()
     {
         Debug.Log("Stage Button Click");
         Debug.Log("Go to the store");
+        GameManager.Instance.CurrentStage = 0;
         shopPanel.SetActive(true);
-
-
     }
+    public void OnClickStageTwoButtonClick()
+    {
+        Debug.Log("Stage Button Click");
+        Debug.Log("Go to the store");
+        GameManager.Instance.CurrentStage = 1 << 0;
+        shopPanel.SetActive(true);
+    }
+    
+    public void OnClickStageThreeButtonClick()
+    {
+        Debug.Log("Stage Button Click");
+        Debug.Log("Go to the store");
+        GameManager.Instance.CurrentStage = 1 << 1;
+        shopPanel.SetActive(true);
+    }
+
+
 
     public void OnClickBackToLoginSceneButton()
     {

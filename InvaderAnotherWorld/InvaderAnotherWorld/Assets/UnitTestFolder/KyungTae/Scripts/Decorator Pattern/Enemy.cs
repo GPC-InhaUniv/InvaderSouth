@@ -15,6 +15,8 @@ abstract public class Enemy : MonoBehaviour
     private void Awake()
     {
         bulletSpawn = this.transform.Find("BulletSpawn");
+        //bulletObjectPool = GameObject.FindGameObjectWithTag("ObjectPoolManager").GetComponent<BulletObjectPool>();
+        //enemyObjectPool = GameObject.FindGameObjectWithTag("ObjectPoolManager").GetComponent<EnemyObjectPool>();
         bulletObjectPool = GameObject.Find("ObjectPool").GetComponent<BulletObjectPool>();
         enemyObjectPool = GameObject.Find("ObjectPool").GetComponent<EnemyObjectPool>();
     }

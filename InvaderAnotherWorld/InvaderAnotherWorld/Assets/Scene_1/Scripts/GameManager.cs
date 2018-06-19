@@ -9,11 +9,8 @@ public class GameManager : Singleton<GameManager>
     public int LastCompletedStageNumber;
     public int[] CleardStageScore;
     public bool[] IsPlayerHavePlane;
-
-  
-
-    public int currentStage = 0;
-    public bool[] buyItemList;
+    public bool[] BuyItemList;
+    public int CurrentStage = (1 << 0);
 
     private const int maxStageCount = 3;
     private const int maxPlaneCount = 2;
@@ -35,9 +32,9 @@ public class GameManager : Singleton<GameManager>
         for (int i = 0; i < maxPlaneCount; i++)
             IsPlayerHavePlane[i] = false;
 
-        buyItemList = new bool[maxItemCount];
+        BuyItemList = new bool[maxItemCount];
         for (int i = 0; i < maxItemCount; i++)
-            buyItemList[i] = false;
+            BuyItemList[i] = false;
 
     }
 

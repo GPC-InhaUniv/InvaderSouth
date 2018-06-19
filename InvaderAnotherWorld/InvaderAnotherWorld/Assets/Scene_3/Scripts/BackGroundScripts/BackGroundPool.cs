@@ -8,7 +8,7 @@ public class BackGroundPool : MonoBehaviour
     private GameObject BackGroundObject;
 
     private int enemyCount = 30;
-    List<GameObject> backgroundObjects;
+    private List<GameObject> backgroundObjects;
     private float spaqwnWait;
     private float startWait;
     private float waveWait;
@@ -21,8 +21,7 @@ public class BackGroundPool : MonoBehaviour
 
     // Use this for initialization
     void Start()
-    {
-        
+    {     
             //object pool 생성
             backgroundObjects = new List<GameObject>();
             for (int i = 0; i < enemyCount; i++)
@@ -34,7 +33,6 @@ public class BackGroundPool : MonoBehaviour
               //  DontDestroyOnLoad(obj);
             }
         
-
     }
 
     public void StartBackGround()

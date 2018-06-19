@@ -16,7 +16,7 @@ public class BulletObjectPool : MonoBehaviour
     private GameObject enemyBullet;
     private const int enemyBulletCount = 50;
 
-    private void Awake()
+    private void Start()
     {
         playerBullets = new Queue<GameObject>();
         enemyBullets = new Queue<GameObject>();

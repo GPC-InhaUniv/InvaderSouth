@@ -10,12 +10,13 @@ public class DestroyByBoundary : MonoBehaviour {
         if(other.tag=="Bullet")
         {
             BulletPool.EnqeueBullet(other.gameObject);
+            
             other.gameObject.SetActive(false);
         }
 
         if(other.tag=="BossSmallBullet")
         {
-            BossBulletPool.BosssmallBullets.Enqueue(other.gameObject);
+            BossEnemyPool.BosssmallBullets.Enqueue(other.gameObject);
             other.gameObject.SetActive(false);
         }
         if(other.tag=="BackGroundElement")

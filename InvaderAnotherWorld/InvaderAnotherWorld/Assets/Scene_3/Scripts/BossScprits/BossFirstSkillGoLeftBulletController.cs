@@ -2,8 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BossFirstSkillGoRightBulletController : MonoBehaviour
-{
+public class BossFirstSkillGoLeftBulletController : MonoBehaviour {
 
     [SerializeField]
     private GameObject smallBullet;
@@ -13,15 +12,12 @@ public class BossFirstSkillGoRightBulletController : MonoBehaviour
     private float runningTime = 0;
     private float speed = 1.0f;
     private int smallBulletCount = 0;
-    private bool IsFinishMakeCircle;
     private GameObject tempbosssmallBullet;
-
     private float moveFowardTime = 0;
     private float fireRate = 0f;
 
     // Use this for initialization
-    void Start()
-    {
+    void Start () {
         rigidbody = GetComponent<Rigidbody>();
         smallBulletCount = 0;
         speed = 1.0f;
@@ -37,6 +33,7 @@ public class BossFirstSkillGoRightBulletController : MonoBehaviour
         moveFowardTime = 0;
         gameObject.transform.rotation = Quaternion.identity;
         gameObject.transform.position = new Vector3(0, 0, 0);
+        
     }
 
     private void FixedUpdate()
@@ -51,25 +48,24 @@ public class BossFirstSkillGoRightBulletController : MonoBehaviour
             runningTime += Time.deltaTime + 10.0f;
             float x = radius * Mathf.Sin(runningTime);
 
-            tempbosssmallBullet = BossBulletPool.BosssmallBullets.Dequeue();
+            tempbosssmallBullet = BossEnemyPool.BosssmallBullets.Dequeue();
             tempbosssmallBullet.SetActive(true);
 
             tempbosssmallBullet.transform.position = new Vector3(x + transform.position.x, 3.6f, transform.position.z);
-            tempbosssmallBullet.transform.rotation = Quaternion.Euler(0, -runningTime, 0);
+            tempbosssmallBullet.transform.rotation = Quaternion.Euler(0, runningTime, 0);
 
             smallBulletCount++;
             if (smallBulletCount >= 40)
             {
                 Initialize();
-                BossBulletPool.BossSecondRightMissiles.Enqueue(gameObject);
+                BossEnemyPool.BossSecondLeftMissiles.Enqueue(gameObject);
                 gameObject.SetActive(false);
-
+               
             }
             fireRate = 0;
         }
 
         fireRate += Time.deltaTime;
     }
+
 }
-
-

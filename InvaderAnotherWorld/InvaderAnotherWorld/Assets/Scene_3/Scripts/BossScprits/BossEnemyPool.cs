@@ -2,8 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BossBulletPool : MonoBehaviour
+public class BossEnemyPool : MonoBehaviour
 {
+    [SerializeField]
+    private GameObject bossObject;
+    private int bossObjectAmount = 1;
+    public static Queue<GameObject> BossObjects;
+    GameObject tempBoss;
+
+
     [SerializeField]
     private GameObject bossNormalBullet;
     private int NormalBulletCount = 15;
@@ -47,10 +54,18 @@ public class BossBulletPool : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        GameObject obj;
+
+        BossObjects = new Queue<GameObject>();
+        obj = Instantiate(bossObject);
+        obj.transform.parent = parent.transform;
+        obj.SetActive(false);
+        BossObjects.Enqueue(obj);
+
         BossNormalbullets = new Queue<GameObject>();
         for (int i = 0; i < NormalBulletCount; i++)
         {
-            GameObject obj = Instantiate(bossNormalBullet);
+            obj = Instantiate(bossNormalBullet);
             obj.transform.parent = parent.transform;
             obj.SetActive(false);
             BossNormalbullets.Enqueue(obj);
@@ -60,7 +75,7 @@ public class BossBulletPool : MonoBehaviour
         BossSecondLeftMissiles = new Queue<GameObject>();
         for (int i = 0; i < secondLeftMissileCount; i++)
         {
-            GameObject obj = Instantiate(bossSecondLeftMissile);
+            obj = Instantiate(bossSecondLeftMissile);
             obj.transform.parent = parent.transform;
             obj.SetActive(false);
             BossSecondLeftMissiles.Enqueue(obj);
@@ -70,7 +85,7 @@ public class BossBulletPool : MonoBehaviour
         BossSecondRightMissiles = new Queue<GameObject>();
         for (int i = 0; i < secondRightMissileCount; i++)
         {
-            GameObject obj = Instantiate(bossSecondRightMissile);
+            obj = Instantiate(bossSecondRightMissile);
             obj.transform.parent = parent.transform;
             obj.SetActive(false);
             BossSecondRightMissiles.Enqueue(obj);
@@ -80,7 +95,7 @@ public class BossBulletPool : MonoBehaviour
         BossThirdMissiles = new Queue<GameObject>();
         for (int i = 0; i < thirdMissileCount; i++)
         {
-            GameObject obj = Instantiate(bossThirdMissile);
+            obj = Instantiate(bossThirdMissile);
             obj.transform.parent = parent.transform;
             obj.SetActive(false);
             BossThirdMissiles.Enqueue(obj);
@@ -90,7 +105,7 @@ public class BossBulletPool : MonoBehaviour
         BosssmallBullets = new Queue<GameObject>();
         for (int i = 0; i < bosssmallBulletCount; i++)
         {
-            GameObject obj = Instantiate(bosssmallBullet);
+            obj = Instantiate(bosssmallBullet);
             obj.transform.parent = parent.transform;
             obj.SetActive(false);
             BosssmallBullets.Enqueue(obj);
@@ -137,6 +152,14 @@ public class BossBulletPool : MonoBehaviour
         tempbosssmallBullet.SetActive(true);
         tempbosssmallBullet.transform.position = transform.position;
         tempbosssmallBullet.transform.rotation = Quaternion.Euler(0, Angle, 0);
+    }
+
+    public void GenerateBoss(Transform transform)
+    {
+        tempBoss = BossObjects.Dequeue();
+        tempBoss.SetActive(true);
+        tempBoss.transform.position = transform.position;
+        tempBoss.transform.rotation = Quaternion.identity;
     }
 
 

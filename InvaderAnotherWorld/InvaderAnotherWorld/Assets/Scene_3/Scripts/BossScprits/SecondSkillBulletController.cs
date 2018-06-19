@@ -59,7 +59,7 @@ public class SecondSkillBulletController : MonoBehaviour
                 Initialize();
                 gameObject.SetActive(false);
                 lazerObject.SetActive(false);
-                BossBulletPool.BossThirdMissiles.Enqueue(gameObject);
+                BossEnemyPool.BossThirdMissiles.Enqueue(gameObject);
                 
             }
 

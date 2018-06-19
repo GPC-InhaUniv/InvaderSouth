@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyObjectPool : MonoBehaviour
-{
+public class EnemyPool : MonoBehaviour {
+
     private const int enemyCount = 10;
 
     public GameObject EnemyPlanePrefab;
@@ -19,7 +19,7 @@ public class EnemyObjectPool : MonoBehaviour
         enemyPlanes = new Queue<GameObject>();
         enemySpacePlanes = new Queue<GameObject>();
 
-        for(int i = 0; i < enemyCount; i++)
+        for (int i = 0; i < enemyCount; i++)
         {
             GameObject EnemyPlaneObj = Instantiate(EnemyPlanePrefab);
             EnemyPlaneObj.SetActive(false);

@@ -7,10 +7,9 @@ public class GameObjectPoolController : MonoBehaviour
     private LoadingSceneController LoadingSceneController;
 
     private void Start()
-    {
-        GameManager.Instance.currentStage = 2;
+    { 
         LoadingSceneController = GameObject.Find("LoadingSceneManager").GetComponent<LoadingSceneController>();
-        switch (GameManager.Instance.currentStage)
+        switch (GameManager.Instance.CurrentStage)
         {
             
             case 0:            
@@ -22,7 +21,10 @@ public class GameObjectPoolController : MonoBehaviour
             case 2:
                 LoadingSceneController.LoadInGameSceneDelegater = new LoadingSceneController.LoadInGameScene(MakeObjectPoolAtStage2);
                 break;
+            case 4:
+                break;
             default:
+                Debug.Log("error!");
                 break;
         }
      
@@ -33,6 +35,8 @@ public class GameObjectPoolController : MonoBehaviour
     {
         GetComponent<BulletPool>().enabled = true;
         GetComponent<BackGroundPool>().enabled = true;
+        GetComponent<BulletObjectPool>().enabled = true;
+        GetComponent<EnemyObjectPool>().enabled = true;
         DontDestroyOnLoad(gameObject);
         Debug.Log("GameObjectPool 0스테이지 작동");
 
@@ -42,6 +46,7 @@ public class GameObjectPoolController : MonoBehaviour
     {
         GetComponent<BulletPool>().enabled = true;
         GetComponent<BackGroundPool>().enabled = true;
+        GetComponent<BossEnemyPool>().enabled = true;
         DontDestroyOnLoad(gameObject);
         Debug.Log("GameObjectPool 1 스테이지 작동");
 
@@ -51,7 +56,7 @@ public class GameObjectPoolController : MonoBehaviour
     {
         GetComponent<BulletPool>().enabled = true;
         GetComponent<BackGroundPool>().enabled = true;
-        GetComponent<BossBulletPool>().enabled = true;
+        GetComponent<BossEnemyPool>().enabled = true;
         DontDestroyOnLoad(gameObject);
         Debug.Log("GameObjectPool 2 스테이지 작동");
     }

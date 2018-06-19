@@ -32,13 +32,13 @@ public class BossController : MonoBehaviour
     private bool isUseSkill;
     private BossState bossstate;
 
-    private BossBulletPool bossBulletPool;
+    private BossEnemyPool bossEnemyPool;
 
 
     void Start()
     {
         player = GameObject.Find("Player").GetComponent<PlayerController>();
-        bossBulletPool = GameObject.Find("GameObjectPool").GetComponent<BossBulletPool>();
+        bossEnemyPool = GameObject.Find("GameObjectPool").GetComponent<BossEnemyPool>();
 
         isUseSkill = false;
         bossstate = BossState.alive;
@@ -61,7 +61,7 @@ public class BossController : MonoBehaviour
             }
             else
             {
-                bossBulletPool.FireNormalBullet(shotposition.transform);
+                bossEnemyPool.FireNormalBullet(shotposition.transform);
                 yield return new WaitForSeconds(0.8f);
             }
 
@@ -90,16 +90,16 @@ public class BossController : MonoBehaviour
     }
     void UseFirstSkill()
     {
-        bossBulletPool.FireSecondBullet(shotposition.transform, firstMissleAngle);
+        bossEnemyPool.FireSecondBullet(shotposition.transform, firstMissleAngle);
         firstFiredelayTime = Time.time + firstFireTime;
         isUseSkill = true;
     }
 
     void UseSecondSkill()
     {
-        bossBulletPool.FireThirdBullet(shotposition.transform, 0);
-        bossBulletPool.FireThirdBullet(shotposition.transform, -secondMissleAngle);
-        bossBulletPool.FireThirdBullet(shotposition.transform, secondMissleAngle);
+        bossEnemyPool.FireThirdBullet(shotposition.transform, 0);
+        bossEnemyPool.FireThirdBullet(shotposition.transform, -secondMissleAngle);
+        bossEnemyPool.FireThirdBullet(shotposition.transform, secondMissleAngle);
         secondFiredelayTime = Time.time + secondFireTime;
         isUseSkill = true;
 

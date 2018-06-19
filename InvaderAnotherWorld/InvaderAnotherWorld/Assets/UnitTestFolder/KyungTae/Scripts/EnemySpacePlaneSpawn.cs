@@ -8,7 +8,8 @@ public class EnemySpacePlaneSpawn : MonoBehaviour
 
     private void Awake()
     {
-        enemyObjectPool = GameObject.Find("ObjectPool").GetComponent<EnemyObjectPool>();
+       // enemyObjectPool = GameObject.FindGameObjectWithTag("ObjectPoolManager").GetComponent<EnemyObjectPool>();
+       enemyObjectPool = GameObject.Find("ObjectPool").GetComponent<EnemyObjectPool>();
     }
 
     private void Start()
