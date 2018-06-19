@@ -6,15 +6,23 @@ public class EnemyPlane : Enemy
 {
     private void Start()
     {
-        enemySpawn = GameObject.Find("EnemyPlaneSpawn").transform;
+        enemySpawn = GameObject.Find("EnemySpawn").transform;
         movingDecorator = gameObject.AddComponent<RotationMovingDecorator>();
-        StartCoroutine(bulletObjectPool.SetEnemyBulletOfPositionAndActive(bulletSpawn));
     }
 
     private void FixedUpdate()
     {
         EnemyMove();
         movingDecorator.EnemyMove();
+    }
+
+    private void Update()
+    {
+        if (Time.time > nextFire)
+        {
+            nextFire = Time.time + fireRate;
+            bulletObjectPool.SetEnemyBulletOfPositionAndActive(bulletSpawn);
+        }
     }
 
     private void OnTriggerEnter(Collider other)

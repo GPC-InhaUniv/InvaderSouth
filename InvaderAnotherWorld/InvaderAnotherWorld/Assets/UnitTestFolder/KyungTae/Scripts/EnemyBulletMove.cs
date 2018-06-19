@@ -8,7 +8,7 @@ public class EnemyBulletMove : MonoBehaviour
 
     public void Start()
     {
-        if(gameObject.transform.position.z < 10)
+        if (gameObject.transform.position.z <= 8)
             GetComponent<Rigidbody>().velocity = Vector3.forward * Speed;
     }
 }

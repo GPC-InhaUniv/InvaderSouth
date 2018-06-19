@@ -8,13 +8,21 @@ public class EnemySpacePlane : Enemy
     {
         enemySpawn = GameObject.Find("EnemySpacePlaneSpawn").transform;
         movingDecorator = gameObject.AddComponent<ZigzagMovingDecorator>();
-        StartCoroutine(bulletObjectPool.SetEnemyBulletOfPositionAndActive(bulletSpawn));
     }
 
     private void FixedUpdate()
     {
         EnemyMove();
         movingDecorator.EnemyMove();
+    }
+
+    private void Update()
+    {
+        if (Time.time > nextFire)
+        {
+            nextFire = Time.time + fireRate;
+            bulletObjectPool.SetEnemyBulletOfPositionAndActive(bulletSpawn);
+        }
     }
 
     private void OnTriggerEnter(Collider other)

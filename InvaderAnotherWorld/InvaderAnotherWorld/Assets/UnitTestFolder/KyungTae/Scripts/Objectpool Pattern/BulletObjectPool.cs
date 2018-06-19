@@ -49,15 +49,11 @@ public class BulletObjectPool : MonoBehaviour
         }
     }
 
-    public IEnumerator SetEnemyBulletOfPositionAndActive(Transform p)
+    public void SetEnemyBulletOfPositionAndActive(Transform p)
     {
-        while (true)
-        {
             enemyBullet = enemyBullets.Dequeue();
             enemyBullet.SetActive(true);
             enemyBullet.transform.position = p.position;
-            yield return new WaitForSeconds(1);
-        }
     }
 
     public void PlayerBulletsEnqueue(GameObject other)

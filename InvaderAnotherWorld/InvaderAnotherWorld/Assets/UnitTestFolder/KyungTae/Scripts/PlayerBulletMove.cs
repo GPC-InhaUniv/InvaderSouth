@@ -8,6 +8,7 @@ public class PlayerBulletMove : MonoBehaviour
 
     public void Start()
     {
-        GetComponent<Rigidbody>().velocity = Vector3.forward * Speed;
+        if (gameObject.transform.position.z <= 8)
+            GetComponent<Rigidbody>().velocity = Vector3.forward * Speed;
     }
 }
