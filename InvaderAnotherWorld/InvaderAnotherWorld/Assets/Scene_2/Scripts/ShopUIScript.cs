@@ -14,10 +14,10 @@ public class ShopUIScript : MonoBehaviour
     private int itemCount = 3;
     private int goldItemCount = 10;
     private int diamondItemCount = 10;
+
     const int NONE = -1;
-    //싱글톤으로 연결 부탁드립니다. 값은 테스트를 위해 임시로 넣어놨어요!
-    private int playerMoneyCount = GameManager.Instance.PlayerMoneyCount;   //계산하기 쉽도록 만든 변수. 아래서 사용하는 동안 형변환을 하지 않기 위해.
-    private int playerDiamondCount = GameManager.Instance.PlayerDiamondCount;
+    private int playerMoneyCount = NONE;   //계산하기 쉽도록 만든 변수. 아래서 사용하는 동안 형변환을 하지 않기 위해.
+    private int playerDiamondCount = NONE;
 
     private int totalItemPrice;
     private Text showTotalItemPriceText;
@@ -26,7 +26,7 @@ public class ShopUIScript : MonoBehaviour
     [Header("<Gold>")]
     private Text goldAlert;
 
-    private int maxGold = 999999;
+    private int maxGold ;  
     private GameObject buyGoldPanel;
     private Image buyAlert;
     private Text canBuyGoldAndDiamondText;
@@ -37,9 +37,8 @@ public class ShopUIScript : MonoBehaviour
     private int saveDiamondItemPrice = 0;   //선택해준 다이아몬드 개수를 기억할 수 있도록
     private Image thankAlert;
 
-
     [Header("<Diamond>")]
-    private int maxDiamond = 999999 ;
+    private int maxDiamond ;
     private GameObject buyDiamondPanel;
     private Text diamondAlert;
     private GameObject diamondButtonPanel;
@@ -67,6 +66,10 @@ public class ShopUIScript : MonoBehaviour
         OnClickedItemButton();
         CheckedListCount();    //유니티 플레이 중에는 수정이 불가하기 때문에 start에만 넣어준다.
 
+        maxGold = 999999;
+        maxDiamond = 999999;
+
+
         //배열로 받아온 골드 가격 텍스트에 골드 가격(마찬가지로 배열)을 넣어줌//
         for (int i = 0; i < goldinfo.Count; i++)
         {
@@ -79,6 +82,239 @@ public class ShopUIScript : MonoBehaviour
             diamondinfo[i].DiamondPriceText.text = diamondinfo[i].DiamondPrice.ToString();
         }
 
+    }
+
+    [Serializable]
+    private struct Item
+    {
+        public Toggle ItemToggle;   //shopToggleList
+        public Text ItempriceText;
+    }
+    [SerializeField]
+    private List<Item> itemInfo;
+
+
+    [Serializable]
+    private struct GoldPriceInfo
+    {
+        public Text GoldPriceText;
+        public int GoldPrice;
+    }
+    [SerializeField]
+    private List<GoldPriceInfo> goldinfo;
+
+
+    [Serializable]
+    private struct DiamondPriceInfo
+    {
+        public Text DiamondPriceText;
+        public int DiamondPrice;
+    }
+    [SerializeField]
+    private List<DiamondPriceInfo> diamondinfo;
+
+
+
+    public void OnClickedItemButton()
+    {
+        int itemPrice = 0;
+
+        for (int i = 0; i < itemInfo.Count; i++)
+        {
+
+            if (itemInfo[i].ItemToggle.isOn)
+            {
+                int number;
+                if (int.TryParse(itemInfo[i].ItempriceText.text, out number))
+                {
+                    itemPrice += number;
+                }
+                else
+                {
+                    Debug.Log("스트링 값이 들어오지 않음");
+                }
+
+                //싱글톤에 저장해준 아이템을 True로 만들어준다.
+                GameManager.Instance.BuyItemList[i] = true;
+
+                Debug.Log(itemInfo[i].ItemToggle + "는 토글 켜져있음-ON");
+            }
+            else
+            {
+                GameManager.Instance.BuyItemList[i] = false;
+                Debug.Log(itemInfo[i].ItemToggle + "는 토글 꺼져있음-OFF");
+            }
+
+        }
+        Debug.Log(itemPrice);
+        if (itemPrice == 0)
+        {
+            showTotalItemPriceText.text = "0";
+        }
+        else
+        {
+            totalItemPrice = itemPrice;
+            showTotalItemPriceText.text = "-" + totalItemPrice.ToString();
+        }
+    }
+
+
+    public void OnClickedCloseShopButton()
+    {
+        SetDiamondUIOff();
+        SetGoldUIOff();
+        SetShopUIOff();
+        SetAllToggleOff();
+
+        //아이템 배열 초기화
+        for (int i = 0; i < GameManager.Instance.BuyItemList.Length; i++)
+            GameManager.Instance.BuyItemList[i] = false; 
+    }
+
+    /// <summary>
+    /// 골드 구매
+    /// </summary>
+    //골드 구매 버튼//
+    public void OnClickedGoldButton()
+    {
+        
+        if (playerMoneyCount >= maxGold)
+        {
+            goldAlert.gameObject.SetActive(true);
+        }
+        else
+        {
+            SetGoldUIOff();
+            buyGoldPanel.gameObject.SetActive(true);
+            thankAlert.gameObject.SetActive(false);
+            buyAlert.gameObject.SetActive(false);
+
+        }
+    }
+
+    //골드 구매 시 , 상황별 알림창 띄우는 메소드//
+    public void OnClickedBuyGoldAlertMethod()
+    {
+        if (playerDiamondCount >= diamondPriceForGold)
+        {
+            buyAlert.gameObject.SetActive(true);
+            canBuyGoldAndDiamondText.gameObject.SetActive(true);
+            cantBuyGoldAndDiamondText.gameObject.SetActive(false);
+        }
+        else
+        {
+            buyAlert.gameObject.SetActive(true);
+            canBuyGoldAndDiamondText.gameObject.SetActive(false);
+            cantBuyGoldAndDiamondText.gameObject.SetActive(true);
+        }
+    }
+
+    //골드 구매 시 : 정말로 구매하시겠습니까 창이 떴을때 Yes버튼을 누르면 작동하는 메소드//
+    public void OnClickedBuyGold()
+    {
+        if (playerDiamondCount >= diamondPriceForGold)
+        {
+            DataManager.Instance.BuyMoney(saveGoldItemPrice);
+            DataManager.Instance.UseDiaMond(diamondPriceForGold);
+            currentPlayerMoneyText.text = GameManager.Instance.PlayerMoneyCount.ToString();
+            currentPlayerDiamondText.text = GameManager.Instance.PlayerDiamondCount.ToString();
+            thankAlert.gameObject.SetActive(true);
+        }
+        else if (playerDiamondCount <= diamondPriceForGold)
+        {
+            SetDiamondUIOn();
+            buyAlert.gameObject.SetActive(false); 
+            buyGoldPanel.gameObject.SetActive(false);
+        }
+    }
+
+    // 골드 아이템 버튼 메소드
+    public void OnClickedSelectGoldItemButton(int clicked)
+    {
+        saveGoldItemPrice = goldinfo[clicked].GoldPrice;
+    }
+
+
+    /// <summary>
+    /// 다이아몬드 구매
+    /// </summary>
+    //다이아몬드 구매 버튼 눌렀을 시.
+    public void OnClickedDiamondButton()
+    {
+       
+        if (playerDiamondCount >= maxDiamond)
+        {
+            //다이아몬드 알람으로 띄우기
+            diamondAlert.gameObject.SetActive(true);
+        }
+        else
+        {
+            SetDiamondUIOn();
+            SetAlertMessageOff();
+        }
+    }
+
+    //다이아 구매 시 , 알림창 띄우는 메소드//
+    public void OnClickedBuyDiamondAlertMethod()
+    {
+        buyAlert.gameObject.SetActive(true);
+        canBuyGoldAndDiamondText.gameObject.SetActive(true);
+        diamondButtonPanel.gameObject.SetActive(true);
+    }
+
+    //다이아 구매 시 : 정말로 구매하시겠습니까 창이 떴을때 Yes버튼을 누르면 작동하는 메소드//
+    public void OnClickedBuyDiamond()
+    {
+        DataManager.Instance.BuyDiaMond(saveDiamondItemPrice);
+        currentPlayerDiamondText.text = GameManager.Instance.PlayerDiamondCount.ToString();
+        thankAlert.gameObject.SetActive(true);
+        diamondButtonPanel.gameObject.SetActive(false);
+    }
+
+
+    // 다이아몬드 구매 버튼 메소드
+    public void OnClickedSelectDiamondItemButton(int clicked)
+    {
+        saveDiamondItemPrice = diamondinfo[clicked].DiamondPrice;
+    }
+
+
+
+    public void OnClickedStartButton()   
+    {
+        totalItemPrice = Convert.ToInt32(showTotalItemPriceText.text);
+        if (totalItemPrice < 0)
+            totalItemPrice = totalItemPrice * -1;
+
+        int calculateMoneyBeforeStart = Convert.ToInt32(GameManager.Instance.PlayerMoneyCount) - totalItemPrice;
+        if (calculateMoneyBeforeStart < 0)
+        {
+            Debug.Log("소지 금액 부족");
+            warningText.text = "소지금액 " + calculateMoneyBeforeStart.ToString() + " 원이 부족합니다.";
+            startButtonWarningPanel.SetActive(true);
+        }
+        else
+        {
+            DataManager.Instance.UseMoney(totalItemPrice);
+            LoadingSceneController.LoadScene("Main");
+        }
+    }
+
+
+    private void Update()
+    {
+        if (playerMoneyCount == NONE || playerMoneyCount == NONE)
+        {
+            UpdatePlayerInformation();
+        }
+    }
+
+    private void UpdatePlayerInformation()
+    {
+        playerMoneyCount = GameManager.Instance.PlayerMoneyCount;
+        playerDiamondCount = GameManager.Instance.PlayerDiamondCount;
+        currentPlayerMoneyText.text = playerMoneyCount.ToString() + " G";
+        currentPlayerDiamondText.text = playerDiamondCount.ToString() + "D";
     }
 
     private void SetBuyGoldUIPanel()
@@ -147,6 +383,15 @@ public class ShopUIScript : MonoBehaviour
         diamondButtonPanel.gameObject.SetActive(false);
     }
 
+
+    private void SetAllToggleOff()
+    {
+        for (int i = 0; i < itemInfo.Count; i++)
+        {
+            itemInfo[i].ItemToggle.isOn = false;
+        }
+    }
+
     private void CheckedListCount()
     {
         if (itemInfo.Count > itemCount)
@@ -165,242 +410,5 @@ public class ShopUIScript : MonoBehaviour
         }
     }
 
-
-    [Serializable]
-    private struct Item
-    {
-        public Toggle ItemToggle;   //shopToggleList
-        public Text ItempriceText;
-    }
-    [SerializeField]
-    private List<Item> itemInfo;
-
-
-    [Serializable]
-    private struct GoldPriceInfo
-    {
-        public Text GoldPriceText;
-        public int GoldPrice;
-    }
-    [SerializeField]
-    private List<GoldPriceInfo> goldinfo;
-
-
-    [Serializable]
-    private struct DiamondPriceInfo
-    {
-        public Text DiamondPriceText;
-        public int DiamondPrice;
-    }
-    [SerializeField]
-    private List<DiamondPriceInfo> diamondinfo;
-
-
-
-
-
-    void SetAllToggleOff()
-    {
-        for (int i = 0; i < itemInfo.Count; i++)
-        {
-            itemInfo[i].ItemToggle.isOn = false;
-        }
-    }
-
-    public void OnClickedItemButton()
-    {
-        int itemPrice = 0;
-
-        for (int i = 0; i < itemInfo.Count; i++)
-        {
-
-            if (itemInfo[i].ItemToggle.isOn)
-            {
-                int number;
-                if (int.TryParse(itemInfo[i].ItempriceText.text, out number))
-                {
-                    itemPrice += number;
-                }
-                else
-                {
-                    Debug.Log("스트링 값이 들어오지 않음");
-                }
-
-                Debug.Log(itemInfo[i].ItemToggle + "는 토글 켜져있음-ON");
-            }
-            else
-            {
-                Debug.Log(itemInfo[i].ItemToggle + "는 토글 꺼져있음-OFF");
-            }
-
-        }
-        Debug.Log(itemPrice);
-        if (itemPrice == 0)
-        {
-            showTotalItemPriceText.text = "0";
-        }
-        else
-        {
-            totalItemPrice = itemPrice;
-            showTotalItemPriceText.text = "-" + totalItemPrice.ToString();
-        }
-    }
-
-
-    public void OnClickedCloseShopButton()
-    {
-        SetDiamondUIOff();
-        SetGoldUIOff();
-        SetShopUIOff();
-        SetAllToggleOff();
-    }
-
-
-    /// <summary>
-    /// 골드 구매
-    /// </summary>
-    //골드 구매 버튼//
-    public void OnClickedGoldButton()
-    {
-        if (playerMoneyCount >= maxGold)
-        {
-            goldAlert.gameObject.SetActive(true);
-        }
-        else
-        {
-            SetGoldUIOff();
-            buyGoldPanel.gameObject.SetActive(true);
-            thankAlert.gameObject.SetActive(false);
-            buyAlert.gameObject.SetActive(false);
-
-        }
-    }
-
-    //골드 구매 시 , 상황별 알림창 띄우는 메소드//
-    public void OnClickedBuyGoldAlertMethod()
-    {
-        if (playerDiamondCount >= diamondPriceForGold)
-        {
-            buyAlert.gameObject.SetActive(true);
-            canBuyGoldAndDiamondText.gameObject.SetActive(true);
-            cantBuyGoldAndDiamondText.gameObject.SetActive(false);
-        }
-        else
-        {
-            buyAlert.gameObject.SetActive(true);
-            canBuyGoldAndDiamondText.gameObject.SetActive(false);
-            cantBuyGoldAndDiamondText.gameObject.SetActive(true);
-        }
-    }
-
-    //골드 구매 시 : 정말로 구매하시겠습니까 창이 떴을때 Yes버튼을 누르면 작동하는 메소드//
-    public void OnClickedBuyGold()
-    {
-        if (playerDiamondCount >= diamondPriceForGold)
-        {
-            DataManager.Instance.BuyMoney(saveGoldItemPrice);
-            DataManager.Instance.UseDiaMond(diamondPriceForGold);
-            currentPlayerMoneyText.text = GameManager.Instance.PlayerMoneyCount.ToString();
-            currentPlayerDiamondText.text = GameManager.Instance.PlayerDiamondCount.ToString();
-            thankAlert.gameObject.SetActive(true);
-        }
-        else if (playerDiamondCount <= diamondPriceForGold)
-        {
-            SetDiamondUIOn();
-            buyAlert.gameObject.SetActive(false); 
-            buyGoldPanel.gameObject.SetActive(false);
-        }
-    }
-
-    // 골드 아이템 버튼 메소드
-    public void OnClickedSelectGoldItemButton(int clicked)
-    {
-        saveGoldItemPrice = goldinfo[clicked].GoldPrice;
-    }
-
-
-    /// <summary>
-    /// 다이아몬드 구매
-    /// </summary>
-    //다이아몬드 구매 버튼 눌렀을 시.
-    public void OnClickedDiamondButton()
-    {
-        if (playerDiamondCount >= maxDiamond)
-        {
-            //다이아몬드 알람으로 띄우기
-            diamondAlert.gameObject.SetActive(true);
-        }
-        else
-        {
-            SetDiamondUIOn();
-            SetAlertMessageOff();
-        }
-    }
-
-    //다이아 구매 시 , 알림창 띄우는 메소드//
-    public void OnClickedBuyDiamondAlertMethod()
-    {
-        buyAlert.gameObject.SetActive(true);
-        canBuyGoldAndDiamondText.gameObject.SetActive(true);
-        diamondButtonPanel.gameObject.SetActive(true);
-    }
-
-    //다이아 구매 시 : 정말로 구매하시겠습니까 창이 떴을때 Yes버튼을 누르면 작동하는 메소드//
-    public void OnClickedBuyDiamond()
-    {
-        DataManager.Instance.BuyDiaMond(saveDiamondItemPrice);
-        currentPlayerDiamondText.text = GameManager.Instance.PlayerDiamondCount.ToString();
-        thankAlert.gameObject.SetActive(true);
-        diamondButtonPanel.gameObject.SetActive(false);
-    }
-
-
-    // 다이아몬드 구매 버튼 메소드
-    public void OnClickedSelectDiamondItemButton(int clicked)
-    {
-        saveDiamondItemPrice = diamondinfo[clicked].DiamondPrice;
-    }
-
-
-
-    public void OnClickedStartButton()   
-    {
-        totalItemPrice = Convert.ToInt32(showTotalItemPriceText.text);
-        if (totalItemPrice < 0)
-            totalItemPrice = totalItemPrice * -1;
-
-        int calculateMoneyBeforeStart = Convert.ToInt32(GameManager.Instance.PlayerMoneyCount) - totalItemPrice;
-        if (calculateMoneyBeforeStart < 0)
-        {
-            Debug.Log("소지 금액 부족");
-            warningText.text = "소지금액 " + calculateMoneyBeforeStart.ToString() + " 원이 부족합니다.";
-            startButtonWarningPanel.SetActive(true);
-
-
-        }
-        else
-        {
-            DataManager.Instance.UseMoney(totalItemPrice);
-            LoadingSceneController.LoadScene("Main");
-        }
-    }
-
-
-    private void Update()
-    {
-        if (playerMoneyCount == NONE || playerMoneyCount == NONE)
-        {
-            UpdatePlayerInformation();
-        }
-
-    }
-
-    private void UpdatePlayerInformation()
-    {
-        playerMoneyCount = GameManager.Instance.PlayerMoneyCount;
-        playerDiamondCount = GameManager.Instance.PlayerDiamondCount;
-        currentPlayerMoneyText.text = playerMoneyCount.ToString() + " G";
-        currentPlayerDiamondText.text = playerDiamondCount.ToString() + "D";
-    }
 
 }
