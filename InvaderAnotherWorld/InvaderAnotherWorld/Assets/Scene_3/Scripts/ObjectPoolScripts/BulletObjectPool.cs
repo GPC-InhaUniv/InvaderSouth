@@ -43,7 +43,7 @@ public class BulletObjectPool : MonoBehaviour
         }
     }
 
-    public void SetPlayerBulletOfPositionAndActive(Transform transform)
+    public void SetPlayerBulletOfPositionAndActive(Transform p)
     {
         if (playerBullets.Count > playerBulletCount)
             return;
@@ -51,26 +51,16 @@ public class BulletObjectPool : MonoBehaviour
         {
             playerBullet = playerBullets.Dequeue();
             playerBullet.SetActive(true);
-            playerBullet.transform.position = transform.position;
+            playerBullet.transform.position = p.position;
             nextFire = Time.time;
         }
     }
 
-<<<<<<< HEAD:InvaderAnotherWorld/InvaderAnotherWorld/Assets/UnitTestFolder/KyungTae/Scripts/Objectpool Pattern/BulletObjectPool.cs
     public void SetEnemyBulletOfPositionAndActive(Transform p)
-=======
-    public IEnumerator SetEnemyBulletOfPositionAndActive(Transform transform)
->>>>>>> 66acb102c810a0ae19e2601e7c4a7e5d2cbae1b1:InvaderAnotherWorld/InvaderAnotherWorld/Assets/Scene_3/Scripts/ObjectPoolScripts/BulletObjectPool.cs
     {
-            enemyBullet = enemyBullets.Dequeue();
-            enemyBullet.SetActive(true);
-<<<<<<< HEAD:InvaderAnotherWorld/InvaderAnotherWorld/Assets/UnitTestFolder/KyungTae/Scripts/Objectpool Pattern/BulletObjectPool.cs
-            enemyBullet.transform.position = p.position;
-=======
-            enemyBullet.transform.position = transform.position;
-            yield return new WaitForSeconds(1);
-        }
->>>>>>> 66acb102c810a0ae19e2601e7c4a7e5d2cbae1b1:InvaderAnotherWorld/InvaderAnotherWorld/Assets/Scene_3/Scripts/ObjectPoolScripts/BulletObjectPool.cs
+        enemyBullet = enemyBullets.Dequeue();
+        enemyBullet.SetActive(true);
+        enemyBullet.transform.position = p.position;
     }
 
     public void PlayerBulletsEnqueue(GameObject other)
