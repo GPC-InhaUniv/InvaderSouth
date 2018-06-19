@@ -49,7 +49,7 @@ public class LobbyUIScript : MonoBehaviour
         stageSelectionUIPanel.SetActive(true);
         lastCompletedStageNumber =GameManager.Instance.LastCompletedStageNumber;
         CheckTheDifficulty();
-        Debug.Log("Start Button Click!");
+     //   Debug.Log("Start Button Click!");
     }
 
     public void OnClickRightArrowButtonOfCharacterSelection()
@@ -58,7 +58,7 @@ public class LobbyUIScript : MonoBehaviour
         firstCharacterInfoImage.SetActive(false);
         secondCharacter.SetActive(true);
         secondCharacterInfoImage.SetActive(true);
-        Debug.Log("Right Arrow Button Click!");
+    //    Debug.Log("Right Arrow Button Click!");
     }
 
     public void OnClickLeftArrowButtonOfCharacterSelection()
@@ -67,20 +67,20 @@ public class LobbyUIScript : MonoBehaviour
         firstCharacterInfoImage.SetActive(true);
         secondCharacter.SetActive(false);
         secondCharacterInfoImage.SetActive(false);
-        Debug.Log("Left Arrow Button Click!");
+    //    Debug.Log("Left Arrow Button Click!");
     }
 
     private void OnClickBackwardMovementButtonOfStageSelection()
     {
         characterSelectionUIPanel.SetActive(true);
         stageSelectionUIPanel.SetActive(false);
-        Debug.Log("Backward Movement Button Click!");
+  //      Debug.Log("Backward Movement Button Click!");
     }
 
     public void OnClickStageOneButtonClick()
     {
-        Debug.Log("Stage Button Click");
-        Debug.Log("Go to the store");
+  //      Debug.Log("Stage Button Click");
+  //      Debug.Log("Go to the store");
         GameManager.Instance.CurrentStage = 0;
         shopPanel.SetActive(true);
     }
@@ -94,8 +94,8 @@ public class LobbyUIScript : MonoBehaviour
     
     public void OnClickStageThreeButtonClick()
     {
-        Debug.Log("Stage Button Click");
-        Debug.Log("Go to the store");
+  //      Debug.Log("Stage Button Click");
+  //      Debug.Log("Go to the store");
         GameManager.Instance.CurrentStage = 1 << 1;
         shopPanel.SetActive(true);
     }
