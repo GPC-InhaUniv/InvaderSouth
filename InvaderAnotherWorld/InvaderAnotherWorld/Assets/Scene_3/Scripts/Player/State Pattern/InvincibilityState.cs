@@ -9,7 +9,7 @@ public class InvincibilityState : IState
 
     public InvincibilityState()
     {
-        playerCollider = GameObject.Find("PlayerShip").GetComponent<MeshCollider>();
+        playerCollider = GameObject.Find("Player").GetComponentInChildren<MeshCollider>();
         isBehavior = true;
     }
 

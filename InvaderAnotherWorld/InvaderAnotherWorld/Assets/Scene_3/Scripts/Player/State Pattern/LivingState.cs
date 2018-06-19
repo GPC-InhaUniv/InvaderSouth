@@ -11,7 +11,7 @@ public class LivingState : IState
     
     public LivingState()
     {
-        playerObject = GameObject.Find("PlayerShip").gameObject;
+        playerObject = GameObject.Find("Player").gameObject;
         isInput = true;
         isGameClear = false;
     }
