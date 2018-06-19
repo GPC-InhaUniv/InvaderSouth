@@ -32,6 +32,9 @@ public class BackGroundPool : MonoBehaviour
                 backgroundObjects.Add(obj);
               //  DontDestroyOnLoad(obj);
             }
+
+        startWait = 3.0f;
+ 
         
     }
 
@@ -47,7 +50,7 @@ public class BackGroundPool : MonoBehaviour
         {
             for (int i = 0; i < backgroundObjects.Count; i++)
             {
-                spawnPosition = new Vector3(Random.Range(-spawnValue.x, spawnValue.x), spawnValue.y, spawnValue.z);
+                spawnPosition = new Vector3(Random.Range(-6, 6), 3.6f, 14);
                 spawnRotation = Quaternion.identity;
 
                 backgroundObjects[i].SetActive(true);

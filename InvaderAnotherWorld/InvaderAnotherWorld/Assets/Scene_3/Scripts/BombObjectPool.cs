@@ -2,31 +2,40 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BombObjectPool : MonoBehaviour {
-
-    public GameObject Bomb;
-    public GameObject Bomber;
-    public int BombCount;
-    List<GameObject> Bombs;
+public class BombObjectPool : MonoBehaviour
+{
+    [SerializeField]
+    private GameObject Bomb;
+    [SerializeField]
+    private GameObject Bomber;
+    private int BombCount=30;
+    private List<GameObject> Bombs;
     public bool BombActive;
-    
 
-    public Boundary boundary;
-    public float spaqwnWait;
-    public float endWait;
-    public float startWait;
-    public Vector3 spawnValue;
-    Vector3 spawnPosition;
-    Quaternion spawnRotation;
+
+    private Boundary boundary;
+    private float spaqwnWait;
+    private float endWait;
+    private float startWait;
+    private Vector3 spawnValue;
+    private Vector3 spawnPosition;
+    private Quaternion spawnRotation;
+
+    [SerializeField]
+    private GameObject parent;
     
-    
-    void Awake()
-    {
-        
+    private void Start()
+    {   
         boundary.xMax = 7;
         boundary.xMin = -7;
         boundary.zMax = 20;
         boundary.zMin = 0;
+
+        spaqwnWait = 0.05f;
+        endWait = 2.0f;
+        startWait = 0.8f;
+        spawnValue.x = 6.0f;
+        spawnValue.y = 1.0f;
 
         //object pool 생성
         Bombs = new List<GameObject>();
@@ -40,6 +49,7 @@ public class BombObjectPool : MonoBehaviour {
         {
             GameObject obj = Instantiate(Bomb);
             obj.SetActive(false);
+            obj.transform.parent = parent.transform;
             Bombs.Add(obj);
         }
         //Object Pool 생성 끝
@@ -53,15 +63,6 @@ public class BombObjectPool : MonoBehaviour {
             StartCoroutine(BombingCoroutine());
         }
     }
-    //void OnWillRenderObject()
-    //{
-    //    Debug.Log("OnWillRenderObject");
-    //    if (tag == "Enemy")
-    //    {
-    //        gameObject.SetActive(false);
-    //        Debug.Log("OnWillRenderObject23232");
-    //    }
-    //}
 
     IEnumerator BombingCoroutine()
     {
