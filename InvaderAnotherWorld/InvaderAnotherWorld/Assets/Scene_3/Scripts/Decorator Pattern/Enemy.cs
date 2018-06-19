@@ -4,6 +4,8 @@ using UnityEngine;
 
 abstract public class Enemy : MonoBehaviour
 {
+    protected float fireRate = 1f;
+    protected float nextFire = 0.0f;
     protected Transform enemySpawn;
     protected Transform bulletSpawn;
     protected EnemyObjectPool enemyObjectPool;

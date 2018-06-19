@@ -56,15 +56,21 @@ public class BulletObjectPool : MonoBehaviour
         }
     }
 
+<<<<<<< HEAD:InvaderAnotherWorld/InvaderAnotherWorld/Assets/UnitTestFolder/KyungTae/Scripts/Objectpool Pattern/BulletObjectPool.cs
+    public void SetEnemyBulletOfPositionAndActive(Transform p)
+=======
     public IEnumerator SetEnemyBulletOfPositionAndActive(Transform transform)
+>>>>>>> 66acb102c810a0ae19e2601e7c4a7e5d2cbae1b1:InvaderAnotherWorld/InvaderAnotherWorld/Assets/Scene_3/Scripts/ObjectPoolScripts/BulletObjectPool.cs
     {
-        while (true)
-        {
             enemyBullet = enemyBullets.Dequeue();
             enemyBullet.SetActive(true);
+<<<<<<< HEAD:InvaderAnotherWorld/InvaderAnotherWorld/Assets/UnitTestFolder/KyungTae/Scripts/Objectpool Pattern/BulletObjectPool.cs
+            enemyBullet.transform.position = p.position;
+=======
             enemyBullet.transform.position = transform.position;
             yield return new WaitForSeconds(1);
         }
+>>>>>>> 66acb102c810a0ae19e2601e7c4a7e5d2cbae1b1:InvaderAnotherWorld/InvaderAnotherWorld/Assets/Scene_3/Scripts/ObjectPoolScripts/BulletObjectPool.cs
     }
 
     public void PlayerBulletsEnqueue(GameObject other)
