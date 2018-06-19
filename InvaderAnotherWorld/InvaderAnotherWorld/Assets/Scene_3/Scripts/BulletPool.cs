@@ -49,5 +49,15 @@ public class BulletPool : MonoBehaviour
         bullets.Enqueue(bullet);
     }
 
+    public void OnDisable()
+    {
+        Debug.Log("객체 setactive false");
+    }
+
+    public void OnEnable()
+    {
+        Debug.Log("객체 setactvie true");
+    }
+
 
 }
