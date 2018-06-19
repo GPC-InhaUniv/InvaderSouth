@@ -13,6 +13,7 @@ public class PlayerController : MonoBehaviour
     private EnemyController enemyController;
 
     public BombObjectPool BombSkill;
+    [SerializeField]
     Animator animator;
 
     private bool isGameOver;
@@ -26,6 +27,7 @@ public class PlayerController : MonoBehaviour
     {
         playerState = new LivingState();
         enemyController = GameObject.Find("EnemyShip1").GetComponent<EnemyController>();
+
         BombSkill = GameObject.Find("GameObjectPool").GetComponent<BombObjectPool>();
         animator = gameObject.GetComponentInChildren<Animator>();
         Debug.Log(playerState);
