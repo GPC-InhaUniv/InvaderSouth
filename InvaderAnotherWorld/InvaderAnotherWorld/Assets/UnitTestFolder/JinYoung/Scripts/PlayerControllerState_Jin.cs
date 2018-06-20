@@ -20,6 +20,7 @@ public struct JinBoundary
 
 public class PlayerControllerState_Jin : MonoBehaviour
 {
+    private PlayerStatus playerStatusComponent;
     private JinBoundary jinBoundary;
     private MeshCollider playerMeshCollider;
     private MeshRenderer playerMeshRenderer;
@@ -28,7 +29,6 @@ public class PlayerControllerState_Jin : MonoBehaviour
     private Rigidbody rigidbody3D;
     private EnemyObjectPool enemyObjectPool;
     private IState playerState;
-    private int hp = 5;
     private bool isGameOver;
     public bool IsGameOver
     {
@@ -38,6 +38,7 @@ public class PlayerControllerState_Jin : MonoBehaviour
 
     private void Awake()
     {
+        playerStatusComponent = GetComponent<PlayerStatus>();
         jinBoundary = new JinBoundary(6, -6, 1, -9);
         playerState = new LivingState();
         bulletSpawn = this.transform.Find("BulletSpawn");
@@ -66,7 +67,7 @@ public class PlayerControllerState_Jin : MonoBehaviour
 
         if(isGameOver != true)
         {
-            if (this.hp <= 0)
+            if (playerStatusComponent.PlayerHp <= 0)
             {
                 SetState(new DeadState());
                 playerMeshRenderer.enabled = false;
@@ -85,12 +86,15 @@ public class PlayerControllerState_Jin : MonoBehaviour
         );
     }
 
+<<<<<<< HEAD
+=======
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag == "EnemyPlane")
         {
             enemyObjectPool.EnemyPlaneEnqueue(other.gameObject);
             other.gameObject.SetActive(false);
+<<<<<<< HEAD
 
             if (other.tag == "EnemySpacePlane")
             {
@@ -105,9 +109,45 @@ public class PlayerControllerState_Jin : MonoBehaviour
                 other.gameObject.SetActive(false);
 
             }
+=======
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+       
+=======
+>>>>>>> edd095cb5ee9431a1557d974903a1cd0729bfa01
+>>>>>>> 0f5d878fab3b5eb3759959908a77774675992a97
+        }
+
+        if (other.tag == "EnemySpacePlane")
+        {
+            enemyObjectPool.EnemyPlaneSpaceEnqueue(other.gameObject);
+            other.gameObject.SetActive(false);
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+            
+=======
+>>>>>>> edd095cb5ee9431a1557d974903a1cd0729bfa01
+>>>>>>> 0f5d878fab3b5eb3759959908a77774675992a97
+        }
+
+        if(other.tag == "EnemyBullet")
+        {
+            bulletObjectPool.EnemyBulletsEnqueue(other.gameObject);
+            other.gameObject.SetActive(false);
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+         
+=======
+>>>>>>> edd095cb5ee9431a1557d974903a1cd0729bfa01
+>>>>>>> 0f5d878fab3b5eb3759959908a77774675992a97
+>>>>>>> c8af49f0746b4918f788ed0c6fcf62d5dbcd0e64
         }
     }
 
+>>>>>>> 0f5d878fab3b5eb3759959908a77774675992a97
     private void SetState(IState state)
     {
         this.playerState = state;

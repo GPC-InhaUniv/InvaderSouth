@@ -9,18 +9,18 @@ public class EnemyObjectPool : MonoBehaviour
 
     [SerializeField]
     private GameObject EnemyPlanePrefab;
-    private Queue<GameObject> enemyPlanes;
+    public static Queue<GameObject> enemyPlanes;
     private GameObject enemyPlane;
 
 
     [SerializeField]
     private GameObject EnemySpacePlanePrefab;
-    private Queue<GameObject> enemySpacePlanes;
+    public static Queue<GameObject> enemySpacePlanes;
     private GameObject enemySpacePlane;
 
     [SerializeField]
     private GameObject EnemyDirectPlanePrefab;
-    private Queue<GameObject> enemyDirectPlanes;
+    public static Queue<GameObject> enemyDirectPlanes;
     private GameObject enemyDirectPlane;
 
     [SerializeField]
@@ -135,21 +135,5 @@ public class EnemyObjectPool : MonoBehaviour
             }
             yield return new WaitForSeconds(3f);
         }
-    }
-
-
-    public void EnemyPlaneEnqueue(GameObject other)
-    {
-        enemyPlanes.Enqueue(other);
-    }
-
-    public void EnemyPlaneSpaceEnqueue(GameObject other)
-    {
-        enemySpacePlanes.Enqueue(other);
-    }
-
-    public void EnemyDirectPlaneEnqueue(GameObject other)
-    {
-        enemyDirectPlanes.Enqueue(other);
     }
 }

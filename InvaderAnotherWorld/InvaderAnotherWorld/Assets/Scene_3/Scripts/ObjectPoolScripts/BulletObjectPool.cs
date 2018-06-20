@@ -6,7 +6,7 @@ public class BulletObjectPool : MonoBehaviour
 {
     [SerializeField]
     private GameObject PlayerBulletPrefab;
-    private Queue<GameObject> playerBullets;
+    public static Queue<GameObject> playerBullets;
     private GameObject playerBullet;
     private const int playerBulletCount = 10;
     private const float fireTime = 0.25f;
@@ -14,7 +14,7 @@ public class BulletObjectPool : MonoBehaviour
 
     [SerializeField]
     private GameObject EnemyBulletPrefab;
-    private Queue<GameObject> enemyBullets;
+    public static Queue<GameObject> enemyBullets;
     private GameObject enemyBullet;
     private const int enemyBulletCount = 50;
 
@@ -61,17 +61,5 @@ public class BulletObjectPool : MonoBehaviour
         enemyBullet = enemyBullets.Dequeue();
         enemyBullet.SetActive(true);
         enemyBullet.transform.position = p.position;
-    }
-
-    public void PlayerBulletsEnqueue(GameObject other)
-    {
-        playerBullets.Enqueue(other.gameObject);
-        other.SetActive(false);
-    }
-
-    public void EnemyBulletsEnqueue(GameObject other)
-    {
-        enemyBullets.Enqueue(other.gameObject);
-        other.SetActive(false);
     }
 }

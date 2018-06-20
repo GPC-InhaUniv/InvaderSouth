@@ -9,7 +9,6 @@ public class EnemySpacePlane : Enemy
     private void Start()
     {
         life = 2;
-        damage = 1;
         score = 20;
         gauge = 0.07f;
         movingDecorator = gameObject.AddComponent<ZigzagMovingDecorator>();
@@ -32,16 +31,40 @@ public class EnemySpacePlane : Enemy
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "PlayerBullet")
+        CollisionPlayerBullet(other);
+
+        if (other.tag == "Player")
         {
+            life = 2;
+            EnemyObjectPool.enemySpacePlanes.Enqueue(this.gameObject);
+            this.gameObject.SetActive(false);
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.tag == "Boundary" || other.tag == "Player")
+        {
+            life = 2;
+            EnemyObjectPool.enemySpacePlanes.Enqueue(this.gameObject);
+            this.gameObject.SetActive(false);
+        }
+    }
+
+    private void CollisionPlayerBullet(Collider other)
+    {
+        if (other.tag == "PlayerBullet")
             life -= 1;
-            
-            if(life <= 0)
-            {
-                life = 2;
-                enemyObjectPool.EnemyPlaneSpaceEnqueue(this.gameObject);
-                PlayerInfoDelegater(score, gauge);
-            }
+        else if (other.tag == "PetMissile")
+            life -= 0.5f;
+      
+
+        if (life <= 0)
+        {
+            life = 2;
+            PlayerInfoDelegater(score, gauge);
+            EnemyObjectPool.enemySpacePlanes.Enqueue(this.gameObject);
+            this.gameObject.SetActive(false);
         }
     }
 }

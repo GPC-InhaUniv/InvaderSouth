@@ -79,4 +79,18 @@ public class PlayerStatus : MonoBehaviour {
             Damaged();
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.tag == "Enemy")
+        {
+            Damaged();
+        }
+
+        if (other.tag == "EnemyBullet")
+        {
+            Damaged();
+            BulletObjectPool.enemyBullets.Enqueue(other.gameObject);
+            other.gameObject.SetActive(false);
+        }
+    }
 }

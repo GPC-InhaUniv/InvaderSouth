@@ -28,8 +28,8 @@ public class MastarPlayerController : MonoBehaviour
     private BulletObjectPool bulletObjectPool;
     private Rigidbody rigidbody3D;
     private EnemyObjectPool enemyObjectPool;
+    private PlayerStatus playerStatusComponent;
     private IState playerState;
-    private int hp = 5;
     private bool isGameOver;
     public bool IsGameOver
     {
@@ -42,6 +42,12 @@ public class MastarPlayerController : MonoBehaviour
     private BombObjectPool bombSkill;
     [SerializeField]
     Animator skillAnimator;
+<<<<<<< HEAD
+    [SerializeField]
+    PlayerStatus playerStatus;
+    bool readyToBombSkill = false;
+    
+=======
 
 
     float time;
@@ -49,10 +55,19 @@ public class MastarPlayerController : MonoBehaviour
     [SerializeField]
     bool readyToBombSkill = true;
 
+<<<<<<< HEAD
 
+=======
+=======
+    [SerializeField]
+    bool readyToBombSkill = true;
+>>>>>>> edd095cb5ee9431a1557d974903a1cd0729bfa01
+>>>>>>> 0f5d878fab3b5eb3759959908a77774675992a97
+>>>>>>> c8af49f0746b4918f788ed0c6fcf62d5dbcd0e64
 
     private void Awake()
     {
+        playerStatusComponent = GetComponent<PlayerStatus>();
         mastarBoundary = new MastarBoundary(6, -6, 8, -4);
         playerState = new LivingState();
         bulletSpawn = GameObject.Find("BoltSpawn").GetComponentInChildren<Transform>();
@@ -61,6 +76,7 @@ public class MastarPlayerController : MonoBehaviour
         rigidbody3D = this.gameObject.GetComponent<Rigidbody>();
         bulletObjectPool = GameObject.Find("GameObjectPool").GetComponent<BulletObjectPool>();
         enemyObjectPool = GameObject.Find("GameObjectPool").GetComponent<EnemyObjectPool>();
+        playerStatus = gameObject.GetComponentInChildren<PlayerStatus>();
 
         bombSkill = GameObject.Find("GameObjectPool").GetComponent<BombObjectPool>();
         skillAnimator = gameObject.GetComponentInChildren<Animator>();
@@ -94,7 +110,7 @@ public class MastarPlayerController : MonoBehaviour
 
         if(isGameOver != true)
         {
-            if (this.hp <= 0)
+            if (playerStatusComponent.PlayerHp <= 0)
             {
                 SetState(new DeadState());
                 playerMeshRenderer.enabled = false;
@@ -113,31 +129,64 @@ public class MastarPlayerController : MonoBehaviour
         );
     }
 
+<<<<<<< HEAD
+=======
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag == "EnemyPlane")
         {
             enemyObjectPool.EnemyPlaneEnqueue(other.gameObject);
             other.gameObject.SetActive(false);
+<<<<<<< HEAD
 
+=======
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+          
+=======
+>>>>>>> edd095cb5ee9431a1557d974903a1cd0729bfa01
+>>>>>>> 0f5d878fab3b5eb3759959908a77774675992a97
+>>>>>>> c8af49f0746b4918f788ed0c6fcf62d5dbcd0e64
         }
 
         if (other.tag == "EnemySpacePlane")
         {
             enemyObjectPool.EnemyPlaneSpaceEnqueue(other.gameObject);
             other.gameObject.SetActive(false);
+<<<<<<< HEAD
 
           
+=======
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+          
+=======
+>>>>>>> edd095cb5ee9431a1557d974903a1cd0729bfa01
+>>>>>>> 0f5d878fab3b5eb3759959908a77774675992a97
+>>>>>>> c8af49f0746b4918f788ed0c6fcf62d5dbcd0e64
         }
 
         if(other.tag == "EnemyBullet")
         {
             bulletObjectPool.EnemyBulletsEnqueue(other.gameObject);
             other.gameObject.SetActive(false);
+<<<<<<< HEAD
 
+=======
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+           
+=======
+>>>>>>> edd095cb5ee9431a1557d974903a1cd0729bfa01
+>>>>>>> 0f5d878fab3b5eb3759959908a77774675992a97
+>>>>>>> c8af49f0746b4918f788ed0c6fcf62d5dbcd0e64
         }
     }
 
+>>>>>>> 0f5d878fab3b5eb3759959908a77774675992a97
     private void SetState(IState state)
     {
         this.playerState = state;
