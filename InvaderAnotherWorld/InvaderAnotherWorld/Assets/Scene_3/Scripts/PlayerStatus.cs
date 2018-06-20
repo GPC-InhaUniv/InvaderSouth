@@ -73,10 +73,24 @@ public class PlayerStatus : MonoBehaviour {
         yield return null;
     }
 
-    //private void Update()
-    //{
-    //    if (Input.GetKey(KeyCode.A))
-    //        Damaged();
-    //}
+    private void Update()
+    {
+        if (Input.GetKey(KeyCode.A))
+            Damaged();
+    }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.tag == "Enemy")
+        {
+            Damaged();
+        }
+
+        if (other.tag == "EnemyBullet")
+        {
+            Damaged();
+            BulletObjectPool.enemyBullets.Enqueue(other.gameObject);
+            other.gameObject.SetActive(false);
+        }
+    }
 }

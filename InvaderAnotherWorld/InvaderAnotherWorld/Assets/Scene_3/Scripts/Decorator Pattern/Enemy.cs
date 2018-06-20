@@ -4,9 +4,8 @@ using UnityEngine;
 
 abstract public class Enemy : MonoBehaviour
 {
-    protected int life;
-    protected int damage;
     protected int score;
+    protected float life;
     protected float gauge;
     protected float speed = 0.05f;
     protected float fireRate = 1f;

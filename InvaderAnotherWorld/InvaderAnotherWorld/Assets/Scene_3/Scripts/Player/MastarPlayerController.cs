@@ -28,8 +28,8 @@ public class MastarPlayerController : MonoBehaviour
     private BulletObjectPool bulletObjectPool;
     private Rigidbody rigidbody3D;
     private EnemyObjectPool enemyObjectPool;
+    private PlayerStatus playerStatusComponent;
     private IState playerState;
-    private int hp = 5;
     private bool isGameOver;
     public bool IsGameOver
     {
@@ -48,6 +48,7 @@ public class MastarPlayerController : MonoBehaviour
 
     private void Awake()
     {
+        playerStatusComponent = GetComponent<PlayerStatus>();
         mastarBoundary = new MastarBoundary(6, -6, 8, -4);
         playerState = new LivingState();
         bulletSpawn = GameObject.Find("BoltSpawn").GetComponentInChildren<Transform>();
@@ -89,7 +90,7 @@ public class MastarPlayerController : MonoBehaviour
 
         if(isGameOver != true)
         {
-            if (this.hp <= 0)
+            if (playerStatusComponent.PlayerHp <= 0)
             {
                 SetState(new DeadState());
                 playerMeshRenderer.enabled = false;
@@ -106,27 +107,6 @@ public class MastarPlayerController : MonoBehaviour
             0.0f,
             Mathf.Clamp(rigidbody3D.position.z, mastarBoundary.boundaryZMin, mastarBoundary.boundaryZMax)
         );
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.tag == "EnemyPlane")
-        {
-            enemyObjectPool.EnemyPlaneEnqueue(other.gameObject);
-            other.gameObject.SetActive(false);
-        }
-
-        if (other.tag == "EnemySpacePlane")
-        {
-            enemyObjectPool.EnemyPlaneSpaceEnqueue(other.gameObject);
-            other.gameObject.SetActive(false);
-        }
-
-        if(other.tag == "EnemyBullet")
-        {
-            bulletObjectPool.EnemyBulletsEnqueue(other.gameObject);
-            other.gameObject.SetActive(false);
-        }
     }
 
     private void SetState(IState state)
