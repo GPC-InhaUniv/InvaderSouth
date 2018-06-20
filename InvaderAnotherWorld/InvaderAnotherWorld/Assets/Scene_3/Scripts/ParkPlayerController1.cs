@@ -85,6 +85,8 @@ public class ParkPlayerController : MonoBehaviour
         );
     }
 
+<<<<<<< HEAD
+=======
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag == "EnemyPlane")
@@ -127,6 +129,7 @@ public class ParkPlayerController : MonoBehaviour
         }
     }
 
+>>>>>>> 0f5d878fab3b5eb3759959908a77774675992a97
     private void SetState(IState state)
     {
         this.playerState = state;
