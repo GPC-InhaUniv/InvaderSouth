@@ -5,9 +5,11 @@ using UnityEngine;
 public class GameObjectPoolController : MonoBehaviour
 {
     private LoadingSceneController LoadingSceneController;
+    private GameObject player;
 
     private void Start()
-    { 
+    {
+        player = this.transform.Find("Player").gameObject;
         LoadingSceneController = GameObject.Find("LoadingSceneManager").GetComponent<LoadingSceneController>();
         CheckPlayerItemList();
         switch (GameManager.Instance.CurrentStage)
@@ -42,7 +44,7 @@ public class GameObjectPoolController : MonoBehaviour
         GetComponent<EnemyObjectPool>().enabled = true;
         GetComponent<BombObjectPool>().enabled = true;
         GetComponent<PetObjectPool>().enabled = true;
-
+        player.SetActive(true);
         DontDestroyOnLoad(gameObject);
         Debug.Log("GameObjectPool 0스테이지 작동");
 
@@ -55,6 +57,7 @@ public class GameObjectPoolController : MonoBehaviour
         GetComponent<BossEnemyPool>().enabled = true;
         GetComponent<BombObjectPool>().enabled = true;
         GetComponent<PetObjectPool>().enabled = true;
+        player.SetActive(true);
         DontDestroyOnLoad(gameObject);
         Debug.Log("GameObjectPool 1 스테이지 작동");
 
@@ -67,6 +70,7 @@ public class GameObjectPoolController : MonoBehaviour
         GetComponent<BossEnemyPool>().enabled = true;
         GetComponent<BombObjectPool>().enabled = true;
         GetComponent<PetObjectPool>().enabled = true;
+        player.SetActive(true);
         DontDestroyOnLoad(gameObject);
         Debug.Log("GameObjectPool 2 스테이지 작동");
     }
