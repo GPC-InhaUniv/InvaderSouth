@@ -4,8 +4,14 @@ using UnityEngine;
 
 public class EnemySpacePlane : Enemy
 {
+    public PlayerInfo PlayerInfoDelegater;
+
     private void Start()
     {
+        life = 2;
+        damage = 1;
+        score = 20;
+        gauge = 0.07f;
         movingDecorator = gameObject.AddComponent<ZigzagMovingDecorator>();
     }
 
@@ -28,10 +34,14 @@ public class EnemySpacePlane : Enemy
     {
         if (other.tag == "PlayerBullet")
         {
-            bulletObjectPool.PlayerBulletsEnqueue(other.gameObject);
-            enemyObjectPool.EnemyPlaneSpaceEnqueue(this.gameObject);
-            other.gameObject.SetActive(false);
-            this.gameObject.SetActive(false);
+            life -= 1;
+            
+            if(life <= 0)
+            {
+                life = 2;
+                enemyObjectPool.EnemyPlaneSpaceEnqueue(this.gameObject);
+                PlayerInfoDelegater(score, gauge);
+            }
         }
     }
 }

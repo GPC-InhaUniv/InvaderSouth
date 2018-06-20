@@ -4,6 +4,10 @@ using UnityEngine;
 
 abstract public class Enemy : MonoBehaviour
 {
+    protected int life;
+    protected int damage;
+    protected int score;
+    protected float gauge;
     protected float speed = 0.05f;
     protected float fireRate = 1f;
     protected float nextFire = 0.0f;
@@ -11,12 +15,17 @@ abstract public class Enemy : MonoBehaviour
     protected EnemyObjectPool enemyObjectPool;
     protected MovingDecorator movingDecorator;
     protected BulletObjectPool bulletObjectPool;
+    protected PlayerStatus playerStatus;
+    public delegate void PlayerInfo(int score, float gauge);
+    public PlayerInfo PlayerInfoDelegater;
 
     private void Awake()
     {
         bulletSpawn = this.transform.Find("BulletSpawn");
+        playerStatus = GameObject.Find("Player").GetComponent<PlayerStatus>();
         bulletObjectPool = GameObject.FindGameObjectWithTag("ObjectPoolManager").GetComponent<BulletObjectPool>();
         enemyObjectPool = GameObject.FindGameObjectWithTag("ObjectPoolManager").GetComponent<EnemyObjectPool>();
+        PlayerInfoDelegater += playerStatus.SetScoreSkill;
     }
 
     public virtual void EnemyMove()

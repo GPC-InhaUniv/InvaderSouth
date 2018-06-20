@@ -83,12 +83,12 @@ public class Wingman : MonoBehaviour {
 
         if (Time.time > missileNextFire)
         {
-            Debug.Log("미사일이 발사됨");
+            //Debug.Log("미사일이 발사됨");
             MissilesFire();
         }
         else
         {
-            Debug.Log("미사일을 발사하지 않음");
+            //Debug.Log("미사일을 발사하지 않음");
         }
 
     }
@@ -105,7 +105,6 @@ public class Wingman : MonoBehaviour {
         transform.rotation = Quaternion.Slerp(transform.rotation, rotateVelue, (speed * Time.deltaTime)/speed);
         //PetObject.rotation = Quaternion.Slerp(PetObject.rotation, petObjectRotateVelue, speed * Time.deltaTime);
         PetObject.rotation = petObjectRotateVelue;
-        Debug.Log(petObjectRotateVelue);
         //transform.rotation = 
 
         //Debug.Log(wingManPosition);

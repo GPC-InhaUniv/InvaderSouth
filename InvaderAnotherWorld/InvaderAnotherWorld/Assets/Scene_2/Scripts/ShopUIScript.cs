@@ -137,17 +137,14 @@ public class ShopUIScript : MonoBehaviour
 
                 //싱글톤에 저장해준 아이템을 True로 만들어준다.
                 GameManager.Instance.BuyItemList[i] = true;
-
-                Debug.Log(itemInfo[i].ItemToggle + "는 토글 켜져있음-ON");
             }
             else
             {
                 GameManager.Instance.BuyItemList[i] = false;
-                Debug.Log(itemInfo[i].ItemToggle + "는 토글 꺼져있음-OFF");
             }
 
         }
-        Debug.Log(itemPrice);
+
         if (itemPrice == 0)
         {
             showTotalItemPriceText.text = "0";
