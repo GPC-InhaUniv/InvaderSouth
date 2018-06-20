@@ -91,30 +91,21 @@ public class PlayerControllerState_Jin : MonoBehaviour
         {
             enemyObjectPool.EnemyPlaneEnqueue(other.gameObject);
             other.gameObject.SetActive(false);
-            if (this.hp > 0)
-            {
-                this.hp -= Enemy.Damage;
-            }
+       
         }
 
         if (other.tag == "EnemySpacePlane")
         {
             enemyObjectPool.EnemyPlaneSpaceEnqueue(other.gameObject);
             other.gameObject.SetActive(false);
-            if (this.hp > 0)
-            {
-                this.hp -= Enemy.Damage;
-            }
+            
         }
 
         if(other.tag == "EnemyBullet")
         {
             bulletObjectPool.EnemyBulletsEnqueue(other.gameObject);
             other.gameObject.SetActive(false);
-            if(this.hp > 0)
-            {
-                this.hp -= Enemy.Damage;
-            }
+         
         }
     }
 

@@ -30,10 +30,6 @@ public class PlayerStatus : MonoBehaviour {
         else
         SkillAmount = 0.0f;
 
-        uIController = GameObject.Find("BackGroundManager").GetComponent<UIController>();
-
-        uIController.ReFresh();
-
 
     }
 	public void Damaged()
@@ -43,7 +39,6 @@ public class PlayerStatus : MonoBehaviour {
             PlayerHp -= 1f;
             isDamaged = true;
             meshCollider.enabled = false;
-            uIController.ReFresh();
             StartCoroutine(OnOffPlayer());
            
         }
@@ -78,10 +73,10 @@ public class PlayerStatus : MonoBehaviour {
         yield return null;
     }
 
-    //private void Update()
-    //{
-    //    if (Input.GetKey(KeyCode.A))
-    //        Damaged();
-    //}
+    private void Update()
+    {
+        if (Input.GetKey(KeyCode.A))
+            Damaged();
+    }
 
 }
