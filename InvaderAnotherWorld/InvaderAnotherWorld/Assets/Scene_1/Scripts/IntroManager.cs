@@ -21,7 +21,6 @@ public class IntroManager : MonoBehaviour
 
         if (IntroPanelImage.color.a >= 0.99 && !isLoadedIntro)
         {
-            Debug.Log("인트로 로딩 완료");
             isLoadedIntro = true;
             StartCoroutine(ChangePanelIntroToLogin());
         }

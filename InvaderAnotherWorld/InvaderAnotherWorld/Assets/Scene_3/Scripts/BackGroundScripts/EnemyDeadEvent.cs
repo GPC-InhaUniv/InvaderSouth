@@ -10,15 +10,4 @@ public class EnemyDeadEvent : MonoBehaviour {
 	void Start () {
         playerstatusComponent = GameObject.Find("Player").GetComponent<PlayerStatus>();
 	}
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if(other.tag=="Bullet")
-        {
-            playerstatusComponent.GetScoreSkill(10,0.05f);
-            Destroy(other.gameObject);
-            Destroy(gameObject);
-          
-        }
-    }
 }

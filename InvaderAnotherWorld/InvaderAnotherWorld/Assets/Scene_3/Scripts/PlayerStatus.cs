@@ -2,13 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
+
 public class PlayerStatus : MonoBehaviour {
 
     public float PlayerHp;
     public int Money;
     public int Score;
     public float SkillAmount;
-    private UIController uIController;
     private bool isDamaged = false;
    
 
@@ -17,7 +18,8 @@ public class PlayerStatus : MonoBehaviour {
     [SerializeField]
     private MeshRenderer meshRenderer;
     // Use this for initialization
-    void Start () {
+    void Start ()
+    {
         PlayerHp = 10f;
         Money = 0;
         Score = 0;
@@ -29,12 +31,6 @@ public class PlayerStatus : MonoBehaviour {
         }
         else
         SkillAmount = 0.0f;
-
-        uIController = GameObject.Find("BackGroundManager").GetComponent<UIController>();
-
-        uIController.ReFresh();
-
-
     }
 	public void Damaged()
     {
@@ -43,13 +39,12 @@ public class PlayerStatus : MonoBehaviour {
             PlayerHp -= 1f;
             isDamaged = true;
             meshCollider.enabled = false;
-            uIController.ReFresh();
             StartCoroutine(OnOffPlayer());
            
         }
     }
 
-    public void GetScoreSkill(int score,float skillAmount)
+    public void SetScoreSkill(int score,float skillAmount)
     {
         Score += score;
         SkillAmount += skillAmount;

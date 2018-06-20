@@ -28,17 +28,7 @@ public class UIController : MonoBehaviour {
         previousSkillAmount = 0.0f;
 
         ReFresh();
-
     }
-
- 
-    public void ChangeStat()
-    {
-        playerstatusComponent.Damaged();
-
-        playerstatusComponent.SkillAmount +=0.05f;
-    }
-
 
 
     public void ReFresh()
@@ -48,8 +38,6 @@ public class UIController : MonoBehaviour {
             hpBar.color = Color.yellow;
         else if (hpBar.fillAmount < 0.3f)
             hpBar.color = Color.red;
-        Debug.Log(hpBar.fillAmount);
-
     }
 
     // Update is called once per frame
@@ -71,7 +59,7 @@ public class UIController : MonoBehaviour {
         }
         scoreText.text = playerstatusComponent.Score.ToString();
 
-
+        ReFresh();
     }
 
 

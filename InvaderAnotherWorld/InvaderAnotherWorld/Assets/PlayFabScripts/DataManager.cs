@@ -124,7 +124,6 @@ public class DataManager : MonoBehaviour
         UserDataRecord userData = new UserDataRecord();
         GameManager.Instance.PlayerName=info.Info.AccountInfo.Username;
         info.Info.UserData.TryGetValue("PlayerMoney", out userData);
-        Debug.Log("playermoney" + userData.Value);
         int.TryParse(userData.Value, out GameManager.Instance.PlayerMoneyCount);
 
         info.Info.UserData.TryGetValue("PlayerDiamondCount", out userData);
