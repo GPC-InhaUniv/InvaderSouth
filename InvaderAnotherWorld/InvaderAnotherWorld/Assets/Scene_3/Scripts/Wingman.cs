@@ -5,20 +5,14 @@ using UnityEngine;
 public class Wingman : MonoBehaviour {
     private float moveStartDistance = 2f;
     private float rangeZ = 1f;
-
     private float speed = 10f;
-
-    //Rigidbody rigidbody;
+    
     Vector3 wingManPosition;
     Vector3 targetPosition;
-
-    //float targetPointX;
-    //bool facingRight = true;
+    
     public float fireRate = 3f;
     private float nextFire;
     private float missileNextFire =0;
-    //public GameObject missiles;
-    //private MissileObjectPool missileObjectPool;
 
     private GameObject Player;
     private Transform PetObject;
@@ -89,7 +83,12 @@ public class Wingman : MonoBehaviour {
 
         if (Time.time > missileNextFire)
         {
+            Debug.Log("미사일이 발사됨");
             MissilesFire();
+        }
+        else
+        {
+            Debug.Log("미사일을 발사하지 않음");
         }
 
     }

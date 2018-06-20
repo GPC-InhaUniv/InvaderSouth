@@ -39,9 +39,11 @@ public class MastarPlayerController : MonoBehaviour
 
     //스킬 풀, 스킬애니메이션
     [SerializeField]
-    private BombObjectPool BombSkill;
+    private BombObjectPool bombSkill;
     [SerializeField]
     Animator skillAnimator;
+    [SerializeField]
+    bool readyToBombSkill = true;
     
 
     private void Awake()
@@ -55,7 +57,7 @@ public class MastarPlayerController : MonoBehaviour
         bulletObjectPool = GameObject.Find("GameObjectPool").GetComponent<BulletObjectPool>();
         enemyObjectPool = GameObject.Find("GameObjectPool").GetComponent<EnemyObjectPool>();
 
-        BombSkill = GameObject.Find("GameObjectPool").GetComponent<BombObjectPool>();
+        bombSkill = GameObject.Find("GameObjectPool").GetComponent<BombObjectPool>();
         skillAnimator = gameObject.GetComponentInChildren<Animator>();
     }
 
@@ -74,12 +76,12 @@ public class MastarPlayerController : MonoBehaviour
             bulletObjectPool.SetPlayerBulletOfPositionAndActive(bulletSpawn);
         }
 
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space)&& readyToBombSkill)
         {
             Debug.Log("필살기 사용!");
 
             skillAnimator.Play("SkillAnim");
-            BombSkill.StartBombing();
+            bombSkill.StartBombing();
             
 
             SetState(new InvincibilityState());
