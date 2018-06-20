@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public enum BossState
 {
@@ -18,9 +19,13 @@ public class BossController : MonoBehaviour
     [SerializeField]
     private GameObject SecondSkillBullet;
 
+   
     private float firstMissleAngle;
     private float secondMissleAngle;
 
+    [SerializeField]
+    private Image bossHpImage;
+    public float BossHp=30;
 
     [SerializeField]
     private Transform shotposition;
@@ -32,13 +37,16 @@ public class BossController : MonoBehaviour
     private bool isUseSkill;
     private BossState bossstate;
 
+
     private BossEnemyPool bossEnemyPool;
 
 
     void Start()
     {
-        player = GameObject.Find("Player").GetComponent<PlayerController>();
+        
+        player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
         bossEnemyPool = GameObject.Find("GameObjectPool").GetComponent<BossEnemyPool>();
+        bossHpImage.fillAmount = BossHp / 30.0f;
 
         isUseSkill = false;
         bossstate = BossState.alive;
@@ -103,6 +111,15 @@ public class BossController : MonoBehaviour
         secondFiredelayTime = Time.time + secondFireTime;
         isUseSkill = true;
 
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "Player")
+        {
+            BossHp -= 1;
+            bossHpImage.fillAmount = BossHp / 30;
+        }
     }
 
 

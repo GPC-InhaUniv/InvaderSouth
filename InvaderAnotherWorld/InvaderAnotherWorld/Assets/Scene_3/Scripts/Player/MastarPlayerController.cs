@@ -39,24 +39,30 @@ public class MastarPlayerController : MonoBehaviour
 
     //스킬 풀, 스킬애니메이션
     [SerializeField]
-    private BombObjectPool BombSkill;
+    private BombObjectPool bombSkill;
     [SerializeField]
     Animator skillAnimator;
+<<<<<<< HEAD
 
     float time;
+=======
+    [SerializeField]
+    bool readyToBombSkill = true;
+    
+>>>>>>> 2e88c50803ca921efceb8f6d5e7523fffbc5f3d6
 
     private void Awake()
     {
         mastarBoundary = new MastarBoundary(6, -6, 8, -4);
         playerState = new LivingState();
-        bulletSpawn = this.transform.Find("BulletSpawn");
+        bulletSpawn = GameObject.Find("BoltSpawn").GetComponentInChildren<Transform>();
         playerMeshCollider = this.GetComponentInChildren<MeshCollider>();
         playerMeshRenderer = this.GetComponentInChildren<MeshRenderer>();
         rigidbody3D = this.gameObject.GetComponent<Rigidbody>();
-        //bulletObjectPool = GameObject.Find("ObjectPool").GetComponent<BulletObjectPool>();
-        //enemyObjectPool = GameObject.Find("ObjectPool").GetComponent<EnemyObjectPool>();
+        bulletObjectPool = GameObject.Find("GameObjectPool").GetComponent<BulletObjectPool>();
+        enemyObjectPool = GameObject.Find("GameObjectPool").GetComponent<EnemyObjectPool>();
 
-        //BombSkill = GameObject.Find("GameObjectPool").GetComponent<BombObjectPool>();
+        bombSkill = GameObject.Find("GameObjectPool").GetComponent<BombObjectPool>();
         skillAnimator = gameObject.GetComponentInChildren<Animator>();
     }
 
@@ -74,12 +80,12 @@ public class MastarPlayerController : MonoBehaviour
             bulletObjectPool.SetPlayerBulletOfPositionAndActive(bulletSpawn);
         }
 
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space)&& readyToBombSkill)
         {
             Debug.Log("필살기 사용!");
 
             skillAnimator.Play("SkillAnim");
-            //BombSkill.StartBombing();
+            bombSkill.StartBombing();
             
 
             SetState(new InvincibilityState());

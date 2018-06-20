@@ -15,6 +15,7 @@ public class UIController : MonoBehaviour {
     [SerializeField]
     private Text skillAmountText;
 
+    
 
     private PlayerStatus playerstatusComponent;
     private float previousSkillAmount;
@@ -23,7 +24,7 @@ public class UIController : MonoBehaviour {
     void Start()
     {
         playerstatusComponent = GameObject.Find("Player").GetComponent<PlayerStatus>();
-        skillBar.fillAmount = 0.0f;
+        skillBar.fillAmount = playerstatusComponent.SkillAmount;
         previousSkillAmount = 0.0f;
 
         ReFresh();
@@ -33,7 +34,7 @@ public class UIController : MonoBehaviour {
  
     public void ChangeStat()
     {
-        playerstatusComponent.Damaged(0.1f);
+        playerstatusComponent.Damaged();
 
         playerstatusComponent.SkillAmount +=0.05f;
     }
@@ -42,21 +43,17 @@ public class UIController : MonoBehaviour {
 
     public void ReFresh()
     {
-        hpBar.fillAmount = playerstatusComponent.PlayerHp;
-        if (hpBar.fillAmount <= 0.5f && hpBar.fillAmount >= 0.3f)
+        hpBar.fillAmount = playerstatusComponent.PlayerHp/10f;
+        if (hpBar.fillAmount >= 0.3f && hpBar.fillAmount <= 0.5f)
             hpBar.color = Color.yellow;
         else if (hpBar.fillAmount < 0.3f)
-            hpBar.color = Color.red;   
+            hpBar.color = Color.red;
+        Debug.Log(hpBar.fillAmount);
 
     }
 
-	// Update is called once per frame
-	void Update () {
-        if (Input.GetKeyDown(KeyCode.Q))
-        {
-            ChangeStat();
-           
-        }
+    // Update is called once per frame
+    void Update () {
 
         if(previousSkillAmount< playerstatusComponent.SkillAmount 
             &&skillBar.fillAmount<1.0f)

@@ -56,8 +56,11 @@ public class BombObjectPool : MonoBehaviour
         Bombs = new List<GameObject>();
         
         //폭격기 오브젝트 생성
-        Bomber.SetActive(false);
-        Bombs.Add(Instantiate(Bomber));
+        //Bomber.SetActive(false);
+        GameObject bomberObject = Instantiate(Bomber);
+        bomberObject.SetActive(false);
+        bomberObject.transform.parent = parent.transform;
+        Bombs.Add(bomberObject);
         
         //폭탄 생성
         for (int i = 1; i < BombCount+1; i++)
@@ -86,6 +89,7 @@ public class BombObjectPool : MonoBehaviour
         if (BombActive)
         {
             //폭격기 오브젝트의 위치를 초기화 하고 동작시킨다
+            Debug.Log("폭격기 오브젝트의 위치를 초기화 하고 동작시킨다");
             Bombs[0].transform.position = new Vector3(0f, 0f, bombBoundary.boundaryZMin - 10f);
             Bombs[0].SetActive(true); 
         }
@@ -99,6 +103,7 @@ public class BombObjectPool : MonoBehaviour
             Bombs[i].transform.position = spawnPosition;
             Bombs[i].transform.rotation = spawnRotation;
             Bombs[i].SetActive(true);
+            Debug.Log(Bombs[i].activeSelf+"번 폭탄 엑티브셀프");
             yield return new WaitForSeconds(spaqwnWait);
         }
 

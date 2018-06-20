@@ -9,20 +9,20 @@ public class IntroManager : MonoBehaviour
     [SerializeField]
     private GameObject LoginManager;
 
-    private bool IsLoadedIntro;
+    private bool isLoadedIntro;
     private void Start()
     {
         Screen.SetResolution(700, 1080, true);
-        IsLoadedIntro = false;
+        isLoadedIntro = false;
     }
     // Update is called once per frame
     void Update()
     {
 
-        if (IntroPanelImage.color.a >= 0.99 && !IsLoadedIntro)
+        if (IntroPanelImage.color.a >= 0.99 && !isLoadedIntro)
         {
             Debug.Log("인트로 로딩 완료");
-            IsLoadedIntro = true;
+            isLoadedIntro = true;
             StartCoroutine(ChangePanelIntroToLogin());
         }
 
