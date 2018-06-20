@@ -6,7 +6,6 @@ public class EnemyPlane : Enemy
 {
     private void Start()
     {
-        enemySpawn = GameObject.Find("EnemySpawn").transform;
         movingDecorator = gameObject.AddComponent<RotationMovingDecorator>();
     }
 

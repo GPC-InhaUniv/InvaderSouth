@@ -6,7 +6,6 @@ public class EnemySpacePlane : Enemy
 {
     private void Start()
     {
-        enemySpawn = GameObject.Find("EnemySpacePlaneSpawn").transform;
         movingDecorator = gameObject.AddComponent<ZigzagMovingDecorator>();
     }
 
