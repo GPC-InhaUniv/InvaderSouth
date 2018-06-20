@@ -31,6 +31,11 @@ public class PlayerStatus : MonoBehaviour {
         }
         else
         SkillAmount = 0.0f;
+<<<<<<< HEAD
+
+
+=======
+>>>>>>> edd095cb5ee9431a1557d974903a1cd0729bfa01
     }
 	public void Damaged()
     {
