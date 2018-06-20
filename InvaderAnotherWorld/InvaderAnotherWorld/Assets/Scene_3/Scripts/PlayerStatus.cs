@@ -8,34 +8,80 @@ public class PlayerStatus : MonoBehaviour {
     public int Money;
     public int Score;
     public float SkillAmount;
-    public bool[] Items;
-    public UIController uIController;
-	// Use this for initialization
-	void Start () {
-        PlayerHp = 1.0f;
+    private UIController uIController;
+    private bool isDamaged = false;
+   
+
+    [SerializeField]
+    private MeshCollider meshCollider;
+    [SerializeField]
+    private MeshRenderer meshRenderer;
+    // Use this for initialization
+    void Start () {
+        PlayerHp = 10f;
         Money = 0;
         Score = 0;
+
+        if(GameManager.Instance.BuyItemList[1])
+        {
+            SkillAmount = 1.0f;
+            GameManager.Instance.BuyItemList[1] = false;
+        }
+        else
         SkillAmount = 0.0f;
+
         uIController = GameObject.Find("BackGroundManager").GetComponent<UIController>();
-        
 
-	  	
-	}
-	public void Damaged(float damage)
-    {
-        PlayerHp -= damage;
         uIController.ReFresh();
+
+
     }
-    public void GetScoreSkill()
+	public void Damaged()
     {
-        Score += 10;
-        SkillAmount += 0.3f;
+        if (!isDamaged)
+        {
+            PlayerHp -= 1f;
+            isDamaged = true;
+            meshCollider.enabled = false;
+            uIController.ReFresh();
+            StartCoroutine(OnOffPlayer());
+           
+        }
     }
 
-	// Update is called once per frame
-	void Update ()
+    public void GetScoreSkill(int score,float skillAmount)
     {
-		
+        Score += score;
+        SkillAmount += skillAmount;
 
-	}
+        if (SkillAmount >= 1.0f)
+            SkillAmount = 1.0f;
+    }
+
+    IEnumerator OnOffPlayer()
+    {
+        bool swtichOnOff = false;
+        float frameCount = 0;
+        while(isDamaged)
+        {
+            meshRenderer.enabled= swtichOnOff;
+            swtichOnOff = !swtichOnOff;
+            frameCount += 0.1f;
+            if (frameCount >= 1.0f)
+                isDamaged = false;
+            yield return new WaitForSeconds(0.1f);
+        }
+
+        meshCollider.enabled = true;
+        meshRenderer.enabled = true;
+        gameObject.SetActive(true);
+        yield return null;
+    }
+
+    //private void Update()
+    //{
+    //    if (Input.GetKey(KeyCode.A))
+    //        Damaged();
+    //}
+
 }

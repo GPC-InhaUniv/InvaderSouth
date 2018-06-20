@@ -15,7 +15,7 @@ public class EnemyDeadEvent : MonoBehaviour {
     {
         if(other.tag=="Bullet")
         {
-            playerstatusComponent.GetScoreSkill();
+            playerstatusComponent.GetScoreSkill(10,0.05f);
             Destroy(other.gameObject);
             Destroy(gameObject);
           
