@@ -18,24 +18,19 @@ public class PlayerStatus : MonoBehaviour {
     [SerializeField]
     private MeshRenderer meshRenderer;
     // Use this for initialization
-    void Start ()
+    void Start()
     {
         PlayerHp = 10f;
         Money = 0;
         Score = 0;
 
-        if(GameManager.Instance.BuyItemList[1])
+        if (GameManager.Instance.BuyItemList[1])
         {
             SkillAmount = 1.0f;
             GameManager.Instance.BuyItemList[1] = false;
         }
         else
-        SkillAmount = 0.0f;
-<<<<<<< HEAD
-
-
-=======
->>>>>>> edd095cb5ee9431a1557d974903a1cd0729bfa01
+            SkillAmount = 0.0f;
     }
 	public void Damaged()
     {

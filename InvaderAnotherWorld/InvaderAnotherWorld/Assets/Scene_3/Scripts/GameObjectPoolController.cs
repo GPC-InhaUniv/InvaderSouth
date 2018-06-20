@@ -14,11 +14,11 @@ public class GameObjectPoolController : MonoBehaviour
         CheckPlayerItemList();
         switch (GameManager.Instance.CurrentStage)
         {
-            
-            case 0:            
+
+            case 0:
                 LoadingSceneController.LoadInGameSceneDelegater = new LoadingSceneController.LoadInGameScene(MakeObjectPoolAtStage0);
                 break;
-            case 1:      
+            case 1:
                 LoadingSceneController.LoadInGameSceneDelegater = new LoadingSceneController.LoadInGameScene(MakeObjectPoolAtStage1);
                 break;
             case 2:
@@ -29,7 +29,9 @@ public class GameObjectPoolController : MonoBehaviour
             default:
                 Debug.Log("error!");
                 break;
+
         }
+
 
        
 
@@ -80,6 +82,7 @@ public class GameObjectPoolController : MonoBehaviour
         if (GameManager.Instance.BuyItemList[2])
         {
             //펫 objectpool 작동
+            Debug.Log("펫 사용");
             GameManager.Instance.BuyItemList[2]=false;
         }
     }

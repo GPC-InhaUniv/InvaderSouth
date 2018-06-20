@@ -43,16 +43,13 @@ public class MastarPlayerController : MonoBehaviour
     [SerializeField]
     Animator skillAnimator;
 
-<<<<<<< HEAD
+
     float time;
 
     [SerializeField]
     bool readyToBombSkill = true;
 
-=======
-    [SerializeField]
-    bool readyToBombSkill = true;
->>>>>>> edd095cb5ee9431a1557d974903a1cd0729bfa01
+
 
     private void Awake()
     {
@@ -122,30 +119,22 @@ public class MastarPlayerController : MonoBehaviour
         {
             enemyObjectPool.EnemyPlaneEnqueue(other.gameObject);
             other.gameObject.SetActive(false);
-<<<<<<< HEAD
-          
-=======
->>>>>>> edd095cb5ee9431a1557d974903a1cd0729bfa01
+
         }
 
         if (other.tag == "EnemySpacePlane")
         {
             enemyObjectPool.EnemyPlaneSpaceEnqueue(other.gameObject);
             other.gameObject.SetActive(false);
-<<<<<<< HEAD
+
           
-=======
->>>>>>> edd095cb5ee9431a1557d974903a1cd0729bfa01
         }
 
         if(other.tag == "EnemyBullet")
         {
             bulletObjectPool.EnemyBulletsEnqueue(other.gameObject);
             other.gameObject.SetActive(false);
-<<<<<<< HEAD
-           
-=======
->>>>>>> edd095cb5ee9431a1557d974903a1cd0729bfa01
+
         }
     }
 
