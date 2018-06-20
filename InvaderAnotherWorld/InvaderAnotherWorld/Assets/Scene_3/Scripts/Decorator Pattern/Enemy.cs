@@ -4,15 +4,13 @@ using UnityEngine;
 
 abstract public class Enemy : MonoBehaviour
 {
+    protected float speed = 0.05f;
     protected float fireRate = 1f;
     protected float nextFire = 0.0f;
-    protected Transform enemySpawn;
     protected Transform bulletSpawn;
     protected EnemyObjectPool enemyObjectPool;
     protected MovingDecorator movingDecorator;
     protected BulletObjectPool bulletObjectPool;
-    protected float speed = 0.05f;
-    public static int Damage = 1;
 
     private void Awake()
     {

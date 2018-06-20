@@ -6,7 +6,7 @@ public class RotationMovingDecorator : MovingDecorator
 {
     private void Awake()
     {
-        parkBoundary = new ParkBoundary(5.5f, -5.5f, 14, -20);
+        parkBoundary = new ParkBoundary(5.5f, -5.5f, 50, -20);
         EnemyPlane = GetComponent<EnemyPlane>();
         rigidbody3D = GetComponent<Rigidbody>();
     }

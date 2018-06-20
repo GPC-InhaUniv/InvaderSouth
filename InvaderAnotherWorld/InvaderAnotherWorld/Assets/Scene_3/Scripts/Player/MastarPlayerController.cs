@@ -42,9 +42,14 @@ public class MastarPlayerController : MonoBehaviour
     private BombObjectPool bombSkill;
     [SerializeField]
     Animator skillAnimator;
+<<<<<<< HEAD
+
+    float time;
+=======
     [SerializeField]
     bool readyToBombSkill = true;
     
+>>>>>>> 2e88c50803ca921efceb8f6d5e7523fffbc5f3d6
 
     private void Awake()
     {
@@ -64,7 +69,6 @@ public class MastarPlayerController : MonoBehaviour
     private void Update()
     {
         //playerState.Behavior();
-        Debug.Log(playerState);
     }
 
     private void FixedUpdate()
