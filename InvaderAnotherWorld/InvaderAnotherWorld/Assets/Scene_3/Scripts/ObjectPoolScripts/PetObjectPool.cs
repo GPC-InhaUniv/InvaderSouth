@@ -11,8 +11,6 @@ public class PetObjectPool : MonoBehaviour {
     public static Queue<GameObject> petMissiles;
     private GameObject petMissile;
     private const int petMissileCount = 10;
-    //private const float fireTime = 0.25f;
-    //private float nextFire = 1f;
     
 
     [SerializeField]
@@ -42,21 +40,14 @@ public class PetObjectPool : MonoBehaviour {
     {
         petMissile = petMissiles.Dequeue();
         petMissile.SetActive(true);
+        petMissile.transform.rotation = p.rotation;
         petMissile.transform.position = p.position;
-
-        //if (petMissiles.Count > petMissileCount)
-        //    return;
-        //if (nextFire < Time.time + fireTime && petMissiles.Count != 0)
-        //{
-        //    petMissile = petMissiles.Dequeue();
-        //    petMissile.SetActive(true);
-        //    petMissile.transform.position = p.position;
-        //    nextFire = Time.time;
-        //}
+        
     }
 
     public static void PetMissilesEnqueue(GameObject other)
     {
         petMissiles.Enqueue(other.gameObject);
+        other.SetActive(false);
     }
 }

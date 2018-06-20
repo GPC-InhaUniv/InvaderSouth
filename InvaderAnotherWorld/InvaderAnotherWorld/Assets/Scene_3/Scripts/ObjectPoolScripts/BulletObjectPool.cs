@@ -66,10 +66,12 @@ public class BulletObjectPool : MonoBehaviour
     public void PlayerBulletsEnqueue(GameObject other)
     {
         playerBullets.Enqueue(other.gameObject);
+        other.SetActive(false);
     }
 
     public void EnemyBulletsEnqueue(GameObject other)
     {
         enemyBullets.Enqueue(other.gameObject);
+        other.SetActive(false);
     }
 }
