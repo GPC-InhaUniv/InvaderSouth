@@ -67,6 +67,7 @@ public class TitleManager : MonoBehaviour
             LoginManager.SetActive(true);
         }
 
+
     }
 
     private void Update()
