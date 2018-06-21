@@ -17,6 +17,8 @@ public class PlayerStatus : MonoBehaviour {
     private MeshCollider meshCollider;
     [SerializeField]
     private MeshRenderer meshRenderer;
+    private bool ReadyToSkill;
+
     // Use this for initialization
     void Start()
     {
