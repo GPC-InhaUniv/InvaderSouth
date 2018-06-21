@@ -54,8 +54,8 @@ public class EnemyObjectPool : MonoBehaviour
 
     private void Update()
     {
-        time += Time.deltaTime;
-      //  Debug.Log(time);
+      time += Time.deltaTime;
+      Debug.Log(time);
     }
 
     public IEnumerator SetEnemyPlaneOfPositionAndActive(Transform transform)
@@ -85,7 +85,7 @@ public class EnemyObjectPool : MonoBehaviour
                 yield return new WaitForSeconds(3f);
             }
 
-            if(time > 10 && time < 90)
+            if (time > 10 && time <= 90)
             {
                 enemyPlane = enemyPlanes.Dequeue();
                 enemyPlane.SetActive(true);
@@ -102,22 +102,51 @@ public class EnemyObjectPool : MonoBehaviour
                 enemyPlane.transform.position = position2;
                 yield return new WaitForSeconds(2f);
             }
+
+            if(time > 90)
+            {
+                break;
+            }
         }
     }
 
     public IEnumerator SetEnemySpacePlaneOfPositionAndActive(Transform transform)
     {
+        Vector3 SecondPosition = new Vector3(transform.position.x + 8, transform.position.y, transform.position.z);
+
         while (true)
         {
+            if (time <= 10)
+            {
+                yield return null;
+            }
+            
             if (enemySpacePlanes.Count > enemyCount)
                 yield return null;
-            if (time > 10 && time < 65)
+            if (time > 10 && time <= 65)
             {
                 enemySpacePlane = enemySpacePlanes.Dequeue();
                 enemySpacePlane.SetActive(true);
                 enemySpacePlane.transform.position = transform.position;
+                yield return new WaitForSeconds(10f);
             }
-            yield return new WaitForSeconds(5f);
+
+            if(time > 65 && time <= 90)
+            {
+                enemySpacePlane = enemySpacePlanes.Dequeue();
+                enemySpacePlane.SetActive(true);
+                enemySpacePlane.transform.position = transform.position;
+                yield return new WaitForSeconds(3f);
+                enemySpacePlane = enemySpacePlanes.Dequeue();
+                enemySpacePlane.SetActive(true);
+                enemySpacePlane.transform.position = SecondPosition;
+                yield return new WaitForSeconds(5f);
+            }
+
+            if (time > 90)
+            {
+                break;
+            }
         }
     }
 

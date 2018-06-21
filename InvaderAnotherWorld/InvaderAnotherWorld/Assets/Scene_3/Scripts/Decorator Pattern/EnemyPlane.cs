@@ -52,10 +52,17 @@ public class EnemyPlane : Enemy
     private void CollisionPlayerBullet(Collider other)
     {
         if (other.tag == "PetMissile")
+        {
             life -= 0.5f;
-        if (other.tag == "PlayerBullet")
-            life -= 1;
+            // 유도 미사일 꺼준다.
+        }
 
+        if (other.tag == "PlayerBullet")
+        {
+            life -= 1;
+            BulletObjectPool.playerBullets.Enqueue(other.gameObject);
+            other.gameObject.SetActive(false);
+        }
 
         if (life <= 0)
         {

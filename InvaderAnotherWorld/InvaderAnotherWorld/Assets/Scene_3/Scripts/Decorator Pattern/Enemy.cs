@@ -8,7 +8,7 @@ abstract public class Enemy : MonoBehaviour
     protected float life;
     protected float gauge;
     protected float speed = 0.05f;
-    protected float fireRate = 1f;
+    protected float fireRate = 3f;
     protected float nextFire = 0.0f;
     protected Transform bulletSpawn;
     protected EnemyObjectPool enemyObjectPool;

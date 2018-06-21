@@ -7,7 +7,6 @@ public class ZigzagMovingDecorator : MovingDecorator
     private float maxPositionEnemyX;
     private float minPositionEnemyX;
     private bool isBoundaryCollision = true;
-    private float timer;
 
     private void Awake()
     {

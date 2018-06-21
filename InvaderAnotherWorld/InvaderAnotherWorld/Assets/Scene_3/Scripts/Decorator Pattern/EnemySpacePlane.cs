@@ -53,10 +53,17 @@ public class EnemySpacePlane : Enemy
     private void CollisionPlayerBullet(Collider other)
     {
         if (other.tag == "PlayerBullet")
+        {
             life -= 1;
+            BulletObjectPool.playerBullets.Enqueue(other.gameObject);
+            other.gameObject.SetActive(false);
+        }
+
         else if (other.tag == "PetMissile")
+        {
             life -= 0.5f;
-      
+
+        }
 
         if (life <= 0)
         {
