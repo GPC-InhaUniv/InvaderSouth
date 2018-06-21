@@ -42,8 +42,10 @@ public class UIController : MonoBehaviour {
 
 
         if (playerstatusComponent.SkillAmount == 0)
+        {
             skillBar.fillAmount = 0;
-
+            skillAmountText.text = "0%";
+        }
         else if (previousSkillAmount < playerstatusComponent.SkillAmount
            && skillBar.fillAmount < 1.0f)
         {
