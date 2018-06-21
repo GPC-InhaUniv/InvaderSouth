@@ -60,7 +60,7 @@ public class BulletObjectPool : MonoBehaviour
     {
      
         enemyBullet = enemyBullets.Dequeue();
-        Debug.Log("디큐 적 총알 갯수: " + enemyBullets.Count);
+       // Debug.Log("디큐 적 총알 갯수: " + enemyBullets.Count);
         enemyBullet.SetActive(true);
         enemyBullet.transform.position = p.position;
     }

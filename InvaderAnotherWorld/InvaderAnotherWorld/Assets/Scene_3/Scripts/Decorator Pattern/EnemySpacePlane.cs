@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class EnemySpacePlane : Enemy
 {
-    public PlayerInfo PlayerInfoDelegater;
 
     private void Start()
     {
