@@ -55,7 +55,7 @@ public class EnemyObjectPool : MonoBehaviour
     private void Update()
     {
         time += Time.deltaTime;
-        Debug.Log(time);
+      //  Debug.Log(time);
     }
 
     public IEnumerator SetEnemyPlaneOfPositionAndActive(Transform transform)

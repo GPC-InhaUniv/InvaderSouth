@@ -47,12 +47,6 @@ public class MastarPlayerController : MonoBehaviour
     PlayerStatus playerStatus;
     bool readyToBombSkill = false;
 
-
-    float time;
-
-
-
-
     private void Awake()
     {
         playerStatusComponent = GetComponent<PlayerStatus>();
@@ -68,11 +62,6 @@ public class MastarPlayerController : MonoBehaviour
 
         bombSkill = GameObject.Find("GameObjectPool").GetComponent<BombObjectPool>();
         skillAnimator = gameObject.GetComponentInChildren<Animator>();
-    }
-
-    private void Update()
-    {
-        //playerState.Behavior();
     }
 
     private void FixedUpdate()
@@ -120,30 +109,19 @@ public class MastarPlayerController : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "EnemyPlane")
+        if (other.tag == "Enemy")
         {
-            EnemyObjectPool.enemyPlanes.Enqueue(other.gameObject);
-           // enemyObjectPool.EnemyPlaneEnqueue(other.gameObject);
-            other.gameObject.SetActive(false);
-
+            playerStatusComponent.Damaged();
         }
 
-        if (other.tag == "EnemySpacePlane")
+        if (other.tag == "EnemyBullet")
         {
-            EnemyObjectPool.enemySpacePlanes.Enqueue(other.gameObject);
-         //   enemyObjectPool.EnemyPlaneSpaceEnqueue(other.gameObject);
-            other.gameObject.SetActive(false);
-
-        }
-
-        if(other.tag == "EnemyBullet")
-        {
+            playerStatusComponent.Damaged();
             BulletObjectPool.enemyBullets.Enqueue(other.gameObject);
             other.gameObject.SetActive(false);
-
         }
     }
-    
+
     private void SetState(IState state)
     {
         this.playerState = state;

@@ -16,6 +16,7 @@ public class DestroyByBoundary : MonoBehaviour
         if (other.tag == "EnemyBullet")
         {
             BulletObjectPool.enemyBullets.Enqueue(other.gameObject);
+            Debug.Log("인큐 적 총알 갯수: " + BulletObjectPool.enemyBullets.Count);
             other.gameObject.SetActive(false);
         }
 

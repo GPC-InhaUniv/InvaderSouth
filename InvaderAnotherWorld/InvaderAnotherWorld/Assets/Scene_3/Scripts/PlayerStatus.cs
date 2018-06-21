@@ -40,7 +40,6 @@ public class PlayerStatus : MonoBehaviour {
             isDamaged = true;
             meshCollider.enabled = false;
             StartCoroutine(OnOffPlayer());
-           
         }
     }
 
@@ -79,18 +78,18 @@ public class PlayerStatus : MonoBehaviour {
             Damaged();
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if(other.tag == "Enemy")
-        {
-            Damaged();
-        }
+    //private void OnTriggerEnter(Collider other)
+    //{
+    //    if(other.tag == "Enemy")
+    //    {
+    //        Damaged();
+    //    }
 
-        if (other.tag == "EnemyBullet")
-        {
-            Damaged();
-            BulletObjectPool.enemyBullets.Enqueue(other.gameObject);
-            other.gameObject.SetActive(false);
-        }
-    }
+    //    if (other.tag == "EnemyBullet")
+    //    {
+    //        Damaged();
+    //        BulletObjectPool.enemyBullets.Enqueue(other.gameObject);
+    //        other.gameObject.SetActive(false);
+    //    }
+    //}
 }

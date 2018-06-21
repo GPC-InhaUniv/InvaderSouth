@@ -43,7 +43,7 @@ public class EnemySpacePlane : Enemy
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.tag == "Boundary" || other.tag == "Player")
+        if (other.tag == "Boundary")
         {
             life = 2;
             EnemyObjectPool.enemySpacePlanes.Enqueue(this.gameObject);
