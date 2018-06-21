@@ -120,6 +120,10 @@ public class BossController : MonoBehaviour
             BossHp -= 1;
             bossHpImage.fillAmount = BossHp / 30;
         }
+        if (other.tag == "Bomb")
+        {
+
+        }
     }
 
 
