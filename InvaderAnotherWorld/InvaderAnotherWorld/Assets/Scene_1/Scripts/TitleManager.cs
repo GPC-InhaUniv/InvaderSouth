@@ -13,177 +13,71 @@ public class TitleManager : MonoBehaviour
     [SerializeField]
     private InputField passInputField;
 
-    [Header("CreateAccountPanel")]
-    [SerializeField]
-    private InputField new_IDInputField;
-    [SerializeField]
-    private InputField new_PassInputField;
-    [SerializeField]
-    private InputField confirm_New_PassInputField;
-
     [Header("PopUp")]
     [SerializeField]
-    private GameObject LoginAlertPanel;
+    private GameObject loginErrorPanel;
     [SerializeField]
-    private GameObject LoginErrorPanel;
+    private GameObject createAccountPanel;
     [SerializeField]
-    private GameObject CreateAccountPanel;
+    private GameObject createAlertPanel;
     [SerializeField]
-    private GameObject CreateAlertPanel;
+    private GameObject loginPanel;
+     
     [SerializeField]
-    private GameObject CreateIDErrorPanel;
-    [SerializeField]
-    private GameObject LoginPanel;
-    [SerializeField]
-    private Text CreateAccountAlert;
+    private GameObject loginManager;
 
     [SerializeField]
-    private GameObject LoginManager;
+    private GameObject introManager;
 
-    [SerializeField]
-    private GameObject IntroManager;
-
-    private string playerID = "";
 
     /*AccountInfoMation에서 사용해야 하기 때문에 static으로 선언*/
     public static bool IsCreateIDError = false;
     public static bool IsLoginError = false;
     public static bool IsSuccesCreateId = false;
 
-    private bool IsNotFirstStart=false;
+    private bool isNotFirstStart=false;
 
     private void Start()
     {
         Screen.SetResolution(700, 1080, true);
-        if(!IsNotFirstStart)
+        if(!isNotFirstStart)
         {
-            IntroManager.SetActive(true);
-            LoginManager.SetActive(false);
-            IsNotFirstStart = true;
+            introManager.SetActive(true);
+            loginManager.SetActive(false);
+            isNotFirstStart = true;
         }
         else
         {
-            IntroManager.SetActive(false);
-            LoginManager.SetActive(true);
+            introManager.SetActive(false);
+            loginManager.SetActive(true);
         }
 
     }
 
     private void Update()
     {
-        if (IsLoginError && LoginPanel.activeInHierarchy)
+        if (IsLoginError && loginPanel.activeInHierarchy)
         {
             Debug.Log("로그인 에러!");
-            LoginErrorPanel.gameObject.SetActive(true);
+            loginErrorPanel.gameObject.SetActive(true);
             IsLoginError = false;
             IsCreateIDError = false;
         }
-        else if (IsCreateIDError && CreateAccountPanel.activeInHierarchy)
+        else if (IsCreateIDError && createAccountPanel.activeInHierarchy)
         {
-            CreateIDErrorPanel.gameObject.SetActive(true);
             IsCreateIDError = false;
             IsLoginError = false;
             IsSuccesCreateId = false;
         }
-        else if (CreateAccountPanel.activeInHierarchy && !IsCreateIDError && IsSuccesCreateId)
+        else if (createAccountPanel.activeInHierarchy && !IsCreateIDError && IsSuccesCreateId)
         {
-            
-            CreateAlertPanel.gameObject.SetActive(true);
+            createAlertPanel.gameObject.SetActive(true);
             IsSuccesCreateId = false;
         }
 
     }
 
-    /// <summary>
-    /// Login, CreateAccount
-    /// </summary>
-    public void LoginBtn()
-    {
-        LoingAccount();
-    }
-
-
-
-    void LoingAccount()
-    {
-        if (idInputField.text != "" && passInputField.text != "")
-        {
-            //아이디 및 비밀번호를 임시 변수에 저장
-            playerID = idInputField.text;
-          
-        }
-    }
-
-    public void OpenCreateAccountBtn()
-    {
-        CreateAccountPanel.SetActive(true);
-    }
-
-    public void CreateAccountBtn()
-    {
-        CreateAccount();
-    }
-
-    void CreateAccount()
-    {
-        playerID = new_IDInputField.text;
-
-    }
-
-    public void ShowLoginAlertPanel()
-    {
-        if (idInputField.text == "" || passInputField.text == "")
-        {
-            LoginAlertPanel.gameObject.SetActive(true);
-        }
-    }
-
-    public void HideLoginErrorPanel()
-    {
-        LoginErrorPanel.gameObject.SetActive(false);
-    }
-
-    public void HideLoginAlertPanel()
-    {
-        LoginAlertPanel.gameObject.SetActive(false);
-    }
-
-    public void ShowCreateAlertPanel()
-    {
-        CreateAlertPanel.gameObject.SetActive(true);
-
-    }
-    public void HideCreateAlertPanel()
-    {
-        CreateAlertPanel.gameObject.SetActive(false);
-    }
-
-    public void HideCreateAccountPanel()
-    {
-        CreateAccountPanel.gameObject.SetActive(false);
-    }
-
-    public void HideLoginPanel()
-    {
-        LoginPanel.gameObject.SetActive(false);
-    }
-
-    public void ShowLoginPanel()
-    {
-        LoginPanel.gameObject.SetActive(true);
-    }
-
-    public void ShowCreateIDErrorPanel()
-    {
-        CreateIDErrorPanel.gameObject.SetActive(true);
-    }
-
-    public void HideCreateIDErrorPanel()
-    {
-        CreateIDErrorPanel.gameObject.SetActive(false);
-    }
-
-    public void GameQuit()
+    public void OnClickedGameQuit()
     {
         Application.Quit();
     }
