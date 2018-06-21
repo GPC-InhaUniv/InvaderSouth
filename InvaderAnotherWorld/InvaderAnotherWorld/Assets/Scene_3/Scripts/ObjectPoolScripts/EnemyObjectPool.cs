@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class EnemyObjectPool : MonoBehaviour
 {
-    private float time;
     private const int enemyCount = 20;
 
     [SerializeField]
@@ -52,13 +51,6 @@ public class EnemyObjectPool : MonoBehaviour
         }
     }
 
-    private void Update()
-    {
-        time += Time.deltaTime;
-
-        Debug.Log(time);
-    }
-
     public IEnumerator SetEnemyPlaneOfPositionAndActive(Transform transform)
     {
         Vector3 position1 = new Vector3(transform.position.x + 4, transform.position.y, transform.position.z);
@@ -66,9 +58,14 @@ public class EnemyObjectPool : MonoBehaviour
 
         while (true)
         {
+            if(StageManager.time == 0)
+            {
+                yield return null;
+            }
+
             if (enemyPlanes.Count > enemyCount)
                 yield return null;
-            if (time <= 10)
+            if (StageManager.time <= 10)
             {
                 enemyPlane = enemyPlanes.Dequeue();
                 enemyPlane.SetActive(true);
@@ -86,7 +83,7 @@ public class EnemyObjectPool : MonoBehaviour
                 yield return new WaitForSeconds(3f);
             }
 
-            if (time > 10 && time <= 90)
+            if (StageManager.time > 10 && StageManager.time <= 90)
             {
                 enemyPlane = enemyPlanes.Dequeue();
                 enemyPlane.SetActive(true);
@@ -104,7 +101,7 @@ public class EnemyObjectPool : MonoBehaviour
                 yield return new WaitForSeconds(2f);
             }
 
-            if (time > 90)
+            if (StageManager.time > 90)
             {
                 break;
             }
@@ -117,14 +114,14 @@ public class EnemyObjectPool : MonoBehaviour
 
         while (true)
         {
-            if (time <= 10)
+            if (StageManager.time <= 10)
             {
                 yield return null;
             }
 
             if (enemySpacePlanes.Count > enemyCount)
                 yield return null;
-            if (time > 10 && time <= 65)
+            if (StageManager.time > 10 && StageManager.time <= 65)
             {
                 enemySpacePlane = enemySpacePlanes.Dequeue();
                 enemySpacePlane.SetActive(true);
@@ -132,7 +129,7 @@ public class EnemyObjectPool : MonoBehaviour
                 yield return new WaitForSeconds(10f);
             }
 
-            if (time > 65 && time <= 90)
+            if (StageManager.time > 65 && StageManager.time <= 90)
             {
                 enemySpacePlane = enemySpacePlanes.Dequeue();
                 enemySpacePlane.SetActive(true);
@@ -144,7 +141,7 @@ public class EnemyObjectPool : MonoBehaviour
                 yield return new WaitForSeconds(5f);
             }
 
-            if (time > 90)
+            if (StageManager.time > 90)
             {
                 break;
             }

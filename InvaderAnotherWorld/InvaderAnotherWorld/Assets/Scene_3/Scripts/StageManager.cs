@@ -4,20 +4,12 @@ using UnityEngine;
 
 public class StageManager : MonoBehaviour {
     private GameObject backgroundObject;
-    private GameObject bulletObject;
-    private GameObject gameobjectPool;
     [SerializeField]
     private GameObject sparkBomb;
-
+    
     private int stageAmount = 3;
     private int currentStage = 0;
-
-    /*Load Enemy1*/
-    [SerializeField]
-    private GameObject enemy1GeneratePosition;
-    [SerializeField]
-    private GameObject enemy2GeneratePosition;
-    private EnemyPool enemyPool; 
+    public static float time;
 
     /*Load BossEnemy*/
     private BossEnemyPool bossEnemyPool;
@@ -30,9 +22,8 @@ public class StageManager : MonoBehaviour {
         currentStage=CheckPlayerStage(GameManager.Instance.CurrentStage);
         //backgroundObject = GameObject.Find("BackGroundElemtns").gameObject;
         //bulletObject = GameObject.Find("Bullets").gameObject;
-        gameobjectPool = GameObject.FindGameObjectWithTag("ObjectPoolManager").gameObject;
 
-        MakeGameRule();
+        //MakeGameRule();
 
         //  StartCoroutine(MakeSparkBomb());
     }
@@ -40,44 +31,44 @@ public class StageManager : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
-
-        if (Input.GetKeyDown(KeyCode.T))
+        if(time <= 95)
         {
-            ReStartThisStage();
+            time += Time.deltaTime;
+            Debug.Log(time);
         }
     }
 
-    void MakeGameRule()
-    {
-        switch (currentStage)
-        {
-            case 0:
-                {
-                    enemy1GeneratePosition.SetActive(true);
-                    enemy2GeneratePosition.SetActive(true);
-                    break;
-                }
-            case 1:
-                {
-                    break;
-                }
-            case 2:
-                {
-                    bossEnemyPool = gameobjectPool.GetComponent<BossEnemyPool>();
-                    StartCoroutine(MakeBossEnmey());
-                    break;
-                }
-            case 4:
-                {
-                    break;
-                }
-            default:
-                {
-                    Debug.Log("error stage load");
-                    break;
-                }
-        }
-    }
+    //void MakeGameRule()
+    //{
+    //    switch (currentStage)
+    //    {
+    //        case 0:
+    //            {
+    //                enemy1GeneratePosition.SetActive(true);
+    //                enemy2GeneratePosition.SetActive(true);
+    //                break;
+    //            }
+    //        case 1:
+    //            {
+    //                break;
+    //            }
+    //        case 2:
+    //            {
+    //                bossEnemyPool = gameobjectPool.GetComponent<BossEnemyPool>();
+    //                StartCoroutine(MakeBossEnmey());
+    //                break;
+    //            }
+    //        case 4:
+    //            {
+    //                break;
+    //            }
+    //        default:
+    //            {
+    //                Debug.Log("error stage load");
+    //                break;
+    //            }
+    //    }
+    //}
 
     int CheckPlayerStage(int playerCurrentStage)
     {
@@ -119,13 +110,13 @@ public class StageManager : MonoBehaviour {
         }
     }
 
-    void ReStartThisStage()
-    {
-        Destroy(backgroundObject);
-        Destroy(bulletObject);
-        Destroy(gameobjectPool);
-        LoadingSceneController.LoadScene("Main");
-    }
+    //void ReStartThisStage()
+    //{
+    //    Destroy(backgroundObject);
+    //    Destroy(bulletObject);
+    //    Destroy(gameobjectPool);
+    //    LoadingSceneController.LoadScene("Main");
+    //}
 
 
     
