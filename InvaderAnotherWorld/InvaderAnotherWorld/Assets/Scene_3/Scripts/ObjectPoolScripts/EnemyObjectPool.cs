@@ -54,8 +54,9 @@ public class EnemyObjectPool : MonoBehaviour
 
     private void Update()
     {
-      time += Time.deltaTime;
-      Debug.Log(time);
+        time += Time.deltaTime;
+
+        Debug.Log(time);
     }
 
     public IEnumerator SetEnemyPlaneOfPositionAndActive(Transform transform)
@@ -103,7 +104,7 @@ public class EnemyObjectPool : MonoBehaviour
                 yield return new WaitForSeconds(2f);
             }
 
-            if(time > 90)
+            if (time > 90)
             {
                 break;
             }
@@ -120,7 +121,7 @@ public class EnemyObjectPool : MonoBehaviour
             {
                 yield return null;
             }
-            
+
             if (enemySpacePlanes.Count > enemyCount)
                 yield return null;
             if (time > 10 && time <= 65)
@@ -131,7 +132,7 @@ public class EnemyObjectPool : MonoBehaviour
                 yield return new WaitForSeconds(10f);
             }
 
-            if(time > 65 && time <= 90)
+            if (time > 65 && time <= 90)
             {
                 enemySpacePlane = enemySpacePlanes.Dequeue();
                 enemySpacePlane.SetActive(true);
