@@ -7,13 +7,12 @@ public class LivingState : IState
     private GameObject playerObject;
     private float speed = 0.2f;
     private bool isInput;
-    private bool isGameClear;
+    private GameObject gameClearUI;
     
     public LivingState()
     {
+        gameClearUI = GameObject.Find("InGameUI").transform.Find("GameClearUI").gameObject;
         playerObject = GameObject.Find("Player").gameObject;
-        isInput = true;
-        isGameClear = false;
     }
 
     public void Behavior()
@@ -41,16 +40,21 @@ public class LivingState : IState
             }
         }
 
-        //보스 몬스터가 죽었을 경우에 Gaem Clear를 보여주는 if문 작성!
-        //if (보스가 살아있는가 != true)
-        //{
-        //    isInput = false;
-        //    isGameClear = true;    
-        //    if (isGameClear != flase)
-        //    {
-        //        Gaem Clear를 화면에 보여준다.
-        //        isGameClear = false;
-        //    }
-        //}
+        // 스테이지 1일 떄, 90가되면 게임 클리어가 뜬다.
+        if (GameManager.Instance.CurrentStage == 0)
+        {
+            if (StageManager.time == 95)
+            {
+                gameClearUI.SetActive(true);
+            }
+        }
+
+        else if (GameManager.Instance.CurrentStage == 1)
+        {
+            if (BossController.IsBossAlive != true)
+            {
+                gameClearUI.SetActive(true);
+            }
+        }
     }
 }

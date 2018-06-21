@@ -26,4 +26,13 @@ public class boomActiveTime : MonoBehaviour {
         yield return new WaitForSeconds(lifeTime);
         gameObject.SetActive(false);
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "EnemyBullet")
+        {
+            BulletObjectPool.enemyBullets.Enqueue(other.gameObject);
+            other.gameObject.SetActive(false);
+        }
+    }
 }

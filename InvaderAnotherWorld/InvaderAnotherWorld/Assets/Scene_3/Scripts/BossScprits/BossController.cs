@@ -26,6 +26,7 @@ public class BossController : MonoBehaviour
     [SerializeField]
     private Image bossHpImage;
     public float BossHp=30;
+    public static bool IsBossAlive = true;
 
     [SerializeField]
     private Transform shotposition;
@@ -43,7 +44,6 @@ public class BossController : MonoBehaviour
 
     void Start()
     {
-        
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
         bossEnemyPool = GameObject.Find("GameObjectPool").GetComponent<BossEnemyPool>();
         bossHpImage.fillAmount = BossHp / 30.0f;
@@ -110,15 +110,25 @@ public class BossController : MonoBehaviour
         bossEnemyPool.FireThirdBullet(shotposition.transform, secondMissleAngle);
         secondFiredelayTime = Time.time + secondFireTime;
         isUseSkill = true;
-
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Player")
+        if (other.tag == "PlayerBullet")
         {
             BossHp -= 1;
             bossHpImage.fillAmount = BossHp / 30;
+            BulletObjectPool.playerBullets.Enqueue(other.gameObject);
+            other.gameObject.SetActive(false);
+
+            if (BossHp <= 0)
+            {
+                IsBossAlive = false;
+            }
+        }
+        if (other.tag == "Bomb")
+        {
+
         }
     }
 

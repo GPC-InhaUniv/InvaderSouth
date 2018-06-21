@@ -37,6 +37,12 @@ public class EnemyPlane : Enemy
             EnemyObjectPool.enemyPlanes.Enqueue(this.gameObject);
             this.gameObject.SetActive(false);
         }
+        if (other.tag == "Bomb")
+        {
+            life = 1;
+            EnemyObjectPool.enemyPlanes.Enqueue(this.gameObject);
+            this.gameObject.SetActive(false);
+        }
     }
 
     private void OnTriggerExit(Collider other)
