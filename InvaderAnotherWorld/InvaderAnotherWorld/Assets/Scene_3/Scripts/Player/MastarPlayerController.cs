@@ -37,6 +37,9 @@ public class MastarPlayerController : MonoBehaviour
         private set { }
     }
 
+    public delegate void GameResult(bool isGameResult);
+    public GameResult GameResultDelegate;
+
     //스킬 풀, 스킬애니메이션
     [SerializeField]
     private BombObjectPool bombSkill;
@@ -94,12 +97,15 @@ public class MastarPlayerController : MonoBehaviour
 
         if(isGameResult == true)
         {
+            GameResultDelegate(isGameResult);
+
             if (playerStatusComponent.PlayerHp <= 0)
             {
                 SetState(new DeadState());
                 playerMeshRenderer.enabled = false;
                 playerMeshCollider.enabled = false;
                 isGameResult = false;
+                GameResultDelegate(isGameResult);
                 Debug.Log("플레이어 죽음");
             }
         }

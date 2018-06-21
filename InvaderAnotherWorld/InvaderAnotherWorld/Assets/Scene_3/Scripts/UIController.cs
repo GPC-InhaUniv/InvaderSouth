@@ -15,7 +15,9 @@ public class UIController : MonoBehaviour {
     [SerializeField]
     private Text skillAmountText;
 
-    
+    private GameObject gameClearUI;
+    private GameObject gameOverUI;
+    private MastarPlayerController mastarPlayerController;
 
     private PlayerStatus playerstatusComponent;
     private float previousSkillAmount;
@@ -23,10 +25,14 @@ public class UIController : MonoBehaviour {
     // Use this for initialization
     void Start()
     {
+        mastarPlayerController = GameObject.Find("Player").GetComponent<MastarPlayerController>();
+        gameClearUI = GameObject.Find("InGameUI").transform.Find("GameClearUI").gameObject;
+        gameOverUI = GameObject.Find("InGameUI").transform.Find("GameOverUI").gameObject;
         playerstatusComponent = GameObject.Find("Player").GetComponent<PlayerStatus>();
         skillBar.fillAmount = playerstatusComponent.SkillAmount/2;
         skillAmountText.text = (playerstatusComponent.SkillAmount*100).ToString() + "%";
         previousSkillAmount = 0.0f;
+        mastarPlayerController.GameResultDelegate += GameResult;
 
         ReFresh();
     }
@@ -74,5 +80,30 @@ public class UIController : MonoBehaviour {
         ReFresh();
     }
 
+    public void GameResult(bool result)
+    {
+        if(result == true)
+        {
+            if (GameManager.Instance.CurrentStage == 0)
+            {
+                if (StageManager.time >= 120)
+                {
+                    gameClearUI.SetActive(true);
+                }
+            }
 
+            else if (GameManager.Instance.CurrentStage == 1)
+            {
+                if (BossController.IsBossAlive != true)
+                {
+                    gameClearUI.SetActive(true);
+                }
+            }
+        }
+
+        if(result == false)
+        {
+            gameOverUI.SetActive(true);
+        }
+    }
 }

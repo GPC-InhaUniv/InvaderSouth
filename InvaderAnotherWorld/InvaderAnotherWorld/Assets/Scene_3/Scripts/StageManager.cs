@@ -31,10 +31,15 @@ public class StageManager : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
-        if(time <= 95)
+        if(time <= 120)
         {
             time += Time.deltaTime;
             Debug.Log(time);
+
+            if(Input.GetKey(KeyCode.S) == true)
+            {
+                time += 10;
+            }
         }
     }
 

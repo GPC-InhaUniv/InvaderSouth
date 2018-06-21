@@ -4,12 +4,10 @@ using UnityEngine;
 
 public class DeadState : IState
 {
-    private GameObject gameOverUI;
     private bool isBehavior;
 
     public DeadState()
     {
-        gameOverUI = GameObject.Find("InGameUI").transform.Find("GameOverUI").gameObject;
         isBehavior = true;
     }
 
@@ -17,7 +15,6 @@ public class DeadState : IState
     {
         if(isBehavior == true)
         {
-            gameOverUI.SetActive(true);
             isBehavior = false;
             Debug.Log("Game Over Image Output");
         }
