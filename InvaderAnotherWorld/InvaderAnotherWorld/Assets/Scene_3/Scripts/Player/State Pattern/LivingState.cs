@@ -11,6 +11,7 @@ public class LivingState : IState
     public LivingState()
     {
         playerObject = GameObject.Find("Player").gameObject;
+        isInput = true;
     }
 
     public void Behavior()
