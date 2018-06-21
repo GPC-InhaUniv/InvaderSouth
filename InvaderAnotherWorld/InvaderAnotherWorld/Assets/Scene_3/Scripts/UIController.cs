@@ -25,6 +25,7 @@ public class UIController : MonoBehaviour {
     {
         playerstatusComponent = GameObject.Find("Player").GetComponent<PlayerStatus>();
         skillBar.fillAmount = playerstatusComponent.SkillAmount;
+        skillAmountText.text = (playerstatusComponent.SkillAmount*100).ToString() + "%";
         previousSkillAmount = 0.0f;
 
         ReFresh();
@@ -45,6 +46,7 @@ public class UIController : MonoBehaviour {
         {
             skillBar.fillAmount = 0;
             skillAmountText.text = "0%";
+            previousSkillAmount = 0.0f;
         }
         else if (previousSkillAmount < playerstatusComponent.SkillAmount
            && skillBar.fillAmount < 1.0f)
