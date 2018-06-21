@@ -42,28 +42,16 @@ public class MastarPlayerController : MonoBehaviour
     private BombObjectPool bombSkill;
     [SerializeField]
     Animator skillAnimator;
-<<<<<<< HEAD
+
     [SerializeField]
     PlayerStatus playerStatus;
     bool readyToBombSkill = false;
-    
-=======
 
 
     float time;
 
-    [SerializeField]
-    bool readyToBombSkill = true;
 
-<<<<<<< HEAD
 
-=======
-=======
-    [SerializeField]
-    bool readyToBombSkill = true;
->>>>>>> edd095cb5ee9431a1557d974903a1cd0729bfa01
->>>>>>> 0f5d878fab3b5eb3759959908a77774675992a97
->>>>>>> c8af49f0746b4918f788ed0c6fcf62d5dbcd0e64
 
     private void Awake()
     {
@@ -129,64 +117,33 @@ public class MastarPlayerController : MonoBehaviour
         );
     }
 
-<<<<<<< HEAD
-=======
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag == "EnemyPlane")
         {
-            enemyObjectPool.EnemyPlaneEnqueue(other.gameObject);
+            EnemyObjectPool.enemyPlanes.Enqueue(other.gameObject);
+           // enemyObjectPool.EnemyPlaneEnqueue(other.gameObject);
             other.gameObject.SetActive(false);
-<<<<<<< HEAD
 
-=======
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-          
-=======
->>>>>>> edd095cb5ee9431a1557d974903a1cd0729bfa01
->>>>>>> 0f5d878fab3b5eb3759959908a77774675992a97
->>>>>>> c8af49f0746b4918f788ed0c6fcf62d5dbcd0e64
         }
 
         if (other.tag == "EnemySpacePlane")
         {
-            enemyObjectPool.EnemyPlaneSpaceEnqueue(other.gameObject);
+            EnemyObjectPool.enemySpacePlanes.Enqueue(other.gameObject);
+         //   enemyObjectPool.EnemyPlaneSpaceEnqueue(other.gameObject);
             other.gameObject.SetActive(false);
-<<<<<<< HEAD
 
-          
-=======
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-          
-=======
->>>>>>> edd095cb5ee9431a1557d974903a1cd0729bfa01
->>>>>>> 0f5d878fab3b5eb3759959908a77774675992a97
->>>>>>> c8af49f0746b4918f788ed0c6fcf62d5dbcd0e64
         }
 
         if(other.tag == "EnemyBullet")
         {
-            bulletObjectPool.EnemyBulletsEnqueue(other.gameObject);
+            BulletObjectPool.enemyBullets.Enqueue(other.gameObject);
             other.gameObject.SetActive(false);
-<<<<<<< HEAD
 
-=======
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-           
-=======
->>>>>>> edd095cb5ee9431a1557d974903a1cd0729bfa01
->>>>>>> 0f5d878fab3b5eb3759959908a77774675992a97
->>>>>>> c8af49f0746b4918f788ed0c6fcf62d5dbcd0e64
         }
     }
-
->>>>>>> 0f5d878fab3b5eb3759959908a77774675992a97
+    
     private void SetState(IState state)
     {
         this.playerState = state;
