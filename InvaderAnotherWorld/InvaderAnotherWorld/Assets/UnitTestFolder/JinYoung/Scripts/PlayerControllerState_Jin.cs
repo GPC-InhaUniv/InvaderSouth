@@ -86,49 +86,6 @@ public class PlayerControllerState_Jin : MonoBehaviour
         );
     }
 
-
-
-    //private void OnTriggerEnter(Collider other)
-    //{
-    //    if (other.tag == "EnemyPlane")
-    //    {
-    //        enemyObjectPool.EnemyPlaneEnqueue(other.gameObject);
-    //        other.gameObject.SetActive(false);
-
-
-    //        if (other.tag == "EnemySpacePlane")
-    //        {
-    //            enemyObjectPool.EnemyPlaneSpaceEnqueue(other.gameObject);
-    //            other.gameObject.SetActive(false);
-
-    //        }
-
-    //        if (other.tag == "EnemyBullet")
-    //        {
-    //            bulletObjectPool.EnemyBulletsEnqueue(other.gameObject);
-    //            other.gameObject.SetActive(false);
-
-    //        }
-
-
-    //    }
-
-    //    if (other.tag == "EnemySpacePlane")
-    //    {
-    //        enemyObjectPool.EnemyPlaneSpaceEnqueue(other.gameObject);
-    //        other.gameObject.SetActive(false);
-
-            
-    //    }
-
-    //    if(other.tag == "EnemyBullet")
-    //    {
-    //        bulletObjectPool.EnemyBulletsEnqueue(other.gameObject);
-    //        other.gameObject.SetActive(false);
-
-    //    }
-    //}
-
     private void SetState(IState state)
     {
         this.playerState = state;

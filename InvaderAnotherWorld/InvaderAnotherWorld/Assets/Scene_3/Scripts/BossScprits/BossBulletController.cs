@@ -26,7 +26,6 @@ public class BossBulletController : MonoBehaviour {
 
     public void Initialize()
     {
-        autoActiveFalseTime = 2.0f;
         aliveMissleTime = 0.0f;
         gameObject.transform.rotation = Quaternion.identity;
         gameObject.transform.position = new Vector3(0, 0, 0);

@@ -30,12 +30,15 @@ public class MastarPlayerController : MonoBehaviour
     private EnemyObjectPool enemyObjectPool;
     private PlayerStatus playerStatusComponent;
     private IState playerState;
-    private bool isGameOver;
-    public bool IsGameOver
+    private bool isGameResult;
+    public bool IsGameResult
     {
-        get { return isGameOver; }
+        get { return isGameResult; }
         private set { }
     }
+
+    public delegate void GameResult(bool isGameResult);
+    public GameResult GameResultDelegate;
 
     //스킬 풀, 스킬애니메이션
     [SerializeField]
@@ -45,18 +48,15 @@ public class MastarPlayerController : MonoBehaviour
 
     [SerializeField]
     PlayerStatus playerStatus;
-    bool readyToBombSkill = false;
 
-
-    float time;
-
-
-
+    [SerializeField]
+    ParticleSystem attacedEffect;
 
     private void Awake()
     {
+        isGameResult = true;
         playerStatusComponent = GetComponent<PlayerStatus>();
-        mastarBoundary = new MastarBoundary(6, -6, 8, -4);
+        mastarBoundary = new MastarBoundary(6, -6, 12, -2);
         playerState = new LivingState();
         bulletSpawn = GameObject.Find("BoltSpawn").GetComponentInChildren<Transform>();
         playerMeshCollider = this.GetComponentInChildren<MeshCollider>();
@@ -64,17 +64,16 @@ public class MastarPlayerController : MonoBehaviour
         rigidbody3D = this.gameObject.GetComponent<Rigidbody>();
         bulletObjectPool = GameObject.Find("GameObjectPool").GetComponent<BulletObjectPool>();
         enemyObjectPool = GameObject.Find("GameObjectPool").GetComponent<EnemyObjectPool>();
-        playerStatus = gameObject.GetComponentInChildren<PlayerStatus>();
 
         bombSkill = GameObject.Find("GameObjectPool").GetComponent<BombObjectPool>();
         skillAnimator = gameObject.GetComponentInChildren<Animator>();
-    }
 
-    private void Update()
-    {
-        //playerState.Behavior();
-    }
+        playerStatus = gameObject.GetComponentInChildren<PlayerStatus>();
 
+        attacedEffect = gameObject.GetComponentInChildren<ParticleSystem>();
+        
+    }
+    
     private void FixedUpdate()
     {
         playerState.Behavior();
@@ -84,10 +83,10 @@ public class MastarPlayerController : MonoBehaviour
             bulletObjectPool.SetPlayerBulletOfPositionAndActive(bulletSpawn);
         }
 
-        if (Input.GetKeyDown(KeyCode.Space)&& readyToBombSkill)
+        if (Input.GetKeyDown(KeyCode.Space)&& playerStatus.SkillAmount>=1.0f)
         {
             Debug.Log("필살기 사용!");
-
+            playerStatus.SkillAmount = 0f;
             skillAnimator.Play("SkillAnim");
             bombSkill.StartBombing();
             
@@ -96,14 +95,17 @@ public class MastarPlayerController : MonoBehaviour
             Invoke("SetMeshCollider", 1.2f);
         }
 
-        if(isGameOver != true)
+        if(isGameResult == true)
         {
+            GameResultDelegate(isGameResult);
+
             if (playerStatusComponent.PlayerHp <= 0)
             {
                 SetState(new DeadState());
                 playerMeshRenderer.enabled = false;
                 playerMeshCollider.enabled = false;
-                isGameOver = true;
+                isGameResult = false;
+                GameResultDelegate(isGameResult);
                 Debug.Log("플레이어 죽음");
             }
         }
@@ -120,30 +122,21 @@ public class MastarPlayerController : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "EnemyPlane")
+        if (other.tag == "Enemy")
         {
-            EnemyObjectPool.enemyPlanes.Enqueue(other.gameObject);
-           // enemyObjectPool.EnemyPlaneEnqueue(other.gameObject);
-            other.gameObject.SetActive(false);
-
+            playerStatusComponent.Damaged();
         }
 
-        if (other.tag == "EnemySpacePlane")
+        if (other.tag == "EnemyBullet")
         {
-            EnemyObjectPool.enemySpacePlanes.Enqueue(other.gameObject);
-         //   enemyObjectPool.EnemyPlaneSpaceEnqueue(other.gameObject);
-            other.gameObject.SetActive(false);
-
-        }
-
-        if(other.tag == "EnemyBullet")
-        {
+            playerStatusComponent.Damaged();
             BulletObjectPool.enemyBullets.Enqueue(other.gameObject);
             other.gameObject.SetActive(false);
 
+            attacedEffect.Play(true);
         }
     }
-    
+
     private void SetState(IState state)
     {
         this.playerState = state;

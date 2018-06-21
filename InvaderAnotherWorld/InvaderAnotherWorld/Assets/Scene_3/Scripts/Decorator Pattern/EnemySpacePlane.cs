@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class EnemySpacePlane : Enemy
 {
-    public PlayerInfo PlayerInfoDelegater;
 
     private void Start()
     {
@@ -39,11 +38,17 @@ public class EnemySpacePlane : Enemy
             EnemyObjectPool.enemySpacePlanes.Enqueue(this.gameObject);
             this.gameObject.SetActive(false);
         }
+        if (other.tag == "Bomb")
+        {
+            life = 2;
+            EnemyObjectPool.enemySpacePlanes.Enqueue(this.gameObject);
+            this.gameObject.SetActive(false);
+        }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.tag == "Boundary" || other.tag == "Player")
+        if (other.tag == "Boundary")
         {
             life = 2;
             EnemyObjectPool.enemySpacePlanes.Enqueue(this.gameObject);
@@ -54,10 +59,17 @@ public class EnemySpacePlane : Enemy
     private void CollisionPlayerBullet(Collider other)
     {
         if (other.tag == "PlayerBullet")
+        {
             life -= 1;
+            BulletObjectPool.playerBullets.Enqueue(other.gameObject);
+            other.gameObject.SetActive(false);
+        }
+
         else if (other.tag == "PetMissile")
+        {
             life -= 0.5f;
-      
+
+        }
 
         if (life <= 0)
         {

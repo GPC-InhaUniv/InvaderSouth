@@ -11,7 +11,6 @@ public class GameObjectPoolController : MonoBehaviour
     {
         player = this.transform.Find("Player").gameObject;
         LoadingSceneController = GameObject.Find("LoadingSceneManager").GetComponent<LoadingSceneController>();
-        CheckPlayerItemList();
         switch (GameManager.Instance.CurrentStage)
         {
 
@@ -45,7 +44,7 @@ public class GameObjectPoolController : MonoBehaviour
         GetComponent<BulletObjectPool>().enabled = true;
         GetComponent<EnemyObjectPool>().enabled = true;
         GetComponent<BombObjectPool>().enabled = true;
-        GetComponent<PetObjectPool>().enabled = true;
+        CheckPlayerItemList();
         player.SetActive(true);
         DontDestroyOnLoad(gameObject);
         Debug.Log("GameObjectPool 0스테이지 작동");
@@ -58,7 +57,7 @@ public class GameObjectPoolController : MonoBehaviour
         GetComponent<BulletObjectPool>().enabled = true;
         GetComponent<BossEnemyPool>().enabled = true;
         GetComponent<BombObjectPool>().enabled = true;
-        GetComponent<PetObjectPool>().enabled = true;
+        CheckPlayerItemList();
         player.SetActive(true);
         DontDestroyOnLoad(gameObject);
         Debug.Log("GameObjectPool 1 스테이지 작동");
@@ -71,7 +70,7 @@ public class GameObjectPoolController : MonoBehaviour
         GetComponent<BulletObjectPool>().enabled = true;
         GetComponent<BossEnemyPool>().enabled = true;
         GetComponent<BombObjectPool>().enabled = true;
-        GetComponent<PetObjectPool>().enabled = true;
+        CheckPlayerItemList();
         player.SetActive(true);
         DontDestroyOnLoad(gameObject);
         Debug.Log("GameObjectPool 2 스테이지 작동");
@@ -83,6 +82,7 @@ public class GameObjectPoolController : MonoBehaviour
         {
             //펫 objectpool 작동
             Debug.Log("펫 사용");
+            GetComponent<PetObjectPool>().enabled = true;
             GameManager.Instance.BuyItemList[2]=false;
         }
     }

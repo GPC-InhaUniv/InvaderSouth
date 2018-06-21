@@ -37,11 +37,17 @@ public class EnemyPlane : Enemy
             EnemyObjectPool.enemyPlanes.Enqueue(this.gameObject);
             this.gameObject.SetActive(false);
         }
+        if (other.tag == "Bomb")
+        {
+            life = 1;
+            EnemyObjectPool.enemyPlanes.Enqueue(this.gameObject);
+            this.gameObject.SetActive(false);
+        }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.tag == "Boundary" || other.tag == "Player")
+        if (other.tag == "Boundary")
         {
             life = 1;
             EnemyObjectPool.enemyPlanes.Enqueue(this.gameObject);
@@ -52,10 +58,17 @@ public class EnemyPlane : Enemy
     private void CollisionPlayerBullet(Collider other)
     {
         if (other.tag == "PetMissile")
+        {
             life -= 0.5f;
-        if (other.tag == "PlayerBullet")
-            life -= 1;
+            // 유도 미사일 꺼준다.
+        }
 
+        if (other.tag == "PlayerBullet")
+        {
+            life -= 1;
+            BulletObjectPool.playerBullets.Enqueue(other.gameObject);
+            other.gameObject.SetActive(false);
+        }
 
         if (life <= 0)
         {

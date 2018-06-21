@@ -121,7 +121,15 @@ public class DataManager : MonoBehaviour
 
     public void SetGameManagerData()
     {
+        
         UserDataRecord userData = new UserDataRecord();
+        if(userData==null)
+        {
+            while(userData==null)
+            {
+                userData = new UserDataRecord();
+            }
+        }
         GameManager.Instance.PlayerName=info.Info.AccountInfo.Username;
         info.Info.UserData.TryGetValue("PlayerMoney", out userData);
         int.TryParse(userData.Value, out GameManager.Instance.PlayerMoneyCount);
