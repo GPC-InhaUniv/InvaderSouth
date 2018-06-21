@@ -45,7 +45,9 @@ public class MastarPlayerController : MonoBehaviour
 
     [SerializeField]
     PlayerStatus playerStatus;
-    //bool readyToBombSkill = false;
+
+    [SerializeField]
+    ParticleSystem attacedEffect;
 
     private void Awake()
     {
@@ -64,6 +66,8 @@ public class MastarPlayerController : MonoBehaviour
         skillAnimator = gameObject.GetComponentInChildren<Animator>();
 
         playerStatus = gameObject.GetComponentInChildren<PlayerStatus>();
+
+        attacedEffect = gameObject.GetComponentInChildren<ParticleSystem>();
         
     }
     
@@ -122,6 +126,8 @@ public class MastarPlayerController : MonoBehaviour
             playerStatusComponent.Damaged();
             BulletObjectPool.enemyBullets.Enqueue(other.gameObject);
             other.gameObject.SetActive(false);
+
+            attacedEffect.Play(true);
         }
     }
 

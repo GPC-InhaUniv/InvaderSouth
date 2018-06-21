@@ -24,7 +24,8 @@ public class UIController : MonoBehaviour {
     void Start()
     {
         playerstatusComponent = GameObject.Find("Player").GetComponent<PlayerStatus>();
-        skillBar.fillAmount = playerstatusComponent.SkillAmount;
+        skillBar.fillAmount = playerstatusComponent.SkillAmount/2;
+        skillAmountText.text = (playerstatusComponent.SkillAmount*100).ToString() + "%";
         previousSkillAmount = 0.0f;
 
         ReFresh();
@@ -45,20 +46,21 @@ public class UIController : MonoBehaviour {
         {
             skillBar.fillAmount = 0;
             skillAmountText.text = "0%";
+            previousSkillAmount = 0.0f;
         }
-        else if (previousSkillAmount < playerstatusComponent.SkillAmount
-           && skillBar.fillAmount < 1.0f)
+        else if (previousSkillAmount < playerstatusComponent.SkillAmount/2
+           && skillBar.fillAmount < 0.5f)
         {
-            skillBar.fillAmount += 0.01f;
-            previousSkillAmount += 0.01f;
-            if (previousSkillAmount >= 1.0f ||
-                skillBar.fillAmount >= 1.0f)
+            skillBar.fillAmount += 0.005f;
+            previousSkillAmount += 0.005f;
+            if (previousSkillAmount >= 0.5f ||
+                skillBar.fillAmount >= 0.5f)
             {
-                previousSkillAmount = 1.0f;
-                skillBar.fillAmount = 1.0f;
+                previousSkillAmount = 0.5f;
+                skillBar.fillAmount = 0.5f;
             }
 
-            skillAmountText.text = (Math.Truncate(skillBar.fillAmount * 100)).ToString() + "%";
+            skillAmountText.text = (Math.Truncate(skillBar.fillAmount*2 * 100)).ToString() + "%";
         }
 
         scoreText.text = playerstatusComponent.Score.ToString();
