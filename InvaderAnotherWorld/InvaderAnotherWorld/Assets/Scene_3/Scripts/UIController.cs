@@ -34,30 +34,37 @@ public class UIController : MonoBehaviour {
     public void ReFresh()
     {
         hpBar.fillAmount = playerstatusComponent.PlayerHp/10f;
+
         if (hpBar.fillAmount >= 0.3f && hpBar.fillAmount <= 0.5f)
             hpBar.color = Color.yellow;
         else if (hpBar.fillAmount < 0.3f)
             hpBar.color = Color.red;
-    }
 
-    // Update is called once per frame
-    void Update () {
 
-        if(previousSkillAmount< playerstatusComponent.SkillAmount 
-            &&skillBar.fillAmount<1.0f)
+        if (playerstatusComponent.SkillAmount == 0)
+            skillBar.fillAmount = 0;
+
+        else if (previousSkillAmount < playerstatusComponent.SkillAmount
+           && skillBar.fillAmount < 1.0f)
         {
             skillBar.fillAmount += 0.01f;
             previousSkillAmount += 0.01f;
-            if(previousSkillAmount>=1.0f ||
-                skillBar.fillAmount>=1.0f)
+            if (previousSkillAmount >= 1.0f ||
+                skillBar.fillAmount >= 1.0f)
             {
                 previousSkillAmount = 1.0f;
                 skillBar.fillAmount = 1.0f;
             }
 
-            skillAmountText.text = (Math.Truncate(skillBar.fillAmount * 100)).ToString()+"%";
+            skillAmountText.text = (Math.Truncate(skillBar.fillAmount * 100)).ToString() + "%";
         }
+
         scoreText.text = playerstatusComponent.Score.ToString();
+
+    }
+
+    // Update is called once per frame
+    void Update () {
 
         ReFresh();
     }

@@ -11,7 +11,6 @@ public class GameObjectPoolController : MonoBehaviour
     {
         player = this.transform.Find("Player").gameObject;
         LoadingSceneController = GameObject.Find("LoadingSceneManager").GetComponent<LoadingSceneController>();
-        CheckPlayerItemList();
         switch (GameManager.Instance.CurrentStage)
         {
 
