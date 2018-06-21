@@ -126,6 +126,10 @@ public class BossController : MonoBehaviour
                 IsBossAlive = false;
             }
         }
+        if (other.tag == "Bomb")
+        {
+
+        }
     }
 
 
