@@ -45,7 +45,7 @@ public class MastarPlayerController : MonoBehaviour
 
     [SerializeField]
     PlayerStatus playerStatus;
-    bool readyToBombSkill = false;
+    //bool readyToBombSkill = false;
 
     private void Awake()
     {
@@ -58,12 +58,16 @@ public class MastarPlayerController : MonoBehaviour
         rigidbody3D = this.gameObject.GetComponent<Rigidbody>();
         bulletObjectPool = GameObject.Find("GameObjectPool").GetComponent<BulletObjectPool>();
         enemyObjectPool = GameObject.Find("GameObjectPool").GetComponent<EnemyObjectPool>();
-        playerStatus = gameObject.GetComponentInChildren<PlayerStatus>();
+        
+        
 
         bombSkill = GameObject.Find("GameObjectPool").GetComponent<BombObjectPool>();
         skillAnimator = gameObject.GetComponentInChildren<Animator>();
-    }
 
+        playerStatus = gameObject.GetComponentInChildren<PlayerStatus>();
+        
+    }
+    
     private void FixedUpdate()
     {
         playerState.Behavior();
@@ -73,10 +77,10 @@ public class MastarPlayerController : MonoBehaviour
             bulletObjectPool.SetPlayerBulletOfPositionAndActive(bulletSpawn);
         }
 
-        if (Input.GetKeyDown(KeyCode.Space)&& readyToBombSkill)
+        if (Input.GetKeyDown(KeyCode.Space)&& playerStatus.SkillAmount>=1.0f)
         {
             Debug.Log("필살기 사용!");
-
+            playerStatus.SkillAmount = 0f;
             skillAnimator.Play("SkillAnim");
             bombSkill.StartBombing();
             
