@@ -3,35 +3,40 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class GridMisslie : MonoBehaviour {
-    public Transform target;
-    public float speed = 15f;
-    public float rotateSpeed = 5;
+
+    [SerializeField]
+    private Transform target;
+    [SerializeField]
+    private float speed = 15f;
+    [SerializeField]
+    private float rotateSpeed = 5;
     //bool ifTarget = false;
     Rigidbody rb;
-    
+
+    [SerializeField]
+    private float autoActiveFalseTime;
+    [SerializeField]
+    private float aliveMissleTime;
+
     // Use this for initialization
     void Start ()
     {
         rb = GetComponent<Rigidbody>();
+        autoActiveFalseTime = 2f;
+        aliveMissleTime = 0f;
     }
-    //Update is called once per frame
-    void FixedUpdate () {
-        //if(!ifTarget)
-        //{
-        //    rb.transform.Translate(new Vector3(0, 0, 1) * speed * Time.deltaTime);
-        //    SetTarget();
-        //}
-        //else if (ifTarget)
-        //{
-        //    Vector3 direction = target.position - rb.position;
-        //    //direction.Normalize();
-        //    Quaternion q = Quaternion.LookRotation(direction);
-        //    Quaternion s = Quaternion.Slerp(transform.rotation, q, rotateSpeed * Time.deltaTime);
-        //    rb.rotation = s;
-        //    rb.transform.Translate(new Vector3(0, 0, 1) * speed * Time.deltaTime);
-
-        //}
-        
+    private void Update()
+    {
+        if (aliveMissleTime > autoActiveFalseTime)
+        {
+            Initialize();
+            EnqueueAndSetActiveToObject();
+        }
+        else
+            aliveMissleTime += Time.deltaTime;
+    }
+    void FixedUpdate ()
+    {
         if (target!=null)
         {
             RuningToEnemy(target);
@@ -39,11 +44,8 @@ public class GridMisslie : MonoBehaviour {
         else
         {
             SetTarget();
-            //Debug.Log("settarget "+rb);
             rb.transform.Translate(new Vector3(0, 0, 1) * speed * Time.deltaTime);
         }
-        //Debug.Log(target);
-        
     }
     void RuningToEnemy(Transform target)
     {
@@ -54,7 +56,7 @@ public class GridMisslie : MonoBehaviour {
         rb.transform.Translate(new Vector3(0, 0, 1) * speed * Time.deltaTime);
         
     }
-    public void SetTarget()
+    void SetTarget()
     {
         if (GameObject.FindGameObjectWithTag("Enemy") != null)
         {
@@ -74,12 +76,17 @@ public class GridMisslie : MonoBehaviour {
             }
         }
     }
+
+    
+
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Enemy")
         {
             Debug.Log("적과 충돌");
-            PetObjectPool.PetMissilesEnqueue(gameObject);
+            Initialize();
+            EnqueueAndSetActiveToObject();
         }
     }
     private void OnTriggerExit(Collider other)
@@ -87,7 +94,18 @@ public class GridMisslie : MonoBehaviour {
         if (other.tag == "Boundary")
         {
             Debug.Log("바운더리 충돌");
-            PetObjectPool.PetMissilesEnqueue(gameObject);
+            Initialize();
+            EnqueueAndSetActiveToObject();
         }
+    }
+    public void Initialize()
+    {
+        aliveMissleTime = 0.0f;
+        target = null;
+    }
+    void EnqueueAndSetActiveToObject()
+    {
+        PetObjectPool.PetMissilesEnqueue(gameObject);
+        gameObject.SetActive(false);
     }
 }

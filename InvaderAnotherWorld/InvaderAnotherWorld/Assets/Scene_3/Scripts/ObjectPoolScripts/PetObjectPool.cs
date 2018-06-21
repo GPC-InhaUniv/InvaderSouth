@@ -10,7 +10,7 @@ public class PetObjectPool : MonoBehaviour {
     private GameObject petMissilePrefab;
     public static Queue<GameObject> petMissiles;
     private GameObject petMissile;
-    private const int petMissileCount = 10;
+    private const int petMissileCount = 3;
     
 
     [SerializeField]
@@ -39,10 +39,9 @@ public class PetObjectPool : MonoBehaviour {
     public void SetPetMissileOfPositionAndActive(Transform p)
     {
         petMissile = petMissiles.Dequeue();
-        petMissile.SetActive(true);
         petMissile.transform.rotation = p.rotation;
         petMissile.transform.position = p.position;
-        
+        petMissile.SetActive(true);
     }
 
     public static void PetMissilesEnqueue(GameObject other)
