@@ -33,15 +33,24 @@ public class StageManager : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
-        if(time <= 100)
+        if(GameManager.Instance.CurrentStage == 0)
+        {
+            if (time <= 100)
+            {
+                time += Time.deltaTime;
+                Debug.Log("Stage1 : " + time);
+
+                if (Input.GetKey(KeyCode.S) == true)
+                {
+                    time += 10;
+                }
+            }
+        }
+
+        else if(GameManager.Instance.CurrentStage == 1)
         {
             time += Time.deltaTime;
-            //Debug.Log(time);
-
-            if(Input.GetKey(KeyCode.S) == true)
-            {
-                time += 10;
-            }
+            Debug.Log("Stage2 : " + time);
         }
 
         //if (KillEnemyCount>=maxEnemyCount)

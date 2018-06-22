@@ -38,6 +38,9 @@ public class SparkBombController : MonoBehaviour {
         }
         if(autoSetActiveFlaseTime>=0.3f)
         {
+            autoSetActiveFlaseTime = 0;
+            bombTime = 0;
+            EnemyObjectPool.SparkBoms.Enqueue(this.gameObject);
             gameObject.SetActive(false);
         }
 

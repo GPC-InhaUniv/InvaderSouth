@@ -26,7 +26,7 @@ public class EnemyPlane : Enemy
         if (other.tag == "Player")
         {
             life = 1;
-            EnemyObjectPool.enemyPlanes.Enqueue(this.gameObject);
+            EnemyObjectPool.EnemyPlanes.Enqueue(this.gameObject);
             StageManager.KillEnemy();
             this.gameObject.SetActive(false);
         }
@@ -34,7 +34,7 @@ public class EnemyPlane : Enemy
         {
             life = 1;
             StageManager.KillEnemy();
-            EnemyObjectPool.enemyPlanes.Enqueue(this.gameObject);
+            EnemyObjectPool.EnemyPlanes.Enqueue(this.gameObject);
             this.gameObject.SetActive(false);
         }
     }
@@ -45,7 +45,7 @@ public class EnemyPlane : Enemy
         {
             life = 1;
             StageManager.KillEnemy();
-            EnemyObjectPool.enemyPlanes.Enqueue(this.gameObject);
+            EnemyObjectPool.EnemyPlanes.Enqueue(this.gameObject);
             this.gameObject.SetActive(false);
         }
     }
@@ -70,7 +70,7 @@ public class EnemyPlane : Enemy
             life = 1;
             StageManager.KillEnemy();
             PlayerInfoDelegater(score, gauge);
-            EnemyObjectPool.enemyPlanes.Enqueue(this.gameObject);
+            EnemyObjectPool.EnemyPlanes.Enqueue(this.gameObject);
             this.gameObject.SetActive(false);
         }
     }
