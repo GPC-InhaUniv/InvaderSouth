@@ -30,12 +30,9 @@ public class MastarPlayerController : MonoBehaviour
     private EnemyObjectPool enemyObjectPool;
     private PlayerStatus playerStatusComponent;
     private IState playerState;
-    private bool isGameResult;
-    public bool IsGameResult
-    {
-        get { return isGameResult; }
-        private set { }
-    }
+
+    public bool IsGameResult;
+
 
     public delegate void GameResult(bool isGameResult);
     public GameResult GameResultDelegate;
@@ -54,7 +51,7 @@ public class MastarPlayerController : MonoBehaviour
 
     private void Awake()
     {
-        isGameResult = true;
+        IsGameResult = true;
         playerStatusComponent = GetComponent<PlayerStatus>();
         mastarBoundary = new MastarBoundary(6, -6, 12, -2);
         playerState = new LivingState();
@@ -95,17 +92,17 @@ public class MastarPlayerController : MonoBehaviour
             Invoke("SetMeshCollider", 1.2f);
         }
 
-        if(isGameResult == true)
+        if(IsGameResult == true)
         {
-            GameResultDelegate(isGameResult);
+            GameResultDelegate(IsGameResult);
 
             if (playerStatusComponent.PlayerHp <= 0)
             {
                 SetState(new DeadState());
                 playerMeshRenderer.enabled = false;
                 playerMeshCollider.enabled = false;
-                isGameResult = false;
-                GameResultDelegate(isGameResult);
+                IsGameResult = false;
+                GameResultDelegate(IsGameResult);
                 Debug.Log("플레이어 죽음");
             }
         }
