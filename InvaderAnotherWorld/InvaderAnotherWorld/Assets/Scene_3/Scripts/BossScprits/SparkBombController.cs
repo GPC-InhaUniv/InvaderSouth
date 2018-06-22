@@ -21,34 +21,29 @@ public class SparkBombController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if(2.0f>bombTime)
+		if(5.0f > bombTime)
         {
             bombTime += Time.deltaTime;
         }
         else
         {
             particleSystem.SetActive(true);
-            sparkCapsule.SetActive(false);
-            
-                
+            sparkCapsule.SetActive(false);    
         }
         if(particleSystem.activeInHierarchy)
         {
             autoSetActiveFlaseTime += Time.deltaTime;
         }
-        if(autoSetActiveFlaseTime>=1f)
+
+        if(autoSetActiveFlaseTime>=0.2f)
         {
-<<<<<<< HEAD
-
             autoSetActiveFlaseTime = 0;
             bombTime = 0;
             EnemyObjectPool.SparkBoms.Enqueue(this.gameObject);
-=======
             autoSetActiveFlaseTime = 0;
             bombTime = 0;
             EnemyObjectPool.SparkBoms.Enqueue(this.gameObject);
 
->>>>>>> 97984a709e0a06981b72517083b23da5f54396c8
             gameObject.SetActive(false);
         }
 
