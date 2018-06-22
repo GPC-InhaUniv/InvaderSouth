@@ -67,6 +67,7 @@ public class EnemyObjectPool : MonoBehaviour
                 yield return null;
             if (StageManager.time <= 10)
             {
+                
                 enemyPlane = enemyPlanes.Dequeue();
                 enemyPlane.SetActive(true);
                 enemyPlane.transform.position = transform.position;
@@ -85,6 +86,8 @@ public class EnemyObjectPool : MonoBehaviour
 
             if (StageManager.time > 10 && StageManager.time <= 90)
             {
+
+               
                 enemyPlane = enemyPlanes.Dequeue();
                 enemyPlane.SetActive(true);
                 enemyPlane.transform.position = transform.position;
@@ -123,6 +126,7 @@ public class EnemyObjectPool : MonoBehaviour
                 yield return null;
             if (StageManager.time > 10 && StageManager.time <= 65)
             {
+
                 enemySpacePlane = enemySpacePlanes.Dequeue();
                 enemySpacePlane.SetActive(true);
                 enemySpacePlane.transform.position = transform.position;
@@ -131,6 +135,7 @@ public class EnemyObjectPool : MonoBehaviour
 
             if (StageManager.time > 65 && StageManager.time <= 90)
             {
+
                 enemySpacePlane = enemySpacePlanes.Dequeue();
                 enemySpacePlane.SetActive(true);
                 enemySpacePlane.transform.position = transform.position;
@@ -145,6 +150,7 @@ public class EnemyObjectPool : MonoBehaviour
             {
                 break;
             }
+
         }
     }
 
