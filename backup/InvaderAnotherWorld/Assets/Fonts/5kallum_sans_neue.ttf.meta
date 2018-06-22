@@ -1,0 +1,22 @@
+fileFormatVersion: 2
+guid: a73a66007c939a445bcf34d57d2fec6f
+timeCreated: 1529475804
+licenseType: Free
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: 5Kallum Sans Neue
+  fontNames:
+  - 5Kallum Sans Neue
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
