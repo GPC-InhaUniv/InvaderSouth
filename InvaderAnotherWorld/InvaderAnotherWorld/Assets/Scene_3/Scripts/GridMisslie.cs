@@ -54,7 +54,8 @@ public class GridMisslie : MonoBehaviour {
         Quaternion s = Quaternion.Slerp(transform.rotation, q, rotateSpeed * Time.deltaTime);
         rb.rotation = s;
         rb.transform.Translate(new Vector3(0, 0, 1) * speed * Time.deltaTime);
-        
+        Debug.Log(direction);
+        //rb.transform.position = Vector3.Lerp(rb.transform.position, target.transform.position, speed * Time.deltaTime);
     }
     void SetTarget()
     {
