@@ -40,7 +40,7 @@ public class MoveOnPath : MonoBehaviour {
         }
         if (currentWayPointID>=pathToFollow.pathObjects.Count)
         {
-            currentWayPointID = 0;
+            gameObject.GetComponent<MoveOnPath>().enabled =false;
         }
 
     }
