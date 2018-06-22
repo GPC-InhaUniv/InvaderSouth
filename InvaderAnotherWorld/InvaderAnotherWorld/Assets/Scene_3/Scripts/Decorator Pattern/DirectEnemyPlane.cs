@@ -24,13 +24,13 @@ public class DirectEnemyPlane : Enemy
         if (other.tag == "Player")
         {
             life = 1;
-            EnemyObjectPool.enemyPlanes.Enqueue(this.gameObject);
+            EnemyObjectPool.EnemyDirectPlanes.Enqueue(this.gameObject);
             this.gameObject.SetActive(false);
         }
         if (other.tag == "Bomb")
         {
             life = 1;
-            EnemyObjectPool.enemyPlanes.Enqueue(this.gameObject);
+            EnemyObjectPool.EnemyDirectPlanes.Enqueue(this.gameObject);
             this.gameObject.SetActive(false);
         }
     }
@@ -40,7 +40,7 @@ public class DirectEnemyPlane : Enemy
         if (other.tag == "Boundary")
         {
             life = 1;
-            EnemyObjectPool.enemyPlanes.Enqueue(this.gameObject);
+            EnemyObjectPool.EnemyDirectPlanes.Enqueue(this.gameObject);
             this.gameObject.SetActive(false);
         }
     }
@@ -64,7 +64,7 @@ public class DirectEnemyPlane : Enemy
         {
             life = 1;
             PlayerInfoDelegater(score, gauge);
-            EnemyObjectPool.enemyPlanes.Enqueue(this.gameObject);
+            EnemyObjectPool.EnemyDirectPlanes.Enqueue(this.gameObject);
             this.gameObject.SetActive(false);
         }
     }

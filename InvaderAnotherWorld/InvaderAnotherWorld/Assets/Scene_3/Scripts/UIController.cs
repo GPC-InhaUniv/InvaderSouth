@@ -194,6 +194,10 @@ public class UIController : MonoBehaviour
             getGoldAmount *= 2;
             GameManager.Instance.BuyItemList[0] = false;
         }
+        else
+        {
+            resultGoldText.text = getGoldAmount.ToString();
+        }
         Debug.Log(getGoldAmount + "원을 벌었음");
         DataManager.Instance.BuyMoney(getGoldAmount);
     }
