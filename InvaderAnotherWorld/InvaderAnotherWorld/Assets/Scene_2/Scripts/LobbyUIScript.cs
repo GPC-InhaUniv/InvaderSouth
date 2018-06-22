@@ -118,8 +118,8 @@ public class LobbyUIScript : MonoBehaviour
     {
         if (lastCompletedStageNumber >= 1)
             stageTwoSelectionButton.interactable = true;
-        if (lastCompletedStageNumber == 2)
-            stageThreeSelectionButton.interactable = true;
+        //if (lastCompletedStageNumber == 2)
+        //    stageThreeSelectionButton.interactable = true;
     }
 
     private void SetCharacterSelectionUIPanel()
@@ -141,7 +141,7 @@ public class LobbyUIScript : MonoBehaviour
         stageSelectionUIPanel = GameObject.Find("LobbyUICanvas").transform.Find("StageSelectionUIPanel").gameObject;
         stageOneSelectionButton = stageSelectionUIPanel.transform.Find("StageOneSelectionButton").GetComponent<Button>();
         stageTwoSelectionButton = stageSelectionUIPanel.transform.Find("StageTwoSelectionButton").GetComponent<Button>();
-        stageThreeSelectionButton = stageSelectionUIPanel.transform.Find("StageThreeSelectionButton").GetComponent<Button>();
+       // stageThreeSelectionButton = stageSelectionUIPanel.transform.Find("StageThreeSelectionButton").GetComponent<Button>();
     }
 
     private void SetShopUIPanel()
