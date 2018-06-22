@@ -9,8 +9,8 @@ public class BulletObjectPool : MonoBehaviour
     public static Queue<GameObject> playerBullets;
     private GameObject playerBullet;
     private const int playerBulletCount = 10;
-    private const float fireRate = 0.25f;
-    private float nextFire = 0f;
+    //private const float fireRate = 0.25f;
+    //private float nextFire = 0f;
 
     [SerializeField]
     private GameObject EnemyBulletPrefab;
@@ -47,12 +47,12 @@ public class BulletObjectPool : MonoBehaviour
     {
         if (playerBullets.Count > playerBulletCount)
             return;
-        if (Time.time > nextFire && playerBullets.Count != 0)
+        if (playerBullets.Count != 0)//Time.time > nextFire && 
         {
             playerBullet = playerBullets.Dequeue();
             playerBullet.SetActive(true);
             playerBullet.transform.position = transform.position;
-            nextFire = Time.time + fireRate;
+            //nextFire = Time.time + fireRate;
         }
     }
 
