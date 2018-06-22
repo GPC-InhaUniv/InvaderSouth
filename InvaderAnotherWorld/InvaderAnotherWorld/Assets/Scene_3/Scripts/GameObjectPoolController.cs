@@ -55,6 +55,7 @@ public class GameObjectPoolController : MonoBehaviour
     {
         GetComponent<BackGroundPool>().enabled = true;
         GetComponent<BulletObjectPool>().enabled = true;
+        GetComponent<EnemyObjectPool>().enabled = true;
         GetComponent<BossEnemyPool>().enabled = true;
         GetComponent<BombObjectPool>().enabled = true;
         CheckPlayerItemList();
