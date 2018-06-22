@@ -118,8 +118,8 @@ public class LobbyUIScript : MonoBehaviour
     {
         if (lastCompletedStageNumber >= 1)
             stageTwoSelectionButton.interactable = true;
-        if (lastCompletedStageNumber == 2)
-            stageThreeSelectionButton.interactable = true;
+        //if (lastCompletedStageNumber == 2)
+        //    stageThreeSelectionButton.interactable = true;
     }
 
     private void SetCharacterSelectionUIPanel()
