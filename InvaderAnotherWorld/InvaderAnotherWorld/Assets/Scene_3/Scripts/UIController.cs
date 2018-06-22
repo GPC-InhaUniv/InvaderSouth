@@ -123,12 +123,16 @@ public class UIController : MonoBehaviour
 
     public void OnClickedBackToMainBtn()
     {
+        StageManager.time = 0;
+        StageManager.KillEnemyCount = 0;
         Destroy(gameobjectPool);
         LoadingSceneController.LoadScene("Lobby");
     }
 
     public void OnClickedRestartBtn()
     {
+        StageManager.time = 0;
+        StageManager.KillEnemyCount = 0;
         Destroy(gameobjectPool);
         LoadingSceneController.LoadScene("Main");
     }
@@ -168,8 +172,6 @@ public class UIController : MonoBehaviour
 
     IEnumerator SetGameResult(bool result)
     {
-        StageManager.time = 0;
-        StageManager.KillEnemyCount = 0;
         yield return new WaitForSeconds(1.0f); 
         gameReulstPanel.SetActive(true);
         if (result)
