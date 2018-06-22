@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class EnemyMove : MonoBehaviour {
     private Rigidbody rb;
+    [SerializeField]
     private float speed = -10f;
 
 	void Awake ()
