@@ -3,9 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Mover : MonoBehaviour {
-    public Rigidbody rb;
-    public float speed = 5f;
+public class EnemyMove : MonoBehaviour {
+    private Rigidbody rb;
+    private float speed = -10f;
 
 	void Awake ()
     {

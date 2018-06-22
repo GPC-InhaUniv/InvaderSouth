@@ -31,7 +31,7 @@ public class StageManager : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
-        if(time <= 105)
+        if(time <= 100)
         {
             time += Time.deltaTime;
             Debug.Log(time);

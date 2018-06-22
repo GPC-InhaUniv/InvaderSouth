@@ -55,6 +55,8 @@ public class EnemyObjectPool : MonoBehaviour
     {
         Vector3 position1 = new Vector3(transform.position.x + 4, transform.position.y, transform.position.z);
         Vector3 position2 = new Vector3(transform.position.x - 4, transform.position.y, transform.position.z);
+        Vector3 position3 = new Vector3(transform.position.x + 2, transform.position.y, transform.position.z);
+        Vector3 position4 = new Vector3(transform.position.x - 2, transform.position.y, transform.position.z);
 
         while (true)
         {
@@ -65,6 +67,7 @@ public class EnemyObjectPool : MonoBehaviour
 
             if (enemyPlanes.Count > enemyCount)
                 yield return null;
+
             if (StageManager.time <= 10)
             {
                 enemyPlane = enemyPlanes.Dequeue();
@@ -88,7 +91,7 @@ public class EnemyObjectPool : MonoBehaviour
                 enemyPlane = enemyPlanes.Dequeue();
                 enemyPlane.SetActive(true);
                 enemyPlane.transform.position = transform.position;
-                yield return new WaitForSeconds(3f);
+                yield return new WaitForSeconds(2f);
 
                 enemyPlane = enemyPlanes.Dequeue();
                 enemyPlane.SetActive(true);
@@ -98,6 +101,21 @@ public class EnemyObjectPool : MonoBehaviour
                 enemyPlane = enemyPlanes.Dequeue();
                 enemyPlane.SetActive(true);
                 enemyPlane.transform.position = position2;
+                yield return new WaitForSeconds(2f);
+
+                enemyPlane = enemyPlanes.Dequeue();
+                enemyPlane.SetActive(true);
+                enemyPlane.transform.position = transform.position;
+                yield return new WaitForSeconds(2f);
+
+                enemyPlane = enemyPlanes.Dequeue();
+                enemyPlane.SetActive(true);
+                enemyPlane.transform.position = position3;
+                yield return new WaitForSeconds(2f);
+
+                enemyPlane = enemyPlanes.Dequeue();
+                enemyPlane.SetActive(true);
+                enemyPlane.transform.position = position4;
                 yield return new WaitForSeconds(2f);
             }
 

@@ -21,11 +21,7 @@ public class EnemySpacePlane : Enemy
 
     private void Update()
     {
-        if (Time.time > nextFire)
-        {
-            nextFire = Time.time + fireRate;
-            bulletObjectPool.SetEnemyBulletOfPositionAndActive(bulletSpawn);
-        }
+        FireABullet();
     }
 
     private void OnTriggerEnter(Collider other)

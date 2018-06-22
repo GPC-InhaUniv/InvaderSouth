@@ -2,20 +2,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyPlane : Enemy
+public class DirectEnemyPlane : Enemy
 {
     private void Start()
     {
         life = 1;
         score = 10;
         gauge = 0.05f;
-        movingDecorator = gameObject.AddComponent<RotationMovingDecorator>();
     }
 
     private void FixedUpdate()
     {
         EnemyMove();
-        movingDecorator.EnemyMove();
         FireABullet();
     }
 

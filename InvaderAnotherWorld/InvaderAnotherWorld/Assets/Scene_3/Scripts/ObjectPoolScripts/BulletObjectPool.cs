@@ -43,7 +43,7 @@ public class BulletObjectPool : MonoBehaviour
         }
     }
 
-    public void SetPlayerBulletOfPositionAndActive(Transform p)
+    public void SetPlayerBulletOfPositionAndActive(Transform transform)
     {
         if (playerBullets.Count > playerBulletCount)
             return;
@@ -51,17 +51,18 @@ public class BulletObjectPool : MonoBehaviour
         {
             playerBullet = playerBullets.Dequeue();
             playerBullet.SetActive(true);
-            playerBullet.transform.position = p.position;
+            playerBullet.transform.position = transform.position;
             nextFire = Time.time + fireRate;
         }
     }
 
-    public void SetEnemyBulletOfPositionAndActive(Transform p)
+    public void SetEnemyBulletOfPositionAndActive(Transform transform)
     {
-     
-        enemyBullet = enemyBullets.Dequeue();
-       // Debug.Log("디큐 적 총알 갯수: " + enemyBullets.Count);
-        enemyBullet.SetActive(true);
-        enemyBullet.transform.position = p.position;
+        if(transform.position.z < 20)
+        {
+            enemyBullet = enemyBullets.Dequeue();
+            enemyBullet.SetActive(true);
+            enemyBullet.transform.position = transform.position;
+        }
     }
 }

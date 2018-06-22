@@ -7,8 +7,8 @@ abstract public class Enemy : MonoBehaviour
     protected int score;
     protected float life;
     protected float gauge;
-    protected float speed = 0.05f;
-    protected float fireRate = 3f;
+    protected float speed = 0.12f;
+    protected float fireRate = 2f;
     protected float nextFire = 0.0f;
     protected Transform bulletSpawn;
     protected EnemyObjectPool enemyObjectPool;
@@ -25,6 +25,15 @@ abstract public class Enemy : MonoBehaviour
         bulletObjectPool = GameObject.FindGameObjectWithTag("ObjectPoolManager").GetComponent<BulletObjectPool>();
         enemyObjectPool = GameObject.FindGameObjectWithTag("ObjectPoolManager").GetComponent<EnemyObjectPool>();
         PlayerInfoDelegater += playerStatus.SetScoreSkill;
+    }
+
+    protected void FireABullet()
+    {
+        if (Time.time > nextFire)
+        {
+            nextFire = Time.time + fireRate;
+            bulletObjectPool.SetEnemyBulletOfPositionAndActive(bulletSpawn);
+        }
     }
 
     public virtual void EnemyMove()
