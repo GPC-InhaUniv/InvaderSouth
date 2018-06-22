@@ -132,6 +132,11 @@ public class MastarPlayerController : MonoBehaviour
 
             attacedEffect.Play(true);
         }
+
+        if(other.tag == "SparkBomb")
+        {
+            StartCoroutine(Slow());
+        }
     }
 
     private void SetState(IState state)
@@ -143,5 +148,12 @@ public class MastarPlayerController : MonoBehaviour
     {
         playerMeshCollider.enabled = true;
         SetState(new LivingState());
+    }
+
+    private IEnumerator Slow()
+    {
+        playerState = new SlowState();
+        yield return new WaitForSeconds(3f);
+        playerState = new LivingState();
     }
 }

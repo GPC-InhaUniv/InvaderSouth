@@ -48,9 +48,6 @@ public class BossEnemyPool : MonoBehaviour
     private BossFirstSkillGoLeftBulletController bossFirstSkillGoLeftBullet;
     private BossFirstSkillGoRightBulletController bossFirstSkillGoRightBulletController;
 
-    
-
-
     // Use this for initialization
     void Start()
     {
@@ -109,7 +106,6 @@ public class BossEnemyPool : MonoBehaviour
             obj.transform.parent = parent.transform;
             obj.SetActive(false);
             BosssmallBullets.Enqueue(obj);
-
         }
 
 
