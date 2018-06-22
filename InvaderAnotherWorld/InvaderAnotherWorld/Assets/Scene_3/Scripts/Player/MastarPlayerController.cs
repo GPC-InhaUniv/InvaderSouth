@@ -30,6 +30,8 @@ public class MastarPlayerController : MonoBehaviour
     private EnemyObjectPool enemyObjectPool;
     private PlayerStatus playerStatusComponent;
     private IState playerState;
+    private const float fireRate = 0.25f;
+    private float nextFire = 0f;
 
     public bool IsGameResult;
 
@@ -48,6 +50,10 @@ public class MastarPlayerController : MonoBehaviour
 
     [SerializeField]
     ParticleSystem attacedEffect;
+
+    [SerializeField]
+    AudioClip fireClip;
+    AudioSource fireAudio;
 
     private void Awake()
     {
@@ -68,16 +74,26 @@ public class MastarPlayerController : MonoBehaviour
         playerStatus = gameObject.GetComponentInChildren<PlayerStatus>();
 
         attacedEffect = gameObject.GetComponentInChildren<ParticleSystem>();
-        
+
+
+        //플레이어 공격사운드
+        //fireClip = 
+        fireAudio = gameObject.AddComponent<AudioSource>();
+        fireAudio.loop = false;
+        fireAudio.clip = fireClip;
+
     }
     
     private void FixedUpdate()
     {
         playerState.Behavior();
 
-        if (Input.GetKey(KeyCode.Z))
+        if (Time.time > nextFire && Input.GetKey(KeyCode.Z))
         {
+            nextFire = Time.time + fireRate;
             bulletObjectPool.SetPlayerBulletOfPositionAndActive(bulletSpawn);
+            fireAudio.PlayOneShot(fireClip);
+
         }
 
         if (Input.GetKeyDown(KeyCode.Space)&& playerStatus.SkillAmount>=1.0f)
