@@ -4,9 +4,6 @@ using UnityEngine;
 
 public class StageManager : MonoBehaviour {
     private GameObject backgroundObject;
-    
-    [SerializeField]
-    private GameObject sparkBomb;
     private int maxEnemyCount = 0;
     public static int KillEnemyCount = 0;
     private int stageAmount = 3;
@@ -117,14 +114,14 @@ public class StageManager : MonoBehaviour {
 
     }
 	
-    IEnumerator MakeSparkBomb()
-    {
-        while(true)
-        {
-            Instantiate(sparkBomb, new Vector3(Random.Range(-5,5),3.6f,Random.Range(18,23)),Quaternion.identity);
-            yield return new WaitForSeconds(1.0f);
-        }
-    }
+    //IEnumerator MakeSparkBomb()
+    //{
+    //    while(true)
+    //    {
+    //        Instantiate(sparkBomb, new Vector3(Random.Range(-5,5),3.6f,Random.Range(18,23)),Quaternion.identity);
+    //        yield return new WaitForSeconds(1.0f);
+    //    }
+    //}
 
     //void ReStartThisStage()
     //{
