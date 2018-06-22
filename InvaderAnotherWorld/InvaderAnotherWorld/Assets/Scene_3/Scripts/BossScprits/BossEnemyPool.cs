@@ -59,7 +59,7 @@ public class BossEnemyPool : MonoBehaviour
         BossObjects = new Queue<GameObject>();
         obj = Instantiate(bossObject);
         obj.transform.parent = parent.transform;
-        obj.SetActive(false);
+        obj.SetActive(true);
         BossObjects.Enqueue(obj);
 
         BossNormalbullets = new Queue<GameObject>();
