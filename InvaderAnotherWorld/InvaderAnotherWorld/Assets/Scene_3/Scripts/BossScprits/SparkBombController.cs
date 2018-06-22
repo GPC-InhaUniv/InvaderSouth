@@ -38,6 +38,7 @@ public class SparkBombController : MonoBehaviour {
         }
         if(autoSetActiveFlaseTime>=0.3f)
         {
+
             gameObject.SetActive(false);
         }
 
