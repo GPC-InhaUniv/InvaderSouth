@@ -32,14 +32,14 @@ public class EnemySpacePlane : Enemy
         {
             life = 2;
             StageManager.KillEnemy();
-            EnemyObjectPool.enemySpacePlanes.Enqueue(this.gameObject);
+            EnemyObjectPool.EnemySpacePlanes.Enqueue(this.gameObject);
             this.gameObject.SetActive(false);
         }
         if (other.tag == "Bomb")
         {
             life = 2;
             StageManager.KillEnemy();
-            EnemyObjectPool.enemySpacePlanes.Enqueue(this.gameObject);
+            EnemyObjectPool.EnemySpacePlanes.Enqueue(this.gameObject);
             this.gameObject.SetActive(false);
         }
     }
@@ -51,7 +51,7 @@ public class EnemySpacePlane : Enemy
             life = 2;
 
             StageManager.KillEnemy();
-            EnemyObjectPool.enemySpacePlanes.Enqueue(this.gameObject);
+            EnemyObjectPool.EnemySpacePlanes.Enqueue(this.gameObject);
             this.gameObject.SetActive(false);
         }
     }
@@ -76,7 +76,7 @@ public class EnemySpacePlane : Enemy
             life = 2;
             StageManager.KillEnemy();
             PlayerInfoDelegater(score, gauge);
-            EnemyObjectPool.enemySpacePlanes.Enqueue(this.gameObject);
+            EnemyObjectPool.EnemySpacePlanes.Enqueue(this.gameObject);
             this.gameObject.SetActive(false);
         }
     }
