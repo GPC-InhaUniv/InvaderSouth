@@ -36,7 +36,7 @@ public class SparkBombController : MonoBehaviour {
         {
             autoSetActiveFlaseTime += Time.deltaTime;
         }
-        if(autoSetActiveFlaseTime>=0.3f)
+        if(autoSetActiveFlaseTime>=1f)
         {
 
             autoSetActiveFlaseTime = 0;
