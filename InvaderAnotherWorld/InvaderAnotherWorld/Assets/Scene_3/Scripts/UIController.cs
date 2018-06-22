@@ -86,7 +86,7 @@ public class UIController : MonoBehaviour {
         {
             if (GameManager.Instance.CurrentStage == 0)
             {
-                if (StageManager.time >= 105)
+                if (StageManager.time >= 100)
                 {
                     gameClearUI.SetActive(true);
                 }
@@ -104,6 +104,7 @@ public class UIController : MonoBehaviour {
         if(result == false)
         {
             gameOverUI.SetActive(true);
+            StageManager.time = 90;
         }
     }
 }

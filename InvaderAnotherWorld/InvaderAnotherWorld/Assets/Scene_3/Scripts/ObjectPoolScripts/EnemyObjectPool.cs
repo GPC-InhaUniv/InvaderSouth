@@ -55,6 +55,8 @@ public class EnemyObjectPool : MonoBehaviour
     {
         Vector3 position1 = new Vector3(transform.position.x + 4, transform.position.y, transform.position.z);
         Vector3 position2 = new Vector3(transform.position.x - 4, transform.position.y, transform.position.z);
+        Vector3 position3 = new Vector3(transform.position.x + 2, transform.position.y, transform.position.z);
+        Vector3 position4 = new Vector3(transform.position.x - 2, transform.position.y, transform.position.z);
 
         while (true)
         {
@@ -65,8 +67,10 @@ public class EnemyObjectPool : MonoBehaviour
 
             if (enemyPlanes.Count > enemyCount)
                 yield return null;
+
             if (StageManager.time <= 10)
             {
+                
                 enemyPlane = enemyPlanes.Dequeue();
                 enemyPlane.SetActive(true);
                 enemyPlane.transform.position = transform.position;
@@ -85,10 +89,12 @@ public class EnemyObjectPool : MonoBehaviour
 
             if (StageManager.time > 10 && StageManager.time <= 90)
             {
+
+               
                 enemyPlane = enemyPlanes.Dequeue();
                 enemyPlane.SetActive(true);
                 enemyPlane.transform.position = transform.position;
-                yield return new WaitForSeconds(3f);
+                yield return new WaitForSeconds(2f);
 
                 enemyPlane = enemyPlanes.Dequeue();
                 enemyPlane.SetActive(true);
@@ -98,6 +104,21 @@ public class EnemyObjectPool : MonoBehaviour
                 enemyPlane = enemyPlanes.Dequeue();
                 enemyPlane.SetActive(true);
                 enemyPlane.transform.position = position2;
+                yield return new WaitForSeconds(2f);
+
+                enemyPlane = enemyPlanes.Dequeue();
+                enemyPlane.SetActive(true);
+                enemyPlane.transform.position = transform.position;
+                yield return new WaitForSeconds(2f);
+
+                enemyPlane = enemyPlanes.Dequeue();
+                enemyPlane.SetActive(true);
+                enemyPlane.transform.position = position3;
+                yield return new WaitForSeconds(2f);
+
+                enemyPlane = enemyPlanes.Dequeue();
+                enemyPlane.SetActive(true);
+                enemyPlane.transform.position = position4;
                 yield return new WaitForSeconds(2f);
             }
 
@@ -123,6 +144,7 @@ public class EnemyObjectPool : MonoBehaviour
                 yield return null;
             if (StageManager.time > 10 && StageManager.time <= 65)
             {
+
                 enemySpacePlane = enemySpacePlanes.Dequeue();
                 enemySpacePlane.SetActive(true);
                 enemySpacePlane.transform.position = transform.position;
@@ -131,6 +153,7 @@ public class EnemyObjectPool : MonoBehaviour
 
             if (StageManager.time > 65 && StageManager.time <= 90)
             {
+
                 enemySpacePlane = enemySpacePlanes.Dequeue();
                 enemySpacePlane.SetActive(true);
                 enemySpacePlane.transform.position = transform.position;
@@ -145,6 +168,7 @@ public class EnemyObjectPool : MonoBehaviour
             {
                 break;
             }
+
         }
     }
 

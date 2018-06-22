@@ -4,9 +4,11 @@ using UnityEngine;
 
 public class StageManager : MonoBehaviour {
     private GameObject backgroundObject;
+    
     [SerializeField]
     private GameObject sparkBomb;
-    
+    private int maxEnemyCount = 0;
+    public static int KillEnemyCount = 0;
     private int stageAmount = 3;
     private int currentStage = 0;
     public static float time;
@@ -31,49 +33,58 @@ public class StageManager : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
-        if(time <= 105)
+        if(time <= 100)
         {
             time += Time.deltaTime;
-            Debug.Log(time);
+            //Debug.Log(time);
 
             if(Input.GetKey(KeyCode.S) == true)
             {
                 time += 10;
             }
         }
+
+        //if (KillEnemyCount>=maxEnemyCount)
+        //    Debug.Log("게임 클리어");
+    
+      
     }
 
-    //void MakeGameRule()
-    //{
-    //    switch (currentStage)
-    //    {
-    //        case 0:
-    //            {
-    //                enemy1GeneratePosition.SetActive(true);
-    //                enemy2GeneratePosition.SetActive(true);
-    //                break;
-    //            }
-    //        case 1:
-    //            {
-    //                break;
-    //            }
-    //        case 2:
-    //            {
-    //                bossEnemyPool = gameobjectPool.GetComponent<BossEnemyPool>();
-    //                StartCoroutine(MakeBossEnmey());
-    //                break;
-    //            }
-    //        case 4:
-    //            {
-    //                break;
-    //            }
-    //        default:
-    //            {
-    //                Debug.Log("error stage load");
-    //                break;
-    //            }
-    //    }
-    //}
+    public static void KillEnemy()
+    {
+        KillEnemyCount++;
+        Debug.Log(KillEnemyCount);
+    }
+    void MakeGameRule()
+    {
+        switch (currentStage)
+        {
+            case 0:
+                {
+                    KillEnemyCount = 0;
+                    maxEnemyCount = 51;
+                    break;
+                }
+            case 1:
+                {
+                    break;
+                }
+            case 2:
+                {
+                    
+                    break;
+                }
+            case 4:
+                {
+                    break;
+                }
+            default:
+                {
+                    Debug.Log("error stage load");
+                    break;
+                }
+        }
+    }
 
     int CheckPlayerStage(int playerCurrentStage)
     {

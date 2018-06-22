@@ -16,15 +16,7 @@ public class EnemyPlane : Enemy
     {
         EnemyMove();
         movingDecorator.EnemyMove();
-    }
-
-    private void Update()
-    {
-        if (Time.time > nextFire)
-        {
-            nextFire = Time.time + fireRate;
-            bulletObjectPool.SetEnemyBulletOfPositionAndActive(bulletSpawn);
-        }
+        FireABullet();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -35,11 +27,13 @@ public class EnemyPlane : Enemy
         {
             life = 1;
             EnemyObjectPool.enemyPlanes.Enqueue(this.gameObject);
+            StageManager.KillEnemy();
             this.gameObject.SetActive(false);
         }
         if (other.tag == "Bomb")
         {
             life = 1;
+            StageManager.KillEnemy();
             EnemyObjectPool.enemyPlanes.Enqueue(this.gameObject);
             this.gameObject.SetActive(false);
         }
@@ -50,6 +44,7 @@ public class EnemyPlane : Enemy
         if (other.tag == "Boundary")
         {
             life = 1;
+            StageManager.KillEnemy();
             EnemyObjectPool.enemyPlanes.Enqueue(this.gameObject);
             this.gameObject.SetActive(false);
         }
@@ -73,6 +68,7 @@ public class EnemyPlane : Enemy
         if (life <= 0)
         {
             life = 1;
+            StageManager.KillEnemy();
             PlayerInfoDelegater(score, gauge);
             EnemyObjectPool.enemyPlanes.Enqueue(this.gameObject);
             this.gameObject.SetActive(false);
