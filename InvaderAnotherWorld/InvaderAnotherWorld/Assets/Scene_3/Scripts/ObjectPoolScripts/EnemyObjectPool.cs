@@ -316,7 +316,6 @@ public class EnemyObjectPool : MonoBehaviour
 
         while (true)
         {
-
             if (StageManager.time <= 10)
                 yield return null;
 

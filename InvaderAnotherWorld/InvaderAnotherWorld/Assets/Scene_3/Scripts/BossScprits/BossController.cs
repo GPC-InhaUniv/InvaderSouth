@@ -25,8 +25,8 @@ public class BossController : MonoBehaviour
 
     //[SerializeField]
     //private Image bossHpImage;
-    public float BossHp=30;
-    public static bool IsBossAlive = true;
+    public float BossHp = 30;
+    public static bool IsBossAlive;
 
     [SerializeField]
     private Transform shotposition;
@@ -44,6 +44,7 @@ public class BossController : MonoBehaviour
 
     void Start()
     {
+        IsBossAlive = true;
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
         bossEnemyPool = GameObject.Find("GameObjectPool").GetComponent<BossEnemyPool>();
     
@@ -133,11 +134,14 @@ public class BossController : MonoBehaviour
             if (BossHp <= 0)
             {
                 IsBossAlive = false;
+                BossEnemyPool.BossObjects.Enqueue(this.gameObject);
+                this.gameObject.SetActive(false);
             }
         }
+
         if (other.tag == "Bomb")
         {
-
+            BossHp -= 5;
         }
     }
 

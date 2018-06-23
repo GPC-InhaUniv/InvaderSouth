@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SparkBombController : MonoBehaviour {
+public class SparkBombController : MonoBehaviour
+{
 
     [SerializeField]
     private GameObject particleSystem;
@@ -12,49 +13,47 @@ public class SparkBombController : MonoBehaviour {
     private float bombTime;
     private float autoSetActiveFlaseTime = 0.0f;
     // Use this for initialization
-	void Start () {
+    void Start()
+    {
 
         bombTime = 0.0f;
         particleSystem.SetActive(false);
 
     }
-	
-	// Update is called once per frame
-	void Update () {
-		if(5.0f > bombTime)
+
+    // Update is called once per frame
+    void Update()
+    {
+        if (5.0f > bombTime)
         {
             bombTime += Time.deltaTime;
         }
         else
         {
             particleSystem.SetActive(true);
-            sparkCapsule.SetActive(false);    
+            sparkCapsule.SetActive(false);
         }
-        if(particleSystem.activeInHierarchy)
+        if (particleSystem.activeInHierarchy)
         {
             autoSetActiveFlaseTime += Time.deltaTime;
         }
-<<<<<<< HEAD
-=======
-        if(autoSetActiveFlaseTime>=1f)
+
+        if (autoSetActiveFlaseTime >= 1f)
         {
->>>>>>> 347fdf013be43c045c4fdc904d2418f235ac4974
 
-        if(autoSetActiveFlaseTime>=0.2f)
-        {
-            autoSetActiveFlaseTime = 0;
-            bombTime = 0;
-            EnemyObjectPool.SparkBoms.Enqueue(this.gameObject);
-<<<<<<< HEAD
-=======
+            if (autoSetActiveFlaseTime >= 0.2f)
+            {
+                autoSetActiveFlaseTime = 0;
+                bombTime = 0;
+                EnemyObjectPool.SparkBoms.Enqueue(this.gameObject);
 
->>>>>>> 347fdf013be43c045c4fdc904d2418f235ac4974
-            autoSetActiveFlaseTime = 0;
-            bombTime = 0;
-            EnemyObjectPool.SparkBoms.Enqueue(this.gameObject);
+                autoSetActiveFlaseTime = 0;
+                bombTime = 0;
+                EnemyObjectPool.SparkBoms.Enqueue(this.gameObject);
 
-            gameObject.SetActive(false);
+                gameObject.SetActive(false);
+            }
+
         }
-
-	}
+    }
 }

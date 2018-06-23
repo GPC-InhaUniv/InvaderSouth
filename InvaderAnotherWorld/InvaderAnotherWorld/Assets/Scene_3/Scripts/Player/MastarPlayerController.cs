@@ -62,8 +62,8 @@ public class MastarPlayerController : MonoBehaviour
         mastarBoundary = new MastarBoundary(6, -6, 12, -2);
         playerState = new LivingState();
         bulletSpawn = GameObject.Find("BoltSpawn").GetComponentInChildren<Transform>();
-        playerMeshCollider = this.GetComponentInChildren<MeshCollider>();
-        playerMeshRenderer = this.GetComponentInChildren<MeshRenderer>();
+        playerMeshCollider = this.transform.Find("PlayerShip").GetComponentInChildren<MeshCollider>();
+        playerMeshRenderer = this.transform.Find("PlayerShip").GetComponentInChildren<MeshRenderer>();
         rigidbody3D = this.gameObject.GetComponent<Rigidbody>();
         bulletObjectPool = GameObject.Find("GameObjectPool").GetComponent<BulletObjectPool>();
         enemyObjectPool = GameObject.Find("GameObjectPool").GetComponent<EnemyObjectPool>();
@@ -81,7 +81,6 @@ public class MastarPlayerController : MonoBehaviour
         fireAudio = gameObject.AddComponent<AudioSource>();
         fireAudio.loop = false;
         fireAudio.clip = fireClip;
-
     }
     
     private void FixedUpdate()
@@ -151,7 +150,21 @@ public class MastarPlayerController : MonoBehaviour
 
         if(other.tag == "SparkBomb")
         {
-            StartCoroutine(Slow());
+            StartCoroutine(SetSlowState());
+        }
+
+        if(other.tag == "BossSmallBullet")
+        {
+            playerStatusComponent.Damaged();
+            BossEnemyPool.BosssmallBullets.Enqueue(other.gameObject);
+            other.gameObject.SetActive(false);
+        }
+
+        if(other.tag == "BossNormalBullet")
+        {
+            playerStatusComponent.Damaged();
+            BossEnemyPool.BossNormalbullets.Enqueue(other.gameObject);
+            other.gameObject.SetActive(false);
         }
     }
 
@@ -166,7 +179,7 @@ public class MastarPlayerController : MonoBehaviour
         SetState(new LivingState());
     }
 
-    private IEnumerator Slow()
+    private IEnumerator SetSlowState()
     {
         playerState = new SlowState();
         yield return new WaitForSeconds(3f);
