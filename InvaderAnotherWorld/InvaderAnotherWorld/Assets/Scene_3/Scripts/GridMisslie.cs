@@ -18,10 +18,18 @@ public class GridMisslie : MonoBehaviour {
     [SerializeField]
     private float aliveMissleTime;
 
+    [SerializeField]
+    GameObject missileObject;
+    [SerializeField]
+    GameObject smokeObject;
+
     // Use this for initialization
     void Start ()
     {
         rb = GetComponent<Rigidbody>();
+
+        //missileObject = GetComponentInChildren<GameObject>();
+        //smokeObject = GetComponentInChildren<GameObject>();  GameObject.Find("InGameUI").transform.Find("GameClearUI").gameObject;
         autoActiveFalseTime = 2f;
         aliveMissleTime = 0f;
     }
@@ -54,7 +62,7 @@ public class GridMisslie : MonoBehaviour {
         Quaternion s = Quaternion.Slerp(transform.rotation, q, rotateSpeed * Time.deltaTime);
         rb.rotation = s;
         rb.transform.Translate(new Vector3(0, 0, 1) * speed * Time.deltaTime);
-        Debug.Log(direction);
+        //Debug.Log(direction);
         //rb.transform.position = Vector3.Lerp(rb.transform.position, target.transform.position, speed * Time.deltaTime);
     }
     void SetTarget()

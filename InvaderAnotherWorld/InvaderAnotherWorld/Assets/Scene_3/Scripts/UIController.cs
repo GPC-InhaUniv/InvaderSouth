@@ -36,6 +36,11 @@ public class UIController : MonoBehaviour
     private float previousSkillAmount;
 
     private bool gameCleard = false;
+
+    [SerializeField]
+    GameObject pausePanel;
+
+
     // Use this for initialization
     void Start()
     {
@@ -43,6 +48,8 @@ public class UIController : MonoBehaviour
         SetGameReulstUI();
         SetPlayerUI();
         ReFresh();
+        //일시정지 ui
+        pausePanel = GameObject.Find("InGameUI").transform.Find("PausePanel").gameObject;
     }
 
     void SetGameReulstUI()
@@ -55,6 +62,7 @@ public class UIController : MonoBehaviour
         //resultScoreText = gameReulstPanel.transform.Find("GameEndResultPanel").Find("PlayerScoreText").GetComponent<Text>();
         //resultGoldText = gameReulstPanel.transform.Find("GameEndResultPanel").Find("PlayerGoldText").GetComponent<Text>();
         //NextStageBtn = gameReulstPanel.transform.Find("GameEndResultPanel").Find("NextButton").gameObject;
+        
     }
 
     void SetPlayerInfo()
@@ -105,12 +113,19 @@ public class UIController : MonoBehaviour
 
         scoreText.text = playerstatusComponent.Score.ToString();
 
+        //esc키를 받는지 검사
+        if (Input.GetKeyDown(KeyCode.Escape))//Input.GetButtonDown("Pause")
+        {
+            //Debug.Log("Pause");
+            pausePanel.SetActive(true);
+            Time.timeScale = 0;
+        }
+
     }
 
     // Update is called once per frame
     void Update()
     {
-
         ReFresh();
     }
 
@@ -125,6 +140,14 @@ public class UIController : MonoBehaviour
         Destroy(gameobjectPool);
         LoadingSceneController.LoadScene("Main");
     }
+    
+    //일시정지
+    public void OnClickedResumeBtn()
+    {
+        pausePanel.SetActive(false);
+        Time.timeScale = 1;
+    }
+
     public void GameResult(bool result)
     {
         if (result == true)
