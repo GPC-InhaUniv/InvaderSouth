@@ -50,10 +50,11 @@ public class StageManager : MonoBehaviour {
             Debug.Log("Stage2 : " + time);
         }
 
-        //if (KillEnemyCount>=maxEnemyCount)
-        //    Debug.Log("게임 클리어");
-    
-      
+
+        if (Input.GetKey(KeyCode.S) == true)
+        {
+            time += 10;
+        }
     }
 
     public static void KillEnemy()
@@ -110,18 +111,19 @@ public class StageManager : MonoBehaviour {
         return -1;
     }
 
-    IEnumerator MakeEnemyOne()
-    {
-        yield return new WaitForSeconds(5.0f);
-       
-    }
+    //public IEnumerator MakeEnemyOne()
+    //{
+    //    if(StageManager.time >= 60)
+    //    {
+    //        bossEnemyPool.GenerateBoss(bossGeneratePosition);
+    //    }       
+    //}
 
-    IEnumerator MakeBossEnmey()
-    {
-        yield return new WaitForSeconds(5.0f);
-        bossEnemyPool.GenerateBoss(bossGeneratePosition);
-
-    }
+    //IEnumerator MakeBossEnmey()
+    //{
+    //    if()
+    //    bossEnemyPool.GenerateBoss(bossGeneratePosition);
+    //}
 	
     //IEnumerator MakeSparkBomb()
     //{

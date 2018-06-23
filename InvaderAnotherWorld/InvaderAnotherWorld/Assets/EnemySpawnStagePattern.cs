@@ -9,6 +9,7 @@ public class EnemySpawnStagePattern : MonoBehaviour
     private void Start()
     {
         enemyObjectPool = GameObject.Find("GameObjectPool").GetComponent<EnemyObjectPool>();
+
         if(GameManager.Instance.CurrentStage == 0)
         {
             StartCoroutine(enemyObjectPool.StageOneEnemyPlaneAndDirectPlaneOfPosition(this.transform));

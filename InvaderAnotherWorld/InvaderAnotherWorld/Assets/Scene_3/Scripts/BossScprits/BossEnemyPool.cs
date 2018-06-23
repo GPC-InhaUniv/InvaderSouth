@@ -167,4 +167,25 @@ public class BossEnemyPool : MonoBehaviour
     {
 
     }
+
+    public IEnumerator SetBossOfPosition(Transform transform, GameObject bossStats)
+    {
+        bool IsSetBoss = false;
+
+        while (!IsSetBoss)
+        {
+            if (StageManager.time >= 60)
+            {
+                GenerateBoss(transform);
+                IsSetBoss = true;
+                bossStats.SetActive(true);
+            }
+
+            if (IsSetBoss == true)
+            {
+                break;
+            }
+            yield return new WaitForSeconds(1f);
+        }
+    }
 }
