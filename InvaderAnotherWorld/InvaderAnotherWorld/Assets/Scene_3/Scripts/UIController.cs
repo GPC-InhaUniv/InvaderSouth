@@ -131,12 +131,14 @@ public class UIController : MonoBehaviour
 
     public void OnClickedBackToMainBtn()
     {
+        Time.timeScale = 1;
         Destroy(gameobjectPool);
         LoadingSceneController.LoadScene("Lobby");
     }
 
     public void OnClickedRestartBtn()
     {
+        Time.timeScale = 1;
         Destroy(gameobjectPool);
         LoadingSceneController.LoadScene("Main");
     }

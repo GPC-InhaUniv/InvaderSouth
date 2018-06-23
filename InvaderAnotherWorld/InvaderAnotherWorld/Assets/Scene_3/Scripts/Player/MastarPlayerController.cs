@@ -32,7 +32,8 @@ public class MastarPlayerController : MonoBehaviour
     private IState playerState;
 
     public bool IsGameResult;
-
+    private const float fireRate = 0.25f;
+    private float nextFire = 0f;
 
     public delegate void GameResult(bool isGameResult);
     public GameResult GameResultDelegate;
@@ -75,8 +76,10 @@ public class MastarPlayerController : MonoBehaviour
 
 
         //플레이어 공격사운드
-        //fireClip = 
+        //fireClip = Resources.Load<Audio>("GunSound");
+        
         fireAudio = gameObject.AddComponent<AudioSource>();
+        //fireAudio = Resources.Load<AudioSource>("GunSound");
         fireAudio.loop = false;
         fireAudio.clip = fireClip;
 
@@ -89,10 +92,11 @@ public class MastarPlayerController : MonoBehaviour
     {
         playerState.Behavior();
 
-        if (Input.GetKey(KeyCode.Z))
+        if (Time.time > nextFire && Input.GetKey(KeyCode.Z))
         {
+            nextFire = Time.time + fireRate;
             bulletObjectPool.SetPlayerBulletOfPositionAndActive(bulletSpawn);
-            //fireAudio.PlayOneShot(fireClip);
+            fireAudio.PlayOneShot(fireClip);
         }
 
         if (Input.GetKeyDown(KeyCode.Space)&& playerStatus.SkillAmount>=1.0f)

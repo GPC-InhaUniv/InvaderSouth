@@ -51,12 +51,12 @@ public class BulletObjectPool : MonoBehaviour
     {
         if (playerBullets.Count > playerBulletCount)
             return;
-        if (Time.time > nextFire && playerBullets.Count != 0)
+        if (playerBullets.Count != 0) //플레이어컨트롤로 Time.time > nextFire &&  조건 이동
         {
             playerBullet = playerBullets.Dequeue();
             playerBullet.SetActive(true);
             playerBullet.transform.position = transform.position;
-            nextFire = Time.time + fireRate;
+            //nextFire = Time.time + fireRate;
         }
     }
 
