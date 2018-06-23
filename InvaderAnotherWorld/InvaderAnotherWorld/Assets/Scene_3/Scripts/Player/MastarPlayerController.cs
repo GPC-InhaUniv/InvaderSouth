@@ -76,16 +76,13 @@ public class MastarPlayerController : MonoBehaviour
 
         //플레이어 공격사운드
         //fireClip = 
-<<<<<<< HEAD
         fireAudio = gameObject.AddComponent<AudioSource>();
         fireAudio.loop = false;
         fireAudio.clip = fireClip;
-=======
+
         //fireAudio = gameObject.AddComponent<AudioSource>();
         //fireAudio.loop = false;
         //fireAudio.clip = fireClip;
-
->>>>>>> 2b08154109aad59b18096110877c9f76530cad70
     }
     
     private void FixedUpdate()
@@ -150,7 +147,6 @@ public class MastarPlayerController : MonoBehaviour
 
             attacedEffect.Play(true);
         }
-<<<<<<< HEAD
 
         if(other.tag == "SparkBomb")
         {
@@ -170,8 +166,7 @@ public class MastarPlayerController : MonoBehaviour
             BossEnemyPool.BossNormalbullets.Enqueue(other.gameObject);
             other.gameObject.SetActive(false);
         }
-=======
->>>>>>> 2b08154109aad59b18096110877c9f76530cad70
+
     }
 
     private void SetState(IState state)
@@ -184,7 +179,7 @@ public class MastarPlayerController : MonoBehaviour
         playerMeshCollider.enabled = true;
         SetState(new LivingState());
     }
-<<<<<<< HEAD
+
 
     private IEnumerator SetSlowState()
     {
@@ -192,6 +187,4 @@ public class MastarPlayerController : MonoBehaviour
         yield return new WaitForSeconds(3f);
         playerState = new LivingState();
     }
-=======
->>>>>>> 2b08154109aad59b18096110877c9f76530cad70
 }

@@ -178,7 +178,7 @@ public class UIController : MonoBehaviour
             resultGameText.text = "Game Over";
             NextStageBtn.SetActive(false);
             Debug.Log("게임패배");
-              SetGameDataToServer();
+            SetGameDataToServer();
         }
 
         yield return null;
