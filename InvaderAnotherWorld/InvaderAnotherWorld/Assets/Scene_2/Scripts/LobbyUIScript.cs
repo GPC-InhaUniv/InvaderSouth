@@ -22,6 +22,7 @@ public class LobbyUIScript : MonoBehaviour
     private Button stageTwoSelectionButton;
     private Button stageThreeSelectionButton;
     private Text playerMoneyCountText;
+    private Text playerDiamondCountText;
     private Text playerNameText;
 
     private void Awake()
@@ -39,6 +40,7 @@ public class LobbyUIScript : MonoBehaviour
             || playerMoneyCountText.text == "")
         {
             playerMoneyCountText.text = GameManager.Instance.PlayerMoneyCount.ToString();
+            playerDiamondCountText.text = GameManager.Instance.PlayerDiamondCount.ToString();
             playerNameText.text = GameManager.Instance.PlayerName;
         }
     }
@@ -130,6 +132,7 @@ public class LobbyUIScript : MonoBehaviour
         firstCharacter = characterSelectionUIPanel.transform.Find("FirstCharacter").gameObject;
         secondCharacter = characterSelectionUIPanel.transform.Find("SecondCharacter").gameObject;
         playerMoneyCountText = characterSelectionUIPanel.transform.Find("PlayerNameAndMoneyImage").transform.Find("PlayerMoneyCountText").GetComponent<Text>();
+        playerDiamondCountText = characterSelectionUIPanel.transform.Find("PlayerNameAndMoneyImage").transform.Find("PlayerDiamondCountText").GetComponent<Text>();
         playerNameText = characterSelectionUIPanel.transform.Find("PlayerNameAndMoneyImage").transform.Find("PlayerNameText").GetComponent<Text>();
         backToLoginScenePanel = characterSelectionUIPanel.transform.Find("BackToLoginScenePanel").gameObject;
         firstCharacterInfoImage = characterSelectionUIPanel.transform.Find("FirstCharacterInfoImage").gameObject;

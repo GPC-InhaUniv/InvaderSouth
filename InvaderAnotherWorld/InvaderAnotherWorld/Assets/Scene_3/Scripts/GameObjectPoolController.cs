@@ -30,6 +30,12 @@ public class GameObjectPoolController : MonoBehaviour
                 break;
 
         }
+
+
+       
+
+
+
     }
 
     public void MakeObjectPoolAtStage0()
