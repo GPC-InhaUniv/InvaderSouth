@@ -26,7 +26,7 @@ public class BossController : MonoBehaviour
     //[SerializeField]
     //private Image bossHpImage;
     public float BossHp = 30;
-    public static bool IsBossAlive;
+    public static bool IsBossAlive = true;
 
     //[SerializeField]
     //private Image bossHpImage;
@@ -48,7 +48,6 @@ public class BossController : MonoBehaviour
 
     void Start()
     {
-        IsBossAlive = true;
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
         bossEnemyPool = GameObject.Find("GameObjectPool").GetComponent<BossEnemyPool>();
         //bossHpImage.fillAmount = BossHp / 30.0f;
@@ -66,7 +65,6 @@ public class BossController : MonoBehaviour
     {
         while (BossState.alive.Equals(bossstate))
         {
-
             if (isUseSkill)
             {
                 yield return new WaitForSeconds(2.5f);
@@ -77,10 +75,10 @@ public class BossController : MonoBehaviour
                 bossEnemyPool.FireNormalBullet(shotposition.transform);
                 yield return new WaitForSeconds(0.8f);
             }
-
         }
 
     }
+
     private void Update()
     {
         if (bossstate.Equals(BossState.alive))
@@ -101,6 +99,7 @@ public class BossController : MonoBehaviour
         }
 
     }
+
     void UseFirstSkill()
     {
         bossEnemyPool.FireSecondBullet(shotposition.transform, firstMissleAngle);
