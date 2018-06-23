@@ -29,12 +29,6 @@ public class UIController : MonoBehaviour
     [SerializeField]
     private GameObject NextStageBtn;
 
-    [SerializeField]
-    private GameObject bossHp;
-    [SerializeField]
-    private GameObject bossStats;
-
-
     private GameObject gameobjectPool;
     private MastarPlayerController mastarPlayerController;
 
@@ -55,9 +49,8 @@ public class UIController : MonoBehaviour
     {
         gameClearUI = GameObject.Find("InGameUI").transform.Find("GameClearUI").gameObject;
         gameOverUI = GameObject.Find("InGameUI").transform.Find("GameOverUI").gameObject;
-        //gameReulstPanel = GameObject.Find("InGameUI").transform.Find("GameEndResultPanel").gameObject;
+        gameReulstPanel = GameObject.Find("InGameUI").transform.Find("GameEndResultPanel").gameObject;
         gameobjectPool = GameObject.Find("GameObjectPool").gameObject;
-
         //resultGameText = gameReulstPanel.transform.Find("GameEndResultPanel").Find("GameResultText").GetComponent<Text>();
         //resultScoreText = gameReulstPanel.transform.Find("GameEndResultPanel").Find("PlayerScoreText").GetComponent<Text>();
         //resultGoldText = gameReulstPanel.transform.Find("GameEndResultPanel").Find("PlayerGoldText").GetComponent<Text>();
@@ -117,22 +110,18 @@ public class UIController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
         ReFresh();
     }
 
     public void OnClickedBackToMainBtn()
     {
-        StageManager.time = 0;
-        StageManager.KillEnemyCount = 0;
         Destroy(gameobjectPool);
         LoadingSceneController.LoadScene("Lobby");
     }
 
     public void OnClickedRestartBtn()
     {
-        StageManager.time = 0;
-        StageManager.KillEnemyCount = 0;
         Destroy(gameobjectPool);
         LoadingSceneController.LoadScene("Main");
     }
@@ -172,6 +161,8 @@ public class UIController : MonoBehaviour
 
     IEnumerator SetGameResult(bool result)
     {
+        StageManager.time = 0;
+        StageManager.KillEnemyCount = 0;
         yield return new WaitForSeconds(1.0f); 
         gameReulstPanel.SetActive(true);
         if (result)

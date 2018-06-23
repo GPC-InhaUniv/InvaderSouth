@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-
 public class StageManager : MonoBehaviour {
     private GameObject backgroundObject;
     private int maxEnemyCount = 0;
@@ -11,8 +10,6 @@ public class StageManager : MonoBehaviour {
     private int currentStage = 0;
     public static float time;
 
-    private GameObject bossobject;
-    private GameObject bossHpobject;
     /*Load BossEnemy*/
     private BossEnemyPool bossEnemyPool;
     [SerializeField]
@@ -25,7 +22,7 @@ public class StageManager : MonoBehaviour {
         //backgroundObject = GameObject.Find("BackGroundElemtns").gameObject;
         //bulletObject = GameObject.Find("Bullets").gameObject;
 
-        MakeGameRule();
+        //MakeGameRule();
 
         //  StartCoroutine(MakeSparkBomb());
     }
@@ -33,7 +30,6 @@ public class StageManager : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
-
         if(GameManager.Instance.CurrentStage == 0)
         {
             if (time <= 100)
@@ -51,17 +47,7 @@ public class StageManager : MonoBehaviour {
         else if(GameManager.Instance.CurrentStage == 1)
         {
             time += Time.deltaTime;
-            if(time>=60&&!bossobject.activeInHierarchy)
-            {
-                bossobject.SetActive(true);
-                bossHpobject.SetActive(true);
-            }
             Debug.Log("Stage2 : " + time);
-        }
-
-        if(Input.GetKey(KeyCode.S))
-        {
-            time += 10;
         }
 
         //if (KillEnemyCount>=maxEnemyCount)
@@ -87,10 +73,6 @@ public class StageManager : MonoBehaviour {
                 }
             case 1:
                 {
-                    bossobject = GameObject.FindGameObjectWithTag("BossEnemy");
-                    bossobject.SetActive(false);
-                    bossHpobject = GameObject.Find("BossStats");
-                    bossHpobject.SetActive(false);
                     break;
                 }
             case 2:

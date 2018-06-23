@@ -23,8 +23,8 @@ public class BossController : MonoBehaviour
     private float firstMissleAngle;
     private float secondMissleAngle;
 
-    //[SerializeField]
-    //private Image bossHpImage;
+    [SerializeField]
+    private Image bossHpImage;
     public float BossHp=30;
     public static bool IsBossAlive = true;
 
@@ -37,7 +37,7 @@ public class BossController : MonoBehaviour
     private float secondFiredelayTime = 15.0f;
     private bool isUseSkill;
     private BossState bossstate;
-    private bool isBossCreate = false;
+
 
     private BossEnemyPool bossEnemyPool;
 
@@ -46,14 +46,15 @@ public class BossController : MonoBehaviour
     {
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
         bossEnemyPool = GameObject.Find("GameObjectPool").GetComponent<BossEnemyPool>();
-    
+        bossHpImage.fillAmount = BossHp / 30.0f;
+
         isUseSkill = false;
-        bossstate = BossState.dead;
+        bossstate = BossState.alive;
         firstMissleAngle = 30.0f;
         secondMissleAngle = 45.0f;
         firstFiredelayTime = Time.time + firstFireTime;
         secondFiredelayTime = Time.time + secondFireTime;
-      
+        StartCoroutine(BossNormalAttack());
     }
 
     IEnumerator BossNormalAttack()
@@ -77,16 +78,6 @@ public class BossController : MonoBehaviour
     }
     private void Update()
     {
-        if(!isBossCreate)
-        {
-            //bossHpImage.fillAmount = BossHp / 30.0f;
-         
-            isBossCreate = true;
-            bossstate = BossState.alive;
-            gameObject.SetActive(true);
-            StartCoroutine(BossNormalAttack());
-        }
-
         if (bossstate.Equals(BossState.alive))
         {
             UseSkill();
@@ -126,7 +117,7 @@ public class BossController : MonoBehaviour
         if (other.tag == "PlayerBullet")
         {
             BossHp -= 1;
-            //bossHpImage.fillAmount = BossHp / 30;
+            bossHpImage.fillAmount = BossHp / 30;
             BulletObjectPool.playerBullets.Enqueue(other.gameObject);
             other.gameObject.SetActive(false);
 
