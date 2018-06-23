@@ -60,8 +60,8 @@ public class MastarPlayerController : MonoBehaviour
         mastarBoundary = new MastarBoundary(6, -6, 12, -2);
         playerState = new LivingState();
         bulletSpawn = GameObject.Find("BoltSpawn").GetComponentInChildren<Transform>();
-        playerMeshCollider = this.GetComponentInChildren<MeshCollider>();
-        playerMeshRenderer = this.GetComponentInChildren<MeshRenderer>();
+        playerMeshCollider = this.transform.Find("PlayerShip").GetComponentInChildren<MeshCollider>();
+        playerMeshRenderer = this.transform.Find("PlayerShip").GetComponentInChildren<MeshRenderer>();
         rigidbody3D = this.gameObject.GetComponent<Rigidbody>();
         bulletObjectPool = GameObject.Find("GameObjectPool").GetComponent<BulletObjectPool>();
         enemyObjectPool = GameObject.Find("GameObjectPool").GetComponent<EnemyObjectPool>();
@@ -76,10 +76,13 @@ public class MastarPlayerController : MonoBehaviour
 
         //플레이어 공격사운드
         //fireClip = 
+        fireAudio = gameObject.AddComponent<AudioSource>();
+        fireAudio.loop = false;
+        fireAudio.clip = fireClip;
+
         //fireAudio = gameObject.AddComponent<AudioSource>();
         //fireAudio.loop = false;
         //fireAudio.clip = fireClip;
-
     }
     
     private void FixedUpdate()
@@ -144,6 +147,26 @@ public class MastarPlayerController : MonoBehaviour
 
             attacedEffect.Play(true);
         }
+
+        if(other.tag == "SparkBomb")
+        {
+            StartCoroutine(SetSlowState());
+        }
+
+        if(other.tag == "BossSmallBullet")
+        {
+            playerStatusComponent.Damaged();
+            BossEnemyPool.BosssmallBullets.Enqueue(other.gameObject);
+            other.gameObject.SetActive(false);
+        }
+
+        if(other.tag == "BossNormalBullet")
+        {
+            playerStatusComponent.Damaged();
+            BossEnemyPool.BossNormalbullets.Enqueue(other.gameObject);
+            other.gameObject.SetActive(false);
+        }
+
     }
 
     private void SetState(IState state)
@@ -155,5 +178,13 @@ public class MastarPlayerController : MonoBehaviour
     {
         playerMeshCollider.enabled = true;
         SetState(new LivingState());
+    }
+
+
+    private IEnumerator SetSlowState()
+    {
+        playerState = new SlowState();
+        yield return new WaitForSeconds(3f);
+        playerState = new LivingState();
     }
 }

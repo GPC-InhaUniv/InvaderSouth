@@ -39,9 +39,18 @@ public class PlayerStatus : MonoBehaviour {
         if (!isDamaged)
         {
             PlayerHp -= 1f;
-            isDamaged = true;
-            meshCollider.enabled = false;
-            StartCoroutine(OnOffPlayer());
+
+            if (PlayerHp > 0)
+            {
+                isDamaged = true;
+                meshCollider.enabled = false;
+                StartCoroutine(OnOffPlayer());
+            }
+
+            if (PlayerHp <= 0)
+            {
+                return;
+            }
         }
     }
 

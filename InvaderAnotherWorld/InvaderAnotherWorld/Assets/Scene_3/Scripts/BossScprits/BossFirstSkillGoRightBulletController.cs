@@ -54,7 +54,7 @@ public class BossFirstSkillGoRightBulletController : MonoBehaviour
             tempbosssmallBullet = BossEnemyPool.BosssmallBullets.Dequeue();
             tempbosssmallBullet.SetActive(true);
 
-            tempbosssmallBullet.transform.position = new Vector3(x + transform.position.x, 3.6f, transform.position.z);
+            tempbosssmallBullet.transform.position = new Vector3(x + transform.position.x, 0, transform.position.z);
             tempbosssmallBullet.transform.rotation = Quaternion.Euler(0, -runningTime, 0);
 
             smallBulletCount++;

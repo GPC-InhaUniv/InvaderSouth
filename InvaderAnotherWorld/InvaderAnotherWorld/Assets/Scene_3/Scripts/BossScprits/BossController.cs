@@ -23,10 +23,14 @@ public class BossController : MonoBehaviour
     private float firstMissleAngle;
     private float secondMissleAngle;
 
-    [SerializeField]
-    private Image bossHpImage;
-    public float BossHp=30;
-    public static bool IsBossAlive = true;
+    //[SerializeField]
+    //private Image bossHpImage;
+    public float BossHp = 30;
+    public static bool IsBossAlive;
+
+    //[SerializeField]
+    //private Image bossHpImage;
+
 
     [SerializeField]
     private Transform shotposition;
@@ -44,9 +48,10 @@ public class BossController : MonoBehaviour
 
     void Start()
     {
+        IsBossAlive = true;
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
         bossEnemyPool = GameObject.Find("GameObjectPool").GetComponent<BossEnemyPool>();
-        bossHpImage.fillAmount = BossHp / 30.0f;
+        //bossHpImage.fillAmount = BossHp / 30.0f;
 
         isUseSkill = false;
         bossstate = BossState.alive;
@@ -117,18 +122,28 @@ public class BossController : MonoBehaviour
         if (other.tag == "PlayerBullet")
         {
             BossHp -= 1;
-            bossHpImage.fillAmount = BossHp / 30;
+            //bossHpImage.fillAmount = BossHp / 30;
             BulletObjectPool.playerBullets.Enqueue(other.gameObject);
             other.gameObject.SetActive(false);
 
             if (BossHp <= 0)
             {
                 IsBossAlive = false;
+                BossEnemyPool.BossObjects.Enqueue(this.gameObject);
+                this.gameObject.SetActive(false);
             }
         }
+
         if (other.tag == "Bomb")
         {
+            BossHp -= 5;
 
+            if(BossHp <= 0)
+            {
+                IsBossAlive = false;
+                BossEnemyPool.BossObjects.Enqueue(this.gameObject);
+                this.gameObject.SetActive(false);
+            }
         }
     }
 
