@@ -45,12 +45,15 @@ public class BossController : MonoBehaviour
 
     private BossEnemyPool bossEnemyPool;
 
+    MoveOnPath moveOnPath;
 
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
         bossEnemyPool = GameObject.Find("GameObjectPool").GetComponent<BossEnemyPool>();
         //bossHpImage.fillAmount = BossHp / 30.0f;
+        moveOnPath = gameObject.GetComponent<MoveOnPath>();
+
 
         isUseSkill = false;
         bossstate = BossState.alive;
@@ -102,6 +105,7 @@ public class BossController : MonoBehaviour
 
     void UseFirstSkill()
     {
+        moveOnPath.secondMove = true;
         bossEnemyPool.FireSecondBullet(shotposition.transform, firstMissleAngle);
         firstFiredelayTime = Time.time + firstFireTime;
         isUseSkill = true;
@@ -109,6 +113,7 @@ public class BossController : MonoBehaviour
 
     void UseSecondSkill()
     {
+        moveOnPath.thirdMove = true;
         bossEnemyPool.FireThirdBullet(shotposition.transform, 0);
         bossEnemyPool.FireThirdBullet(shotposition.transform, -secondMissleAngle);
         bossEnemyPool.FireThirdBullet(shotposition.transform, secondMissleAngle);
@@ -145,6 +150,9 @@ public class BossController : MonoBehaviour
             }
         }
     }
+    //IEnumerator bossMoving()
+    //{
 
+    //}
 
 }

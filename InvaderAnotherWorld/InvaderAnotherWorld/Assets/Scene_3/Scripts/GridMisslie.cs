@@ -21,15 +21,18 @@ public class GridMisslie : MonoBehaviour {
     [SerializeField]
     GameObject missileObject;
     [SerializeField]
-    GameObject smokeObject;
+    ParticleSystem jetSmokeParticle;
+    ParticleSystem.MainModule mainModule;
 
     // Use this for initialization
     void Start ()
     {
         rb = GetComponent<Rigidbody>();
 
-        //missileObject = GetComponentInChildren<GameObject>();
-        //smokeObject = GetComponentInChildren<GameObject>();  GameObject.Find("InGameUI").transform.Find("GameClearUI").gameObject;
+        missileObject = gameObject.transform.Find("MissileObject").gameObject;
+        jetSmokeParticle = gameObject.transform.Find("JetSmoke").GetComponent<ParticleSystem>();
+        mainModule = jetSmokeParticle.main;
+        //GameObject.Find("InGameUI").transform.Find("GameClearUI").gameObject;
         autoActiveFalseTime = 2f;
         aliveMissleTime = 0f;
     }
@@ -91,8 +94,7 @@ public class GridMisslie : MonoBehaviour {
         if (other.tag == "Enemy")
         {
             Debug.Log("적과 충돌");
-            Initialize();
-            EnqueueAndSetActiveToObject();
+            RemoveFromField();
         }
     }
     private void OnTriggerExit(Collider other)
@@ -100,9 +102,16 @@ public class GridMisslie : MonoBehaviour {
         if (other.tag == "Boundary")
         {
             Debug.Log("바운더리 충돌");
-            Initialize();
-            EnqueueAndSetActiveToObject();
+            RemoveFromField();
         }
+    }
+    void RemoveFromField()
+    {
+        missileObject.SetActive(false);
+        //jetSmokeParticle.main.startLifetime
+        mainModule.startLifetime = 5;
+        Initialize();
+        Invoke("EnqueueAndSetActiveToObject", 2f);
     }
     public void Initialize()
     {
@@ -111,6 +120,8 @@ public class GridMisslie : MonoBehaviour {
     }
     void EnqueueAndSetActiveToObject()
     {
+        mainModule.startLifetime = 0.6f;
+        missileObject.SetActive(true);
         PetObjectPool.PetMissilesEnqueue(gameObject);
         gameObject.SetActive(false);
     }
