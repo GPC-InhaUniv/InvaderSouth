@@ -9,7 +9,7 @@ public class BombObjectPool : MonoBehaviour
     private GameObject Bomb;
     [SerializeField]
     private GameObject Bomber;
-    private int BombCount=30;
+    private int BombCount = 30;
     private List<GameObject> Bombs;
     private bool BombActive;
 
@@ -41,11 +41,11 @@ public class BombObjectPool : MonoBehaviour
 
     [SerializeField]
     private GameObject parent;
-    
+
     private void Start()
     {
         bombBoundary = new BombBoundary(7, -7, 20, 0);
-  
+
         spaqwnWait = 0.05f;
         endWait = 2.0f;
         startWait = 0.8f;
@@ -54,16 +54,16 @@ public class BombObjectPool : MonoBehaviour
 
         //object pool 생성
         Bombs = new List<GameObject>();
-        
+
         //폭격기 오브젝트 생성
         //Bomber.SetActive(false);
         GameObject bomberObject = Instantiate(Bomber);
         bomberObject.SetActive(false);
         bomberObject.transform.parent = parent.transform;
         Bombs.Add(bomberObject);
-        
+
         //폭탄 생성
-        for (int i = 1; i < BombCount+1; i++)
+        for (int i = 1; i < BombCount + 1; i++)
         {
             GameObject obj = Instantiate(Bomb);
             obj.SetActive(false);
@@ -72,7 +72,7 @@ public class BombObjectPool : MonoBehaviour
         }
         //Object Pool 생성 끝
     }
-    
+
     //폭격시작 메소드(폭격중인지 확인하고 아니면 폭격코루틴을 동작시킨다)
     public void StartBombing()
     {
@@ -91,7 +91,7 @@ public class BombObjectPool : MonoBehaviour
             //폭격기 오브젝트의 위치를 초기화 하고 동작시킨다
             Debug.Log("폭격기 오브젝트의 위치를 초기화 하고 동작시킨다");
             Bombs[0].transform.position = new Vector3(0f, 0f, bombBoundary.boundaryZMin - 10f);
-            Bombs[0].SetActive(true); 
+            Bombs[0].SetActive(true);
         }
 
         yield return new WaitForSeconds(startWait);
@@ -103,7 +103,7 @@ public class BombObjectPool : MonoBehaviour
             Bombs[i].transform.position = spawnPosition;
             Bombs[i].transform.rotation = spawnRotation;
             Bombs[i].SetActive(true);
-            Debug.Log(Bombs[i].activeSelf+"번 폭탄 엑티브셀프");
+            Debug.Log(Bombs[i].activeSelf + "번 폭탄 엑티브셀프");
             yield return new WaitForSeconds(spaqwnWait);
         }
 

@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BossBulletController : MonoBehaviour {
+public class BossBulletController : MonoBehaviour
+{
 
     [SerializeField]
     private Rigidbody rb;
@@ -16,7 +17,8 @@ public class BossBulletController : MonoBehaviour {
     public float aliveMissleTime;
     // Use this for initialization
 
-    void Start () {
+    void Start()
+    {
 
         rb = GetComponent<Rigidbody>();
         autoActiveFalseTime = 2.0f;
@@ -39,14 +41,14 @@ public class BossBulletController : MonoBehaviour {
         }
         else
         {
-            SetTarget(); 
+            SetTarget();
             rb.transform.Translate(new Vector3(0, 0, -1) * speed * Time.deltaTime);
         }
 
         if (aliveMissleTime > autoActiveFalseTime)
         {
             Initialize();
-            BossEnemyPool. BossNormalbullets.Enqueue(this.gameObject);
+            BossEnemyPool.BossNormalbullets.Enqueue(this.gameObject);
             gameObject.SetActive(false);
         }
         else
@@ -68,18 +70,18 @@ public class BossBulletController : MonoBehaviour {
         if (GameObject.FindGameObjectWithTag("Player") != null)
         {
             GameObject player = GameObject.FindGameObjectWithTag("Player");
-     
-            float distance = Mathf.Infinity;   
-           
-                Vector3 diff = player.transform.position - rb.position;
-                float curDistance = diff.sqrMagnitude;
 
-                if (curDistance < distance)
-                {
-                    target = player.transform;
-                    distance = curDistance;
-                }
-            
+            float distance = Mathf.Infinity;
+
+            Vector3 diff = player.transform.position - rb.position;
+            float curDistance = diff.sqrMagnitude;
+
+            if (curDistance < distance)
+            {
+                target = player.transform;
+                distance = curDistance;
+            }
+
         }
     }
 

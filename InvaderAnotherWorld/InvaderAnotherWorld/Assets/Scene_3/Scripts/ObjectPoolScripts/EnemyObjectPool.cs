@@ -57,7 +57,7 @@ public class EnemyObjectPool : MonoBehaviour
             EnemyPlaneObj.transform.parent = parent.transform;
             EnemyDirectPlanes.Enqueue(EnemyPlaneObj);
 
-            if(GameManager.Instance.CurrentStage == 1)
+            if (GameManager.Instance.CurrentStage == 1)
             {
                 SparkBobObj = Instantiate(sparkBomPrefab);
                 SparkBobObj.SetActive(false);
@@ -76,7 +76,7 @@ public class EnemyObjectPool : MonoBehaviour
 
         while (true)
         {
-            if(StageManager.time == 0)
+            if (StageManager.time == 0)
             {
                 yield return null;
             }
@@ -89,17 +89,17 @@ public class EnemyObjectPool : MonoBehaviour
                 enemyPlane = EnemyPlanes.Dequeue();
                 enemyPlane.SetActive(true);
                 enemyPlane.transform.position = transform.position;
-                yield return new WaitForSeconds(3f);
+                yield return new WaitForSeconds(1f);
 
                 enemyDirectPlane = EnemyDirectPlanes.Dequeue();
                 enemyDirectPlane.SetActive(true);
                 enemyDirectPlane.transform.position = position1;
-                yield return new WaitForSeconds(3f);
+                yield return new WaitForSeconds(1f);
 
                 enemyDirectPlane = EnemyDirectPlanes.Dequeue();
                 enemyDirectPlane.SetActive(true);
                 enemyDirectPlane.transform.position = position2;
-                yield return new WaitForSeconds(3f);
+                yield return new WaitForSeconds(1f);
             }
 
             if (StageManager.time > 10 && StageManager.time <= 90)
@@ -159,12 +159,12 @@ public class EnemyObjectPool : MonoBehaviour
                 enemySpacePlane = EnemySpacePlanes.Dequeue();
                 enemySpacePlane.SetActive(true);
                 enemySpacePlane.transform.position = transform.position;
-                yield return new WaitForSeconds(10f);
+                yield return new WaitForSeconds(8f);
 
                 enemySpacePlane = EnemySpacePlanes.Dequeue();
                 enemySpacePlane.SetActive(true);
                 enemySpacePlane.transform.position = SecondPosition;
-                yield return new WaitForSeconds(10f);
+                yield return new WaitForSeconds(8f);
             }
 
             if (StageManager.time > 65 && StageManager.time <= 90)
@@ -173,12 +173,12 @@ public class EnemyObjectPool : MonoBehaviour
                 enemySpacePlane = EnemySpacePlanes.Dequeue();
                 enemySpacePlane.SetActive(true);
                 enemySpacePlane.transform.position = transform.position;
-                yield return new WaitForSeconds(3f);
+                yield return new WaitForSeconds(2f);
 
                 enemySpacePlane = EnemySpacePlanes.Dequeue();
                 enemySpacePlane.SetActive(true);
                 enemySpacePlane.transform.position = SecondPosition;
-                yield return new WaitForSeconds(5f);
+                yield return new WaitForSeconds(4f);
             }
 
             if (StageManager.time > 90)
@@ -210,17 +210,17 @@ public class EnemyObjectPool : MonoBehaviour
                 enemyPlane = EnemyPlanes.Dequeue();
                 enemyPlane.SetActive(true);
                 enemyPlane.transform.position = transform.position;
-                yield return new WaitForSeconds(3f);
+                yield return new WaitForSeconds(1f);
 
                 enemyDirectPlane = EnemyDirectPlanes.Dequeue();
                 enemyDirectPlane.SetActive(true);
                 enemyDirectPlane.transform.position = position1;
-                yield return new WaitForSeconds(3f);
+                yield return new WaitForSeconds(1f);
 
                 enemyDirectPlane = EnemyDirectPlanes.Dequeue();
                 enemyDirectPlane.SetActive(true);
                 enemyDirectPlane.transform.position = position2;
-                yield return new WaitForSeconds(3f);
+                yield return new WaitForSeconds(1f);
             }
 
             if (StageManager.time > 10)
@@ -316,7 +316,6 @@ public class EnemyObjectPool : MonoBehaviour
 
         while (true)
         {
-
             if (StageManager.time <= 10)
                 yield return null;
 
@@ -336,7 +335,7 @@ public class EnemyObjectPool : MonoBehaviour
                 yield return new WaitForSeconds(5f);
             }
 
-            if(StageManager.time > 30 && StageManager.time <= 60)
+            if (StageManager.time > 30 && StageManager.time <= 60)
             {
                 sparkBom = SparkBoms.Dequeue();
                 sparkBom.SetActive(true);
@@ -354,7 +353,7 @@ public class EnemyObjectPool : MonoBehaviour
                 yield return new WaitForSeconds(10f);
             }
 
-            if(StageManager.time > 60)
+            if (StageManager.time > 60)
             {
                 sparkBom = SparkBoms.Dequeue();
                 sparkBom.SetActive(true);

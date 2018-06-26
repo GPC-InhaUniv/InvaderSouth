@@ -1,8 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class BossFirstSkillGoLeftBulletController : MonoBehaviour {
+public class BossFirstSkillGoLeftBulletController : MonoBehaviour
+{
 
     [SerializeField]
     private GameObject smallBullet;
@@ -17,7 +16,8 @@ public class BossFirstSkillGoLeftBulletController : MonoBehaviour {
     private float fireRate = 0f;
 
     // Use this for initialization
-    void Start () {
+    void Start()
+    {
         rigidbody = GetComponent<Rigidbody>();
         smallBulletCount = 0;
         speed = 1.0f;
@@ -33,7 +33,7 @@ public class BossFirstSkillGoLeftBulletController : MonoBehaviour {
         moveFowardTime = 0;
         gameObject.transform.rotation = Quaternion.identity;
         gameObject.transform.position = new Vector3(0, 0, 0);
-        
+
     }
 
     private void FixedUpdate()
@@ -51,7 +51,7 @@ public class BossFirstSkillGoLeftBulletController : MonoBehaviour {
             tempbosssmallBullet = BossEnemyPool.BosssmallBullets.Dequeue();
             tempbosssmallBullet.SetActive(true);
 
-            tempbosssmallBullet.transform.position = new Vector3(x + transform.position.x, 3.6f, transform.position.z);
+            tempbosssmallBullet.transform.position = new Vector3(x + transform.position.x, 0, transform.position.z);
             tempbosssmallBullet.transform.rotation = Quaternion.Euler(0, runningTime, 0);
 
             smallBulletCount++;
@@ -60,7 +60,7 @@ public class BossFirstSkillGoLeftBulletController : MonoBehaviour {
                 Initialize();
                 BossEnemyPool.BossSecondLeftMissiles.Enqueue(gameObject);
                 gameObject.SetActive(false);
-               
+
             }
             fireRate = 0;
         }

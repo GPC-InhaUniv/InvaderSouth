@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyPool : MonoBehaviour {
+public class EnemyPool : MonoBehaviour
+{
 
     private const int enemyCount = 10;
 

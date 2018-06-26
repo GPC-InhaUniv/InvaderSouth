@@ -1,8 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.EventSystems;
 using System;
 
 
@@ -23,25 +21,26 @@ public class ShopUIScript : MonoBehaviour
     private int totalItemPrice;
     private Text showTotalItemPriceText;
     private Text currentPlayerMoneyText;
+    private Text playerName;
 
     [Header("<Gold>")]
-    private Text goldAlert;
+    private Image goldAlert;
 
-    private int maxGold ;  
+    private int maxGold;
     private GameObject buyGoldPanel;
     private Image buyAlert;
     private Text canBuyGoldAndDiamondText;
     private Text cantBuyGoldAndDiamondText;
 
-    private int diamondPriceForGold = 5; //골드당 다이아몬드 가격 나중에 배열로 바꿔서 각기 정해줄 예정////수정수정수정수정수정수정수정수정수정수정수정수정수정수정수정
+    private int diamondPriceForGold = 5; //골드당 다이아몬드 가격. 추후 리스트로 바꿔서 각기 정해줄 예정
     private int saveGoldItemPrice = 0;   //선택해준 골드를 기억할 수 있도록
     private int saveDiamondItemPrice = 0;   //선택해준 다이아몬드 개수를 기억할 수 있도록
     private Image thankAlert;
 
     [Header("<Diamond>")]
-    private int maxDiamond ;
+    private int maxDiamond;
     private GameObject buyDiamondPanel;
-    private Text diamondAlert;
+    private Image diamondAlert;
     private GameObject diamondButtonPanel;
     private Text currentPlayerDiamondText;
 
@@ -71,16 +70,16 @@ public class ShopUIScript : MonoBehaviour
         maxDiamond = 999999;
 
 
-        //배열로 받아온 골드 가격 텍스트에 골드 가격(마찬가지로 배열)을 넣어줌//
+        //리스트로 받아온 골드 가격 텍스트에 골드 가격(마찬가지로 리스트)을 넣어줌//
         for (int i = 0; i < goldinfo.Count; i++)
         {
-            goldinfo[i].GoldPriceText.text = goldinfo[i].GoldPrice.ToString();
+            goldinfo[i].GoldPriceText.text = goldinfo[i].GoldPrice.ToString() + "개";
         }
 
-        //배열로 받아온 다이아몬드 가격 텍스트에 다이아몬드 가격(마찬가지로 배열)을 넣어줌//
+        //리스트로 받아온 다이아몬드 가격 텍스트에 다이아몬드 가격(마찬가지로 리스트)을 넣어줌//
         for (int i = 0; i < diamondinfo.Count; i++)
         {
-            diamondinfo[i].DiamondPriceText.text = diamondinfo[i].DiamondPrice.ToString();
+            diamondinfo[i].DiamondPriceText.text = diamondinfo[i].DiamondPrice.ToString() + "개";
         }
 
     }
@@ -130,11 +129,7 @@ public class ShopUIScript : MonoBehaviour
                 {
                     itemPrice += number;
                 }
-                else
-                {
-                    Debug.Log("스트링 값이 들어오지 않음");
-                }
-
+          
                 //싱글톤에 저장해준 아이템을 True로 만들어준다.
                 GameManager.Instance.BuyItemList[i] = true;
             }
@@ -166,7 +161,7 @@ public class ShopUIScript : MonoBehaviour
 
         //아이템 배열 초기화
         for (int i = 0; i < GameManager.Instance.BuyItemList.Length; i++)
-            GameManager.Instance.BuyItemList[i] = false; 
+            GameManager.Instance.BuyItemList[i] = false;
     }
 
     /// <summary>
@@ -175,7 +170,7 @@ public class ShopUIScript : MonoBehaviour
     //골드 구매 버튼//
     public void OnClickedGoldButton()
     {
-        
+
         if (playerMoneyCount >= maxGold)
         {
             goldAlert.gameObject.SetActive(true);
@@ -221,7 +216,7 @@ public class ShopUIScript : MonoBehaviour
         else if (playerDiamondCount <= diamondPriceForGold)
         {
             SetDiamondUIOn();
-            buyAlert.gameObject.SetActive(false); 
+            buyAlert.gameObject.SetActive(false);
             buyGoldPanel.gameObject.SetActive(false);
         }
     }
@@ -239,7 +234,7 @@ public class ShopUIScript : MonoBehaviour
     //다이아몬드 구매 버튼 눌렀을 시.
     public void OnClickedDiamondButton()
     {
-       
+
         if (playerDiamondCount >= maxDiamond)
         {
             //다이아몬드 알람으로 띄우기
@@ -264,6 +259,8 @@ public class ShopUIScript : MonoBehaviour
     public void OnClickedBuyDiamond()
     {
         DataManager.Instance.BuyDiaMond(saveDiamondItemPrice);
+        //2018/06/25 수정
+        playerDiamondCount = GameManager.Instance.PlayerDiamondCount;
         currentPlayerDiamondText.text = GameManager.Instance.PlayerDiamondCount.ToString();
         thankAlert.gameObject.SetActive(true);
         diamondButtonPanel.gameObject.SetActive(false);
@@ -278,7 +275,7 @@ public class ShopUIScript : MonoBehaviour
 
 
 
-    public void OnClickedStartButton()   
+    public void OnClickedStartButton()
     {
         totalItemPrice = Convert.ToInt32(showTotalItemPriceText.text);
         if (totalItemPrice < 0)
@@ -287,7 +284,7 @@ public class ShopUIScript : MonoBehaviour
         int calculateMoneyBeforeStart = Convert.ToInt32(GameManager.Instance.PlayerMoneyCount) - totalItemPrice;
         if (calculateMoneyBeforeStart < 0)
         {
-            Debug.Log("소지 금액 부족");
+            //Debug.Log("소지 금액 부족");
             warningText.text = "소지금액 " + calculateMoneyBeforeStart.ToString() + " 원이 부족합니다.";
             startButtonWarningPanel.SetActive(true);
         }
@@ -301,7 +298,7 @@ public class ShopUIScript : MonoBehaviour
 
     private void Update()
     {
-        if (playerMoneyCount == NONE || playerMoneyCount == NONE)
+        if (playerMoneyCount == NONE || playerDiamondCount == NONE)
         {
             UpdatePlayerInformation();
         }
@@ -313,18 +310,19 @@ public class ShopUIScript : MonoBehaviour
         playerDiamondCount = GameManager.Instance.PlayerDiamondCount;
         currentPlayerMoneyText.text = playerMoneyCount.ToString() + " G";
         currentPlayerDiamondText.text = playerDiamondCount.ToString() + "D";
+        playerName.text = GameManager.Instance.PlayerName;
     }
 
     private void SetBuyGoldUIPanel()
     {
         buyGoldPanel = GameObject.Find("BuyGoldPanel");
-        goldAlert = GameObject.Find("GoldAlert").GetComponent<Text>();
+        goldAlert = GameObject.Find("GoldAlert").GetComponent<Image>();
     }
 
     private void SetBuyDiamondUIPanel()
     {
         buyDiamondPanel = GameObject.Find("BuyDiamondPanel");
-        diamondAlert = GameObject.Find("DiamondAlert").GetComponent<Text>();
+        diamondAlert = GameObject.Find("DiamondAlert").GetComponent<Image>();
         diamondButtonPanel = GameObject.Find("DiamondButtonPanel");
     }
 
@@ -334,9 +332,10 @@ public class ShopUIScript : MonoBehaviour
         startButtonWarningPanel = shopPanel.transform.Find("StartButtonWarningPanel").gameObject;
 
         warningText = GameObject.Find("WarningText").GetComponent<Text>();
-        showTotalItemPriceText = GameObject.Find("ShowTotalItemPriceText").GetComponent<Text>();    //위에 있는걸 불러오는게 아니라 얘 하나만 필요해서 그냥 사용
-        currentPlayerMoneyText = GameObject.Find("CurrentPlayerCashText").GetComponent<Text>();  //위에 있는걸 불러오는게 아니라 얘 하나만 필요해서 그냥 사용
-        currentPlayerDiamondText = GameObject.Find("CurrentPlayerDiamondText").GetComponent<Text>(); //위에 있는걸 불러오는게 아니라 얘 하나만 필요해서 그냥 사용
+        showTotalItemPriceText = GameObject.Find("ShowTotalItemPriceText").GetComponent<Text>();
+        currentPlayerMoneyText = GameObject.Find("CurrentPlayerCashText").GetComponent<Text>();
+        currentPlayerDiamondText = GameObject.Find("CurrentPlayerDiamondText").GetComponent<Text>();
+        playerName = GameObject.Find("PlayerName").GetComponent<Text>();
 
         buyAlert = GameObject.Find("BuyAlert").GetComponent<Image>();
         thankAlert = buyAlert.transform.Find("ThankAlert").GetComponent<Image>();

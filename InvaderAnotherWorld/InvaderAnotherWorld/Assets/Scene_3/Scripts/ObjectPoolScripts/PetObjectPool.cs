@@ -1,8 +1,8 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
-public class PetObjectPool : MonoBehaviour {
+public class PetObjectPool : MonoBehaviour
+{
 
     [SerializeField]
     private GameObject petObjectPrefab;
@@ -11,7 +11,7 @@ public class PetObjectPool : MonoBehaviour {
     public static Queue<GameObject> petMissiles;
     private GameObject petMissile;
     private const int petMissileCount = 3;
-    
+
 
     [SerializeField]
     private GameObject parent;
@@ -23,7 +23,7 @@ public class PetObjectPool : MonoBehaviour {
         petObject.SetActive(true);
         petObject.transform.parent = parent.transform;
         //petMissiles.Enqueue(petObject);
-        
+
 
 
         for (int i = 1; i < petMissileCount; i++)

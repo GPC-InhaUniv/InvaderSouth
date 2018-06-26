@@ -1,13 +1,11 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class LivingState : IState
 {
     private GameObject playerObject;
     private float speed = 0.2f;
     private bool isInput;
-    
+
     public LivingState()
     {
         playerObject = GameObject.Find("Player").gameObject;

@@ -1,18 +1,17 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class Wingman : MonoBehaviour {
+public class Wingman : MonoBehaviour
+{
     private float moveStartDistance = 2f;
     private float rangeZ = 1f;
     private float speed = 10f;
-    
+
     Vector3 wingManPosition;
     Vector3 targetPosition;
-    
+
     public float fireRate = 3f;
     private float nextFire;
-    private float missileNextFire =0;
+    private float missileNextFire = 0;
 
     private GameObject Player;
     private Transform PetObject;
@@ -22,8 +21,8 @@ public class Wingman : MonoBehaviour {
     PetObjectPool petObjectPool;
 
     // Use this for initialization
-    void Start () {
-        //rigidbody = GetComponent<Rigidbody>();
+    void Start()
+    {
         wingManPosition = transform.position;
         Player = GameObject.FindGameObjectWithTag("Player");
         PetObject = transform.GetChild(0);
@@ -39,77 +38,55 @@ public class Wingman : MonoBehaviour {
 
     void Update()
     {
-        
+
         if (Player == null)
         {
             Debug.Log("Destroy");
             Destroy(gameObject);
         }
-        else 
+        else
         {
             targetPosition = Player.transform.position;
             wingManPosition = targetPosition;
             wingManPosition.z = targetPosition.z - rangeZ;
             if (Player.transform.position.x > 1)
             {
-                //rotateVelue = new Vector3(0, 0, 0);
+
                 rotateVelue = Quaternion.Euler(new Vector3(0, 0, 0));
                 petObjectRotateVelue = Quaternion.Euler(new Vector3(0, 0, 0));
-                //rotateVelue = Player.transform.rotation;
 
-                //transform.Rotate(new Vector3(0, 0, 0) * Time.deltaTime * speed);
-                //transform.Rotate(new Vector3(0,0,0),Space.Self);
             }
             else if (Player.transform.position.x < -1)
             {
                 rotateVelue = Quaternion.Euler(new Vector3(0, 180f, 0));
                 petObjectRotateVelue = Quaternion.Euler(new Vector3(0, 0, 0));
-                //rotateVelue = Player.transform.rotation;
-                //transform.Rotate(new Vector3(0, -180, 0)*Time.deltaTime*speed);
-                //transform.rotation = Vector3.right.y
+
             }
-            //else
-            //{
-            //    wingManPosition = targetPosition;
-            //    wingManPosition.z -= rangeX;
-            //}
 
         }
-
-
-
-        //wingManPosition = targetPosition;
-        //transform.position = targetPosition;
 
         if (Time.time > missileNextFire)
         {
             //Debug.Log("미사일이 발사됨");
             MissilesFire();
         }
-        else
-        {
-            //Debug.Log("미사일을 발사하지 않음");
-        }
+
 
     }
 
     // Update is called once per frame
-    void FixedUpdate () {
-        
+    void FixedUpdate()
+    {
+
         MoveToPlayer();
     }
 
     void MoveToPlayer()
     {
-        transform.position = Vector3.Lerp(transform.position, wingManPosition, 2*speed * Time.deltaTime);
-        transform.rotation = Quaternion.Slerp(transform.rotation, rotateVelue, (speed * Time.deltaTime)/speed);
-        //PetObject.rotation = Quaternion.Slerp(PetObject.rotation, petObjectRotateVelue, speed * Time.deltaTime);
+        transform.position = Vector3.Lerp(transform.position, wingManPosition, 2 * speed * Time.deltaTime);
+        transform.rotation = Quaternion.Slerp(transform.rotation, rotateVelue, (speed * Time.deltaTime) / speed);
         PetObject.rotation = petObjectRotateVelue;
-        //transform.rotation = 
 
-        //Debug.Log(wingManPosition);
-        //Debug.Log(targetPosition);
-        //Debug.Log("MoveToPlayer");
 
     }
     private void MissilesFire()

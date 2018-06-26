@@ -1,7 +1,5 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 public enum BossState
 {
@@ -19,14 +17,18 @@ public class BossController : MonoBehaviour
     [SerializeField]
     private GameObject SecondSkillBullet;
 
-   
+
     private float firstMissleAngle;
     private float secondMissleAngle;
 
     //[SerializeField]
     //private Image bossHpImage;
-    public float BossHp=30;
+    public float BossHp = 30;
     public static bool IsBossAlive = true;
+
+    //[SerializeField]
+    //private Image bossHpImage;
+
 
     [SerializeField]
     private Transform shotposition;
@@ -37,8 +39,8 @@ public class BossController : MonoBehaviour
     private float secondFiredelayTime = 15.0f;
     private bool isUseSkill;
     private BossState bossstate;
-    private bool isBossCreate = false;
-
+    private bool isAttackPlayerSkill = false;
+    private float skillAttackedTimer = 0.0f;
     private BossEnemyPool bossEnemyPool;
 
 
@@ -46,21 +48,32 @@ public class BossController : MonoBehaviour
     {
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
         bossEnemyPool = GameObject.Find("GameObjectPool").GetComponent<BossEnemyPool>();
-    
+        //bossHpImage.fillAmount = BossHp / 30.0f;
+
         isUseSkill = false;
-        bossstate = BossState.dead;
+        bossstate = BossState.alive;
         firstMissleAngle = 30.0f;
         secondMissleAngle = 45.0f;
         firstFiredelayTime = Time.time + firstFireTime;
         secondFiredelayTime = Time.time + secondFireTime;
-      
+        StartCoroutine(MoveAfterGenerate());
+        StartCoroutine(BossNormalAttack());
+    }
+
+    IEnumerator MoveAfterGenerate()
+    {
+        while (this.transform.position.z >= 12)
+        {
+            transform.Translate(new Vector3(0, 0, 1) * 0.01f);
+            yield return new WaitForEndOfFrame();
+        }
+
     }
 
     IEnumerator BossNormalAttack()
     {
         while (BossState.alive.Equals(bossstate))
         {
-
             if (isUseSkill)
             {
                 yield return new WaitForSeconds(2.5f);
@@ -71,22 +84,12 @@ public class BossController : MonoBehaviour
                 bossEnemyPool.FireNormalBullet(shotposition.transform);
                 yield return new WaitForSeconds(0.8f);
             }
-
         }
 
     }
+
     private void Update()
     {
-        if(!isBossCreate)
-        {
-            //bossHpImage.fillAmount = BossHp / 30.0f;
-         
-            isBossCreate = true;
-            bossstate = BossState.alive;
-            gameObject.SetActive(true);
-            StartCoroutine(BossNormalAttack());
-        }
-
         if (bossstate.Equals(BossState.alive))
         {
             UseSkill();
@@ -103,8 +106,19 @@ public class BossController : MonoBehaviour
         {
             UseSecondSkill();
         }
+        //수정
+        if (isAttackPlayerSkill)
+        {
+            skillAttackedTimer += Time.deltaTime;
+            if (skillAttackedTimer >= 2.0f)
+            {
+                skillAttackedTimer = 0;
+                isAttackPlayerSkill = false;
+            }
+        }
 
     }
+
     void UseFirstSkill()
     {
         bossEnemyPool.FireSecondBullet(shotposition.transform, firstMissleAngle);
@@ -123,6 +137,7 @@ public class BossController : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        Debug.Log("충돌");
         if (other.tag == "PlayerBullet")
         {
             BossHp -= 1;
@@ -133,11 +148,22 @@ public class BossController : MonoBehaviour
             if (BossHp <= 0)
             {
                 IsBossAlive = false;
+                BossEnemyPool.BossObjects.Enqueue(this.gameObject);
+                this.gameObject.SetActive(false);
             }
         }
-        if (other.tag == "Bomb")
-        {
 
+        //수정
+        if (other.tag == "Bomb" && !isAttackPlayerSkill)
+        {
+            BossHp -= 5;
+            isAttackPlayerSkill = true;
+            if (BossHp <= 0)
+            {
+                IsBossAlive = false;
+                BossEnemyPool.BossObjects.Enqueue(this.gameObject);
+                this.gameObject.SetActive(false);
+            }
         }
     }
 

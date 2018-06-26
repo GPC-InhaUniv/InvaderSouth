@@ -1,8 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class GridMisslie : MonoBehaviour {
+public class GridMisslie : MonoBehaviour
+{
 
     [SerializeField]
     private Transform target;
@@ -18,8 +17,13 @@ public class GridMisslie : MonoBehaviour {
     [SerializeField]
     private float aliveMissleTime;
 
+    [SerializeField]
+    GameObject missileObject;
+    [SerializeField]
+    GameObject smokeObject;
+
     // Use this for initialization
-    void Start ()
+    void Start()
     {
         rb = GetComponent<Rigidbody>();
         autoActiveFalseTime = 2f;
@@ -35,9 +39,9 @@ public class GridMisslie : MonoBehaviour {
         else
             aliveMissleTime += Time.deltaTime;
     }
-    void FixedUpdate ()
+    void FixedUpdate()
     {
-        if (target!=null)
+        if (target != null)
         {
             RuningToEnemy(target);
         }
@@ -54,8 +58,7 @@ public class GridMisslie : MonoBehaviour {
         Quaternion s = Quaternion.Slerp(transform.rotation, q, rotateSpeed * Time.deltaTime);
         rb.rotation = s;
         rb.transform.Translate(new Vector3(0, 0, 1) * speed * Time.deltaTime);
-        Debug.Log(direction);
-        //rb.transform.position = Vector3.Lerp(rb.transform.position, target.transform.position, speed * Time.deltaTime);
+ 
     }
     void SetTarget()
     {
@@ -77,7 +80,7 @@ public class GridMisslie : MonoBehaviour {
             }
         }
     }
-    
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Enemy")

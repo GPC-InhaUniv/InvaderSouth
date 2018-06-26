@@ -1,15 +1,13 @@
-﻿
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class PlayerBulletMover : MonoBehaviour {
+public class PlayerBulletMover : MonoBehaviour
+{
     private Rigidbody rb;
     private float speed = 10f;
 
-	void Awake ()
+    void Awake()
     {
         rb = GetComponent<Rigidbody>();
         rb.velocity = transform.forward * speed;
-	}
+    }
 }

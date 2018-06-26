@@ -1,9 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-
-public class StageManager : MonoBehaviour {
+public class StageManager : MonoBehaviour
+{
     private GameObject backgroundObject;
     private int maxEnemyCount = 0;
     public static int KillEnemyCount = 0;
@@ -11,8 +9,6 @@ public class StageManager : MonoBehaviour {
     private int currentStage = 0;
     public static float time;
 
-    private GameObject bossobject;
-    private GameObject bossHpobject;
     /*Load BossEnemy*/
     private BossEnemyPool bossEnemyPool;
     [SerializeField]
@@ -21,93 +17,46 @@ public class StageManager : MonoBehaviour {
     // Use this for initialization
     void Start()
     {
-        currentStage=CheckPlayerStage(GameManager.Instance.CurrentStage);
-        //backgroundObject = GameObject.Find("BackGroundElemtns").gameObject;
-        //bulletObject = GameObject.Find("Bullets").gameObject;
-
-        MakeGameRule();
-
-        //  StartCoroutine(MakeSparkBomb());
+        currentStage = CheckPlayerStage(GameManager.Instance.CurrentStage);
+       
     }
 
     // Update is called once per frame
     void Update()
     {
-
-        if(GameManager.Instance.CurrentStage == 0)
+        if (GameManager.Instance.CurrentStage == 0)
         {
             if (time <= 100)
             {
                 time += Time.deltaTime;
                 Debug.Log("Stage1 : " + time);
 
-                if (Input.GetKey(KeyCode.S) == true)
+                if (Input.GetKeyDown(KeyCode.T) == true)
                 {
-                    time += 10;
+                    time += 5;
+                    Debug.Log(time);
                 }
             }
         }
 
-        else if(GameManager.Instance.CurrentStage == 1)
+        else if (GameManager.Instance.CurrentStage == 1)
         {
             time += Time.deltaTime;
-            if(time>=60&&!bossobject.activeInHierarchy)
-            {
-                bossobject.SetActive(true);
-                bossHpobject.SetActive(true);
-            }
             Debug.Log("Stage2 : " + time);
         }
 
-        if(Input.GetKey(KeyCode.S))
-        {
-            time += 10;
-        }
 
-        //if (KillEnemyCount>=maxEnemyCount)
-        //    Debug.Log("게임 클리어");
-    
-      
+        if (Input.GetKeyDown(KeyCode.T) == true)
+        {
+            time += 5;
+            Debug.Log(time);
+        }
     }
 
     public static void KillEnemy()
     {
         KillEnemyCount++;
         Debug.Log(KillEnemyCount);
-    }
-    void MakeGameRule()
-    {
-        switch (currentStage)
-        {
-            case 0:
-                {
-                    KillEnemyCount = 0;
-                    maxEnemyCount = 51;
-                    break;
-                }
-            case 1:
-                {
-                    bossobject = GameObject.FindGameObjectWithTag("BossEnemy");
-                    bossobject.SetActive(false);
-                    bossHpobject = GameObject.Find("BossStats");
-                    bossHpobject.SetActive(false);
-                    break;
-                }
-            case 2:
-                {
-                    
-                    break;
-                }
-            case 4:
-                {
-                    break;
-                }
-            default:
-                {
-                    Debug.Log("error stage load");
-                    break;
-                }
-        }
     }
 
     int CheckPlayerStage(int playerCurrentStage)
@@ -128,36 +77,36 @@ public class StageManager : MonoBehaviour {
         return -1;
     }
 
-    IEnumerator MakeEnemyOne()
-    {
-        yield return new WaitForSeconds(5.0f);
-       
-    }
-
-    IEnumerator MakeBossEnmey()
-    {
-        yield return new WaitForSeconds(5.0f);
-        bossEnemyPool.GenerateBoss(bossGeneratePosition);
-
-    }
-	
-    //IEnumerator MakeSparkBomb()
+    //do not use yet
+    //void MakeGameRule()
     //{
-    //    while(true)
+    //    switch (currentStage)
     //    {
-    //        Instantiate(sparkBomb, new Vector3(Random.Range(-5,5),3.6f,Random.Range(18,23)),Quaternion.identity);
-    //        yield return new WaitForSeconds(1.0f);
+    //        case 0:
+    //            {
+    //                KillEnemyCount = 0;
+    //                maxEnemyCount = 51;
+    //                break;
+    //            }
+    //        case 1:
+    //            {
+    //                break;
+    //            }
+    //        case 2:
+    //            {
+
+    //                break;
+    //            }
+    //        case 4:
+    //            {
+    //                break;
+    //            }
+    //        default:
+    //            {
+    //                Debug.Log("error stage load");
+    //                break;
+    //            }
     //    }
     //}
 
-    //void ReStartThisStage()
-    //{
-    //    Destroy(backgroundObject);
-    //    Destroy(bulletObject);
-    //    Destroy(gameobjectPool);
-    //    LoadingSceneController.LoadScene("Main");
-    //}
-
-
-    
 }

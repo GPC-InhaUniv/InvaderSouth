@@ -1,17 +1,17 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 
 
-public class PlayerStatus : MonoBehaviour {
+public class PlayerStatus : MonoBehaviour
+{
 
     public float PlayerHp;
     public int Money;
     public int Score;
     public float SkillAmount;
     private bool isDamaged = false;
-   
+
 
     [SerializeField]
     private MeshCollider meshCollider;
@@ -34,18 +34,27 @@ public class PlayerStatus : MonoBehaviour {
         else
             SkillAmount = 0.0f;
     }
-	public void Damaged()
+    public void Damaged()
     {
         if (!isDamaged)
         {
             PlayerHp -= 1f;
-            isDamaged = true;
-            meshCollider.enabled = false;
-            StartCoroutine(OnOffPlayer());
+
+            if (PlayerHp > 0)
+            {
+                isDamaged = true;
+                meshCollider.enabled = false;
+                StartCoroutine(OnOffPlayer());
+            }
+
+            if (PlayerHp <= 0)
+            {
+                return;
+            }
         }
     }
 
-    public void SetScoreSkill(int score,float skillAmount)
+    public void SetScoreSkill(int score, float skillAmount)
     {
         Score += score;
         SkillAmount += skillAmount;
@@ -58,9 +67,9 @@ public class PlayerStatus : MonoBehaviour {
     {
         bool swtichOnOff = false;
         float frameCount = 0;
-        while(isDamaged)
+        while (isDamaged)
         {
-            meshRenderer.enabled= swtichOnOff;
+            meshRenderer.enabled = swtichOnOff;
             swtichOnOff = !swtichOnOff;
             frameCount += 0.1f;
             if (frameCount >= 1.0f)
@@ -74,24 +83,4 @@ public class PlayerStatus : MonoBehaviour {
         yield return null;
     }
 
-    private void Update()
-    {
-        if (Input.GetKey(KeyCode.A))
-            Damaged();
-    }
-
-    //private void OnTriggerEnter(Collider other)
-    //{
-    //    if(other.tag == "Enemy")
-    //    {
-    //        Damaged();
-    //    }
-
-    //    if (other.tag == "EnemyBullet")
-    //    {
-    //        Damaged();
-    //        BulletObjectPool.enemyBullets.Enqueue(other.gameObject);
-    //        other.gameObject.SetActive(false);
-    //    }
-    //}
 }

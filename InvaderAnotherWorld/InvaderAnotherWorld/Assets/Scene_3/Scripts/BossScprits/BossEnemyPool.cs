@@ -48,6 +48,9 @@ public class BossEnemyPool : MonoBehaviour
     private BossFirstSkillGoLeftBulletController bossFirstSkillGoLeftBullet;
     private BossFirstSkillGoRightBulletController bossFirstSkillGoRightBulletController;
 
+
+
+
     // Use this for initialization
     void Start()
     {
@@ -56,7 +59,7 @@ public class BossEnemyPool : MonoBehaviour
         BossObjects = new Queue<GameObject>();
         obj = Instantiate(bossObject);
         obj.transform.parent = parent.transform;
-        obj.SetActive(true);
+        obj.SetActive(false);
         BossObjects.Enqueue(obj);
 
         BossNormalbullets = new Queue<GameObject>();
@@ -106,6 +109,7 @@ public class BossEnemyPool : MonoBehaviour
             obj.transform.parent = parent.transform;
             obj.SetActive(false);
             BosssmallBullets.Enqueue(obj);
+
         }
 
 
@@ -131,7 +135,7 @@ public class BossEnemyPool : MonoBehaviour
         tempSecondRightMissile.transform.rotation = Quaternion.Euler(0, -Angle, 0);
     }
 
-    public void FireThirdBullet(Transform transform,float Angle)
+    public void FireThirdBullet(Transform transform, float Angle)
     {
         tempThirdMissile = BossThirdMissiles.Dequeue();
         tempThirdMissile.SetActive(true);
@@ -162,5 +166,28 @@ public class BossEnemyPool : MonoBehaviour
     public void WithdrawNormalBullet()
     {
 
+    }
+
+    public IEnumerator SetBossOfPosition(Transform transform, GameObject bossStats)
+    {
+        bool IsSetBoss = false;
+
+        while (!IsSetBoss)
+        {
+            if (StageManager.time >= 40)
+            {
+                GenerateBoss(transform);
+                IsSetBoss = true;
+
+            }
+
+            if (IsSetBoss == true)
+            {
+                break;
+            }
+            yield return new WaitForSeconds(1f);
+        }
+        yield return new WaitForSeconds(3.5f);
+        bossStats.SetActive(true);
     }
 }

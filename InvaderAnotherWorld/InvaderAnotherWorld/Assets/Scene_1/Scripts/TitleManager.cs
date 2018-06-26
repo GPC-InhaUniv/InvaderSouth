@@ -22,25 +22,35 @@ public class TitleManager : MonoBehaviour
     private GameObject createAlertPanel;
     [SerializeField]
     private GameObject loginPanel;
-     
+    [SerializeField]
+    private Button loginBtn;
     [SerializeField]
     private GameObject loginManager;
+    [SerializeField]
+    private InputField newIDField;
+    [SerializeField]
+    private InputField newPassWordField;
+    [SerializeField]
+    private InputField confirmNewPassWorldFiled;
+    [SerializeField]
+    private InputField newEmailAdress;
 
     [SerializeField]
     private GameObject introManager;
 
+    private int currentInputPosition = 0;
 
     /*AccountInfoMation에서 사용해야 하기 때문에 static으로 선언*/
     public static bool IsCreateIDError = false;
     public static bool IsLoginError = false;
     public static bool IsSuccesCreateId = false;
 
-    private bool isNotFirstStart=false;
+    private bool isNotFirstStart = false;
 
     private void Start()
     {
         Screen.SetResolution(700, 1080, true);
-        if(!isNotFirstStart)
+        if (!isNotFirstStart)
         {
             introManager.SetActive(true);
             loginManager.SetActive(false);
@@ -76,7 +86,57 @@ public class TitleManager : MonoBehaviour
             IsSuccesCreateId = false;
         }
 
+        if (Input.GetKeyDown(KeyCode.Tab) && loginPanel.activeInHierarchy && currentInputPosition == 1)
+        {
+            passInputField.Select();
+        }
+
+        if (Input.GetKeyDown(KeyCode.Return) && loginPanel.activeInHierarchy && currentInputPosition == 2) //enter
+        {
+            loginBtn.Select();
+        }
+
+        if (Input.GetKeyDown(KeyCode.Tab) && createAccountPanel.activeInHierarchy)
+        {
+            if (currentInputPosition == 3)
+            {
+                newPassWordField.Select();
+            }
+            else if (currentInputPosition == 4)
+            {
+                confirmNewPassWorldFiled.Select();
+            }
+            else if (currentInputPosition == 5)
+            {
+                newEmailAdress.Select();
+            }
+        }
+
     }
+
+    public void OnClickedIDField()
+    {
+        currentInputPosition = 1;
+    }
+
+    public void OnclikedPwFiled()
+    {
+        currentInputPosition = 2;
+    }
+
+    public void OnClickedCreateIDFiled()
+    {
+        currentInputPosition = 3;
+    }
+    public void OnClickedCreatePwFiled()
+    {
+        currentInputPosition = 4;
+    }
+    public void OnClickedCreatePw2Filed()
+    {
+        currentInputPosition = 5;
+    }
+
 
     public void OnClickedGameQuit()
     {

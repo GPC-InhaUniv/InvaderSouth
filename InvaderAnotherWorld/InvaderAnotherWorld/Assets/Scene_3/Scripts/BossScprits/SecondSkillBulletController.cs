@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class SecondSkillBulletController : MonoBehaviour
 {
@@ -37,12 +35,12 @@ public class SecondSkillBulletController : MonoBehaviour
             moveFowardTime += Time.deltaTime;
             rigidbody.transform.Translate(new Vector3(0, 0, -1) * speed * Time.deltaTime);
         }
-        else if (!warningPlane.activeInHierarchy&&warningTime<1f)
+        else if (!warningPlane.activeInHierarchy && warningTime < 1f)
         {
             warningPlane.SetActive(true);
-           
+
         }
-        else if (warningPlane.activeInHierarchy&&!lazerObject.activeInHierarchy)
+        else if (warningPlane.activeInHierarchy && !lazerObject.activeInHierarchy)
         {
             warningTime += Time.deltaTime;
             if (warningTime > 2.0f)
@@ -60,7 +58,7 @@ public class SecondSkillBulletController : MonoBehaviour
                 gameObject.SetActive(false);
                 lazerObject.SetActive(false);
                 BossEnemyPool.BossThirdMissiles.Enqueue(gameObject);
-                
+
             }
 
 

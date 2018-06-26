@@ -75,6 +75,26 @@ public class DataManager : MonoBehaviour
         int.TryParse(userData.Value, out GameManager.Instance.PlayerDiamondCount);
     }
 
+    //수정
+    public void SetCompleteStage()
+    {
+        UserDataRecord userData = new UserDataRecord();
+        info.Info.UserData.TryGetValue("CompleteStageNumber", out userData);
+        int currentStage = GameManager.Instance.CurrentStage;
+        currentStage += 1;
+        userData.Value = currentStage.ToString();
+        Dictionary<string, string> data = new Dictionary<string, string>();
+        data.Add("CompleteStageNumber", userData.Value);
+
+
+        UpdateUserDataRequest request = new UpdateUserDataRequest()
+        {
+            Data = data,
+
+        };
+        PlayFabClientAPI.UpdateUserData(request, UpdateDataInfo, GameErrorManager.OnAPIError);
+
+    }
 
 
     public void BuyMoney(int price)

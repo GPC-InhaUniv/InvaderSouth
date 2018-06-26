@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class InvincibilityState : IState
 {
@@ -15,7 +13,7 @@ public class InvincibilityState : IState
 
     public void Behavior()
     {
-        if(isBehavior == true)
+        if (isBehavior == true)
         {
             isBehavior = false;
             playerCollider.enabled = false;

@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public struct MastarBoundary
@@ -30,14 +29,13 @@ public class MastarPlayerController : MonoBehaviour
     private EnemyObjectPool enemyObjectPool;
     private PlayerStatus playerStatusComponent;
     private IState playerState;
-    private const float fireRate = 0.25f;
-    private float nextFire = 0f;
 
     public bool IsGameResult;
 
 
     public delegate void GameResult(bool isGameResult);
     public GameResult GameResultDelegate;
+
 
     //스킬 풀, 스킬애니메이션
     [SerializeField]
@@ -59,11 +57,12 @@ public class MastarPlayerController : MonoBehaviour
     {
         IsGameResult = true;
         playerStatusComponent = GetComponent<PlayerStatus>();
-        mastarBoundary = new MastarBoundary(6, -6, 12, -2);
+        //수정
+        mastarBoundary = new MastarBoundary(6, -6, 12, -1);
         playerState = new LivingState();
         bulletSpawn = GameObject.Find("BoltSpawn").GetComponentInChildren<Transform>();
-        playerMeshCollider = this.GetComponentInChildren<MeshCollider>();
-        playerMeshRenderer = this.GetComponentInChildren<MeshRenderer>();
+        playerMeshCollider = this.transform.Find("PlayerShip").GetComponentInChildren<MeshCollider>();
+        playerMeshRenderer = this.transform.Find("PlayerShip").GetComponentInChildren<MeshRenderer>();
         rigidbody3D = this.gameObject.GetComponent<Rigidbody>();
         bulletObjectPool = GameObject.Find("GameObjectPool").GetComponent<BulletObjectPool>();
         enemyObjectPool = GameObject.Find("GameObjectPool").GetComponent<EnemyObjectPool>();
@@ -82,33 +81,34 @@ public class MastarPlayerController : MonoBehaviour
         fireAudio.loop = false;
         fireAudio.clip = fireClip;
 
+        //fireAudio = gameObject.AddComponent<AudioSource>();
+        //fireAudio.loop = false;
+        //fireAudio.clip = fireClip;
     }
-    
+
     private void FixedUpdate()
     {
         playerState.Behavior();
 
-        if (Time.time > nextFire && Input.GetKey(KeyCode.Z))
+        if (Input.GetKey(KeyCode.S))
         {
-            nextFire = Time.time + fireRate;
             bulletObjectPool.SetPlayerBulletOfPositionAndActive(bulletSpawn);
-            fireAudio.PlayOneShot(fireClip);
-
+            //fireAudio.PlayOneShot(fireClip);
         }
 
-        if (Input.GetKeyDown(KeyCode.Space)&& playerStatus.SkillAmount>=1.0f)
+        if (Input.GetKeyDown(KeyCode.Space) && playerStatus.SkillAmount >= 1.0f)
         {
             Debug.Log("필살기 사용!");
             playerStatus.SkillAmount = 0f;
             skillAnimator.Play("SkillAnim");
             bombSkill.StartBombing();
-            
+
 
             SetState(new InvincibilityState());
             Invoke("SetMeshCollider", 1.2f);
         }
 
-        if(IsGameResult == true)
+        if (IsGameResult == true)
         {
             GameResultDelegate(IsGameResult);
 
@@ -149,10 +149,25 @@ public class MastarPlayerController : MonoBehaviour
             attacedEffect.Play(true);
         }
 
-        if(other.tag == "SparkBomb")
+        if (other.tag == "SparkBomb")
         {
-            StartCoroutine(Slow());
+            StartCoroutine(SetSlowState());
         }
+
+        if (other.tag == "BossSmallBullet")
+        {
+            playerStatusComponent.Damaged();
+            BossEnemyPool.BosssmallBullets.Enqueue(other.gameObject);
+            other.gameObject.SetActive(false);
+        }
+
+        if (other.tag == "BossNormalBullet")
+        {
+            playerStatusComponent.Damaged();
+            BossEnemyPool.BossNormalbullets.Enqueue(other.gameObject);
+            other.gameObject.SetActive(false);
+        }
+
     }
 
     private void SetState(IState state)
@@ -166,7 +181,8 @@ public class MastarPlayerController : MonoBehaviour
         SetState(new LivingState());
     }
 
-    private IEnumerator Slow()
+
+    private IEnumerator SetSlowState()
     {
         playerState = new SlowState();
         yield return new WaitForSeconds(3f);

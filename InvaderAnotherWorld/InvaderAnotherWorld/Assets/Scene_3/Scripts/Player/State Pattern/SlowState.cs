@@ -1,16 +1,40 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class Slowwww : MonoBehaviour {
+public class SlowState : IState
+{
+    private GameObject playerObject;
+    private float speed = 0.1f;
+    private bool isInput;
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+    public SlowState()
+    {
+        playerObject = GameObject.Find("Player").gameObject;
+        isInput = true;
+    }
+
+    public void Behavior()
+    {
+        if (isInput == true)
+        {
+            if (Input.GetKey(KeyCode.RightArrow) == true)
+            {
+                playerObject.transform.Translate(new Vector3(1, 0, 0) * speed);
+            }
+
+            else if (Input.GetKey(KeyCode.LeftArrow) == true)
+            {
+                playerObject.transform.Translate(new Vector3(1, 0, 0) * -speed);
+            }
+
+            if (Input.GetKey(KeyCode.UpArrow) == true)
+            {
+                playerObject.transform.Translate(new Vector3(0, 0, 1) * speed);
+            }
+
+            else if (Input.GetKey(KeyCode.DownArrow) == true)
+            {
+                playerObject.transform.Translate(new Vector3(0, 0, 1) * -speed);
+            }
+        }
+    }
 }

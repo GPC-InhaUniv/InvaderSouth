@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class DeadState : IState
 {
@@ -13,7 +11,7 @@ public class DeadState : IState
 
     public void Behavior()
     {
-        if(isBehavior == true)
+        if (isBehavior == true)
         {
             isBehavior = false;
             Debug.Log("Game Over Image Output");

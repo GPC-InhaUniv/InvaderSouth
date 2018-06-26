@@ -1,6 +1,4 @@
-﻿using UnityEngine;
-using UnityEngine.SceneManagement;
-
+﻿
 public class GameManager : Singleton<GameManager>
 {
     public string PlayerName;
@@ -51,7 +49,7 @@ public class GameManager : Singleton<GameManager>
         IsPlayerHavePlane = new bool[maxPlaneCount];
         for (int i = 0; i < maxPlaneCount; i++)
             IsPlayerHavePlane[i] = false;
-       
+
     }
 
 }

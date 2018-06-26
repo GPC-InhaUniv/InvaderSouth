@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -17,11 +15,16 @@ public class LobbyUIScript : MonoBehaviour
     private GameObject secondCharacter;
     private GameObject shopPanel;
     private GameObject backToLoginScenePanel;
+    private GameObject soundPanel;
+    private GameObject soundSettingBtn;
+    private AudioSource backgroundAudio;
+    private Scrollbar soundScrollBar;
 
     private Button stageOneSelectionButton;
     private Button stageTwoSelectionButton;
     private Button stageThreeSelectionButton;
     private Text playerMoneyCountText;
+    private Text playerDiamondCountText;
     private Text playerNameText;
 
     private void Awake()
@@ -39,6 +42,7 @@ public class LobbyUIScript : MonoBehaviour
             || playerMoneyCountText.text == "")
         {
             playerMoneyCountText.text = GameManager.Instance.PlayerMoneyCount.ToString();
+            playerDiamondCountText.text = GameManager.Instance.PlayerDiamondCount.ToString();
             playerNameText.text = GameManager.Instance.PlayerName;
         }
     }
@@ -47,9 +51,9 @@ public class LobbyUIScript : MonoBehaviour
     {
         characterSelectionUIPanel.SetActive(false);
         stageSelectionUIPanel.SetActive(true);
-        lastCompletedStageNumber =GameManager.Instance.LastCompletedStageNumber;
+        lastCompletedStageNumber = GameManager.Instance.LastCompletedStageNumber;
         CheckTheDifficulty();
-     //   Debug.Log("Start Button Click!");
+        //   Debug.Log("Start Button Click!");
     }
 
     public void OnClickRightArrowButtonOfCharacterSelection()
@@ -58,7 +62,7 @@ public class LobbyUIScript : MonoBehaviour
         firstCharacterInfoImage.SetActive(false);
         secondCharacter.SetActive(true);
         secondCharacterInfoImage.SetActive(true);
-    //    Debug.Log("Right Arrow Button Click!");
+        //    Debug.Log("Right Arrow Button Click!");
     }
 
     public void OnClickLeftArrowButtonOfCharacterSelection()
@@ -67,20 +71,20 @@ public class LobbyUIScript : MonoBehaviour
         firstCharacterInfoImage.SetActive(true);
         secondCharacter.SetActive(false);
         secondCharacterInfoImage.SetActive(false);
-    //    Debug.Log("Left Arrow Button Click!");
+        //    Debug.Log("Left Arrow Button Click!");
     }
 
     private void OnClickBackwardMovementButtonOfStageSelection()
     {
         characterSelectionUIPanel.SetActive(true);
         stageSelectionUIPanel.SetActive(false);
-  //      Debug.Log("Backward Movement Button Click!");
+        //      Debug.Log("Backward Movement Button Click!");
     }
 
     public void OnClickStageOneButtonClick()
     {
-  //      Debug.Log("Stage Button Click");
-  //      Debug.Log("Go to the store");
+        //      Debug.Log("Stage Button Click");
+        //      Debug.Log("Go to the store");
         GameManager.Instance.CurrentStage = 0;
         shopPanel.SetActive(true);
     }
@@ -91,11 +95,11 @@ public class LobbyUIScript : MonoBehaviour
         GameManager.Instance.CurrentStage = 1 << 0;
         shopPanel.SetActive(true);
     }
-    
+
     public void OnClickStageThreeButtonClick()
     {
-  //      Debug.Log("Stage Button Click");
-  //      Debug.Log("Go to the store");
+        //      Debug.Log("Stage Button Click");
+        //      Debug.Log("Go to the store");
         GameManager.Instance.CurrentStage = 1 << 1;
         shopPanel.SetActive(true);
     }
@@ -109,7 +113,12 @@ public class LobbyUIScript : MonoBehaviour
 
     public void OnClickBackLoginYesBtn()
     {
+        //2018/06/25 수정
+
+        Destroy(AccountInfo.Instance.gameObject);
+        Destroy(DataManager.Instance.gameObject);
         GameManager.Instance.ResetPlayerInfo();
+        Destroy(GameManager.Instance.gameObject);
         SceneManager.LoadScene(0);
     }
 
@@ -130,10 +139,27 @@ public class LobbyUIScript : MonoBehaviour
         firstCharacter = characterSelectionUIPanel.transform.Find("FirstCharacter").gameObject;
         secondCharacter = characterSelectionUIPanel.transform.Find("SecondCharacter").gameObject;
         playerMoneyCountText = characterSelectionUIPanel.transform.Find("PlayerNameAndMoneyImage").transform.Find("PlayerMoneyCountText").GetComponent<Text>();
+        playerDiamondCountText = characterSelectionUIPanel.transform.Find("PlayerNameAndMoneyImage").transform.Find("PlayerDiamondCountText").GetComponent<Text>();
         playerNameText = characterSelectionUIPanel.transform.Find("PlayerNameAndMoneyImage").transform.Find("PlayerNameText").GetComponent<Text>();
         backToLoginScenePanel = characterSelectionUIPanel.transform.Find("BackToLoginScenePanel").gameObject;
         firstCharacterInfoImage = characterSelectionUIPanel.transform.Find("FirstCharacterInfoImage").gameObject;
         secondCharacterInfoImage = characterSelectionUIPanel.transform.Find("SecondCharacterInfoImage").gameObject;
+        soundSettingBtn = GameObject.Find("LobbyUICanvas").transform.Find("SoundSetting").gameObject;
+        soundPanel = soundSettingBtn.transform.Find("SoundPanel").gameObject;
+        backgroundAudio = GameObject.Find("AudioObject").GetComponent<AudioSource>();
+        soundScrollBar = soundPanel.transform.Find("SoundScroll").GetComponent<Scrollbar>();
+        soundPanel.SetActive(false);
+    }
+
+    public void OnClickedSoundSettingBtn()
+    {
+        soundScrollBar.value = backgroundAudio.volume;
+        soundPanel.SetActive(true);
+    }
+
+    public void ChangeSoundValue()
+    {
+        backgroundAudio.volume = soundScrollBar.value;
     }
 
     private void SetStageSelectionUIPanel()
@@ -141,7 +167,7 @@ public class LobbyUIScript : MonoBehaviour
         stageSelectionUIPanel = GameObject.Find("LobbyUICanvas").transform.Find("StageSelectionUIPanel").gameObject;
         stageOneSelectionButton = stageSelectionUIPanel.transform.Find("StageOneSelectionButton").GetComponent<Button>();
         stageTwoSelectionButton = stageSelectionUIPanel.transform.Find("StageTwoSelectionButton").GetComponent<Button>();
-       // stageThreeSelectionButton = stageSelectionUIPanel.transform.Find("StageThreeSelectionButton").GetComponent<Button>();
+        // stageThreeSelectionButton = stageSelectionUIPanel.transform.Find("StageThreeSelectionButton").GetComponent<Button>();
     }
 
     private void SetShopUIPanel()

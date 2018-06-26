@@ -53,7 +53,7 @@ public class PlayerControllerState_Jin : MonoBehaviour
     {
         playerState.Behavior();
 
-        if (Input.GetKey(KeyCode.Z))
+        if (Input.GetKey(KeyCode.S))
         {
             bulletObjectPool.SetPlayerBulletOfPositionAndActive(bulletSpawn);
         }

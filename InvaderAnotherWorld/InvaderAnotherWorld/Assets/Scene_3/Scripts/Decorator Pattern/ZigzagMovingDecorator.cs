@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class ZigzagMovingDecorator : MovingDecorator
 {
@@ -23,7 +21,7 @@ public class ZigzagMovingDecorator : MovingDecorator
         {
             EnemyPlane.gameObject.transform.Translate(new Vector3(1, 0, 0) * -base.speed);
 
-            if(parkBoundary.boundaryXMax <= this.transform.position.x)
+            if (parkBoundary.boundaryXMax <= this.transform.position.x)
             {
                 isBoundaryCollision = false;
             }
@@ -38,7 +36,7 @@ public class ZigzagMovingDecorator : MovingDecorator
         {
             EnemyPlane.gameObject.transform.Translate(new Vector3(1, 0, 0) * base.speed);
 
-            if(parkBoundary.boundaryXMin >= this.transform.position.x)
+            if (parkBoundary.boundaryXMin >= this.transform.position.x)
             {
                 isBoundaryCollision = true;
             }

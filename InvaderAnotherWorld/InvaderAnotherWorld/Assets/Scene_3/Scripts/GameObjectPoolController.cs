@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class GameObjectPoolController : MonoBehaviour
 {
@@ -30,6 +28,7 @@ public class GameObjectPoolController : MonoBehaviour
                 break;
 
         }
+
     }
 
     public void MakeObjectPoolAtStage0()
@@ -78,11 +77,9 @@ public class GameObjectPoolController : MonoBehaviour
             //펫 objectpool 작동
             Debug.Log("펫 사용");
             GetComponent<PetObjectPool>().enabled = true;
-            GameManager.Instance.BuyItemList[2]=false;
+            GameManager.Instance.BuyItemList[2] = false;
         }
     }
-
-
 
 
 }

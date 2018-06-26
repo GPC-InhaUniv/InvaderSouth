@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 public class BulletObjectPool : MonoBehaviour
@@ -8,9 +7,13 @@ public class BulletObjectPool : MonoBehaviour
     private GameObject PlayerBulletPrefab;
     public static Queue<GameObject> playerBullets;
     private GameObject playerBullet;
-    private const int playerBulletCount = 10;
+
+    private const int playerBulletCount = 20;
     //private const float fireRate = 0.25f;
     //private float nextFire = 0f;
+
+    private const float fireRate = 0.25f;
+    private float nextFire = 0f;
 
     [SerializeField]
     private GameObject EnemyBulletPrefab;
@@ -34,7 +37,7 @@ public class BulletObjectPool : MonoBehaviour
             playerBullets.Enqueue(PlayerBulletObj);
         }
 
-        for(int i = 0; i < enemyBulletCount; i++)
+        for (int i = 0; i < enemyBulletCount; i++)
         {
             GameObject EnemyBulletObj = Instantiate(EnemyBulletPrefab) as GameObject;
             EnemyBulletObj.SetActive(false);
@@ -47,18 +50,18 @@ public class BulletObjectPool : MonoBehaviour
     {
         if (playerBullets.Count > playerBulletCount)
             return;
-        if (playerBullets.Count != 0)//Time.time > nextFire && 
+        if (Time.time > nextFire && playerBullets.Count != 0)
         {
             playerBullet = playerBullets.Dequeue();
             playerBullet.SetActive(true);
             playerBullet.transform.position = transform.position;
-            //nextFire = Time.time + fireRate;
+            nextFire = Time.time + fireRate;
         }
     }
 
     public void SetEnemyBulletOfPositionAndActive(Transform transform)
     {
-        if(transform.position.z < 20)
+        if (transform.position.z < 20)
         {
             enemyBullet = enemyBullets.Dequeue();
             enemyBullet.SetActive(true);

@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using System;
@@ -16,6 +15,12 @@ public class UIController : MonoBehaviour
     [SerializeField]
     private Text skillAmountText;
 
+    [SerializeField]
+    private GameObject bossStatus;
+    [SerializeField]
+    private Image bossHpImage;
+    private BossController bossController;
+
     private GameObject gameClearUI;
     private GameObject gameOverUI;
     [SerializeField]
@@ -29,11 +34,6 @@ public class UIController : MonoBehaviour
     [SerializeField]
     private GameObject NextStageBtn;
 
-    [SerializeField]
-    private GameObject bossHp;
-    [SerializeField]
-    private GameObject bossStats;
-
 
     private GameObject gameobjectPool;
     private MastarPlayerController mastarPlayerController;
@@ -42,6 +42,11 @@ public class UIController : MonoBehaviour
     private float previousSkillAmount;
 
     private bool gameCleard = false;
+
+    [SerializeField]
+    GameObject pausePanel;
+
+
     // Use this for initialization
     void Start()
     {
@@ -49,19 +54,17 @@ public class UIController : MonoBehaviour
         SetGameReulstUI();
         SetPlayerUI();
         ReFresh();
+        //일시정지 ui
+        pausePanel = GameObject.Find("InGameUI").transform.Find("PausePanel").gameObject;
     }
 
     void SetGameReulstUI()
     {
         gameClearUI = GameObject.Find("InGameUI").transform.Find("GameClearUI").gameObject;
         gameOverUI = GameObject.Find("InGameUI").transform.Find("GameOverUI").gameObject;
-        //gameReulstPanel = GameObject.Find("InGameUI").transform.Find("GameEndResultPanel").gameObject;
+        gameReulstPanel = GameObject.Find("InGameUI").transform.Find("GameEndResultPanel").gameObject;
         gameobjectPool = GameObject.Find("GameObjectPool").gameObject;
-
-        //resultGameText = gameReulstPanel.transform.Find("GameEndResultPanel").Find("GameResultText").GetComponent<Text>();
-        //resultScoreText = gameReulstPanel.transform.Find("GameEndResultPanel").Find("PlayerScoreText").GetComponent<Text>();
-        //resultGoldText = gameReulstPanel.transform.Find("GameEndResultPanel").Find("PlayerGoldText").GetComponent<Text>();
-        //NextStageBtn = gameReulstPanel.transform.Find("GameEndResultPanel").Find("NextButton").gameObject;
+        
     }
 
     void SetPlayerInfo()
@@ -112,12 +115,28 @@ public class UIController : MonoBehaviour
 
         scoreText.text = playerstatusComponent.Score.ToString();
 
+        //esc키를 받는지 검사
+        if (playerstatusComponent.PlayerHp>0 && !gameCleard && Input.GetKeyDown(KeyCode.Escape))//Input.GetButtonDown("Pause")
+        {
+            //Debug.Log("Pause");
+            pausePanel.SetActive(true);
+            Time.timeScale = 0;
+        }
+
+        if(bossController!=null)
+        {
+            bossHpImage.fillAmount = bossController.BossHp / 30f;
+        }
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if (GameManager.Instance.CurrentStage == 1 && StageManager.time >= 45 && bossController == null)
+            bossController = GameObject.Find("BossMonster").GetComponent<BossController>();
+
+
         ReFresh();
     }
 
@@ -126,6 +145,7 @@ public class UIController : MonoBehaviour
         StageManager.time = 0;
         StageManager.KillEnemyCount = 0;
         Destroy(gameobjectPool);
+        Time.timeScale = 1;
         LoadingSceneController.LoadScene("Lobby");
     }
 
@@ -134,8 +154,17 @@ public class UIController : MonoBehaviour
         StageManager.time = 0;
         StageManager.KillEnemyCount = 0;
         Destroy(gameobjectPool);
+        Time.timeScale = 1;
         LoadingSceneController.LoadScene("Main");
     }
+    
+    //일시정지
+    public void OnClickedResumeBtn()
+    {
+        pausePanel.SetActive(false);
+        Time.timeScale = 1;
+    }
+
     public void GameResult(bool result)
     {
         if (result == true)
@@ -180,6 +209,8 @@ public class UIController : MonoBehaviour
             NextStageBtn.SetActive(true);
             Debug.Log("게임승리");
             SetGameDataToServer();
+            //수정
+            DataManager.Instance.SetCompleteStage();
         }
 
         else
@@ -187,9 +218,9 @@ public class UIController : MonoBehaviour
             resultGameText.text = "Game Over";
             NextStageBtn.SetActive(false);
             Debug.Log("게임패배");
-              SetGameDataToServer();
+            SetGameDataToServer();
         }
-
+        Time.timeScale = 0;
         yield return null;
     }
 
@@ -199,7 +230,7 @@ public class UIController : MonoBehaviour
         int getGoldAmount = playerstatusComponent.Score / 10;
         if (GameManager.Instance.BuyItemList[0])
         {
-            resultGoldText.text ="아이템 효과! "+getGoldAmount*2;
+            resultGoldText.text =getGoldAmount.ToString()+" x2";
             getGoldAmount *= 2;
             GameManager.Instance.BuyItemList[0] = false;
         }

@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 [System.Serializable]
 public class Boundary
@@ -22,7 +20,7 @@ public class PlayerController : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         bulletPool = GameObject.Find("GameObjectPool").GetComponent<BulletPool>();
- 
+
     }
 
     private void Update()
@@ -55,7 +53,7 @@ public class PlayerController : MonoBehaviour
     {
         if (other.tag == "Enemy")
             Debug.Log("레이저맞음");
-        if(other.tag=="SparkBomb")
+        if (other.tag == "SparkBomb")
         {
             Debug.Log("상태이상 걸림");
         }
