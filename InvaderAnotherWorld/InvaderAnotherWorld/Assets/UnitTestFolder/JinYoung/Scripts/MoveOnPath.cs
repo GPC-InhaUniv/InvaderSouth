@@ -2,10 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MoveOnPath : MonoBehaviour {
+public class MoveOnPath : MonoBehaviour
+{
 
     [SerializeField]
     WayPointPathEditor pathToFollow;
+    WayPointPathEditor firstPath;
+    WayPointPathEditor secondPath;
+    WayPointPathEditor thirdPath;
+    WayPointPathEditor normalPath;
 
     [SerializeField]
     int currentWayPointID = 0;
@@ -20,28 +25,72 @@ public class MoveOnPath : MonoBehaviour {
     Vector3 lastPosition;
     Vector3 currentPosition;
 
-	// Use this for initialization
-	void Start () {
-        //pathToFollow = GameObject.Find(pathName).GetComponent<WayPointPathEditor>();
-        lastPosition = transform.position;
-	}
-	
-	// Update is called once per frame
-	void Update () {
-        float distance = Vector3.Distance(pathToFollow.pathObjects[currentWayPointID].position, transform.position);
-        transform.position = Vector3.MoveTowards(transform.position, pathToFollow.pathObjects[currentWayPointID].position, rotationSpeed * Time.deltaTime);
-        
-        //transform.position = Vector3.Lerp(transform.position, pathToFollow.pathObjects[currentWayPointID].position, rotationSpeed * Time.deltaTime);
-        //transform.position = Vector3.SlerpUnclamped(transform.position, pathToFollow.pathObjects[currentWayPointID].position, rotationSpeed * Time.deltaTime);
+    public bool firstMove = false;
+    public bool secondMove = false;
+    public bool thirdMove = false;
+    bool normalMove = false;
 
-        if (distance <=reachDistance)
+    // Use this for initialization
+    void Start()
+    {
+        //pathToFollow = GameObject.Find(pathName).GetComponent<WayPointPathEditor>();
+        firstPath = GameObject.Find("WayPointPathsHolder1").GetComponent<WayPointPathEditor>();
+        secondPath = GameObject.Find("WayPointPathsHolder2").GetComponent<WayPointPathEditor>();
+        thirdPath = GameObject.Find("WayPointPathsHolder3").GetComponent<WayPointPathEditor>();
+        normalPath = GameObject.Find("WayPointPathsHolder_Normal").GetComponent<WayPointPathEditor>();
+        lastPosition = transform.position;
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        if (firstMove)
         {
-            currentWayPointID++;
+            PathToFollowing(firstPath);
+            //firstMove = false;
         }
-        if (currentWayPointID>=pathToFollow.pathObjects.Count)
+        else if (secondMove)
+        {
+            PathToFollowing(secondPath);
+            //secondMove = false;
+        }
+        else if (thirdMove)
+        {
+            PathToFollowing(thirdPath);
+            //thirdMove = false;
+        }
+        else if (normalMove)
+        {
+            PathToFollowing(normalPath);
+        }
+    }
+
+
+    void PathToFollowing(WayPointPathEditor path)
+    {
+        pathToFollow = path;
+        if (currentWayPointID >= pathToFollow.pathObjects.Count)
         {
             currentWayPointID = 0;
         }
-
+        float distance = Vector3.Distance(pathToFollow.pathObjects[currentWayPointID].position, transform.position);
+        transform.position = Vector3.MoveTowards(transform.position, pathToFollow.pathObjects[currentWayPointID].position, rotationSpeed * Time.deltaTime);
+        if (distance <= reachDistance)
+        {
+            currentWayPointID++;
+        }
+        if (currentWayPointID >= pathToFollow.pathObjects.Count)
+        {
+            ResetToPath();
+        }
     }
+    void ResetToPath()
+    {
+        currentWayPointID = 0;
+        firstMove = false;
+        secondMove = false;
+        thirdMove = false;
+        normalMove = true;
+    }
+
 }
