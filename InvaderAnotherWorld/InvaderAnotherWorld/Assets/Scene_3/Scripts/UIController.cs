@@ -186,6 +186,7 @@ public class UIController : MonoBehaviour
                     gameClearUI.SetActive(true);
                     gameCleard = true;
                     StartCoroutine(SetGameResult(result));
+                    BossController.IsBossAlive = true;
                 }
             }
         }
