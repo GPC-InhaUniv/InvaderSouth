@@ -29,6 +29,7 @@ public class MastarPlayerController : MonoBehaviour
     private EnemyObjectPool enemyObjectPool;
     private PlayerStatus playerStatusComponent;
     private IState playerState;
+    
 
     public bool IsGameResult;
 
@@ -53,12 +54,14 @@ public class MastarPlayerController : MonoBehaviour
     AudioClip fireClip;
     AudioSource fireAudio;
 
+
+
     private void Awake()
     {
         IsGameResult = true;
         playerStatusComponent = GetComponent<PlayerStatus>();
         //수정
-        mastarBoundary = new MastarBoundary(6, -6, 12, -1);
+        mastarBoundary = new MastarBoundary(6, -5, 12, -1);
         playerState = new LivingState();
         bulletSpawn = GameObject.Find("BoltSpawn").GetComponentInChildren<Transform>();
         playerMeshCollider = this.transform.Find("PlayerShip").GetComponentInChildren<MeshCollider>();
@@ -84,10 +87,25 @@ public class MastarPlayerController : MonoBehaviour
         //fireAudio = gameObject.AddComponent<AudioSource>();
         //fireAudio.loop = false;
         //fireAudio.clip = fireClip;
+
+        //모바일 버전 공격
+        StartCoroutine(MobileAttack());
+
+    }
+    IEnumerator MobileAttack()
+    {
+        yield return 1f;
+
+        while(playerStatusComponent.PlayerHp > 0)
+        {
+            bulletObjectPool.SetPlayerBulletOfPositionAndActive(bulletSpawn);
+            yield return new WaitForSeconds(0.7f);
+        }
     }
 
     private void FixedUpdate()
     {
+
         playerState.Behavior();
 
         if (Input.GetKey(KeyCode.S))
@@ -96,6 +114,7 @@ public class MastarPlayerController : MonoBehaviour
             //fireAudio.PlayOneShot(fireClip);
         }
 
+       
         if (Input.GetKeyDown(KeyCode.Space) && playerStatus.SkillAmount >= 1.0f)
         {
             Debug.Log("필살기 사용!");
@@ -187,5 +206,20 @@ public class MastarPlayerController : MonoBehaviour
         playerState = new SlowState();
         yield return new WaitForSeconds(3f);
         playerState = new LivingState();
+    }
+
+    public void UseSkill()
+    {
+        if (playerStatus.SkillAmount >= 1.0f)
+        {
+            Debug.Log("필살기 사용!");
+            playerStatus.SkillAmount = 0f;
+            skillAnimator.Play("SkillAnim");
+            bombSkill.StartBombing();
+
+
+            SetState(new InvincibilityState());
+            Invoke("SetMeshCollider", 1.2f);
+        }
     }
 }

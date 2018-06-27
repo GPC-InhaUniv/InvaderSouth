@@ -42,14 +42,14 @@ public class StageManager : MonoBehaviour
         else if (GameManager.Instance.CurrentStage == 1)
         {
             time += Time.deltaTime;
-            Debug.Log("Stage2 : " + time);
+           // Debug.Log("Stage2 : " + time);
         }
 
 
         if (Input.GetKeyDown(KeyCode.T) == true)
         {
             time += 5;
-            Debug.Log(time);
+           // Debug.Log(time);
         }
     }
 
