@@ -19,6 +19,7 @@ public class SparkBombController : MonoBehaviour
     {
         particle.time = 0;
         bombTime = 0.0f;
+        gameObject.SetActive(false);
 
     }
 

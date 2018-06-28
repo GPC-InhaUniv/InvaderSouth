@@ -9,6 +9,7 @@ public class EnemySpacePlane : Enemy
         score = 20;
         gauge = 0.07f;
         movingDecorator = gameObject.AddComponent<ZigzagMovingDecorator>();
+        gameObject.SetActive(false);
     }
 
     private void FixedUpdate()

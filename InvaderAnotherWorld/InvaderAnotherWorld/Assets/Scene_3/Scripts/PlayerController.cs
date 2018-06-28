@@ -52,10 +52,10 @@ public class PlayerController : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Enemy")
-            Debug.Log("레이저맞음");
+            //Debug.Log("레이저맞음");
         if (other.tag == "SparkBomb")
         {
-            Debug.Log("상태이상 걸림");
+          //  Debug.Log("상태이상 걸림");
         }
     }
 

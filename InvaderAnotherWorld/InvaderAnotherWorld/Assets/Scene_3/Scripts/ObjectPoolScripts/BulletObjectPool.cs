@@ -9,8 +9,6 @@ public class BulletObjectPool : MonoBehaviour
     private GameObject playerBullet;
 
     private const int playerBulletCount = 30;
-    //private const float fireRate = 0.25f;
-    //private float nextFire = 0f;
 
     private const float fireRate = 0.25f;
     private float nextFire = 0f;

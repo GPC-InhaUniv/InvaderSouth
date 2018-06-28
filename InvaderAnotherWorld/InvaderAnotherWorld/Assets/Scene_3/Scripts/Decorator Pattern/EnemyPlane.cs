@@ -8,6 +8,7 @@ public class EnemyPlane : Enemy
         score = 10;
         gauge = 0.05f;
         movingDecorator = gameObject.AddComponent<RotationMovingDecorator>();
+        gameObject.SetActive(false);
     }
 
     private void FixedUpdate()

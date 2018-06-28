@@ -29,12 +29,12 @@ public class StageManager : MonoBehaviour
             if (time <= 100)
             {
                 time += Time.deltaTime;
-                Debug.Log("Stage1 : " + time);
+             //   Debug.Log("Stage1 : " + time);
 
                 if (Input.GetKeyDown(KeyCode.T) == true)
                 {
                     time += 5;
-                    Debug.Log(time);
+                   // Debug.Log(time);
                 }
             }
         }
@@ -56,7 +56,7 @@ public class StageManager : MonoBehaviour
     public static void KillEnemy()
     {
         KillEnemyCount++;
-        Debug.Log(KillEnemyCount);
+      //  Debug.Log(KillEnemyCount);
     }
 
     int CheckPlayerStage(int playerCurrentStage)

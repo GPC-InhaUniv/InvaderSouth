@@ -14,7 +14,7 @@ public class DeadState : IState
         if (isBehavior == true)
         {
             isBehavior = false;
-            Debug.Log("Game Over Image Output");
+            //Debug.Log("Game Over Image Output");
         }
     }
 }

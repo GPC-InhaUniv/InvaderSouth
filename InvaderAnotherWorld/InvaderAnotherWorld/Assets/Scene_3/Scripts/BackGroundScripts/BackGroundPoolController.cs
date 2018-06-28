@@ -9,6 +9,6 @@ public class BackGroundPoolController : MonoBehaviour {
     {
         Screen.SetResolution(700, 1080, true);
         backGroundPool = GameObject.Find("GameObjectPool").GetComponent<BackGroundPool>();
-        backGroundPool.StartBackGround();
+
 	}
 }

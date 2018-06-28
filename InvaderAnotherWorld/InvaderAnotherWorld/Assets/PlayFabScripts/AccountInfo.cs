@@ -57,9 +57,9 @@ public class AccountInfo : MonoBehaviour
 
     static void OnRegister(RegisterPlayFabUserResult result)
     {
-        Debug.Log("Registered with: " + result.PlayFabId);
+     //   Debug.Log("Registered with: " + result.PlayFabId);
         Instance.SetUpAccount();
-        Debug.Log("계정 생성 완료!");
+       // Debug.Log("계정 생성 완료!");
 
     }
 

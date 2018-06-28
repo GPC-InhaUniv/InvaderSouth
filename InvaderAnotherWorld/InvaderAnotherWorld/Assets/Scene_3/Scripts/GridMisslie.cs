@@ -85,7 +85,7 @@ public class GridMisslie : MonoBehaviour
     {
         if (other.tag == "Enemy")
         {
-            Debug.Log("적과 충돌");
+            //Debug.Log("적과 충돌");
             Initialize();
             EnqueueAndSetActiveToObject();
         }
@@ -94,7 +94,7 @@ public class GridMisslie : MonoBehaviour
     {
         if (other.tag == "Boundary")
         {
-            Debug.Log("바운더리 충돌");
+           // Debug.Log("바운더리 충돌");
             Initialize();
             EnqueueAndSetActiveToObject();
         }

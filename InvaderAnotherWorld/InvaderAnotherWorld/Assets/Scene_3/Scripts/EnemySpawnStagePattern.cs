@@ -12,6 +12,7 @@ public class EnemySpawnStagePattern : MonoBehaviour
         {
             StartCoroutine(enemyObjectPool.StageOneEnemyPlaneAndDirectPlaneOfPosition(this.transform));
             StartCoroutine(enemyObjectPool.StageOneEnemyEnemySpacePlnaeOfPosition(this.transform));
+
         }
 
         if (GameManager.Instance.CurrentStage == 1)

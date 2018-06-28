@@ -99,7 +99,7 @@ public class MastarPlayerController : MonoBehaviour
         while(playerStatusComponent.PlayerHp > 0)
         {
             bulletObjectPool.SetPlayerBulletOfPositionAndActive(bulletSpawn);
-            yield return new WaitForSeconds(0.7f);
+            yield return new WaitForSeconds(0.4f);
         }
     }
 
@@ -138,7 +138,7 @@ public class MastarPlayerController : MonoBehaviour
                 playerMeshCollider.enabled = false;
                 IsGameResult = false;
                 GameResultDelegate(IsGameResult);
-                Debug.Log("플레이어 죽음");
+                //Debug.Log("플레이어 죽음");
             }
         }
 
@@ -212,7 +212,7 @@ public class MastarPlayerController : MonoBehaviour
     {
         if (playerStatus.SkillAmount >= 1.0f)
         {
-            Debug.Log("필살기 사용!");
+          //  Debug.Log("필살기 사용!");
             playerStatus.SkillAmount = 0f;
             skillAnimator.Play("SkillAnim");
             bombSkill.StartBombing();

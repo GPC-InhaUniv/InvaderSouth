@@ -7,6 +7,7 @@ public class DirectEnemyPlane : Enemy
         life = 1;
         score = 10;
         gauge = 0.05f;
+        gameObject.SetActive(false);
     }
 
     private void FixedUpdate()

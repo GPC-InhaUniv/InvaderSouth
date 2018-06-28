@@ -208,7 +208,7 @@ public class UIController : MonoBehaviour
         {
             resultGameText.text = "Game Clear";
             NextStageBtn.SetActive(true);
-            Debug.Log("게임승리");
+            //Debug.Log("게임승리");
             SetGameDataToServer();
             //수정
             DataManager.Instance.SetCompleteStage();
@@ -218,7 +218,7 @@ public class UIController : MonoBehaviour
         {
             resultGameText.text = "Game Over";
             NextStageBtn.SetActive(false);
-            Debug.Log("게임패배");
+           // Debug.Log("게임패배");
             SetGameDataToServer();
         }
         Time.timeScale = 0;
@@ -239,7 +239,7 @@ public class UIController : MonoBehaviour
         {
             resultGoldText.text = getGoldAmount.ToString();
         }
-        Debug.Log(getGoldAmount + "원을 벌었음");
+        //Debug.Log(getGoldAmount + "원을 벌었음");
         DataManager.Instance.BuyMoney(getGoldAmount);
     }
 }

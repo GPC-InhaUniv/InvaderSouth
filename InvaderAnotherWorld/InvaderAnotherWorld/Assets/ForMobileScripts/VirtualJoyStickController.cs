@@ -13,22 +13,23 @@ public class VirtualJoyStickController : MonoBehaviour,IDragHandler,IPointerUpHa
     [SerializeField]
     private Rigidbody playerRigidbody;
     private Vector3 moveVector;
-    private float speed = 0.3f;
+    private float speed = 0.2f;
 
 
     private void Start()
     {
         bgImage = GetComponent<Image>();
         joystickImage = transform.GetChild(0).GetComponent<Image>();
-       
+        if (player == null)
+            player = GameObject.Find("Player").gameObject;
+        if (playerRigidbody == null)
+            playerRigidbody = GameObject.Find("Player").GetComponent<Rigidbody>();
+
     }
 
     private void Update()
     {
-        if(player==null)
-        player = GameObject.Find("Player").gameObject;
-        if (playerRigidbody ==null)
-        playerRigidbody = GameObject.Find("Player").GetComponent<Rigidbody>();
+       
         moveVector = MovePlayer();
         player.transform.Translate(new Vector3(moveVector.x, 0, moveVector.z) * speed);
 
@@ -70,7 +71,7 @@ public class VirtualJoyStickController : MonoBehaviour,IDragHandler,IPointerUpHa
             pos.x = (pos.x / bgImage.rectTransform.sizeDelta.x);
             pos.y = (pos.y / bgImage.rectTransform.sizeDelta.y);
 
-            inputVector = new Vector3(pos.x * 2 + 1, 0, pos.y * 2 - 1);
+            inputVector = new Vector3(pos.x * 2+1 , 0, pos.y * 2-1 );
             inputVector = (inputVector.magnitude > 1.0f) ? inputVector.normalized : inputVector;
 
             //move joystick image

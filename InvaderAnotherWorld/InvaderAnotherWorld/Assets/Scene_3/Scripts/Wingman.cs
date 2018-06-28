@@ -28,7 +28,7 @@ public class Wingman : MonoBehaviour
         PetObject = transform.GetChild(0);
 
         petObjectPool = GameObject.Find("GameObjectPool").GetComponent<PetObjectPool>();
-        Debug.Log(PetObject.ToString());
+        //Debug.Log(PetObject.ToString());
 
         //targetPosition = target.transform.position;
 

@@ -33,7 +33,7 @@ public class GameObjectPoolController : MonoBehaviour
 
     public void MakeObjectPoolAtStage0()
     {
-        GetComponent<BackGroundPool>().enabled = true;
+        
         GetComponent<BulletObjectPool>().enabled = true;
         GetComponent<EnemyObjectPool>().enabled = true;
         GetComponent<BombObjectPool>().enabled = true;
@@ -46,7 +46,7 @@ public class GameObjectPoolController : MonoBehaviour
 
     public void MakeObjectPoolAtStage1()
     {
-        GetComponent<BackGroundPool>().enabled = true;
+
         GetComponent<BulletObjectPool>().enabled = true;
         GetComponent<EnemyObjectPool>().enabled = true;
         GetComponent<BossEnemyPool>().enabled = true;
@@ -54,20 +54,18 @@ public class GameObjectPoolController : MonoBehaviour
         CheckPlayerItemList();
         player.SetActive(true);
         DontDestroyOnLoad(gameObject);
-        Debug.Log("GameObjectPool 1 스테이지 작동");
+      //  Debug.Log("GameObjectPool 1 스테이지 작동");
 
     }
 
     public void MakeObjectPoolAtStage2()
     {
-        GetComponent<BackGroundPool>().enabled = true;
         GetComponent<BulletObjectPool>().enabled = true;
-        GetComponent<BossEnemyPool>().enabled = true;
         GetComponent<BombObjectPool>().enabled = true;
         CheckPlayerItemList();
         player.SetActive(true);
         DontDestroyOnLoad(gameObject);
-        Debug.Log("GameObjectPool 2 스테이지 작동");
+        //Debug.Log("GameObjectPool 2 스테이지 작동");
     }
 
     public void CheckPlayerItemList()
@@ -75,7 +73,7 @@ public class GameObjectPoolController : MonoBehaviour
         if (GameManager.Instance.BuyItemList[2])
         {
             //펫 objectpool 작동
-            Debug.Log("펫 사용");
+            //Debug.Log("펫 사용");
             GetComponent<PetObjectPool>().enabled = true;
             GameManager.Instance.BuyItemList[2] = false;
         }

@@ -30,6 +30,7 @@ public class EnemyObjectPool : MonoBehaviour
     [SerializeField]
     private GameObject parent;
 
+
     private void Start()
     {
         GameObject EnemyPlaneObj;
@@ -43,29 +44,30 @@ public class EnemyObjectPool : MonoBehaviour
         for (int i = 0; i < enemyCount; i++)
         {
             EnemyPlaneObj = Instantiate(enemyPlanePrefab);
-            EnemyPlaneObj.SetActive(false);
+            EnemyPlaneObj.SetActive(true);
             EnemyPlaneObj.transform.parent = parent.transform;
             EnemyPlanes.Enqueue(EnemyPlaneObj);
 
             EnemyPlaneObj = Instantiate(enemySpacePlanePrefab);
-            EnemyPlaneObj.SetActive(false);
+            EnemyPlaneObj.SetActive(true);
             EnemyPlaneObj.transform.parent = parent.transform;
             EnemySpacePlanes.Enqueue(EnemyPlaneObj);
 
             EnemyPlaneObj = Instantiate(enemyDirectPlanePrefab);
-            EnemyPlaneObj.SetActive(false);
+            EnemyPlaneObj.SetActive(true);
             EnemyPlaneObj.transform.parent = parent.transform;
             EnemyDirectPlanes.Enqueue(EnemyPlaneObj);
 
             if (GameManager.Instance.CurrentStage == 1)
             {
                 SparkBobObj = Instantiate(sparkBomPrefab);
-                SparkBobObj.SetActive(false);
+                SparkBobObj.SetActive(true);
                 SparkBobObj.transform.parent = parent.transform;
                 SparkBoms.Enqueue(SparkBobObj);
             }
         }
     }
+
 
     public IEnumerator StageOneEnemyPlaneAndDirectPlaneOfPosition(Transform transform)
     {
@@ -81,10 +83,7 @@ public class EnemyObjectPool : MonoBehaviour
                 yield return null;
             }
 
-            if (EnemyPlanes.Count > enemyCount)
-                yield return null;
-
-            if (StageManager.time <= 10)
+            else if (StageManager.time <= 10)
             {
                 enemyPlane = EnemyPlanes.Dequeue();
                 enemyPlane.SetActive(true);
@@ -102,7 +101,7 @@ public class EnemyObjectPool : MonoBehaviour
                 yield return new WaitForSeconds(1f);
             }
 
-            if (StageManager.time > 10 && StageManager.time <= 90)
+            else if (StageManager.time > 10 && StageManager.time <= 90)
             {
                 enemyPlane = EnemyPlanes.Dequeue();
                 enemyPlane.SetActive(true);
@@ -135,7 +134,7 @@ public class EnemyObjectPool : MonoBehaviour
                 yield return new WaitForSeconds(2f);
             }
 
-            if (StageManager.time > 90)
+            else if (StageManager.time > 90)
             {
                 break;
             }
@@ -146,15 +145,14 @@ public class EnemyObjectPool : MonoBehaviour
     {
         Vector3 SecondPosition = new Vector3(transform.position.x + 4, transform.position.y, transform.position.z);
 
+        
         while (true)
         {
             if (StageManager.time <= 10)
                 yield return null;
 
-            if (EnemySpacePlanes.Count > enemyCount)
-                yield return null;
-
-            if (StageManager.time > 10 && StageManager.time <= 65)
+       
+            else if (StageManager.time > 10 && StageManager.time <= 65)
             {
                 enemySpacePlane = EnemySpacePlanes.Dequeue();
                 enemySpacePlane.SetActive(true);
@@ -167,7 +165,7 @@ public class EnemyObjectPool : MonoBehaviour
                 yield return new WaitForSeconds(8f);
             }
 
-            if (StageManager.time > 65 && StageManager.time <= 90)
+            else if (StageManager.time > 65 && StageManager.time <= 90)
             {
 
                 enemySpacePlane = EnemySpacePlanes.Dequeue();
@@ -181,7 +179,7 @@ public class EnemyObjectPool : MonoBehaviour
                 yield return new WaitForSeconds(4f);
             }
 
-            if (StageManager.time > 90)
+            else if (StageManager.time > 90)
             {
                 break;
             }
@@ -202,10 +200,7 @@ public class EnemyObjectPool : MonoBehaviour
                 yield return null;
             }
 
-            if (EnemyPlanes.Count > enemyCount)
-                yield return null;
-
-            if (StageManager.time <= 10)
+            else if (StageManager.time <= 10)
             {
                 enemyPlane = EnemyPlanes.Dequeue();
                 enemyPlane.SetActive(true);
@@ -223,7 +218,7 @@ public class EnemyObjectPool : MonoBehaviour
                 yield return new WaitForSeconds(1f);
             }
 
-            if (StageManager.time > 10)
+            else if (StageManager.time > 10)
             {
                 enemyPlane = EnemyPlanes.Dequeue();
                 enemyPlane.SetActive(true);
@@ -272,10 +267,7 @@ public class EnemyObjectPool : MonoBehaviour
             if (StageManager.time <= 10)
                 yield return null;
 
-            if (EnemySpacePlanes.Count > enemyCount)
-                yield return null;
-
-            if (StageManager.time > 10 && StageManager.time <= 65)
+            else if (StageManager.time > 10 && StageManager.time <= 65)
             {
                 enemySpacePlane = EnemySpacePlanes.Dequeue();
                 enemySpacePlane.SetActive(true);
@@ -288,7 +280,7 @@ public class EnemyObjectPool : MonoBehaviour
                 yield return new WaitForSeconds(5f);
             }
 
-            if (StageManager.time > 65)
+            else if (StageManager.time > 65)
             {
 
                 enemySpacePlane = EnemySpacePlanes.Dequeue();
@@ -319,10 +311,7 @@ public class EnemyObjectPool : MonoBehaviour
             if (StageManager.time <= 10)
                 yield return null;
 
-            if (SparkBoms.Count > enemyCount)
-                yield return null;
-
-            if (StageManager.time > 10 && StageManager.time <= 30)
+            else if (StageManager.time > 10 && StageManager.time <= 30)
             {
                 sparkBom = SparkBoms.Dequeue();
                 sparkBom.SetActive(true);
@@ -335,7 +324,7 @@ public class EnemyObjectPool : MonoBehaviour
                 yield return new WaitForSeconds(5f);
             }
 
-            if (StageManager.time > 30 && StageManager.time <= 60)
+            else if (StageManager.time > 30 && StageManager.time <= 60)
             {
                 sparkBom = SparkBoms.Dequeue();
                 sparkBom.SetActive(true);
@@ -353,7 +342,7 @@ public class EnemyObjectPool : MonoBehaviour
                 yield return new WaitForSeconds(10f);
             }
 
-            if (StageManager.time > 60)
+            else if (StageManager.time > 60)
             {
                 sparkBom = SparkBoms.Dequeue();
                 sparkBom.SetActive(true);
