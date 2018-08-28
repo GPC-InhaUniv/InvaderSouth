@@ -133,11 +133,11 @@ public class UIController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (GameManager.Instance.CurrentStage == 1 && StageManager.time >= 45 && bossController == null)
-            bossController = GameObject.Find("BossMonster").GetComponent<BossController>();
+        //if (GameManager.Instance.CurrentStage == 1 && StageManager.time >= 45 && bossController == null)
+        //    bossController = GameObject.Find("BossMonster").GetComponent<BossController>();
 
 
-        ReFresh();
+        //ReFresh();
     }
 
     public void OnClickedBackToMainBtn()
