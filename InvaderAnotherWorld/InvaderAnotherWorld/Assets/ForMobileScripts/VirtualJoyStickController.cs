@@ -5,8 +5,11 @@ using UnityEngine;
 
 public class VirtualJoyStickController : MonoBehaviour, IDragHandler, IPointerUpHandler, IPointerDownHandler
 {
+    [SerializeField]
     private Image bgImage;
+    [SerializeField]
     private Image joystickImage;
+
     private Vector3 inputVector;
     [SerializeField]
     private GameObject player;
@@ -46,14 +49,14 @@ public class VirtualJoyStickController : MonoBehaviour, IDragHandler, IPointerUp
 
         ppi = Mathf.Sqrt(ScreenHeight * ScreenHeight + ScreenWidth * ScreenWidth)
             / Mathf.Sqrt((ModelHeightInch * ModelHeightInch + ModelWidthInch * ModelWidthInch));
-        
 
 
-        
-        //if (player == null)
-        //    player = GameObject.Find("Player").gameObject;
-        //if (playerRigidbody == null)
-        //    playerRigidbody = GameObject.Find("Player").GetComponent<Rigidbody>();
+
+
+        if (player == null)
+            player = GameObject.Find("Player").gameObject;
+        if (playerRigidbody == null)
+            playerRigidbody = GameObject.Find("Player").GetComponent<Rigidbody>();
 
     }
 
